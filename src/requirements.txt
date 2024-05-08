@@ -1,0 +1,6 @@
+bokeh
+holoviews
+numpy
+panel
+torch
+torchaudio
