@@ -1,6 +1,7 @@
 # waloviz
-![example snapshot](docs/resources/example_snapshot.png)
-A (soon to be) open source interactive spectrogram audio player, primarily based on bokeh and the holoviz stack (wav+holoviz=waloviz).
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](code_of_conduct.md)
+![example snapshot](docs/resources/example_snapshot.png)  
+An open source interactive spectrogram audio player, primarily based on bokeh and the holoviz stack (wav+holoviz=waloviz).
 ## How to use?
 In jupyter\jupyterlab:
 ```python
@@ -8,10 +9,12 @@ import waloviz as wv
 wv.extension()
 wv.Audio('http://ccrma.stanford.edu/~jos/mp3/pno-cs.mp3')
 ```
-I am actively working on making this project open source, and a pip package etc, some really exciting stuff :)  
+I am actively working on making this project a publicly available pip package with docs and CI/CD etc,  
+some really exciting stuff :)  
+
 ## A VERY initial Roadmap
- - [ ] reserve domains\handles\etc.
- - [ ] become open source
+ - [x] reserve domains\handles\etc.
+ - [x] become open source
  - [ ] make the repo welcoming for users and contributors
  - [ ] make a github actions CI/CD pipeline
  - [ ] publish a test package
@@ -24,3 +27,6 @@ I am actively working on making this project open source, and a pip package etc,
  - [ ] create known issues
  - [ ] create a more advanced roadmap
  - [ ] launch the package on social media
+
+## Contributing
+Please read the [CONTRIBUTING](CONTRIBUTING.md) guidelines and our [CODE OF CONDUCT](CODE_OF_CONDUCT.md).
