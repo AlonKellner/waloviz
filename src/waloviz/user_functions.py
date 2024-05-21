@@ -52,7 +52,7 @@ def Audio(
     cmap: str = "Inferno",
     over_curve_colors: Optional[Union[str, List[str]]] = None,
     theme: Union[str, Dict[str, Any]] = "dark_minimal",
-    max_size: int = 20000,
+    max_size: int = 10000,
 ):
     """waloviz.Audio
     -----
@@ -123,7 +123,7 @@ def Audio(
         amount of displayed values, when the spectrogram or an over curve has
         more values than the `max_size`, it is reduced in size by skipping
         intermediate values, until the size is less than the `max_size`.
-        Default is 20000.
+        Default is 10000.
 
     Returns
     -------
