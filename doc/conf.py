@@ -14,15 +14,25 @@ site = "waloviz.com"
 version = release = "0.0.0a0"
 
 html_static_path += ["_static"]
-html_theme = 'pydata_sphinx_theme'
-html_logo = '_static/logo_horizontal.png'
-html_favicon = '_static/favicon.ico'
+html_theme = "pydata_sphinx_theme"
+html_logo = "_static/logo_horizontal.png"
+html_favicon = "_static/favicon.ico"
 html_theme_options = {}  # fill out theme options as desired
+
+extensions += ["nbsite.gallery"]
+nbsite_gallery_conf = {
+    "backends": ["bokeh"],
+    "default_extensions": ["*.ipynb", "*.py"],
+    "enable_download": True,
+    "examples_dir": os.path.join("..", "examples"),
+    "galleries": {"gallery": {"title": "Gallery"}},
+    "within_subsection_order": lambda key: key,
+}
 
 _NAV = (
     ("Getting Started", "getting_started/index"),
     ("User Guide", "user_guide/index"),
-    ('Gallery', 'gallery/index'),
+    ("Gallery", "gallery/index"),
     ("API", "Reference_Manual/index"),
     ("FAQ", "FAQ"),
     ("About", "about"),
