@@ -1,8 +1,8 @@
-*******
-PROJECT
-*******
+.. raw:: html
+    <h1><img class="dark-light" src="_static/logo_horizontal.png" style="width: 30%;"></h1>
 
-Concise project description
+**An interactive audio player with a spectrogram built-in, as a Jupyter widget or as HTML.**
+
 
 .. toctree::
     :hidden:
@@ -12,6 +12,6 @@ Concise project description
     Getting Started <getting_started>
     User Guide <user_guide>
     Gallery <gallery>
-    API <Reference_Manual>
+    API <reference_manual>
     FAQ <FAQ>
     About <about>
