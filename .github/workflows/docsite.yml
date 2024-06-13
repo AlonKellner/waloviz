@@ -54,5 +54,6 @@ jobs:
           git switch docsite
           mv -vf builtdocs/{.[!.],}* ./
           rmdir builtdocs
+          git add .
           git commit -am "Deploying site from ${git_branch}@${git_hash}"
           git push
