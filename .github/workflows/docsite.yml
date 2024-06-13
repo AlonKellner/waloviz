@@ -35,7 +35,7 @@ jobs:
             ${{ runner.os }}-pip-
 
       - name: Install dependencies
-        run: python3 -m pip install -r src/requirements.txt doc/requirements.txt
+        run: python3 -m pip install -r src/requirements.txt -r doc/requirements.txt -r tests/requirements.txt
 
       - name: Move site root ➜
         run: |
