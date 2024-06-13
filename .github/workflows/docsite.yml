@@ -52,7 +52,7 @@ jobs:
           git_branch=${GITHUB_REF#refs/heads/}
           git fetch
           git switch docsite
-          mv -f builtdocs/* ./*
+          mv -f builtdocs/* ./
           rmdir builtdocs
           git commit -am "Deploying site from ${git_branch}@${git_hash}"
           git push
