@@ -17,14 +17,14 @@ html_static_path += ["_static"]
 html_theme = "pydata_sphinx_theme"
 html_logo = "_static/logo_horizontal.png"
 html_favicon = "_static/favicon.ico"
-html_title = f'{project} v{version}'
+html_title = f"{project} v{version}"
 html_theme_options = {
-    'github_url': 'https://github.com/AlonKellner/waloviz',
-    'icon_links': [
+    "github_url": "https://github.com/AlonKellner/waloviz",
+    "icon_links": [
         {
-            'name': 'Twitter',
-            'url': 'https://x.com/waloviz',
-            'icon': 'fa-brands fa-square-x-twitter',
+            "name": "Twitter",
+            "url": "https://x.com/waloviz",
+            "icon": "fa-brands fa-square-x-twitter",
         },
     ],
     "footer_start": [
@@ -32,7 +32,7 @@ html_theme_options = {
         "last-updated",
     ],
 }
-html_last_updated_fmt = '%Y-%m-%d'
+html_last_updated_fmt = "%Y-%m-%d"
 
 extensions += ["nbsite.gallery"]
 nbsite_gallery_conf = {
