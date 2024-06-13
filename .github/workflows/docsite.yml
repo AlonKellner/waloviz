@@ -31,6 +31,7 @@ jobs:
         with:
           path: ${{ steps.pip-cache.outputs.dir }}
           key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          save-always: true
           restore-keys: |
             ${{ runner.os }}-pip-
 
@@ -41,7 +42,7 @@ jobs:
         run: nbsite build
 
       - name: Move site root ➜
-        run: mv doc/site_root/* builtdocs/*
+        run: mv doc/site_root/* builtdocs/
           
       - name: Push to docsite
         run:  |
