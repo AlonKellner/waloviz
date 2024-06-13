@@ -17,7 +17,22 @@ html_static_path += ["_static"]
 html_theme = "pydata_sphinx_theme"
 html_logo = "_static/logo_horizontal.png"
 html_favicon = "_static/favicon.ico"
-html_theme_options = {}  # fill out theme options as desired
+html_title = f'{project} v{version}'
+html_theme_options = {
+    'github_url': 'https://github.com/AlonKellner/waloviz',
+    'icon_links': [
+        {
+            'name': 'Twitter',
+            'url': 'https://x.com/waloviz',
+            'icon': 'fa-brands fa-square-x-twitter',
+        },
+    ],
+    "footer_start": [
+        "copyright",
+        "last-updated",
+    ],
+}
+html_last_updated_fmt = '%Y-%m-%d'
 
 extensions += ["nbsite.gallery"]
 nbsite_gallery_conf = {
@@ -26,8 +41,8 @@ nbsite_gallery_conf = {
     "enable_download": True,
     "examples_dir": os.path.join("..", "examples"),
     "galleries": {"gallery": {"title": "Gallery"}},
-    "within_subsection_order": lambda key: key,
 }
+
 
 _NAV = (
     ("Getting Started", "getting_started/index"),
