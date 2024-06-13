@@ -16,27 +16,27 @@ from panel.pane.media import (
 
 def _is_2dim_int_or_float_ndarray(obj: Any) -> bool:
     return (
-            isinstance(obj, np.ndarray)
-            and 0 < obj.ndim <= 2
-            and obj.dtype in _VALID_NUMPY_DTYPES_FOR_AUDIO
+        isinstance(obj, np.ndarray)
+        and 0 < obj.ndim <= 2
+        and obj.dtype in _VALID_NUMPY_DTYPES_FOR_AUDIO
     )
 
 
 def _is_2dim_int_or_float_tensor(obj: Any) -> bool:
     return (
-            isinstance(obj, TensorLike)
-            and 0 < obj.dim() <= 2
-            and str(obj.dtype) in _VALID_TORCH_DTYPES_FOR_AUDIO
+        isinstance(obj, TensorLike)
+        and 0 < obj.dim() <= 2
+        and str(obj.dtype) in _VALID_TORCH_DTYPES_FOR_AUDIO
     )
 
 
 def wrap_with_waloviz_panel(
-        waloviz_bokeh,
-        wav: torch.Tensor,
-        sr: int,
-        title: str,
-        width: Union[int, str],
-        audio_height: int,
+    waloviz_bokeh,
+    wav: torch.Tensor,
+    sr: int,
+    title: str,
+    width: Union[int, str],
+    audio_height: int,
 ):
     sizing_mode = "stretch_width" if width == "responsive" else "fixed"
     width_kwargs = {}
@@ -44,8 +44,8 @@ def wrap_with_waloviz_panel(
         width_kwargs["width"] = width
 
     with patch(
-            "panel.pane.media._is_1dim_int_or_float_ndarray",
-            new=_is_2dim_int_or_float_ndarray,
+        "panel.pane.media._is_1dim_int_or_float_ndarray",
+        new=_is_2dim_int_or_float_ndarray,
     ), patch(
         "panel.pane.media._is_1dim_int_or_float_tensor",
         new=_is_2dim_int_or_float_tensor,
@@ -77,11 +77,11 @@ def wrap_with_waloviz_panel(
 
 
 def save_waloviz_panel(
-        waloviz_panel: pn.pane.PaneBase,
-        file: Union[str, os.PathLike, IOBase] = None,
-        title: Optional[str] = None,
-        resources: Resources = INLINE,
-        embed: bool = True,
+    waloviz_panel: pn.pane.PaneBase,
+    file: Union[str, os.PathLike, IOBase] = None,
+    title: Optional[str] = None,
+    resources: Resources = INLINE,
+    embed: bool = True,
 ):
     if title is None:
         try:

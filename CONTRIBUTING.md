@@ -1,15 +1,15 @@
 ## The very first Contribution
 Thank you for wanting to contribute to waloviz!  
 There is one way in which you can contribute that takes only one second:  
-**Please consider giving waloviz a github star** :star2:  
+:star2: **Please consider giving waloviz a github star** :star2:  
 
 Even if you do not give a star, you are the best!  
 Using waloviz, telling a friend about it or making contributions are all amazing ways in which waloviz can become more useful for more people.  
-For that I am greatful :heart:.
+For that I am greatful :heart:
 
 ## Can I Contribute more?
 **YES!**  
-waloviz is early on its path, and there are lots ways in which it can become better.  
+waloviz is early on its path, and there are lots of ways in which it can become better.  
 Here is a not comprehensive list of possible Contributions: 
 * **Read the Roadmap** - find it in the [readme](README.md), you might be able to help in ways that we didn't even realize!
 * **Improve the Documentation** - It is the highest priority

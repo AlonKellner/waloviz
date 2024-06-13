@@ -1,0 +1,58 @@
+name: Deploy Doc Site
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Upgrade pip
+        run: |
+          # install pip=>20.1 to use "pip cache dir"
+          python3 -m pip install --upgrade pip
+
+      - name: Get pip cache dir
+        id: pip-cache
+        run: echo "::set-output name=dir::$(pip cache dir)"
+
+      - name: Cache dependencies
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.pip-cache.outputs.dir }}
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Install dependencies
+        run: python3 -m pip install -r src/requirements.txt doc/requirements.txt
+
+      - name: Move site root ➜
+        run: |
+          mv site_root/* ./
+          rmdir site_root/
+
+      - name: Build site
+        run: nbsite build
+
+      - name: Push to docsite
+        run:  |
+          git config --global user.name '${{ github.repository_owner }}'
+          git config --global user.email '${{ vars.OWNER_EMAIL }}'
+          git_hash=$(git rev-parse --short "$GITHUB_SHA")
+          git_branch=${GITHUB_REF#refs/heads/}
+          git checkout docsite
+          mv -f builtdocs/* ./*
+          rmdir builtdocs
+          git commit -am "Deploying site from ${git_branch}@${git_hash}"
+          git push
