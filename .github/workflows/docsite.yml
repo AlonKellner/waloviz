@@ -37,14 +37,12 @@ jobs:
       - name: Install dependencies
         run: python3 -m pip install -r src/requirements.txt -r doc/requirements.txt -r tests/requirements.txt
 
-      - name: Move site root ➜
-        run: |
-          mv doc/site_root/* builtdocs/*
-          rmdir site_root/
-
       - name: Build site
         run: nbsite build
 
+      - name: Move site root ➜
+        run: mv doc/site_root/* builtdocs/*
+          
       - name: Push to docsite
         run:  |
           git config --global user.name '${{ github.repository_owner }}'
