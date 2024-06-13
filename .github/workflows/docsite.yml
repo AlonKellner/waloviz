@@ -39,7 +39,7 @@ jobs:
 
       - name: Move site root ➜
         run: |
-          mv site_root/* ./
+          mv doc/site_root/* builtdocs/*
           rmdir site_root/
 
       - name: Build site
