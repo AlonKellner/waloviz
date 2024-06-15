@@ -34,7 +34,7 @@ html_theme_options = {
 }
 html_last_updated_fmt = "%Y-%m-%d"
 
-extensions += ["nbsite.gallery"]
+extensions += ["nbsite.gallery", "sphinx_favicon"]
 nbsite_gallery_conf = {
     "backends": ["bokeh"],
     "default_extensions": ["*.ipynb", "*.py"],
