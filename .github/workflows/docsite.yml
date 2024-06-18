@@ -52,7 +52,7 @@ jobs:
           git_branch=${GITHUB_REF#refs/heads/}
           git fetch
           git switch docsite
-          find . -mindepth 1 ! -regex '(^./builtdocs\(/.*\)?)|(^./\.git\(/.*\)?)' -delete
+          find . -mindepth 1 ! -regex '(^\.\/builtdocs\/.*)|(^\.\/\.git\/.*)' -delete
           mv -vf builtdocs/{.[!.],}* ./
           rmdir builtdocs
           git add .
