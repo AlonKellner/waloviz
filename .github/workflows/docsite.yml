@@ -42,7 +42,7 @@ jobs:
         run: nbsite build
 
       - name: Copy site root ➜
-        run: cp -r doc/site_root/* builtdocs/
+        run: cp -r doc/site_root/. builtdocs/
           
       - name: Push to docsite
         run:  |
@@ -53,7 +53,7 @@ jobs:
           git fetch
           git switch docsite
           find . -mindepth 1 -regextype posix-egrep ! -regex '(^\.\/\.git.*)|(^\.\/builtdocs.*)' -delete
-          cp -r builtdocs/* ./
+          cp -r builtdocs/. ./
           rm -r builtdocs
           git add .
           git commit -am "Deploying site from ${git_branch}@${git_hash}"
