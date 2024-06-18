@@ -53,8 +53,8 @@ jobs:
           git fetch
           git switch docsite
           find . -mindepth 1 -regextype posix-egrep ! -regex '(^\.\/\.git.*)|(^\.\/builtdocs.*)' -delete
-          mv -vf builtdocs/{.[!.],}* ./
-          rmdir builtdocs
+          cp -r builtdocs/* ./
+          rm -r builtdocs
           git add .
           git commit -am "Deploying site from ${git_branch}@${git_hash}"
           git push
