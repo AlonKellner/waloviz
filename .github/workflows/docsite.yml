@@ -41,8 +41,8 @@ jobs:
       - name: Build site
         run: nbsite build
 
-      - name: Move site root ➜
-        run: mv doc/site_root/* builtdocs/
+      - name: Copy site root ➜
+        run: cp -r doc/site_root/* builtdocs/
           
       - name: Push to docsite
         run:  |
