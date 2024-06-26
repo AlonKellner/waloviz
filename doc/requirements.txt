@@ -1,3 +1,4 @@
 matplotlib
 nbsite
 sphinx-favicon
+sphinxext-opengraph

@@ -34,7 +34,7 @@ html_theme_options = {
 }
 html_last_updated_fmt = "%Y-%m-%d"
 
-extensions += ["nbsite.gallery", "sphinx_favicon"]
+extensions += ["nbsite.gallery", "sphinx_favicon", "sphinxext-opengraph"]
 nbsite_gallery_conf = {
     "backends": ["bokeh"],
     "default_extensions": ["*.ipynb", "*.py"],
@@ -43,6 +43,18 @@ nbsite_gallery_conf = {
     "galleries": {"gallery": {"title": "Gallery"}},
 }
 
+favicons = [
+    {"href": "/favicon.ico", "sizes": "32x32"},
+    {"rel": "apple-touch-icon", "href": "/apple-touch-icon.png", "sizes": "180x180"},
+    {"href": "/favicon-32x32.png", "sizes": "32x32", "type": "image/png"},
+    {"href": "/favicon-16x16.png", "sizes": "16x16", "type": "image/png"},
+    {"rel": "manifest", "href": "/site.webmanifest"},
+    {"rel": "mask-icon", "href": "/safari-pinned-tab.png", "color": "#5bbad5"},
+]
+
+ogp_site_url = "http://waloviz.com/"
+ogp_image = "https://github.com/AlonKellner/waloviz/raw/main/doc/site_root/android-chrome-512x512.png"
+ogp_enable_meta_description = True
 
 _NAV = (
     ("Getting Started", "getting_started/index"),
