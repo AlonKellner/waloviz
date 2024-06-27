@@ -53,7 +53,7 @@ favicons = [
 ]
 
 ogp_site_url = "http://waloviz.com/"
-ogp_image = "https://github.com/AlonKellner/waloviz/raw/main/doc/site_root/android-chrome-512x512.png"
+ogp_image = "https://waloviz.com/en/latest/_static/logo_vertical.png"
 ogp_enable_meta_description = True
 
 _NAV = (
