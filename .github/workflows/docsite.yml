@@ -44,8 +44,11 @@ jobs:
       - name: Install dependencies
         run: python3 -m pip install -r src/requirements.txt -r doc/requirements.txt -r tests/requirements.txt
 
+      - name: Generate RST
+        run: nbsite generate-rst --org AlonKellner --project-name waloviz
+
       - name: Build site
-        run: nbsite build
+        run: nbsite build --org AlonKellner --project-name waloviz
 
       - name: Copy site root ➜
         run: cp -r doc/site_root/. builtdocs/

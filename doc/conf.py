@@ -6,7 +6,7 @@ from nbsite.shared_conf import *
 ###################################################
 # edit things below as appropriate for your project
 
-project = "waloviz"
+project = "WaloViz"
 authors = "Alon Kellner"
 copyright = "2024 " + authors
 description = "An interactive audio player with a spectrogram built-in, as a Jupyter widget or as HTML."
