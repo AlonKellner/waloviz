@@ -297,7 +297,33 @@ document.write(`
 <article class="bd-article" role="main">
 <section id="getting-started">
 <h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this heading">#</a></h1>
-</section>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">waloviz</span> <span class="k">as</span> <span class="nn">wv</span>
+<span class="n">wv</span><span class="o">.</span><span class="n">extension</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">waloviz</span> <span class="k">as</span> <span class="nn">wv</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">wv</span><span class="o">.</span><span class="n">extension</span><span class="p">()</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named 'waloviz'
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wv</span><span class="o">.</span><span class="n">Audio</span><span class="p">(</span><span class="s1">'http://ccrma.stanford.edu/~jos/mp3/pno-cs.mp3'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div id="scroller-right">This web page was generated from a Jupyter notebook and not all interactivity will work on this website. <a href="https://raw.githubusercontent.com///main/examples/getting-started.ipynb">Right click to download and run locally</a> for full Python-backed interactivity.</div></section>
 </article>
 <footer class="bd-footer-article">
 <div class="footer-article-items footer-article__inner">
@@ -324,7 +350,7 @@ document.write(`
 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 <div class="sidebar-secondary-item">
 <div class="tocsection sourcelink">
-<a href="_sources/getting_started.md.txt">
+<a href="_sources/getting_started.rst.txt">
 <i class="fa-solid fa-file-lines"></i> Show Source
     </a>
 </div>
@@ -350,7 +376,7 @@ document.write(`
 </p>
 </div>
 <div class="footer-item"><p class="last-updated">
-  Last updated on 2024-06-27.
+  Last updated on 2024-06-28.
   <br/>
 </p></div>
 </div>
