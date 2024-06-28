@@ -82,5 +82,7 @@ html_context.update(
             ("Twitter", "https://x.com/waloviz"),
             ("Github", "https://github.com/AlonKellner/waloviz"),
         ),
+        "github_user": "AlonKellner",
+        "github_repo": "waloviz",
     }
 )
