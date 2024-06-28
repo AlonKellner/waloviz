@@ -49,7 +49,7 @@ favicons = [
     {"href": "/favicon-32x32.png", "sizes": "32x32", "type": "image/png"},
     {"href": "/favicon-16x16.png", "sizes": "16x16", "type": "image/png"},
     {"rel": "manifest", "href": "/site.webmanifest"},
-    {"rel": "mask-icon", "href": "/safari-pinned-tab.png", "color": "#5bbad5"},
+    {"rel": "mask-icon", "href": "/safari-pinned-tab.svg", "color": "#5bbad5"},
 ]
 
 ogp_site_url = "http://waloviz.com/"
