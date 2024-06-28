@@ -2,3 +2,4 @@ matplotlib
 nbsite
 sphinx-favicon
 sphinxext-opengraph
+jupyter-bokeh

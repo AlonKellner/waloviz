@@ -10,7 +10,7 @@ import torchaudio
 import torchaudio.transforms as T
 from bokeh.resources import INLINE, Resources
 
-from .bokeh_manipulation import finalize_waloviz_bokeh_gui, get_audio_xformatter, themes
+from .bokeh_manipulation import finalize_waloviz_bokeh_gui, themes
 from .holoviews_manipulations import ThemeHook, get_waloviz_hv
 from .panel_manipulation import wrap_with_waloviz_panel, save_waloviz_panel
 from .tensor_utils import OverCurve, preprocess_over_curve, to_tensor
@@ -29,7 +29,7 @@ def extension():
     >>> wv.Audio('http://ccrma.stanford.edu/~jos/mp3/pno-cs.mp3')
     """
     hv.extension("bokeh")
-    pn.extension()
+    pn.extension(comms="default")
 
 
 def Audio(
@@ -234,11 +234,10 @@ Specify the sample rate in one of the following ways:
     )
     waloviz_bokeh = hv.render(waloviz_hv)
 
-    xformatter = get_audio_xformatter(total_seconds)
     waloviz_bokeh = finalize_waloviz_bokeh_gui(
         waloviz_bokeh,
         theme=theme,
-        xformatter=xformatter,
+        total_seconds=total_seconds,
         stay_color=stay_color,
         follow_color=follow_color,
     )
@@ -252,6 +251,7 @@ Specify the sample rate in one of the following ways:
     )
 
     return waloviz_panel
+    # return waloviz_bokeh
 
 
 def save(
