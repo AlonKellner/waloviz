@@ -53,6 +53,7 @@ def Audio(
     over_curve_colors: Optional[Union[str, List[str]]] = None,
     theme: Union[str, Dict[str, Any]] = "dark_minimal",
     max_size: int = 10000,
+    download_button: bool = True
 ):
     """waloviz.Audio
     -----
@@ -124,6 +125,8 @@ def Audio(
         more values than the `max_size`, it is reduced in size by skipping
         intermediate values, until the size is less than the `max_size`.
         Default is 10000.
+    download_button : bool
+        Whether to show the html download button. Defaults to True.
 
     Returns
     -------
@@ -248,10 +251,10 @@ Specify the sample rate in one of the following ways:
         title=title,
         width=width,
         audio_height=audio_height,
+        download_button=download_button
     )
 
     return waloviz_panel
-    # return waloviz_bokeh
 
 
 def save(
