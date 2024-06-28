@@ -37,7 +37,7 @@ def wrap_with_waloviz_panel(
     title: str,
     width: Union[int, str],
     audio_height: int,
-    download_button: bool
+    download_button: bool,
 ):
     sizing_mode = "stretch_width" if width == "responsive" else "fixed"
     width_kwargs = {}
@@ -70,10 +70,12 @@ def wrap_with_waloviz_panel(
         buffer = BytesIO()
         buffer: BytesIO = save_waloviz_panel(waloviz_panel, buffer, title)
         buffer.seek(0)
-        file_download = pn.widgets.FileDownload(buffer, filename=f"{title}.html", embed=True)
+        file_download = pn.widgets.FileDownload(
+            buffer, filename=f"{title}.html", embed=True
+        )
 
         waloviz_panel = pn.Column(waloviz_panel, file_download)
-    
+
     waloviz_panel.title = title
     return waloviz_panel
 

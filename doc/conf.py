@@ -41,8 +41,8 @@ nbsite_gallery_conf = {
     "enable_download": True,
     "examples_dir": os.path.join("..", "examples"),
     "galleries": {"gallery": {"title": "Gallery"}},
-    'github_org': 'AlonKellner',
-    'github_project': 'waloviz'
+    "github_org": "AlonKellner",
+    "github_project": "waloviz",
 }
 
 favicons = [
