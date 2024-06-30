@@ -16,6 +16,9 @@ from .panel_manipulation import wrap_with_waloviz_panel, save_waloviz_panel
 from .tensor_utils import OverCurve, preprocess_over_curve, to_tensor
 
 
+_orig_comms = pn.config.comms
+
+
 def extension():
     """waloviz.Audio
     -----
@@ -54,6 +57,7 @@ def Audio(
     theme: Union[str, Dict[str, Any]] = "dark_minimal",
     max_size: int = 10000,
     download_button: bool = True,
+    freq_label: str = "Hz"
 ):
     """waloviz.Audio
     -----
@@ -127,12 +131,18 @@ def Audio(
         Default is 10000.
     download_button : bool
         Whether to show the html download button. Defaults to True.
+    freq_label : str
+        The label of the frequency axis (vertical), hides the label when set to None which saves space.
 
     Returns
     -------
     panel : pn.pane.PaneBase
         An interactive waloviz panel, can be saved to html with `waloviz.save(panel)`
     <br/>"""
+
+    if _orig_comms == "colab":
+        extension()
+
     audio_height: int = 30
     pbar_height: int = 40
     stay_color: str = "#ffffff88"
@@ -234,6 +244,7 @@ Specify the sample rate in one of the following ways:
         title=title,
         embed_title=embed_title,
         colorbar=colorbar,
+        freq_label=freq_label
     )
     waloviz_bokeh = hv.render(waloviz_hv)
 

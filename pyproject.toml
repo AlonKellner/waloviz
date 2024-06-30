@@ -7,7 +7,8 @@ source = "vcs"
 
 [tool.hatch.build.hooks.vcs]
 version-file = "src/waloviz/_version.py"
-fallback-version = "0.0.0.a0"
+fallback-version = "dev"
+tag-pattern = "^(?P<type>[a-z]+)\/(?:[\w-]+-)?(?P<version>[vV]?\d+(?:\.\d+){0,2}[^\+]*)(?:\+.*)?$"
 
 [project]
 dynamic = ["version"]

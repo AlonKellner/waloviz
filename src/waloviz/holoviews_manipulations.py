@@ -44,6 +44,7 @@ def get_waloviz_hv(
     colorbar: bool,
     title: str,
     embed_title: bool,
+    freq_label: str
 ):
     responsive = width == "responsive"
 
@@ -63,7 +64,7 @@ def get_waloviz_hv(
         spec_image = hv.Image(
             spec_channel.numpy()[::-1, :] + 1e-5,
             bounds=(0, hz_min, total_seconds, hv_max),
-            kdims=["x", "Hz"],
+            kdims=["x", freq_label],
         ).opts(
             xaxis=None,
             cmap=cmap,
