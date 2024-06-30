@@ -14,23 +14,51 @@ jobs:
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v4
-      - name: Setup Ruby
-        uses: ruby/setup-ruby@v1
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
         with:
-          ruby-version: "3.2.2"
-          bundler-cache: true
-      - name: Install and Build 🔧
+          python-version: '3.10'
+
+      - name: Cache apt-pkgs
+        uses: awalsh128/cache-apt-pkgs-action@latest
+        with:
+          packages: ffmpeg sox libavdevice-dev
+          version: 1.0
+
+      - name: Upgrade pip
         run: |
-          pip3 install --upgrade jupyter
-          export JEKYLL_ENV=production
-          bundle exec jekyll build
-      - name: Purge unused CSS 🧹
-        run: |
-          npm install -g purgecss
-          purgecss -c purgecss.config.js
+          # install pip=>20.1 to use "pip cache dir"
+          python3 -m pip install --upgrade pip
+
+      - name: Get pip cache dir
+        id: pip-cache
+        run: echo "dir=$(pip cache dir)" >> $GITHUB_OUTPUT
+
+      - name: Cache dependencies
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.pip-cache.outputs.dir }}
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          save-always: true
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Install dependencies
+        run: python3 -m pip install -r requirements.txt
+
+      - name: Generate RST
+        run: nbsite generate-rst --org AlonKellner --project-name waloviz
+
+      - name: Build site
+        run: nbsite build --org AlonKellner --project-name waloviz
+
+      - name: Copy site root ➜
+        run: cp -r doc/site_root/. builtdocs/
+
       - name: Link Checker 🔗
         uses: lycheeverse/lychee-action@v1.9.0
         with:
           fail: true
           # only check local links
-          args: --offline --remap '_site(/?.*)/assets/(.*) _site/assets/$2' --verbose --no-progress '_site/**/*.html'
+          args: --offline --remap 'builtdocs(/?.*)/assets/(.*) builtdocs/assets/$2' --verbose --no-progress 'builtdocs/**/*.html'
