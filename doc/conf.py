@@ -40,7 +40,10 @@ html_theme_options = {
 }
 html_last_updated_fmt = "%Y-%m-%d"
 
-extensions += ["nbsite.gallery", "sphinx_favicon", "sphinxext.opengraph"]
+extensions += ["nbsite.gallery", "sphinx_favicon", "sphinxext.opengraph", "sphinx_tabs.tabs"]
+
+sphinx_tabs_disable_tab_closing = True
+
 nbsite_gallery_conf = {
     "backends": ["bokeh"],
     "default_extensions": ["*.ipynb", "*.py"],
