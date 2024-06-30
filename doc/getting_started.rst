@@ -24,72 +24,76 @@ We also need to install ``ffmpeg`` as a backend for ``torchaudio``:
 
 Then we need to import ``waloviz`` and activate the extension:  
 
-.. tab:: jupyter
+.. tabs::
+    
+    .. group-tab:: jupyter
 
-    .. code-block:: python
+        .. code-block:: python
 
-        import waloviz as wv
-        wv.extension()
+            import waloviz as wv
+            wv.extension()
 
-.. tab:: colab
+    .. group-tab:: colab
 
-    .. code-block:: python
+        .. code-block:: python
 
-        import waloviz as wv
-        wv.extension("colab")
+            import waloviz as wv
+            wv.extension("colab")
 
-.. tab:: VSCode
+    .. group-tab:: VSCode
 
-    .. code-block:: python
+        .. code-block:: python
 
-        import waloviz as wv
-        wv.extension()
+            import waloviz as wv
+            wv.extension()
 
-.. tab:: JupyterLab
+    .. group-tab:: JupyterLab
 
-    .. code-block:: python
+        .. code-block:: python
 
-        import waloviz as wv
-        wv.extension()
-        
-.. tab:: Pure HTML
+            import waloviz as wv
+            wv.extension()
+            
+    .. group-tab:: Pure HTML
 
-    .. code-block:: python
+        .. code-block:: python
 
-        import waloviz as wv
+            import waloviz as wv
 
 
 Then we need to call ``wv.Audio`` with our URL or file-path:
 
-.. tab:: jupyter
+.. tabs::
 
-    .. code-block:: python
+    .. group-tab:: jupyter
 
-        wv.Audio('https://www2.cs.uic.edu/~i101/SoundFiles/CantinaBand3.wav')
+        .. code-block:: python
 
-.. tab:: colab
+            wv.Audio('https://www2.cs.uic.edu/~i101/SoundFiles/CantinaBand3.wav')
 
-    .. code-block:: python
+    .. group-tab:: colab
 
-        wv.Audio('https://www2.cs.uic.edu/~i101/SoundFiles/CantinaBand3.wav')
+        .. code-block:: python
 
-.. tab:: VSCode
+            wv.Audio('https://www2.cs.uic.edu/~i101/SoundFiles/CantinaBand3.wav')
 
-    .. code-block:: python
+    .. group-tab:: VSCode
 
-        wv.Audio('https://www2.cs.uic.edu/~i101/SoundFiles/CantinaBand3.wav')
+        .. code-block:: python
 
-.. tab:: JupyterLab
+            wv.Audio('https://www2.cs.uic.edu/~i101/SoundFiles/CantinaBand3.wav')
 
-    .. code-block:: python
+    .. group-tab:: JupyterLab
 
-        wv.Audio('https://www2.cs.uic.edu/~i101/SoundFiles/CantinaBand3.wav')
-        
-.. tab:: Pure HTML
+        .. code-block:: python
 
-    .. code-block:: python
+            wv.Audio('https://www2.cs.uic.edu/~i101/SoundFiles/CantinaBand3.wav')
+            
+    .. group-tab:: Pure HTML
 
-        wv.save('https://www2.cs.uic.edu/~i101/SoundFiles/CantinaBand3.wav') # saves to `waloviz.html` by default
+        .. code-block:: python
+
+            wv.save('https://www2.cs.uic.edu/~i101/SoundFiles/CantinaBand3.wav') # saves to `waloviz.html` by default
 
 And... that's it, you're done.  
 You can use the player to interact with your audio.  
