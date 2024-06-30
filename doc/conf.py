@@ -6,6 +6,10 @@ from nbsite.shared_conf import *
 ###################################################
 # edit things below as appropriate for your project
 
+import sys
+sys.path.append("/workspaces/waloviz/src")
+sys.path.append("/home/runner/work/waloviz/waloviz/src")
+
 import waloviz as wv
 
 project = "WaloViz"
