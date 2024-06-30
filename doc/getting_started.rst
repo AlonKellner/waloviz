@@ -98,10 +98,11 @@ Using the player
 ----------------
 
 The controls are pretty intuitive, but here are the most important controls you should to know:  
+
 1. A single click anywhere - toggles play\\pause.
 2. Scrolling with the mouse wheel - zooms in\\out.
 3. Dragging the mouse while pressing down - moves forwards\\backwards.
 4. The small ↺ icon on the top left - resets to the initial view.
 5. Clicking on the ``Download waloviz.html`` - will download an HTML version of the player.
 
-To learn more, read our `User Guide <./user_guide.md>`_.
+To learn more, read our `User Guide <./user_guide.html>`_.
