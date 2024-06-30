@@ -43,6 +43,7 @@ html_last_updated_fmt = "%Y-%m-%d"
 extensions += ["nbsite.gallery", "sphinx_favicon", "sphinxext.opengraph", "sphinx_tabs.tabs"]
 
 sphinx_tabs_disable_tab_closing = True
+sphinx_tabs_disable_css_loading = True
 
 nbsite_gallery_conf = {
     "backends": ["bokeh"],
