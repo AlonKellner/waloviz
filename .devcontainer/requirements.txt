@@ -1,0 +1,3 @@
+hatch
+hatchling
+hatch-vcs

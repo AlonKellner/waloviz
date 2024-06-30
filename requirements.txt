@@ -1,3 +1,4 @@
 -r src/requirements.txt
 -r doc/requirements.txt
 -r tests/requirements.txt
+-r .devcontainer/requirements.txt

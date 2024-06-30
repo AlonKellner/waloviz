@@ -5,6 +5,10 @@ build-backend = "hatchling.build"
 [tool.hatch.version]
 source = "vcs"
 
+[tool.hatch.build.hooks.vcs]
+version-file = "src/waloviz/_version.py"
+fallback-version = "0.0.0.a0"
+
 [project]
 dynamic = ["version"]
 name = "waloviz"
