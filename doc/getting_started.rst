@@ -59,6 +59,7 @@ Then we need to import ``waloviz`` and activate the extension:
         .. code-block:: python
 
             import waloviz as wv
+            # no need for the extension with pure HTML
 
 
 Then we need to call ``wv.Audio`` with our URL or file-path:
