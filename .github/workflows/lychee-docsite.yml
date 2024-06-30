@@ -1,64 +1,65 @@
-# name: Check for broken links on site
+name: Check for broken links on site
 
+on: workflow_dispatch
 # on:
 #   workflow_run:
 #     workflows: [Deploy Doc Site]
 #     types: [completed]
 
-# jobs:
-#   check-links-on-site:
-#     # https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#running-a-workflow-based-on-the-conclusion-of-another-workflow
-#     if: ${{ github.event.workflow_run.conclusion == 'success' }}
-#     # available images: https://github.com/actions/runner-images#available-images
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: Checkout 🛎️
-#         uses: actions/checkout@v4
+jobs:
+  check-links-on-site:
+    # https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#running-a-workflow-based-on-the-conclusion-of-another-workflow
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    # available images: https://github.com/actions/runner-images#available-images
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v4
 
-#       - name: Setup Python
-#         uses: actions/setup-python@v5
-#         with:
-#           python-version: '3.10'
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
 
-#       - name: Cache apt-pkgs
-#         uses: awalsh128/cache-apt-pkgs-action@latest
-#         with:
-#           packages: ffmpeg sox libavdevice-dev
-#           version: 1.0
+      - name: Cache apt-pkgs
+        uses: awalsh128/cache-apt-pkgs-action@latest
+        with:
+          packages: ffmpeg sox libavdevice-dev
+          version: 1.0
 
-#       - name: Upgrade pip
-#         run: |
-#           # install pip=>20.1 to use "pip cache dir"
-#           python3 -m pip install --upgrade pip
+      - name: Upgrade pip
+        run: |
+          # install pip=>20.1 to use "pip cache dir"
+          python3 -m pip install --upgrade pip
 
-#       - name: Get pip cache dir
-#         id: pip-cache
-#         run: echo "dir=$(pip cache dir)" >> $GITHUB_OUTPUT
+      - name: Get pip cache dir
+        id: pip-cache
+        run: echo "dir=$(pip cache dir)" >> $GITHUB_OUTPUT
 
-#       - name: Cache dependencies
-#         uses: actions/cache@v4
-#         with:
-#           path: ${{ steps.pip-cache.outputs.dir }}
-#           key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
-#           save-always: true
-#           restore-keys: |
-#             ${{ runner.os }}-pip-
+      - name: Cache dependencies
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.pip-cache.outputs.dir }}
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          save-always: true
+          restore-keys: |
+            ${{ runner.os }}-pip-
 
-#       - name: Install dependencies
-#         run: python3 -m pip install -r requirements.txt
+      - name: Install dependencies
+        run: python3 -m pip install -r requirements.txt
 
-#       - name: Generate RST
-#         run: nbsite generate-rst --org AlonKellner --project-name waloviz
+      - name: Generate RST
+        run: nbsite generate-rst --org AlonKellner --project-name waloviz
 
-#       - name: Build site
-#         run: nbsite build --org AlonKellner --project-name waloviz
+      - name: Build site
+        run: nbsite build --org AlonKellner --project-name waloviz
 
-#       - name: Copy site root ➜
-#         run: cp -r doc/site_root/. builtdocs/
+      - name: Copy site root ➜
+        run: cp -r doc/site_root/. builtdocs/
 
-#       - name: Link Checker 🔗
-#         uses: lycheeverse/lychee-action@v1.9.0
-#         with:
-#           fail: true
-#           # only check local links
-#           args: --offline --remap 'builtdocs(/?.*)/assets/(.*) builtdocs/assets/$2' --verbose --no-progress 'builtdocs/**/*.html'
+      - name: Link Checker 🔗
+        uses: lycheeverse/lychee-action@v1.9.0
+        with:
+          fail: true
+          # only check local links
+          args: --offline --remap 'builtdocs(/?.*)/assets/(.*) builtdocs/assets/$2' --verbose --no-progress 'builtdocs/**/*.html'
