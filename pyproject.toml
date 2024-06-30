@@ -4,11 +4,11 @@ build-backend = "hatchling.build"
 
 [tool.hatch.version]
 source = "vcs"
+fallback-version = "dev"
+tag-pattern = '''^[a-z]+\/(?:[\w-]+-)?(?P<version>[vV]?\d+(?:\.\d+){0,2}[^\+]*)(?:\+.*)?$'''
 
 [tool.hatch.build.hooks.vcs]
 version-file = "src/waloviz/_version.py"
-fallback-version = "dev"
-tag-pattern = '''^[a-z]+\/(?:[\w-]+-)?(?P<version>[vV]?\d+(?:\.\d+){0,2}[^\+]*)(?:\+.*)?$'''
 
 [project]
 dynamic = ["version"]
