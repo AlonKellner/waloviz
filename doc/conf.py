@@ -52,13 +52,13 @@ nbsite_gallery_conf = {
 }
 
 favicons = [
-    {"href": "/favicon.ico", "sizes": "32x32"},
-    {"href": "/favicon.svg", "sizes": "any", "type": "image/svg+xml"},
-    {"rel": "apple-touch-icon", "href": "/apple-touch-icon.png", "sizes": "180x180"},
-    {"href": "/favicon-32x32.png", "sizes": "32x32", "type": "image/png"},
-    {"href": "/favicon-16x16.png", "sizes": "16x16", "type": "image/png"},
-    {"rel": "manifest", "href": "/site.webmanifest"},
-    {"rel": "mask-icon", "href": "/safari-pinned-tab.svg", "color": "#5bbad5"},
+    {"href": "/en/latest/favicon.ico", "sizes": "32x32"},
+    {"href": "/en/latest/favicon.svg", "sizes": "any", "type": "image/svg+xml"},
+    {"rel": "apple-touch-icon", "href": "/en/latest/apple-touch-icon.png", "sizes": "180x180"},
+    {"href": "/en/latest/favicon-32x32.png", "sizes": "32x32", "type": "image/png"},
+    {"href": "/en/latest/favicon-16x16.png", "sizes": "16x16", "type": "image/png"},
+    {"rel": "manifest", "href": "/en/latest/site.webmanifest"},
+    {"rel": "mask-icon", "href": "/en/latest/safari-pinned-tab.svg", "color": "#5bbad5"},
 ]
 
 ogp_site_url = "http://waloviz.com/"
