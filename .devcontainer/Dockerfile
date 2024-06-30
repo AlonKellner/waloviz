@@ -5,5 +5,6 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y ffmpeg sox libavd
 COPY src/requirements.txt src/requirements.txt
 COPY tests/requirements.txt tests/requirements.txt
 COPY doc/requirements.txt doc/requirements.txt
+COPY requirements.txt requirements.txt
 RUN --mount=type=cache,target=/root/.cache/ \
-    pip install -r src/requirements.txt -r doc/requirements.txt -r tests/requirements.txt
+    pip install -r requirements.txt
