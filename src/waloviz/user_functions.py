@@ -16,10 +16,10 @@ from .panel_manipulation import wrap_with_waloviz_panel, save_waloviz_panel
 from .tensor_utils import OverCurve, preprocess_over_curve, to_tensor
 
 
-_orig_comms = pn.config.comms
+_mode = "default"
 
 
-def extension():
+def extension(mode="default"):
     """waloviz.Audio
     -----
 
@@ -31,6 +31,8 @@ def extension():
     >>> wv.extension()
     >>> wv.Audio('http://ccrma.stanford.edu/~jos/mp3/pno-cs.mp3')
     """
+    global _mode
+    _mode = mode
     hv.extension("bokeh")
     pn.extension(comms="default")
 
@@ -140,8 +142,9 @@ def Audio(
         An interactive waloviz panel, can be saved to html with `waloviz.save(panel)`
     <br/>"""
 
-    if _orig_comms == "colab":
-        extension()
+    global _mode
+    if _mode == "colab":
+        extension(_mode)
 
     audio_height: int = 30
     pbar_height: int = 40
