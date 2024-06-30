@@ -6,12 +6,14 @@ from nbsite.shared_conf import *
 ###################################################
 # edit things below as appropriate for your project
 
+import waloviz as wv
+
 project = "WaloViz"
 authors = "Alon Kellner"
 copyright = "2024 " + authors
 description = "An interactive audio player with a spectrogram built-in, as a Jupyter widget or as HTML."
 site = "waloviz.com"
-version = release = "0.0.0a0"
+version = release = wv.version
 
 html_static_path += ["_static"]
 html_theme = "pydata_sphinx_theme"
@@ -47,6 +49,7 @@ nbsite_gallery_conf = {
 
 favicons = [
     {"href": "/favicon.ico", "sizes": "32x32"},
+    {"href": "/favicon.svg", "sizes": "any", "type": "image/svg+xml"},
     {"rel": "apple-touch-icon", "href": "/apple-touch-icon.png", "sizes": "180x180"},
     {"href": "/favicon-32x32.png", "sizes": "32x32", "type": "image/png"},
     {"href": "/favicon-16x16.png", "sizes": "16x16", "type": "image/png"},
