@@ -1,0 +1,46 @@
+[build-system]
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
+
+[tool.hatch.version]
+source = "vcs"
+
+[project]
+dynamic = ["version"]
+name = "waloviz"
+dependencies = [
+    "bokeh",
+    "holoviews",
+    "numpy",
+    "panel",
+    "scipy",
+    "torch",
+    "torchaudio"
+]
+requires-python = ">= 3.8"
+authors = [
+  {name = "Alon Kellner", email = "me@alonkellner.com"}
+]
+maintainers = [
+  {name = "Alon Kellner", email = "me@alonkellner.com"}
+]
+description = "An interactive audio player with a spectrogram built-in, as a Jupyter widget or as HTML."
+readme = "README.md"
+
+keywords = ["spectrogram", "player", "wav", "holoviz", "speech", "audio", "bokeh", "visualization", "mp3", "ffmpeg", "flac"]
+
+classifiers = [
+  "Development Status :: 3 - Alpha",
+
+  "Intended Audience :: Science/Research",
+  "Topic :: Multimedia :: Sound/Audio :: Analysis",
+
+  "License :: OSI Approved :: MIT License",
+
+  "Programming Language :: Python :: 3",
+]
+
+[project.urls]
+Homepage = "https://waloviz.com"
+Documentation = "https://waloviz.com"
+Repository = "https://github.com/AlonKellner/waloviz.git"
