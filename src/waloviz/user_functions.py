@@ -134,7 +134,8 @@ def Audio(
     download_button : bool
         Whether to show the html download button. Defaults to True.
     freq_label : str
-        The label of the frequency axis (vertical), hides the label when set to None which saves space.
+        The label of the frequency axis (vertical), hides the label when set 
+        to None which saves space.
 
     Returns
     -------
@@ -277,6 +278,7 @@ def save(
     title: Optional[str] = None,
     resources: Resources = INLINE,
     embed: bool = True,
+    **kwargs
 ):
     """waloviz.save
     -------
@@ -291,8 +293,9 @@ def save(
 
     Parameters
     ----------
-    waloviz_panel : pn.pane.PaneBase
-        The waloviz panel creates by `waloviz.Audio`
+    waloviz_panel : pn.pane.PaneBase | str | os.PathLike | IOBase | (tensorlike, int) | tensorlike
+        The waloviz panel created by `waloviz.Audio`, or the parameters 
+        for `waloviz.Audio` to create a panel with.
     file : str | os.PathLike | IOBase
         The output file for the generated html, default is "{title}.html"
     title : str
@@ -309,4 +312,9 @@ def save(
     file : str | os.PathLike | IOBase
         The file that the waloviz html content was written into
     <br/>"""
+    if not isinstance(waloviz_panel, pn.pane.PaneBase):
+        waloviz_panel = Audio(waloviz_panel, **kwargs)
+    else:
+        if len(kwargs) > 0:
+            raise TypeError(f"save() got an unexpected keyword argument '{kwargs.keys()[0]}'")
     return save_waloviz_panel(waloviz_panel, file, title, resources, embed)
