@@ -3,4 +3,4 @@ nbsite
 sphinx-favicon
 sphinxext-opengraph
 jupyter-bokeh
-sphinx-inline-tabs
+sphinx-tabs
