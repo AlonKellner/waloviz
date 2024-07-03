@@ -62,7 +62,7 @@ def Audio(
     freq_label: str = "Hz",
     native_player: bool = False,
     minimal: bool = False,
-    extended: bool = False
+    extended: bool = False,
 ):
     """waloviz.Audio
     -----
@@ -137,16 +137,16 @@ def Audio(
     download_button : bool
         Whether to show the html download button. Defaults to True.
     freq_label : str
-        The label of the frequency axis (vertical), hides the label when set 
+        The label of the frequency axis (vertical), hides the label when set
         to None which saves space.
     native_player : bool
-        Whether the underlying native audio player should be visible. Default 
+        Whether the underlying native audio player should be visible. Default
         is False
     minimal: bool
-        Does nothing when False, when True it overrides some settings to make 
+        Does nothing when False, when True it overrides some settings to make
         the player more compact and simple.
     extended: bool
-        Does nothing when False, when True it overrides some settings to make 
+        Does nothing when False, when True it overrides some settings to make
         the player more descriptive and functional.
 
     Returns
@@ -161,7 +161,9 @@ def Audio(
     follow_color: str = "#ff0000dd"
 
     if minimal and extended:
-        raise ValueError("`Audio` cannot be both `minimal` and `extended`, choose one to keep")
+        raise ValueError(
+            "`Audio` cannot be both `minimal` and `extended`, choose one to keep"
+        )
 
     if minimal:
         title = "wv"
@@ -229,7 +231,7 @@ Specify the sample rate in one of the following ways:
         raise ValueError(
             f"The given `wav` value has more than 2 dimensions: {len(wav.shape)}!=2"
         )
-    
+
     global _mode
     if _mode == "colab":
         extension(_mode)
@@ -276,7 +278,7 @@ Specify the sample rate in one of the following ways:
         title=title,
         embed_title=embed_title,
         colorbar=colorbar,
-        freq_label=freq_label
+        freq_label=freq_label,
     )
     waloviz_bokeh = hv.render(waloviz_hv)
 
@@ -295,38 +297,38 @@ Specify the sample rate in one of the following ways:
         width=width,
         audio_height=audio_height,
         download_button=download_button,
-        native_player=native_player
+        native_player=native_player,
     )
 
     return waloviz_panel
 
 
 def save(
-    waloviz_panel: pn.pane.PaneBase,
-    file: Union[str, os.PathLike, IOBase] = None,
+    source: pn.pane.PaneBase,
+    *args,
+    out_file: Union[str, os.PathLike, IOBase] = None,
     title: Optional[str] = None,
     resources: Resources = INLINE,
     embed: bool = True,
-    **kwargs
+    **kwargs,
 ):
     """waloviz.save
     -------
 
-    Saves a waloviz panel to an html file
+    Saves a waloviz player to an html file
 
     Example
     -------
     >>> import wavloviz as wv
-    >>> wv_panel = wv.Audio('http://ccrma.stanford.edu/~jos/mp3/pno-cs.mp3')
-    >>> wv.save(wv_panel)
+    >>> wv.save('http://ccrma.stanford.edu/~jos/mp3/pno-cs.mp3')
 
     Parameters
     ----------
-    waloviz_panel : pn.pane.PaneBase | str | os.PathLike | IOBase | (tensorlike, int) | tensorlike
-        The waloviz panel created by `waloviz.Audio`, or the parameters 
-        for `waloviz.Audio` to create a panel with.
-    file : str | os.PathLike | IOBase
-        The output file for the generated html, default is "{title}.html"
+    source : pn.pane.PaneBase | str | os.PathLike | IOBase | (tensorlike, int) | tensorlike
+        The waloviz player created by `waloviz.Audio`, or a source for
+        `waloviz.Audio` to create a player with.
+    out_file : str | os.PathLike | IOBase
+        The output file path for the generated html, default is "{title}.html"
     title : str
         The title to be used in the generated file name and the html title,
         if `waloviz.Audio(title="...")` was specified, then that value is
@@ -338,12 +340,26 @@ def save(
 
     Returns
     -------
-    file : str | os.PathLike | IOBase
+    out_file : str | os.PathLike | IOBase
         The file that the waloviz html content was written into
     <br/>"""
-    if not isinstance(waloviz_panel, pn.pane.PaneBase):
-        waloviz_panel = Audio(waloviz_panel, **kwargs)
-    else:
+
+    if isinstance(source, pn.pane.PaneBase):
         if len(kwargs) > 0:
-            raise TypeError(f"save() got an unexpected keyword argument '{kwargs.keys()[0]}'")
-    return save_waloviz_panel(waloviz_panel, file, title, resources, embed)
+            raise TypeError(
+                f"save() got an unexpected keyword argument '{kwargs.keys()[0]}'"
+            )
+        if len(args) == 1:
+            if isinstance(args[0], (str, os.PathLike, IOBase)):
+                out_file = args[0]
+                args = []
+        elif len(args) > 1:
+            raise ValueError(
+                """`waloviz.save` should be called with at most 2 positional arguments like one of the following ways:
+    waloviz.save(source)
+    waloviz.save(source, out_file)
+    waloviz.save(source, over_curve)"""
+            )
+    else:
+        source = Audio(source, *args, **kwargs)
+    return save_waloviz_panel(source, out_file, title, resources, embed)

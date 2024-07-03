@@ -38,7 +38,7 @@ def wrap_with_waloviz_panel(
     width: Union[int, str],
     audio_height: int,
     download_button: bool,
-    native_player: bool
+    native_player: bool,
 ):
     sizing_mode = "stretch_width" if width == "responsive" else "fixed"
     width_kwargs = {}

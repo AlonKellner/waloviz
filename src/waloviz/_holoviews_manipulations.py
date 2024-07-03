@@ -44,7 +44,7 @@ def get_waloviz_hv(
     colorbar: bool,
     title: str,
     embed_title: bool,
-    freq_label: str
+    freq_label: str,
 ):
     responsive = width == "responsive"
 

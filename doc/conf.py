@@ -7,6 +7,7 @@ from nbsite.shared_conf import *
 # edit things below as appropriate for your project
 
 import sys
+
 sys.path.append("/workspaces/waloviz/src")
 sys.path.append("/home/runner/work/waloviz/waloviz/src")
 
@@ -40,7 +41,12 @@ html_theme_options = {
 }
 html_last_updated_fmt = "%Y-%m-%d"
 
-extensions += ["nbsite.gallery", "sphinx_favicon", "sphinxext.opengraph", "sphinx_tabs.tabs"]
+extensions += [
+    "nbsite.gallery",
+    "sphinx_favicon",
+    "sphinxext.opengraph",
+    "sphinx_tabs.tabs",
+]
 
 sphinx_tabs_disable_tab_closing = True
 
@@ -57,11 +63,19 @@ nbsite_gallery_conf = {
 favicons = [
     {"href": "/en/latest/favicon.ico", "sizes": "32x32"},
     {"href": "/en/latest/favicon.svg", "sizes": "any", "type": "image/svg+xml"},
-    {"rel": "apple-touch-icon", "href": "/en/latest/apple-touch-icon.png", "sizes": "180x180"},
+    {
+        "rel": "apple-touch-icon",
+        "href": "/en/latest/apple-touch-icon.png",
+        "sizes": "180x180",
+    },
     {"href": "/en/latest/favicon-32x32.png", "sizes": "32x32", "type": "image/png"},
     {"href": "/en/latest/favicon-16x16.png", "sizes": "16x16", "type": "image/png"},
     {"rel": "manifest", "href": "/en/latest/site.webmanifest"},
-    {"rel": "mask-icon", "href": "/en/latest/safari-pinned-tab.svg", "color": "#5bbad5"},
+    {
+        "rel": "mask-icon",
+        "href": "/en/latest/safari-pinned-tab.svg",
+        "color": "#5bbad5",
+    },
 ]
 
 ogp_site_url = "http://waloviz.com/"
