@@ -34,6 +34,7 @@ def get_waloviz_hv(
     height: int,
     width: Union[int, str],
     audio_height: int,
+    button_height: int,
     pbar_height: int,
     theme_hook: Any,
     max_size: int,
@@ -57,7 +58,7 @@ def get_waloviz_hv(
     hz_min = (-1 / n_fft) * sr / 2
     hv_max = (1 + 1 / n_fft) * sr / 2
 
-    spec_height = (height - audio_height - pbar_height) // len(spec)
+    spec_height = (height - pbar_height - audio_height - button_height) // len(spec)
 
     plots = []
     for channel, spec_channel in enumerate(spec):

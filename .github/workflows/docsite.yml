@@ -43,9 +43,6 @@ jobs:
 
       - name: Install dependencies
         run: python3 -m pip install -r requirements.txt
-
-      - name: Generate RST
-        run: nbsite generate-rst --org AlonKellner --project-name waloviz
       
       - name: Generate modules
         run: python ./doc/generate_modules.py src/waloviz -d ./doc/reference_manual -n waloviz -e tests

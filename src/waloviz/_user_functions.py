@@ -155,7 +155,6 @@ def Audio(
         An interactive waloviz panel, can be saved to html with `waloviz.save(panel)`
     <br/>"""
 
-    audio_height: int = 30
     pbar_height: int = 40
     stay_color: str = "#ffffff88"
     follow_color: str = "#ff0000dd"
@@ -177,6 +176,16 @@ def Audio(
         colorbar = True
         download_button = True
         native_player = True
+
+    if download_button:
+        button_height: int = 30
+    else:
+        button_height: int = 0
+
+    if native_player:
+        audio_height: int = 30
+    else:
+        audio_height: int = 0
 
     if isinstance(over_curve, int):
         raise ValueError(
@@ -268,6 +277,7 @@ Specify the sample rate in one of the following ways:
         height=height,
         width=width,
         audio_height=audio_height,
+        button_height=button_height,
         pbar_height=pbar_height,
         theme_hook=theme_hook,
         max_size=max_size,
