@@ -10,8 +10,7 @@
 
 Introduction <self>
 Getting Started <getting_started>
-User Guide <user_guide>
-Gallery <gallery>
+User Guide <user_guide/index>
 API <reference_manual>
 FAQ <FAQ>
 About <about>

@@ -48,7 +48,7 @@ jobs:
         run: nbsite generate-rst --org AlonKellner --project-name waloviz
       
       - name: Generate modules
-        run: python ./doc/generate_modules.py waloviz -d ./doc/reference_manual -n waloviz -e tests
+        run: python ./doc/generate_modules.py src/waloviz -d ./doc/reference_manual -n waloviz -e tests
 
       - name: Build site
         run: nbsite build --org AlonKellner --project-name waloviz
