@@ -100,6 +100,8 @@ def finalize_waloviz_bokeh_gui(
         for e in [
             "panstart",
             "panend",
+            "pinchstart",
+            "pinchend",
             "wheel",
             "press",
             "pressup",
@@ -114,6 +116,8 @@ def finalize_waloviz_bokeh_gui(
         for e in [
             "panstart",
             "pan",
+            "pinchstart",
+            "pinch",
             "panend",
             "wheel",
             "press",
@@ -126,7 +130,7 @@ def finalize_waloviz_bokeh_gui(
                 get_keep_dump_range_callback(plot),
                 get_keep_x_range_callback(plot, plots),
             )
-        for e in ["pan", "rangesupdate", "wheel"]:
+        for e in ["pan", "pinch", "rangesupdate", "wheel"]:
             plot.js_on_event(e, get_stop_follow_callback(stay_color, vspans))
 
         if is_spec:
@@ -135,6 +139,9 @@ def finalize_waloviz_bokeh_gui(
 
         if is_pbar:
             for e in [
+                "pinch",
+                "pinchstart",
+                "pinchend",
                 "pan",
                 "panstart",
                 "panend",
@@ -149,6 +156,9 @@ def finalize_waloviz_bokeh_gui(
                 )
 
         for e in [
+            "pinch",
+            "pinchstart",
+            "pinchend",
             "panstart",
             "pan",
             "panend",

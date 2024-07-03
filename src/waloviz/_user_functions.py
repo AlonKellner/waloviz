@@ -10,10 +10,10 @@ import torchaudio
 import torchaudio.transforms as T
 from bokeh.resources import INLINE, Resources
 
-from .bokeh_manipulation import finalize_waloviz_bokeh_gui, themes
-from .holoviews_manipulations import ThemeHook, get_waloviz_hv
-from .panel_manipulation import wrap_with_waloviz_panel, save_waloviz_panel
-from .tensor_utils import OverCurve, preprocess_over_curve, to_tensor
+from ._bokeh_manipulation import finalize_waloviz_bokeh_gui, themes
+from ._holoviews_manipulations import ThemeHook, get_waloviz_hv
+from ._panel_manipulation import wrap_with_waloviz_panel, save_waloviz_panel
+from ._tensor_utils import OverCurve, preprocess_over_curve, to_tensor
 
 
 _mode = "default"
@@ -59,7 +59,10 @@ def Audio(
     theme: Union[str, Dict[str, Any]] = "dark_minimal",
     max_size: int = 10000,
     download_button: bool = True,
-    freq_label: str = "Hz"
+    freq_label: str = "Hz",
+    native_player: bool = False,
+    minimal: bool = False,
+    extended: bool = False
 ):
     """waloviz.Audio
     -----
@@ -136,6 +139,15 @@ def Audio(
     freq_label : str
         The label of the frequency axis (vertical), hides the label when set 
         to None which saves space.
+    native_player : bool
+        Whether the underlying native audio player should be visible. Default 
+        is False
+    minimal: bool
+        Does nothing when False, when True it overrides some settings to make 
+        the player more compact and simple.
+    extended: bool
+        Does nothing when False, when True it overrides some settings to make 
+        the player more descriptive and functional.
 
     Returns
     -------
@@ -143,14 +155,26 @@ def Audio(
         An interactive waloviz panel, can be saved to html with `waloviz.save(panel)`
     <br/>"""
 
-    global _mode
-    if _mode == "colab":
-        extension(_mode)
-
     audio_height: int = 30
     pbar_height: int = 40
     stay_color: str = "#ffffff88"
     follow_color: str = "#ff0000dd"
+
+    if minimal and extended:
+        raise ValueError("`Audio` cannot be both `minimal` and `extended`, choose one to keep")
+
+    if minimal:
+        title = "wv"
+        embed_title = False
+        download_button = False
+        freq_label = None
+        native_player = False
+
+    if extended:
+        embed_title = True
+        colorbar = True
+        download_button = True
+        native_player = True
 
     if isinstance(over_curve, int):
         raise ValueError(
@@ -205,6 +229,10 @@ Specify the sample rate in one of the following ways:
         raise ValueError(
             f"The given `wav` value has more than 2 dimensions: {len(wav.shape)}!=2"
         )
+    
+    global _mode
+    if _mode == "colab":
+        extension(_mode)
 
     if source_sr != target_sr:
         wav = T.Resample(source_sr, target_sr)(wav)
@@ -267,6 +295,7 @@ Specify the sample rate in one of the following ways:
         width=width,
         audio_height=audio_height,
         download_button=download_button,
+        native_player=native_player
     )
 
     return waloviz_panel

@@ -5,7 +5,7 @@ import numpy as np
 import torch
 import torchaudio.transforms as T
 
-from .tensor_utils import OverCurve, skip_to_size
+from ._tensor_utils import OverCurve, skip_to_size
 
 
 class ThemeHook:
@@ -64,9 +64,10 @@ def get_waloviz_hv(
         spec_image = hv.Image(
             spec_channel.numpy()[::-1, :] + 1e-5,
             bounds=(0, hz_min, total_seconds, hv_max),
-            kdims=["x", freq_label],
+            kdims=["x", "Hz"],
         ).opts(
             xaxis=None,
+            ylabel=freq_label,
             cmap=cmap,
             cnorm="log",
             height=spec_height,
