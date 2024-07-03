@@ -21,12 +21,12 @@ _mode = "default"
 
 def extension(mode="default"):
     """waloviz.Audio
-    -----
+    -------------
 
     Creates an interactive audio player with a spectrogram
 
     Examples
-    -------
+    --------
     >>> import wavloviz as wv
     >>> wv.extension()
     >>> wv.Audio('http://ccrma.stanford.edu/~jos/mp3/pno-cs.mp3')
@@ -65,12 +65,12 @@ def Audio(
     extended: bool = False,
 ):
     """waloviz.Audio
-    -----
+    -------------
 
     Creates an interactive audio player with a spectrogram
 
     Examples
-    -------
+    --------
     >>> import wavloviz as wv
 
     >>> wv.Audio('http://ccrma.stanford.edu/~jos/mp3/pno-cs.mp3')
@@ -88,26 +88,26 @@ def Audio(
     over_curve : tensorlike | List[tensorlike] | Dict[str, tensorlike]
         A single or multiple curves to be displayed over the spectrogram
     over_curve_names : str | List[str]
-        A list of display names corresponding to the list given in `over_curve`
+        A list of display names corresponding to the list given in ``over_curve``
     sr : int
         The sample rate, when the source does not contain a sample rate,
-        the given `sr` value is assumed to be the source sample rate, when
+        the given ``sr`` value is assumed to be the source sample rate, when
         this value is different than the source sample rate, the source
-        audio is resampled to the specified `sr` value.
+        audio is resampled to the specified ``sr`` value.
     frame_ms : int
         Sets the spectrogram frame length to the given amount of milliseconds,
         default is 100.
     n_fft : int
-        Sets the `n_fft` of the spectrogram, overrides the `frame_ms` value,
-        default is `(sr/1000 * frame_ms)`.
+        Sets the ``n_fft`` of the spectrogram, overrides the ``frame_ms`` value,
+        default is ``(sr/1000 * frame_ms)``.
     hop_length : int
-        Sets the `hop_length` of the spectrogram, default is `n_fft/8`
+        Sets the `hop_length` of the spectrogram, default is ``n_fft/8``
     title : str
-        A title to be used when saving the plot. If `embed_title` is True,
-        the `title` value will be displayed as part of the plot itself.
+        A title to be used when saving the plot. If ``embed_title`` is True,
+        the ``title`` value will be displayed as part of the plot itself.
         Default is "waloviz".
     embed_title : bool
-        When True, the `title` value will be displayed as part of the plot
+        When True, the ``title`` value will be displayed as part of the plot
         itself, default is False.
     height : int
         The total height of the plot
@@ -122,17 +122,17 @@ def Audio(
     cmap : str
         The colormap used to display the spectrogram, default is "Inferno"
     over_curve_colors : str | List[str] | Dict[str, str]
-        Sets the colors to display for each given `over_curve`, should match
-        the size and structure of the given `over_curve` value.
+        Sets the colors to display for each given ``over_curve``, should match
+        the size and structure of the given ``over_curve`` value.
     theme : str | Dict[str, Any]
         Sets the visual look and feel of the plot, the value provided must
-        be a `bokeh` theme, default is "dark_minimal".
+        be a ``bokeh`` theme, default is "dark_minimal".
     max_size : int
         When the spectrogram or one of the over curves contain many values,
-        the plot's performance suffers. For that reason `max_size` limits the
+        the plot's performance suffers. For that reason ``max_size`` limits the
         amount of displayed values, when the spectrogram or an over curve has
-        more values than the `max_size`, it is reduced in size by skipping
-        intermediate values, until the size is less than the `max_size`.
+        more values than the ``max_size``, it is reduced in size by skipping
+        intermediate values, until the size is less than the ``max_size``.
         Default is 10000.
     download_button : bool
         Whether to show the html download button. Defaults to True.
@@ -152,7 +152,7 @@ def Audio(
     Returns
     -------
     panel : pn.pane.PaneBase
-        An interactive waloviz panel, can be saved to html with `waloviz.save(panel)`
+        An interactive waloviz panel, can be saved to html with ``waloviz.save(panel)``
     <br/>"""
 
     pbar_height: int = 40
@@ -323,7 +323,7 @@ def save(
     **kwargs,
 ):
     """waloviz.save
-    -------
+    ------------
 
     Saves a waloviz player to an html file
 
@@ -335,18 +335,18 @@ def save(
     Parameters
     ----------
     source : pn.pane.PaneBase | str | os.PathLike | IOBase | (tensorlike, int) | tensorlike
-        The waloviz player created by `waloviz.Audio`, or a source for
-        `waloviz.Audio` to create a player with.
+        The waloviz player created by ``waloviz.Audio``, or a source for
+        ``waloviz.Audio`` to create a player with.
     out_file : str | os.PathLike | IOBase
         The output file path for the generated html, default is "{title}.html"
     title : str
         The title to be used in the generated file name and the html title,
-        if `waloviz.Audio(title="...")` was specified, then that value is
+        if ``waloviz.Audio(title="...")`` was specified, then that value is
         used, otherwise, the default is "waloviz".
     resources : bokeh.resources.Resources
-        The resources for the `panel` save method, default is INLINE
+        The resources for the ``panel`` save method, default is INLINE
     embed : bool
-        The embed value for the `panel` save method, default is True
+        The embed value for the ``panel`` save method, default is True
 
     Returns
     -------
