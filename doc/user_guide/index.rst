@@ -5,7 +5,7 @@ The User Guide goes through the available features in WaloViz. For newcomers, qu
 If you are looking for a deep dive into the API, try our `Reference Manual <../reference_manual.html>`_.
 
 Feature guides
------------
+--------------
 
 These user guides provide an overview of the features you might find useful in WaloViz:
 
