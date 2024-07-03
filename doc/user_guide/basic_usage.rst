@@ -1,5 +1,5 @@
-basic_usage
-____________________
+Basic Usage
+___________
 
 .. notebook:: holoviews ../../examples/user_guide/01-basic-usage.ipynb
     :offset: 1
