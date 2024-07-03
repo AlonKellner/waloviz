@@ -42,23 +42,12 @@ html_theme_options = {
 html_last_updated_fmt = "%Y-%m-%d"
 
 extensions += [
-    "nbsite.gallery",
     "sphinx_favicon",
     "sphinxext.opengraph",
     "sphinx_tabs.tabs",
 ]
 
 sphinx_tabs_disable_tab_closing = True
-
-nbsite_gallery_conf = {
-    "backends": ["bokeh"],
-    "default_extensions": ["*.ipynb", "*.py"],
-    "enable_download": True,
-    "examples_dir": os.path.join("..", "examples"),
-    "galleries": {"gallery": {"title": "Gallery"}},
-    "github_org": "AlonKellner",
-    "github_project": "waloviz",
-}
 
 favicons = [
     {"href": "/en/latest/favicon.ico", "sizes": "32x32"},
@@ -85,8 +74,7 @@ ogp_enable_meta_description = True
 _NAV = (
     ("Getting Started", "getting_started/index"),
     ("User Guide", "user_guide/index"),
-    ("Gallery", "gallery/index"),
-    ("API", "Reference_Manual/index"),
+    ("API", "reference_manual/index"),
     ("FAQ", "FAQ"),
     ("About", "about"),
 )
