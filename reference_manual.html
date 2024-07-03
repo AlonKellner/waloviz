@@ -11,13 +11,15 @@
 <link href="/en/latest/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
 <link href="/en/latest/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
 <link href="/en/latest/site.webmanifest" rel="manifest"/>
-<link color="#5bbad5" href="/en/latest/safari-pinned-tab.svg" rel="mask-icon" type="image/svg+xml"/><meta content="Reference Manual" property="og:title"/>
+<link color="#5bbad5" href="/en/latest/safari-pinned-tab.svg" rel="mask-icon" type="image/svg+xml"/><meta content="API Reference Manual" property="og:title"/>
 <meta content="website" property="og:type"/>
 <meta content="http://waloviz.com/reference_manual.html" property="og:url"/>
 <meta content="WaloViz" property="og:site_name"/>
+<meta content="The API reference manual is generated directly from documentation and declarations in the source code, and is thus often much more verbose than necessary. Still, it often helps to navigate the code..." property="og:description"/>
 <meta content="https://waloviz.com/en/latest/_static/logo_vertical.png" property="og:image"/>
 <meta content="WaloViz" property="og:image:alt"/>
-<title>Reference Manual — WaloViz vdev</title>
+<meta content="The API reference manual is generated directly from documentation and declarations in the source code, and is thus often much more verbose than necessary. Still, it often helps to navigate the code..." name="description"/>
+<title>API Reference Manual — WaloViz vdev</title>
 <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
@@ -263,7 +265,9 @@ document.write(`
 <li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user_guide.html">User Guide</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">API</a></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">API</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="FAQ.html">FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="about.html">About</a></li>
 </ul>
@@ -288,7 +292,7 @@ document.write(`
 <i class="fa-solid fa-home"></i>
 </a>
 </li>
-<li aria-current="page" class="breadcrumb-item active">Reference Manual</li>
+<li aria-current="page" class="breadcrumb-item active">API Reference Manual</li>
 </ul>
 </nav>
 </div>
@@ -297,8 +301,32 @@ document.write(`
 </div>
 <div id="searchbox"></div>
 <article class="bd-article" role="main">
-<section id="reference-manual">
-<h1>Reference Manual<a class="headerlink" href="#reference-manual" title="Permalink to this heading">#</a></h1>
+<section id="api-reference-manual">
+<h1>API Reference Manual<a class="headerlink" href="#api-reference-manual" title="Permalink to this heading">#</a></h1>
+<p>The API reference manual is generated directly from documentation and declarations in the source code, and is thus often much more verbose than necessary.
+Still, it often helps to navigate the code when necessary. Use only when you need a deep-dive into the code.</p>
+<hr class="docutils"/>
+<section id="module-structure">
+<h2>Module Structure<a class="headerlink" href="#module-structure" title="Permalink to this heading">#</a></h2>
+<section id="waloviz-subpackages">
+<h3>WaloViz subpackages<a class="headerlink" href="#waloviz-subpackages" title="Permalink to this heading">#</a></h3>
+<p>These subpackages should not be used directly, they contain a LOT of internal logic which is not relevant for the average user.</p>
+<dl class="simple">
+<dt><a href="#id1"><span class="problematic" id="id2">`_user_functions`_</span></a></dt><dd><p>As the name suggests - all of the top-level functionality which is officially available to the user is here.</p>
+</dd>
+<dt><a href="#id3"><span class="problematic" id="id4">`_tensor_utils`_</span></a></dt><dd><p>Utilities for manipulating tensors, mostly to do with different tensor input formats support.</p>
+</dd>
+<dt><a href="#id5"><span class="problematic" id="id6">`_holoviews_manipulations`_</span></a></dt><dd><p>Functions to do with <code class="docutils literal notranslate"><span class="pre">holoviews</span></code>, they create the elements of the plots.</p>
+</dd>
+<dt><a href="#id7"><span class="problematic" id="id8">`_bokeh_manipulation`_</span></a></dt><dd><p>Functions to do with <code class="docutils literal notranslate"><span class="pre">bokeh</span></code>, they customize the plots interactivity and appearance.</p>
+</dd>
+<dt><a href="#id9"><span class="problematic" id="id10">`_panel_manipulation`_</span></a></dt><dd><p>Functions to do with <code class="docutils literal notranslate"><span class="pre">panel</span></code>, they add the audio and link it to the plot.</p>
+</dd>
+</dl>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+</section>
 </section>
 </article>
 <footer class="bd-footer-article">
@@ -325,8 +353,20 @@ document.write(`
 </div>
 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 <div class="sidebar-secondary-item">
+<div class="page-toc tocsection onthispage">
+<i class="fa-solid fa-list"></i> On this page
+  </div>
+<nav class="bd-toc-nav page-toc">
+<ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-structure">Module Structure</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#waloviz-subpackages">WaloViz subpackages</a></li>
+</ul>
+</li>
+</ul>
+</nav></div>
+<div class="sidebar-secondary-item">
 <div class="tocsection sourcelink">
-<a href="_sources/reference_manual.md.txt">
+<a href="_sources/reference_manual.rst.txt">
 <i class="fa-solid fa-file-lines"></i> Show Source
     </a>
 </div>
@@ -352,7 +392,7 @@ document.write(`
 </p>
 </div>
 <div class="footer-item"><p class="last-updated">
-  Last updated on 2024-06-30.
+  Last updated on 2024-07-03.
   <br/>
 </p></div>
 </div>
