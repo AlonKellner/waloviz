@@ -27,9 +27,12 @@ def extension(mode="default"):
 
     Examples
     --------
-    >>> import wavloviz as wv
-    >>> wv.extension()
-    >>> wv.Audio('http://ccrma.stanford.edu/~jos/mp3/pno-cs.mp3')
+
+    .. code-block:: python
+
+            import wavloviz as wv
+            wv.extension()
+            wv.Audio('http://ccrma.stanford.edu/~jos/mp3/pno-cs.mp3')
     """
     global _mode
     _mode = mode
@@ -71,18 +74,28 @@ def Audio(
 
     Examples
     --------
-    >>> import wavloviz as wv
 
-    >>> wv.Audio('http://ccrma.stanford.edu/~jos/mp3/pno-cs.mp3')
+    .. code-block:: python
 
-    >>> wav, sr = np.random.randn(8000), 8000
-    >>> wv.Audio((wav, sr))
+            import wavloviz as wv
 
-    >>> wav, sr = torchaudio.load('http://ccrma.stanford.edu/~jos/mp3/pno-cs.mp3')
-    >>> wv.Audio(wav, sr=sr, over_curve=dict(squared=wav**2, cubed=wav**3))
+    .. code-block:: python
+            
+            wv.Audio('http://ccrma.stanford.edu/~jos/mp3/pno-cs.mp3')
+
+    .. code-block:: python
+
+            wav, sr = np.random.randn(8000), 8000
+            wv.Audio((wav, sr))
+    
+    .. code-block:: python
+            
+            wav, sr = torchaudio.load('http://ccrma.stanford.edu/~jos/mp3/pno-cs.mp3')
+            wv.Audio(wav, sr=sr, over_curve=dict(squared=wav**2, cubed=wav**3))
 
     Parameters
     ----------
+
     source : str | os.PathLike | IOBase | (tensorlike, int) | tensorlike
         Either an audio file, or an audio tensor\\ndarray with a sample rate
     over_curve : tensorlike | List[tensorlike] | Dict[str, tensorlike]
@@ -151,6 +164,7 @@ def Audio(
 
     Returns
     -------
+    
     panel : pn.pane.PaneBase
         An interactive waloviz panel, can be saved to html with ``waloviz.save(panel)``
     <br/>"""
@@ -329,11 +343,15 @@ def save(
 
     Example
     -------
-    >>> import wavloviz as wv
-    >>> wv.save('http://ccrma.stanford.edu/~jos/mp3/pno-cs.mp3')
+
+    .. code-block:: python
+
+            import wavloviz as wv
+            wv.save('http://ccrma.stanford.edu/~jos/mp3/pno-cs.mp3')
 
     Parameters
     ----------
+
     source : pn.pane.PaneBase | str | os.PathLike | IOBase | (tensorlike, int) | tensorlike
         The waloviz player created by ``waloviz.Audio``, or a source for
         ``waloviz.Audio`` to create a player with.
@@ -350,6 +368,7 @@ def save(
 
     Returns
     -------
+
     out_file : str | os.PathLike | IOBase
         The file that the waloviz html content was written into
     <br/>"""
