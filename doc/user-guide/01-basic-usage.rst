@@ -1,7 +1,8 @@
+===========
 Basic Usage
-___________
+===========
 
-.. notebook:: holoviews ../../examples/user_guide/01-basic-usage.ipynb
+.. notebook:: holoviews ../../examples/user-guide/01-basic-usage.ipynb
     :offset: 1
 
 The ``extension`` function

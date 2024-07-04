@@ -1,6 +1,6 @@
 FROM mcr.microsoft.com/devcontainers/python:1-3.10-bookworm
 
-RUN apt-get update && apt-get upgrade -y && apt-get install -y ffmpeg sox libavdevice-dev
+RUN apt-get update && apt-get upgrade -y && apt-get install -y ffmpeg sox libavdevice-dev graphviz
 
 COPY src/requirements.txt src/requirements.txt
 COPY tests/requirements.txt tests/requirements.txt

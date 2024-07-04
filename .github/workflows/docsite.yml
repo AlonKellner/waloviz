@@ -20,7 +20,7 @@ jobs:
       - name: Cache apt-pkgs
         uses: awalsh128/cache-apt-pkgs-action@latest
         with:
-          packages: ffmpeg sox libavdevice-dev
+          packages: ffmpeg sox libavdevice-dev graphviz
           version: 1.0
 
       - name: Upgrade pip
@@ -45,7 +45,7 @@ jobs:
         run: python3 -m pip install -r requirements.txt
       
       - name: Generate modules
-        run: python ./doc/generate_modules.py src/waloviz -d ./doc/reference_manual -n waloviz -e tests
+        run: python ./doc/generate_modules.py src/waloviz -d ./doc/reference-manual -n waloviz -e tests
 
       - name: Build site
         run: nbsite build --org AlonKellner --project-name waloviz

@@ -99,7 +99,8 @@ def create_module_file(package, module, opts):
     """Build the text of the file and write the file."""
 
     text = format_heading(1, "%s Module" % module)
-    text += format_inheritance_diagram(package, module)
+    text += format_inheritance_diagram(module, package)
+    text += "\n"
     text += format_heading(2, ":mod:`%s` Module" % module)
     text += format_directive(module, package)
     write_file(makename(package, module), text, opts)

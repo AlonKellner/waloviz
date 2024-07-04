@@ -9,9 +9,9 @@
 :maxdepth: 2
 
 Introduction <self>
-Getting Started <getting_started>
-User Guide <user_guide/index>
-API <reference_manual>
+Getting Started <getting-started>
+User Guide <user-guide/index>
+API <reference-manual/index>
 FAQ <FAQ>
 About <about>
 ```

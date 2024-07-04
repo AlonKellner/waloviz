@@ -110,4 +110,4 @@ The controls are pretty intuitive, but here are the most important controls you 
 4. The small ↺ icon on the top left - resets to the initial view.
 5. Clicking on the ``Download waloviz.html`` - will download an HTML version of the player.
 
-To learn more, read our `User Guide <./user_guide.html>`_.
+To learn more, read our `User Guide <./user-guide.html>`_.

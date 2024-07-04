@@ -72,9 +72,9 @@ ogp_image = "https://waloviz.com/en/latest/_static/logo_vertical.png"
 ogp_enable_meta_description = True
 
 _NAV = (
-    ("Getting Started", "getting_started/index"),
-    ("User Guide", "user_guide/index"),
-    ("API", "reference_manual/index"),
+    ("Getting Started", "getting-started/index"),
+    ("User Guide", "user-guide/index"),
+    ("API", "reference-manual/index"),
     ("FAQ", "FAQ"),
     ("About", "about"),
 )
