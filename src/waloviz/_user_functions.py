@@ -21,21 +21,21 @@ _mode = "default"
 
 def extension(mode="default"):
     """=====================
-``waloviz.extension``
-=====================
+    ``waloviz.extension``
+    =====================
 
-| Initializes the notebook extensions for the current IDE.
+    | Initializes the notebook extensions for the current IDE.
 
-Examples
---------
+    Examples
+    --------
 
-.. code-block:: python
+    .. code-block:: python
 
-        import wavloviz as wv
-        wv.extension()
-        wv.Audio('http://ccrma.stanford.edu/~jos/mp3/pno-cs.mp3')
+            import wavloviz as wv
+            wv.extension()
+            wv.Audio('http://ccrma.stanford.edu/~jos/mp3/pno-cs.mp3')
 
-|"""
+    |"""
     global _mode
     _mode = mode
     hv.extension("bokeh")
@@ -55,8 +55,10 @@ def Audio(
     hop_length: Optional[int] = None,
     title: Optional[str] = "waloviz",
     embed_title: bool = False,
-    height: int = 500,
+    height: Union[int, str] = "responsive",
     width: Union[int, str] = "responsive",
+    aspect_ratio: float = 3.5,
+    sizing_mode: str = "scale_both",
     sync_legends: bool = False,
     colorbar: bool = False,
     cmap: str = "Inferno",
@@ -70,112 +72,124 @@ def Audio(
     extended: bool = False,
 ):
     """=================
-``waloviz.Audio``
-=================
+    ``waloviz.Audio``
+    =================
 
-| Creates an interactive audio player with a spectrogram
+    | Creates an interactive audio player with a spectrogram
 
-Examples
---------
+    Examples
+    --------
 
-.. code-block:: python
+    .. code-block:: python
 
-        import wavloviz as wv
+            import wavloviz as wv
 
-.. code-block:: python
-        
-        wv.Audio('http://ccrma.stanford.edu/~jos/mp3/pno-cs.mp3')
+    .. code-block:: python
 
-.. code-block:: python
+            wv.Audio('http://ccrma.stanford.edu/~jos/mp3/pno-cs.mp3')
 
-        wav, sr = np.random.randn(8000), 8000
-        wv.Audio((wav, sr))
+    .. code-block:: python
 
-.. code-block:: python
-        
-        wav, sr = torchaudio.load('http://ccrma.stanford.edu/~jos/mp3/pno-cs.mp3')
-        wv.Audio(wav, sr=sr, over_curve=dict(squared=wav**2, cubed=wav**3))
+            wav, sr = np.random.randn(8000), 8000
+            wv.Audio((wav, sr))
 
-Parameters
-----------
+    .. code-block:: python
 
-source : str | os.PathLike | IOBase | (tensorlike, int) | tensorlike
-    Either an audio file, or an audio tensor\\ndarray with a sample rate
-over_curve : tensorlike | List[tensorlike] | Dict[str, tensorlike]
-    A single or multiple curves to be displayed over the spectrogram
-over_curve_names : str | List[str]
-    A list of display names corresponding to the list given in ``over_curve``
-sr : int
-    The sample rate, when the source does not contain a sample rate,
-    the given ``sr`` value is assumed to be the source sample rate, when
-    this value is different than the source sample rate, the source
-    audio is resampled to the specified ``sr`` value.
-frame_ms : int
-    Sets the spectrogram frame length to the given amount of milliseconds,
-    default is 100.
-n_fft : int
-    Sets the ``n_fft`` of the spectrogram, overrides the ``frame_ms`` value,
-    default is ``(sr/1000 * frame_ms)``.
-hop_length : int
-    Sets the `hop_length` of the spectrogram, default is ``n_fft/8``
-title : str
-    A title to be used when saving the plot. If ``embed_title`` is True,
-    the ``title`` value will be displayed as part of the plot itself.
-    Default is "waloviz".
-embed_title : bool
-    When True, the ``title`` value will be displayed as part of the plot
-    itself, default is False.
-height : int
-    The total height of the plot
-width : int
-    The total width of the plot, default is "responsive", which means
-    the plot will stretch in width to fit the screen.
-sync_legends : bool
-    Whether the legends of both audio channels over curves should be
-    synchronized, default is False
-colorbar : bool
-    Whether to display a colorbar for the spectrograms, default is False
-cmap : str
-    The colormap used to display the spectrogram, default is "Inferno"
-over_curve_colors : str | List[str] | Dict[str, str]
-    Sets the colors to display for each given ``over_curve``, should match
-    the size and structure of the given ``over_curve`` value.
-theme : str | Dict[str, Any]
-    Sets the visual look and feel of the plot, the value provided must
-    be a ``bokeh`` theme, default is "dark_minimal".
-max_size : int
-    When the spectrogram or one of the over curves contain many values,
-    the plot's performance suffers. For that reason ``max_size`` limits the
-    amount of displayed values, when the spectrogram or an over curve has
-    more values than the ``max_size``, it is reduced in size by skipping
-    intermediate values, until the size is less than the ``max_size``.
-    Default is 10000.
-download_button : bool
-    Whether to show the html download button. Defaults to True.
-freq_label : str
-    The label of the frequency axis (vertical), hides the label when set
-    to None which saves space.
-native_player : bool
-    Whether the underlying native audio player should be visible. Default
-    is False
-minimal: bool
-    Does nothing when False, when True it overrides some settings to make
-    the player more compact and simple.
-extended: bool
-    Does nothing when False, when True it overrides some settings to make
-    the player more descriptive and functional.
+            wav, sr = torchaudio.load('http://ccrma.stanford.edu/~jos/mp3/pno-cs.mp3')
+            wv.Audio(wav, sr=sr, over_curve=dict(squared=wav**2, cubed=wav**3))
 
-Returns
--------
+    Parameters
+    ----------
 
-panel : pn.pane.PaneBase
-    An interactive waloviz panel, can be saved to html with ``waloviz.save(panel)``
+    source : str | os.PathLike | IOBase | (tensorlike, int) | tensorlike
+        Either an audio file, or an audio tensor\\ndarray with a sample rate
+    over_curve : tensorlike | List[tensorlike] | Dict[str, tensorlike]
+        A single or multiple curves to be displayed over the spectrogram
+    over_curve_names : str | List[str]
+        A list of display names corresponding to the list given in ``over_curve``
+    sr : int
+        The sample rate, when the source does not contain a sample rate,
+        the given ``sr`` value is assumed to be the source sample rate, when
+        this value is different than the source sample rate, the source
+        audio is resampled to the specified ``sr`` value.
+    frame_ms : int
+        Sets the spectrogram frame length to the given amount of milliseconds,
+        default is 100.
+    n_fft : int
+        Sets the ``n_fft`` of the spectrogram, overrides the ``frame_ms`` value,
+        default is ``(sr/1000 * frame_ms)``.
+    hop_length : int
+        Sets the `hop_length` of the spectrogram, default is ``n_fft/8``
+    title : str
+        A title to be used when saving the plot. If ``embed_title`` is True,
+        the ``title`` value will be displayed as part of the plot itself.
+        Default is "waloviz".
+    embed_title : bool
+        When True, the ``title`` value will be displayed as part of the plot
+        itself, default is False.
+    height : int | str
+        The total height of the plot, default is "responsive", which means
+        the plot will stretch in height to fit.
+    width : int | str
+        The total width of the plot, default is "responsive", which means
+        the plot will stretch in width to fit.
+    aspect_ratio : float
+        The ratio between the width and height, relevant only when either
+        width, height or both are "responsive", default is 3.5.
+    sizing_mode : str
+        The panel ``sizing_mode``, can be one of seven values:
+        "stretch_width", "stretch_height", "stretch_both",
+        "scale_width", "scale_height", "scale_both", or "fixed".
+        Default is "scale_both".
+    sync_legends : bool
+        Whether the legends of both audio channels over curves should be
+        synchronized, default is False
+    colorbar : bool
+        Whether to display a colorbar for the spectrograms, default is False
+    cmap : str
+        The colormap used to display the spectrogram, default is "Inferno"
+    over_curve_colors : str | List[str] | Dict[str, str]
+        Sets the colors to display for each given ``over_curve``, should match
+        the size and structure of the given ``over_curve`` value.
+    theme : str | Dict[str, Any]
+        Sets the visual look and feel of the plot, the value provided must
+        be a ``bokeh`` theme, default is "dark_minimal".
+    max_size : int
+        When the spectrogram or one of the over curves contain many values,
+        the plot's performance suffers. For that reason ``max_size`` limits the
+        amount of displayed values, when the spectrogram or an over curve has
+        more values than the ``max_size``, it is reduced in size by skipping
+        intermediate values, until the size is less than the ``max_size``.
+        Default is 10000.
+    download_button : bool
+        Whether to show the html download button. Defaults to True.
+    freq_label : str
+        The label of the frequency axis (vertical), hides the label when set
+        to None which saves space.
+    native_player : bool
+        Whether the underlying native audio player should be visible. Default
+        is False
+    minimal: bool
+        Does nothing when False, when True it overrides some settings to make
+        the player more compact and simple. Deafult is False.
+    extended: bool
+        Does nothing when False, when True it overrides some settings to make
+        the player more descriptive and functional. Deafult is False.
 
-|"""
+    Returns
+    -------
+
+    panel : pn.pane.PaneBase
+        An interactive waloviz panel, can be saved to html with ``waloviz.save(panel)``
+
+    |"""
 
     pbar_height: int = 40
     stay_color: str = "#ffffff88"
     follow_color: str = "#ff0000dd"
+
+    if (width != "responsive") and (height != "responsive"):
+        sizing_mode = "fixed"
 
     if minimal and extended:
         raise ValueError(
@@ -292,10 +306,6 @@ Specify the sample rate in one of the following ways:
         n_fft=n_fft,
         hop_length=hop_length,
         sync_legends=sync_legends,
-        height=height,
-        width=width,
-        audio_height=audio_height,
-        button_height=button_height,
         pbar_height=pbar_height,
         theme_hook=theme_hook,
         max_size=max_size,
@@ -316,6 +326,8 @@ Specify the sample rate in one of the following ways:
         total_seconds=total_seconds,
         stay_color=stay_color,
         follow_color=follow_color,
+        aspect_ratio=aspect_ratio,
+        sizing_mode=sizing_mode,
     )
     waloviz_panel = wrap_with_waloviz_panel(
         waloviz_bokeh,
@@ -323,9 +335,13 @@ Specify the sample rate in one of the following ways:
         sr=sr,
         title=title,
         width=width,
+        height=height,
         audio_height=audio_height,
+        button_height=button_height,
         download_button=download_button,
         native_player=native_player,
+        aspect_ratio=aspect_ratio,
+        sizing_mode=sizing_mode,
     )
 
     return waloviz_panel
@@ -341,43 +357,43 @@ def save(
     **kwargs,
 ):
     """================
-``waloviz.save``
-================
+    ``waloviz.save``
+    ================
 
-| Saves a waloviz player to an html file
+    | Saves a waloviz player to an html file
 
-Example
--------
+    Example
+    -------
 
-.. code-block:: python
+    .. code-block:: python
 
-        import wavloviz as wv
-        wv.save('http://ccrma.stanford.edu/~jos/mp3/pno-cs.mp3')
+            import wavloviz as wv
+            wv.save('http://ccrma.stanford.edu/~jos/mp3/pno-cs.mp3')
 
-Parameters
-----------
+    Parameters
+    ----------
 
-source : pn.pane.PaneBase | str | os.PathLike | IOBase | (tensorlike, int) | tensorlike
-    The waloviz player created by ``waloviz.Audio``, or a source for
-    ``waloviz.Audio`` to create a player with.
-out_file : str | os.PathLike | IOBase
-    The output file path for the generated html, default is "{title}.html"
-title : str
-    The title to be used in the generated file name and the html title,
-    if ``waloviz.Audio(title="...")`` was specified, then that value is
-    used, otherwise, the default is "waloviz".
-resources : bokeh.resources.Resources
-    The resources for the ``panel`` save method, default is INLINE
-embed : bool
-    The embed value for the ``panel`` save method, default is True
+    source : pn.pane.PaneBase | str | os.PathLike | IOBase | (tensorlike, int) | tensorlike
+        The waloviz player created by ``waloviz.Audio``, or a source for
+        ``waloviz.Audio`` to create a player with.
+    out_file : str | os.PathLike | IOBase
+        The output file path for the generated html, default is "{title}.html"
+    title : str
+        The title to be used in the generated file name and the html title,
+        if ``waloviz.Audio(title="...")`` was specified, then that value is
+        used, otherwise, the default is "waloviz".
+    resources : bokeh.resources.Resources
+        The resources for the ``panel`` save method, default is INLINE
+    embed : bool
+        The embed value for the ``panel`` save method, default is True
 
-Returns
--------
+    Returns
+    -------
 
-out_file : str | os.PathLike | IOBase
-    The file that the waloviz html content was written into
+    out_file : str | os.PathLike | IOBase
+        The file that the waloviz html content was written into
 
-|"""
+    |"""
 
     if isinstance(source, pn.pane.PaneBase):
         if len(kwargs) > 0:

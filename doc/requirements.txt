@@ -5,3 +5,4 @@ sphinxext-opengraph
 jupyter-bokeh
 sphinx-tabs
 sphinx-copybutton
+sphinxemoji

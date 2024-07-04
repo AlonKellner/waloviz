@@ -36,14 +36,25 @@ def wrap_with_waloviz_panel(
     sr: int,
     title: str,
     width: Union[int, str],
+    height: Union[int, str],
     audio_height: int,
+    button_height: int,
     download_button: bool,
     native_player: bool,
+    aspect_ratio: float,
+    sizing_mode: str,
 ):
-    sizing_mode = "stretch_width" if width == "responsive" else "fixed"
+    aspect_ratio_kwargs = {}
+    if sizing_mode != "fixed":
+        aspect_ratio_kwargs["aspect_ratio"] = aspect_ratio
+
     width_kwargs = {}
     if width != "responsive":
         width_kwargs["width"] = width
+    height_kwargs = {}
+    if height != "responsive":
+        plot_height = height - audio_height - button_height
+        height_kwargs["height"] = plot_height
 
     with patch(
         "panel.pane.media._is_1dim_int_or_float_ndarray",
@@ -55,10 +66,9 @@ def wrap_with_waloviz_panel(
         audio = pn.pane.Audio(
             wav.T,
             sample_rate=sr,
-            sizing_mode=sizing_mode,
+            sizing_mode="stretch_width",
             height=audio_height,
             visible=native_player,
-            **width_kwargs,
         )
 
     plot_0, _, __ = waloviz_bokeh.children[0]
@@ -66,17 +76,35 @@ def wrap_with_waloviz_panel(
     vspan_0 = plot_0.renderers[-2]
     audio.jslink(pause_0, paused="visible", bidirectional=True)
     audio.jslink(vspan_0, time="right", bidirectional=True)
-    waloviz_panel = pn.Column(waloviz_bokeh, audio)
+    waloviz_panel_plot = pn.Column(
+        waloviz_bokeh,
+    )
+    rows = [waloviz_panel_plot, audio]
 
     if download_button:
         buffer = BytesIO()
-        buffer: BytesIO = save_waloviz_panel(waloviz_panel, buffer, title)
+        buffer: BytesIO = save_waloviz_panel(
+            pn.Column(
+                *rows, 
+                **aspect_ratio_kwargs,
+                **width_kwargs,
+                **height_kwargs,
+            ),
+            buffer,
+            title,
+        )
         buffer.seek(0)
         file_download = pn.widgets.FileDownload(
             buffer, filename=f"{title}.html", embed=True
         )
+        rows.append(file_download)
 
-        waloviz_panel = pn.Column(waloviz_panel, file_download)
+    waloviz_panel = pn.Column(
+        *rows,
+        **aspect_ratio_kwargs,
+        **width_kwargs,
+        **height_kwargs,
+    )
 
     waloviz_panel.title = title
     return waloviz_panel
@@ -98,8 +126,10 @@ def save_waloviz_panel(
     if file is None:
         file = f"{title}.html"
 
-    if isinstance(waloviz_panel[1], pn.widgets.misc.FileDownload):
-        waloviz_panel = waloviz_panel[0]
+    if (len(waloviz_panel) > 2) and isinstance(
+        waloviz_panel[2], pn.widgets.misc.FileDownload
+    ):
+        waloviz_panel = pn.Column(waloviz_panel[0], waloviz_panel[1])
 
     pn.panel(waloviz_panel).save(
         file,

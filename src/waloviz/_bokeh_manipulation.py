@@ -26,6 +26,8 @@ def finalize_waloviz_bokeh_gui(
     total_seconds: float,
     stay_color: str,
     follow_color: str,
+    aspect_ratio: float,
+    sizing_mode: str,
 ):
     waloviz_bokeh.toolbar.autohide = True
 
@@ -63,6 +65,8 @@ def finalize_waloviz_bokeh_gui(
 
             plot.y_range = plots[0].y_range
             plot.extra_y_ranges = plots[0].extra_y_ranges
+            if sizing_mode != "fixed":
+                plot.aspect_ratio = aspect_ratio / (len(children) - 1)
 
         plot.min_border_left = 0
         plot.min_border_right = 0

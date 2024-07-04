@@ -31,10 +31,6 @@ def get_waloviz_hv(
     n_fft: int,
     hop_length: int,
     sync_legends: bool,
-    height: int,
-    width: Union[int, str],
-    audio_height: int,
-    button_height: int,
     pbar_height: int,
     theme_hook: Any,
     max_size: int,
@@ -47,7 +43,7 @@ def get_waloviz_hv(
     embed_title: bool,
     freq_label: str,
 ):
-    responsive = width == "responsive"
+    responsive = True
 
     spec = T.Spectrogram(n_fft=n_fft, hop_length=hop_length)(wav)
 
@@ -57,8 +53,6 @@ def get_waloviz_hv(
 
     hz_min = (-1 / n_fft) * sr / 2
     hv_max = (1 + 1 / n_fft) * sr / 2
-
-    spec_height = (height - pbar_height - audio_height - button_height) // len(spec)
 
     plots = []
     for channel, spec_channel in enumerate(spec):
@@ -71,7 +65,6 @@ def get_waloviz_hv(
             ylabel=freq_label,
             cmap=cmap,
             cnorm="log",
-            height=spec_height,
             colorbar=colorbar,
         )
         vspan = hv.VSpan(0, 0).opts(fill_color="#ffffff33", yaxis=None)
@@ -102,9 +95,7 @@ def get_waloviz_hv(
                     channel_sub_curve,
                     kdims=["x"],
                     label=f"{over_curve_names[curve_index]}",
-                ).opts(
-                    height=spec_height, ylabel="", xaxis=None, alpha=0.9, **color_kwargs
-                )
+                ).opts(ylabel="", xaxis=None, alpha=0.9, **color_kwargs)
                 curves.append(curve)
             spec_image = spec_image * hv.Overlay(curves)
 
@@ -147,10 +138,6 @@ def get_waloviz_hv(
         active_tools=base_tools,
     )
 
-    width_kwargs = {}
-    if width != "responsive":
-        width_kwargs["width"] = width
-
     waloviz_hv = (
         hv.Layout(plots)
         .cols(1)
@@ -159,7 +146,6 @@ def get_waloviz_hv(
             hv.opts.Image(
                 responsive=responsive,
                 hooks=[theme_hook],
-                **width_kwargs,
                 **tools_kwargs,
             )
         )
@@ -167,7 +153,6 @@ def get_waloviz_hv(
             hv.opts.Curve(
                 responsive=responsive,
                 hooks=[theme_hook],
-                **width_kwargs,
                 **tools_kwargs,
             )
         )
