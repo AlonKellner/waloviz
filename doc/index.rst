@@ -34,7 +34,7 @@ Why not?
 | There are 3 very simple ways in which you can help right now:
 
 1. **Try it!** The `Getting Started <../getting-started.html>`_ guide should get you up to speed. If there's a problem, tell us about it in a `Github Issue <https://github.com/AlonKellner/waloviz/issues/new>`_ and we'll do our best to help :) If it works and you like it - tell a friend!
-2. **Consider giving us a |:star2:|** on `our Github repository <https://github.com/AlonKellner/waloviz>`_! The more stars we have, the larger our community will be, and the better WaloViz will become |:star2:|
+2. **Consider giving us a** |:star2:| on `our Github repository <https://github.com/AlonKellner/waloviz>`_! The more stars we have, the larger our community will be, and the better WaloViz will become |:star2:|
 3. **Contribute!** WaloViz is a beginner friendly project, read our `Contributing Guide <https://github.com/AlonKellner/waloviz/blob/main/CONTRIBUTING.md>`_ and take a shot at one of our `good first issues <https://github.com/AlonKellner/waloviz/issues?q=is%3Aissue+is%3Aopen+%3Agood-first-issue>`_!
 
 | There might be other reasons why WaloViz might not be suited for your needs, we'd love to hear about them in a `Github Issue <https://github.com/AlonKellner/waloviz/issues/new>`_.  
