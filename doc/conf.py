@@ -51,6 +51,8 @@ extensions += [
     'sphinx_copybutton',
 ]
 
+myst_enable_extensions = ["colon_fence", "deflist"]
+
 sphinx_tabs_disable_tab_closing = True
 
 favicons = [
