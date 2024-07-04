@@ -10,10 +10,10 @@ Feature guides
 These user guides provide an overview of the features you might find useful in WaloViz:
 
 `Basic Usage <01-basic-usage.html>`_
- The most simple and useful ways to use WaloViz.
+    The most simple and useful ways to use WaloViz.
 
 `Overlaying Data <02-overlaying-data.html>`_
-Add curves overlayed on the player, good for time-aligned visualizations such as a waveform.
+    Add curves overlayed on the player, good for time-aligned visualizations such as a waveform.
 
 .. toctree::
     :titlesonly:
