@@ -22,6 +22,9 @@ version = release = wv.version
 
 html_static_path += ["_static"]
 html_theme = "pydata_sphinx_theme"
+html_css_files += [
+    'css/custom.css'
+]
 html_logo = "_static/logo_horizontal.png"
 html_favicon = "_static/favicon.ico"
 html_title = f"{project} v{version}"
@@ -45,6 +48,7 @@ extensions += [
     "sphinx_favicon",
     "sphinxext.opengraph",
     "sphinx_tabs.tabs",
+    'sphinx_copybutton',
 ]
 
 sphinx_tabs_disable_tab_closing = True
