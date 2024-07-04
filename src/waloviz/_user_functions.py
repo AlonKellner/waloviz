@@ -24,7 +24,7 @@ def extension(mode="default"):
 ``waloviz.extension``
 =====================
 
-Initializes the notebook extensions for the current IDE.
+| Initializes the notebook extensions for the current IDE.
 
 Examples
 --------
@@ -73,7 +73,7 @@ def Audio(
 ``waloviz.Audio``
 =================
 
-Creates an interactive audio player with a spectrogram
+| Creates an interactive audio player with a spectrogram
 
 Examples
 --------
@@ -344,7 +344,7 @@ def save(
 ``waloviz.save``
 ================
 
-Saves a waloviz player to an html file
+| Saves a waloviz player to an html file
 
 Example
 -------

@@ -10,19 +10,19 @@ Explanation
 
 ``waloviz`` was built to be as accessible as possible, whether you're using jupyter, colab, VSCode, JupyterLab or just pure HTML - you'll only need three lines of code.  
 
-First we need to install ``waloviz``:
+| First we need to install ``waloviz``:
 
 .. code-block:: shell 
     
     pip install waloviz
     
-We also need to install ``ffmpeg`` as a backend for ``torchaudio``:
+| We also need to install ``ffmpeg`` as a backend for ``torchaudio``:
 
 .. code-block:: shell 
     
     apt-get install ffmpeg
 
-Then we need to import ``waloviz`` and activate the extension:  
+| Then we need to import ``waloviz`` and activate the extension:  
 
 .. tabs::
     
@@ -62,7 +62,7 @@ Then we need to import ``waloviz`` and activate the extension:
             # no need for the extension with pure HTML
 
 
-Then we need to call ``wv.Audio`` with our URL or file-path:
+| Then we need to call ``wv.Audio`` with our URL or file-path:
 
 .. tabs::
 
@@ -96,13 +96,13 @@ Then we need to call ``wv.Audio`` with our URL or file-path:
 
             wv.save('https://www2.cs.uic.edu/~i101/SoundFiles/CantinaBand3.wav') # saves to `waloviz.html` by default
 
-And... that's it, you're done.  
-You can use the player to interact with your audio.  
+| And... that's it, you're done.  
+| You can use the player to interact with your audio.  
 
 Using the player
 ----------------
 
-The controls are pretty intuitive, but here are the most important controls you should to know:  
+| The controls are pretty intuitive, but here are the most important controls you should to know:  
 
 1. A single click anywhere - toggles play\\pause.
 2. Scrolling with the mouse wheel - zooms in\\out.
@@ -110,4 +110,4 @@ The controls are pretty intuitive, but here are the most important controls you 
 4. The small ↺ icon on the top left - resets to the initial view.
 5. Clicking on the ``Download waloviz.html`` - will download an HTML version of the player.
 
-To learn more, read our `User Guide <./user-guide.html>`_.
+| To learn more, read our `User Guide <./user-guide.html>`_.
