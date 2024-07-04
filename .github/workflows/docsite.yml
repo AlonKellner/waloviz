@@ -24,7 +24,7 @@ jobs:
           version: 1.0
 
       - name: Dot register
-        run: dot -c
+        run: sudo dot -c
 
       - name: Upgrade pip
         run: |
