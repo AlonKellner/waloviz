@@ -28,6 +28,8 @@ def finalize_waloviz_bokeh_gui(
     follow_color: str,
     aspect_ratio: float,
     sizing_mode: str,
+    single_min_height: int,
+    both_min_height: int,
 ):
     waloviz_bokeh.toolbar.autohide = True
 
@@ -53,6 +55,7 @@ def finalize_waloviz_bokeh_gui(
             theme_elements_mapping = dict(Grid="xgrid")
         else:
             plot.min_border_bottom = 0
+            plot.min_height = single_min_height
 
             theme_elements_mapping = dict(
                 Title="title", Grid="grid", BaseColorBar="colorbar"

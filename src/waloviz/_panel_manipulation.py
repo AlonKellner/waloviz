@@ -39,6 +39,9 @@ def wrap_with_waloviz_panel(
     height: Union[int, str],
     audio_height: int,
     button_height: int,
+    pbar_height: int,
+    single_min_height: int,
+    both_min_height: int,
     download_button: bool,
     native_player: bool,
     aspect_ratio: float,
@@ -77,7 +80,7 @@ def wrap_with_waloviz_panel(
     audio.jslink(pause_0, paused="visible", bidirectional=True)
     audio.jslink(vspan_0, time="right", bidirectional=True)
     waloviz_panel_plot = pn.Column(
-        waloviz_bokeh, min_height=200
+        waloviz_bokeh, min_height=both_min_height + pbar_height
     )
     rows = [waloviz_panel_plot, audio]
 
@@ -85,7 +88,7 @@ def wrap_with_waloviz_panel(
         buffer = BytesIO()
         buffer: BytesIO = save_waloviz_panel(
             pn.Column(
-                *rows, 
+                *rows,
                 **aspect_ratio_kwargs,
                 **width_kwargs,
                 **height_kwargs,

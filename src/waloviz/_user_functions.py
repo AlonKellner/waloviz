@@ -184,6 +184,8 @@ def Audio(
 
     |"""
 
+    single_min_height: int = 80
+    both_min_height: int = 150
     pbar_height: int = 40
     stay_color: str = "#ffffff88"
     follow_color: str = "#ff0000dd"
@@ -291,6 +293,12 @@ Specify the sample rate in one of the following ways:
         hop_length = n_fft // 8
 
     channels = len(wav)
+    if both_min_height < single_min_height * channels:
+        both_min_height = single_min_height * channels
+
+    if single_min_height < both_min_height // channels:
+        single_min_height = both_min_height // channels
+
     total_seconds = wav.shape[-1] // sr
 
     over_curve, over_curve_names, over_curve_colors = preprocess_over_curve(
@@ -328,6 +336,8 @@ Specify the sample rate in one of the following ways:
         follow_color=follow_color,
         aspect_ratio=aspect_ratio,
         sizing_mode=sizing_mode,
+        single_min_height=single_min_height,
+        both_min_height=both_min_height,
     )
     waloviz_panel = wrap_with_waloviz_panel(
         waloviz_bokeh,
@@ -338,6 +348,9 @@ Specify the sample rate in one of the following ways:
         height=height,
         audio_height=audio_height,
         button_height=button_height,
+        pbar_height=pbar_height,
+        single_min_height=single_min_height,
+        both_min_height=both_min_height,
         download_button=download_button,
         native_player=native_player,
         aspect_ratio=aspect_ratio,
