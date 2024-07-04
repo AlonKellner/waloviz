@@ -77,7 +77,7 @@ def wrap_with_waloviz_panel(
     audio.jslink(pause_0, paused="visible", bidirectional=True)
     audio.jslink(vspan_0, time="right", bidirectional=True)
     waloviz_panel_plot = pn.Column(
-        waloviz_bokeh,
+        waloviz_bokeh, min_height=120
     )
     rows = [waloviz_panel_plot, audio]
 
