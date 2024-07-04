@@ -20,9 +20,9 @@ _mode = "default"
 
 
 def extension(mode="default"):
-    """=================
+    """=====================
 ``waloviz.extension``
-=================
+=====================
 
 Initializes the notebook extensions for the current IDE.
 
@@ -69,9 +69,9 @@ def Audio(
     minimal: bool = False,
     extended: bool = False,
 ):
-    """=============
+    """=================
 ``waloviz.Audio``
-=============
+=================
 
 Creates an interactive audio player with a spectrogram
 
@@ -340,9 +340,9 @@ def save(
     embed: bool = True,
     **kwargs,
 ):
-    """============
+    """================
 ``waloviz.save``
-============
+================
 
 Saves a waloviz player to an html file
 
