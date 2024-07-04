@@ -29,11 +29,11 @@ These subpackages should not be used directly, they contain a LOT of internal lo
    :maxdepth: 2
    :hidden:
 
-   \_user_functions <waloviz._user_functions>
-   \_tensor_utils <waloviz._tensor_utils>
-   \_holoviews_manipulations <waloviz._holoviews_manipulations>
-   \_bokeh_manipulation <waloviz._bokeh_manipulation>
-   \_panel_manipulation <waloviz._panel_manipulation>
+   _user_functions <waloviz._user_functions>
+   _tensor_utils <waloviz._tensor_utils>
+   _holoviews_manipulations <waloviz._holoviews_manipulations>
+   _bokeh_manipulation <waloviz._bokeh_manipulation>
+   _panel_manipulation <waloviz._panel_manipulation>
 
 .. _Getting Started guide: ../getting-started/index.html
 .. _User Guide: ../user-guide/index.html
