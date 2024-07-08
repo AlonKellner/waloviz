@@ -68,7 +68,7 @@ def finalize_waloviz_bokeh_gui(
 
             plot.y_range = plots[0].y_range
             plot.extra_y_ranges = plots[0].extra_y_ranges
-            if sizing_mode != "fixed":
+            if (sizing_mode != "fixed") and (aspect_ratio is not None):
                 plot.aspect_ratio = aspect_ratio / (len(children) - 1)
 
         plot.min_border_left = 0

@@ -57,8 +57,8 @@ def Audio(
     embed_title: bool = False,
     height: Union[int, str] = "responsive",
     width: Union[int, str] = "responsive",
-    aspect_ratio: float = 3.5,
-    sizing_mode: str = "scale_both",
+    aspect_ratio: Optional[float] = None,
+    sizing_mode: str = None,
     sync_legends: bool = False,
     colorbar: bool = False,
     cmap: str = "Inferno",
@@ -179,7 +179,7 @@ def Audio(
     Returns
     -------
 
-    panel : pn.pane.PaneBase
+    panel : pn.viewable.Viewable
         An interactive waloviz panel, can be saved to html with ``waloviz.save(panel)``
 
     |"""
@@ -190,8 +190,17 @@ def Audio(
     stay_color: str = "#ffffff88"
     follow_color: str = "#ff0000dd"
 
-    if (width != "responsive") and (height != "responsive"):
-        sizing_mode = "fixed"
+    if sizing_mode is None:
+        if (width != "responsive") and (height != "responsive"):
+            sizing_mode = "fixed"
+        elif (width == "responsive") and (height == "responsive"):
+            if aspect_ratio is None:
+                aspect_ratio = 3.5
+            sizing_mode = "scale_both"
+        elif (width == "responsive") and (height != "responsive"):
+            sizing_mode = "stretch_width"
+        elif (width != "responsive") and (height == "responsive"):
+            sizing_mode = "stretch_height"
 
     if minimal and extended:
         raise ValueError(
@@ -361,7 +370,7 @@ Specify the sample rate in one of the following ways:
 
 
 def save(
-    source: pn.pane.PaneBase,
+    source: pn.viewable.Viewable,
     *args,
     out_file: Union[str, os.PathLike, IOBase] = None,
     title: Optional[str] = None,
@@ -386,7 +395,7 @@ def save(
     Parameters
     ----------
 
-    source : pn.pane.PaneBase | str | os.PathLike | IOBase | (tensorlike, int) | tensorlike
+    source : pn.viewable.Viewable | str | os.PathLike | IOBase | (tensorlike, int) | tensorlike
         The waloviz player created by ``waloviz.Audio``, or a source for
         ``waloviz.Audio`` to create a player with.
     out_file : str | os.PathLike | IOBase
@@ -408,10 +417,10 @@ def save(
 
     |"""
 
-    if isinstance(source, pn.pane.PaneBase):
+    if issubclass(type(source), pn.viewable.Viewable):
         if len(kwargs) > 0:
             raise TypeError(
-                f"save() got an unexpected keyword argument '{kwargs.keys()[0]}'"
+                f"save() got an unexpected keyword argument '{list(kwargs.keys())[0]}'"
             )
         if len(args) == 1:
             if isinstance(args[0], (str, os.PathLike, IOBase)):

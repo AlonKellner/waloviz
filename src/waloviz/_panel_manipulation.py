@@ -48,7 +48,7 @@ def wrap_with_waloviz_panel(
     sizing_mode: str,
 ):
     aspect_ratio_kwargs = {}
-    if sizing_mode != "fixed":
+    if (sizing_mode != "fixed") and (aspect_ratio is not None):
         aspect_ratio_kwargs["aspect_ratio"] = aspect_ratio
 
     width_kwargs = {}
@@ -57,6 +57,7 @@ def wrap_with_waloviz_panel(
     height_kwargs = {}
     if height != "responsive":
         plot_height = height - audio_height - button_height
+        print(plot_height)
         height_kwargs["height"] = plot_height
 
     with patch(
@@ -114,7 +115,7 @@ def wrap_with_waloviz_panel(
 
 
 def save_waloviz_panel(
-    waloviz_panel: pn.pane.PaneBase,
+    waloviz_panel: pn.viewable.Viewable,
     file: Union[str, os.PathLike, IOBase] = None,
     title: Optional[str] = None,
     resources: Resources = INLINE,
@@ -129,8 +130,10 @@ def save_waloviz_panel(
     if file is None:
         file = f"{title}.html"
 
-    if (len(waloviz_panel) > 2) and isinstance(
-        waloviz_panel[2], pn.widgets.misc.FileDownload
+    if (
+        hasattr(waloviz_panel, "__len__")
+        and (len(waloviz_panel) > 2)
+        and isinstance(waloviz_panel[2], pn.widgets.misc.FileDownload)
     ):
         waloviz_panel = pn.Column(waloviz_panel[0], waloviz_panel[1])
 

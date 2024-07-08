@@ -5,9 +5,6 @@ Introduction
 .. notebook:: holoviews ../examples/introduction.ipynb
     :offset: 1
 
-Explanation
------------
-
 **An interactive audio player with a spectrogram built-in, as a Jupyter widget or as HTML.**
 
 | Welcome!  

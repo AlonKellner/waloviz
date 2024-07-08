@@ -15,6 +15,9 @@ Feature guides
 `Overlaying Data <02-overlaying-data.html>`_
     Add curves overlayed on the player, good for time-aligned visualizations such as a waveform.
 
+`Responsiveness and Size <03-responsiveness-and-size.html>`_
+    Control the size ot your player and customize the responsiveness to your personal needs.
+
 .. toctree::
     :titlesonly:
     :hidden:
@@ -22,3 +25,4 @@ Feature guides
 
     Basic Usage <01-basic-usage>
     Overlaying Data <02-overlaying-data>
+    Responsiveness and Size <03-responsiveness-and-size>
