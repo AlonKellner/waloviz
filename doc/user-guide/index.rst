@@ -21,6 +21,9 @@ Feature guides
 `Advanced Options <04-advanced-options.html>`_
     Modify the WaloViz player with nuanced options and features to your specific use case.  
 
+`The Player <05-the-player.html>`_
+    Learn all about the hidden features of the WaloViz player, and get more out of it.
+
 .. toctree::
     :titlesonly:
     :hidden:
@@ -30,3 +33,4 @@ Feature guides
     Overlaying Data <02-overlaying-data>
     Responsiveness and Size <03-responsiveness-and-size>
     Advanced Options <04-advanced-options>
+    The Player <05-the-player>
