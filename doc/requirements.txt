@@ -6,3 +6,4 @@ jupyter-bokeh
 sphinx-tabs
 sphinx-copybutton
 sphinxemoji
+sphinx-toolbox
