@@ -15,10 +15,10 @@
 <meta content="website" property="og:type"/>
 <meta content="http://waloviz.com/FAQ.html" property="og:url"/>
 <meta content="WaloViz" property="og:site_name"/>
-<meta content="Q: I got an error: RuntimeError: Couldn't find appropriate backend to handle uri my.wav and format None.` Why? WaloViz uses torchaudio to load audio files, and torchaudio itself uses a beckend to l..." property="og:description"/>
+<meta content="Q: I got an error: RuntimeError: Couldn't find appropriate backend to handle uri my.wav and format None. Why? WaloViz uses torchaudio to load audio files, and torchaudio itself uses a beckend to lo..." property="og:description"/>
 <meta content="https://waloviz.com/en/latest/_static/logo_vertical.png" property="og:image"/>
 <meta content="WaloViz" property="og:image:alt"/>
-<meta content="Q: I got an error: RuntimeError: Couldn't find appropriate backend to handle uri my.wav and format None.` Why? WaloViz uses torchaudio to load audio files, and torchaudio itself uses a beckend to l..." name="description"/>
+<meta content="Q: I got an error: RuntimeError: Couldn't find appropriate backend to handle uri my.wav and format None. Why? WaloViz uses torchaudio to load audio files, and torchaudio itself uses a beckend to lo..." name="description"/>
 <title>FAQ — WaloViz vdev</title>
 <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
@@ -316,18 +316,22 @@ document.write(`
 <section id="faq">
 <h1>FAQ<a class="headerlink" href="#faq" title="Permalink to this heading">#</a></h1>
 <ul>
-<li><p><strong>Q:</strong> I got an error: <code class="docutils literal notranslate"><span class="pre">RuntimeError:</span> <span class="pre">Couldn't</span> <span class="pre">find</span> <span class="pre">appropriate</span> <span class="pre">backend</span> <span class="pre">to</span> <span class="pre">handle</span> <span class="pre">uri</span> <span class="pre">my.wav</span> <span class="pre">and</span> <span class="pre">format</span> <span class="pre">None.`</span></code> Why?</p>
+<li><p><strong>Q:</strong> I got an error: <code class="docutils literal notranslate"><span class="pre">RuntimeError:</span> <span class="pre">Couldn't</span> <span class="pre">find</span> <span class="pre">appropriate</span> <span class="pre">backend</span> <span class="pre">to</span> <span class="pre">handle</span> <span class="pre">uri</span> <span class="pre">my.wav</span> <span class="pre">and</span> <span class="pre">format</span> <span class="pre">None.</span></code> Why?</p>
 <details class="summary-a">
-<summary>**A:**</summary><p>WaloViz uses <cite>torchaudio</cite> to load audio files, and <cite>torchaudio</cite> itself uses a beckend to load them, the recommended backend is <cite>ffmpeg</cite>, so just make sure you’ve installed it:
-<code class="docutils literal notranslate"><span class="pre">`shell</span>
-<span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">ffmpeg</span>
-<span class="pre">`</span></code></p>
+<summary>A:</summary><div class="line-block">
+<div class="line">WaloViz uses <code class="docutils literal notranslate"><span class="pre">torchaudio</span></code> to load audio files, and <code class="docutils literal notranslate"><span class="pre">torchaudio</span></code> itself uses a beckend to load them, the recommended backend is <code class="docutils literal notranslate"><span class="pre">ffmpeg</span></code>, so just make sure you’ve installed it:</div>
+</div>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>apt-get<span class="w"> </span>install<span class="w"> </span>ffmpeg
+</pre></div>
+</div>
 </details></li>
 <li><p><strong>Q:</strong> How can I help WaloViz?</p>
 <details class="summary-a">
-<summary>**A:**</summary><p>Consider giving us a star on [our github repository](<a class="github reference external" href="https://github.com/AlonKellner/waloviz">AlonKellner/waloviz</a>)!
-If you’ve had any issue open a [Github Issue](<a class="github reference external" href="https://github.com/AlonKellner/waloviz/issues/new">AlonKellner/waloviz#new</a>) and tell us about it, we’ll do our best to help :)
-Also, you can contribute! Read our [Contributing Guide](<a class="github reference external" href="https://github.com/AlonKellner/waloviz/blob/main/CONTRIBUTING.md">AlonKellner/waloviz</a>) and take a shot at one of our [good first issues](<a class="github reference external" href="https://github.com/AlonKellner/waloviz/issues?q=is%3Aissue+is%3Aopen+%3Agood-first-issue">AlonKellner/waloviz#issues</a>)!</p>
+<summary>A:</summary><div class="line-block">
+<div class="line">Consider giving us a star on <a class="reference external" href="https://github.com/AlonKellner/waloviz">our github repository</a>!</div>
+<div class="line">If you’ve had any issue open a <a class="reference external" href="https://github.com/AlonKellner/waloviz/issues/new">Github Issue</a> and tell us about it, we’ll do our best to help :)</div>
+<div class="line">Also, you can contribute! Read our <a class="reference external" href="https://github.com/AlonKellner/waloviz/blob/main/CONTRIBUTING.md">Contributing Guide</a> and take a shot at one of our <a class="reference external" href="https://github.com/AlonKellner/waloviz/issues?q=is%3Aissue+is%3Aopen+%3Agood-first-issue">good first issues</a>!</div>
+</div>
 </details></li>
 </ul>
 </section>
