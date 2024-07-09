@@ -52,6 +52,7 @@ def Audio(
     sr: Optional[int] = None,
     frame_ms: Optional[int] = None,
     n_fft: Optional[int] = None,
+    hop_ms: Optional[int] = None,
     hop_length: Optional[int] = None,
     title: Optional[str] = "waloviz",
     embed_title: bool = False,
@@ -103,7 +104,7 @@ def Audio(
 
     source : str | os.PathLike | IOBase | (tensorlike, int) | tensorlike
         Either an audio file, or an audio tensor\\ndarray with a sample rate
-    over_curve : tensorlike | List[tensorlike] | Dict[str, tensorlike]
+    over_curve : tensorlike | List[tensorlike] | Dict[str, tensorlike] | callable
         A single or multiple curves to be displayed over the spectrogram
     over_curve_names : str | List[str]
         A list of display names corresponding to the list given in ``over_curve``
@@ -112,12 +113,14 @@ def Audio(
         the given ``sr`` value is assumed to be the source sample rate, when
         this value is different than the source sample rate, the source
         audio is resampled to the specified ``sr`` value.
-    frame_ms : int
+    frame_ms : float
         Sets the spectrogram frame length to the given amount of milliseconds,
-        default is 100.
+        default is 100.0.
     n_fft : int
         Sets the ``n_fft`` of the spectrogram, overrides the ``frame_ms`` value,
         default is ``(sr/1000 * frame_ms)``.
+    hop_ms: float
+        Sets the `hop_length` of the spectrogram, in milliseconds.
     hop_length : int
         Sets the `hop_length` of the spectrogram, default is ``n_fft/8``
     title : str
@@ -293,10 +296,13 @@ Specify the sample rate in one of the following ways:
     sr = target_sr
 
     if (n_fft is None) and (frame_ms is None):
-        frame_ms = 100
+        frame_ms = 100.0
 
     if n_fft is None:
-        n_fft = (sr * frame_ms) // 1000
+        n_fft = int((sr * frame_ms) / 1000)
+
+    if hop_ms is not None:
+        hop_length = int((sr * hop_ms) / 1000)
 
     if hop_length is None:
         hop_length = n_fft // 8
@@ -308,10 +314,10 @@ Specify the sample rate in one of the following ways:
     if single_min_height < both_min_height // channels:
         single_min_height = both_min_height // channels
 
-    total_seconds = wav.shape[-1] // sr
+    total_seconds = wav.shape[-1] / sr
 
     over_curve, over_curve_names, over_curve_colors = preprocess_over_curve(
-        channels, over_curve, over_curve_names, over_curve_colors
+        wav, sr, channels, over_curve, over_curve_names, over_curve_colors
     )
 
     waloviz_hv = get_waloviz_hv(

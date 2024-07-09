@@ -51,6 +51,8 @@ def skip_to_size(
 
 
 def preprocess_over_curve(
+    wav: torch.Tensor,
+    sr: int,
     channels: int,
     over_curve: Optional[OverCurve],
     over_curve_names: Optional[Union[str, List[str]]] = None,
@@ -100,6 +102,11 @@ def preprocess_over_curve(
             (over_curve_colors[name] if name in over_curve_colors else None)
             for name in over_curve_names
         ]
+
+    over_curve = [
+        (sub_curve(wav, sr) if callable(sub_curve) else sub_curve)
+        for sub_curve in over_curve
+    ]
 
     over_curve = [
         broadcast_to_channels(to_tensor(sub_curve), channels)

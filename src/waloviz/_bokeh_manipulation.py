@@ -2,15 +2,9 @@ from typing import Any, Dict
 
 from bokeh.models.callbacks import CustomJS
 from bokeh.models.formatters import CustomJSTickFormatter
-from bokeh.themes import _caliber, _contrast, _dark_minimal, _light_minimal, _night_sky
+from bokeh.themes import built_in_themes
 
-themes = dict(
-    dark_minimal=_dark_minimal.json,
-    light_minimal=_light_minimal.json,
-    caliber=_caliber.json,
-    contrast=_contrast.json,
-    night_sky=_night_sky.json,
-)
+themes = {k: v._json for k, v in built_in_themes.items()}
 
 
 def apply_theme(plot, theme, theme_elements_mapping):
