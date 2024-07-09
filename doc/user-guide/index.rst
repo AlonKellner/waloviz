@@ -18,6 +18,9 @@ Feature guides
 `Responsiveness and Size <03-responsiveness-and-size.html>`_
     Control the size ot your player and customize the responsiveness to your personal needs.
 
+`Advanced Options <04-advanced-options.html>`_
+    Modify the WaloViz player with nuanced options and features to your specific use case.  
+
 .. toctree::
     :titlesonly:
     :hidden:
@@ -26,3 +29,4 @@ Feature guides
     Basic Usage <01-basic-usage>
     Overlaying Data <02-overlaying-data>
     Responsiveness and Size <03-responsiveness-and-size>
+    Advanced Options <04-advanced-options>
