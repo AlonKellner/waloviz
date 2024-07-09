@@ -57,7 +57,6 @@ def wrap_with_waloviz_panel(
     height_kwargs = {}
     if height != "responsive":
         plot_height = height - audio_height - button_height
-        print(plot_height)
         height_kwargs["height"] = plot_height
 
     with patch(
