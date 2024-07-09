@@ -1,5 +1,5 @@
 from panel.tests.util import serve_and_wait
-from panel.tests.conftest import port  # noqa: F401
+from panel.tests.conftest import port, server_cleanup  # noqa: F401
 
 import pytest
 
