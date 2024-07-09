@@ -48,7 +48,7 @@ extensions += [
     "sphinx_tabs.tabs",
     "sphinx_copybutton",
     "sphinxemoji.sphinxemoji",
-    "sphinx_toolbox.collapse"
+    "sphinx_toolbox.collapse",
 ]
 
 myst_enable_extensions = ["colon_fence", "deflist"]

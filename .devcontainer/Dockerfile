@@ -9,3 +9,5 @@ COPY .devcontainer/requirements.txt .devcontainer/requirements.txt
 COPY requirements.txt requirements.txt
 RUN --mount=type=cache,target=/root/.cache/ \
     pip install -r requirements.txt
+
+RUN playwright install chromium && playwright install-deps
