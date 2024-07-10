@@ -316,7 +316,191 @@ document.write(`
 <h1>__init__ Module<a class="headerlink" href="#init-module" title="Permalink to this heading">#</a></h1>
 <section id="id1">
 <h2><code class="xref py py-mod docutils literal notranslate"><span class="pre">__init__</span></code> Module<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
-<span class="target" id="module-waloviz.__init__"></span></section>
+<span class="target" id="module-waloviz.__init__"></span><dl class="py function">
+<dt class="sig sig-object py" id="waloviz.__init__.Audio">
+<span class="sig-prename descclassname"><span class="pre">waloviz.__init__.</span></span><span class="sig-name descname"><span class="pre">Audio</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">PathLike</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">IOBase</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tensor</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">over_curve</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tensor</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">over_curve_names</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frame_ms</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_fft</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hop_ms</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hop_length</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'waloviz'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">embed_title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'responsive'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'responsive'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aspect_ratio</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sizing_mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sync_legends</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colorbar</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmap</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Inferno'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">over_curve_colors</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theme</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'dark_minimal'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">download_button</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">freq_label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Hz'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">native_player</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minimal</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extended</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/holoviz/waloviz/blob/vdev/waloviz/_user_functions.py#L45-L375"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#waloviz.__init__.Audio" title="Permalink to this definition">#</a></dt>
+<dd><section id="waloviz-audio">
+<h3><code class="docutils literal notranslate"><span class="pre">waloviz.Audio</span></code><a class="headerlink" href="#waloviz-audio" title="Permalink to this heading">#</a></h3>
+<div class="line-block">
+<div class="line">Creates an interactive audio player with a spectrogram</div>
+</div>
+<section id="examples">
+<h4>Examples<a class="headerlink" href="#examples" title="Permalink to this heading">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">wavloviz</span> <span class="k">as</span> <span class="nn">wv</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">wv</span><span class="o">.</span><span class="n">Audio</span><span class="p">(</span><span class="s1">'http://ccrma.stanford.edu/~jos/mp3/pno-cs.mp3'</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">wav</span><span class="p">,</span> <span class="n">sr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">8000</span><span class="p">),</span> <span class="mi">8000</span>
+<span class="n">wv</span><span class="o">.</span><span class="n">Audio</span><span class="p">((</span><span class="n">wav</span><span class="p">,</span> <span class="n">sr</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">wav</span><span class="p">,</span> <span class="n">sr</span> <span class="o">=</span> <span class="n">torchaudio</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">'http://ccrma.stanford.edu/~jos/mp3/pno-cs.mp3'</span><span class="p">)</span>
+<span class="n">wv</span><span class="o">.</span><span class="n">Audio</span><span class="p">(</span><span class="n">wav</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">,</span> <span class="n">over_curve</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">squared</span><span class="o">=</span><span class="n">wav</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">cubed</span><span class="o">=</span><span class="n">wav</span><span class="o">**</span><span class="mi">3</span><span class="p">))</span>
+</pre></div>
+</div>
+</section>
+<section id="parameters">
+<h4>Parameters<a class="headerlink" href="#parameters" title="Permalink to this heading">#</a></h4>
+<dl class="simple">
+<dt>source<span class="classifier">str | os.PathLike | IOBase | (tensorlike, int) | tensorlike</span></dt><dd><p>Either an audio file, or an audio tensorndarray with a sample rate</p>
+</dd>
+<dt>over_curve<span class="classifier">tensorlike | List[tensorlike] | Dict[str, tensorlike] | callable</span></dt><dd><p>A single or multiple curves to be displayed over the spectrogram</p>
+</dd>
+<dt>over_curve_names<span class="classifier">str | List[str]</span></dt><dd><p>A list of display names corresponding to the list given in <code class="docutils literal notranslate"><span class="pre">over_curve</span></code></p>
+</dd>
+<dt>sr<span class="classifier">int</span></dt><dd><p>The sample rate, when the source does not contain a sample rate,
+the given <code class="docutils literal notranslate"><span class="pre">sr</span></code> value is assumed to be the source sample rate, when
+this value is different than the source sample rate, the source
+audio is resampled to the specified <code class="docutils literal notranslate"><span class="pre">sr</span></code> value.</p>
+</dd>
+<dt>frame_ms<span class="classifier">float</span></dt><dd><p>Sets the spectrogram frame length to the given amount of milliseconds,
+default is 100.0.</p>
+</dd>
+<dt>n_fft<span class="classifier">int</span></dt><dd><p>Sets the <code class="docutils literal notranslate"><span class="pre">n_fft</span></code> of the spectrogram, overrides the <code class="docutils literal notranslate"><span class="pre">frame_ms</span></code> value,
+default is <code class="docutils literal notranslate"><span class="pre">(sr/1000</span> <span class="pre">*</span> <span class="pre">frame_ms)</span></code>.</p>
+</dd>
+<dt>hop_ms: float</dt><dd><p>Sets the <cite>hop_length</cite> of the spectrogram, in milliseconds.</p>
+</dd>
+<dt>hop_length<span class="classifier">int</span></dt><dd><p>Sets the <cite>hop_length</cite> of the spectrogram, default is <code class="docutils literal notranslate"><span class="pre">n_fft/8</span></code></p>
+</dd>
+<dt>title<span class="classifier">str</span></dt><dd><p>A title to be used when saving the plot. If <code class="docutils literal notranslate"><span class="pre">embed_title</span></code> is True,
+the <code class="docutils literal notranslate"><span class="pre">title</span></code> value will be displayed as part of the plot itself.
+Default is “waloviz”.</p>
+</dd>
+<dt>embed_title<span class="classifier">bool</span></dt><dd><p>When True, the <code class="docutils literal notranslate"><span class="pre">title</span></code> value will be displayed as part of the plot
+itself, default is False.</p>
+</dd>
+<dt>height<span class="classifier">int | str</span></dt><dd><p>The total height of the plot, default is “responsive”, which means
+the plot will stretch in height to fit.</p>
+</dd>
+<dt>width<span class="classifier">int | str</span></dt><dd><p>The total width of the plot, default is “responsive”, which means
+the plot will stretch in width to fit.</p>
+</dd>
+<dt>aspect_ratio<span class="classifier">float</span></dt><dd><p>The ratio between the width and height, relevant only when either
+width, height or both are “responsive”, default is 3.5.</p>
+</dd>
+<dt>sizing_mode<span class="classifier">str</span></dt><dd><p>The panel <code class="docutils literal notranslate"><span class="pre">sizing_mode</span></code>, can be one of seven values:
+“stretch_width”, “stretch_height”, “stretch_both”,
+“scale_width”, “scale_height”, “scale_both”, or “fixed”.
+Default is “scale_both”.</p>
+</dd>
+<dt>sync_legends<span class="classifier">bool</span></dt><dd><p>Whether the legends of both audio channels over curves should be
+synchronized, default is False</p>
+</dd>
+<dt>colorbar<span class="classifier">bool</span></dt><dd><p>Whether to display a colorbar for the spectrograms, default is False</p>
+</dd>
+<dt>cmap<span class="classifier">str</span></dt><dd><p>The colormap used to display the spectrogram, default is “Inferno”</p>
+</dd>
+<dt>over_curve_colors<span class="classifier">str | List[str] | Dict[str, str]</span></dt><dd><p>Sets the colors to display for each given <code class="docutils literal notranslate"><span class="pre">over_curve</span></code>, should match
+the size and structure of the given <code class="docutils literal notranslate"><span class="pre">over_curve</span></code> value.</p>
+</dd>
+<dt>theme<span class="classifier">str | Dict[str, Any]</span></dt><dd><p>Sets the visual look and feel of the plot, the value provided must
+be a <code class="docutils literal notranslate"><span class="pre">bokeh</span></code> theme, default is “dark_minimal”.</p>
+</dd>
+<dt>max_size<span class="classifier">int</span></dt><dd><p>When the spectrogram or one of the over curves contain many values,
+the plot’s performance suffers. For that reason <code class="docutils literal notranslate"><span class="pre">max_size</span></code> limits the
+amount of displayed values, when the spectrogram or an over curve has
+more values than the <code class="docutils literal notranslate"><span class="pre">max_size</span></code>, it is reduced in size by skipping
+intermediate values, until the size is less than the <code class="docutils literal notranslate"><span class="pre">max_size</span></code>.
+Default is 10000.</p>
+</dd>
+<dt>download_button<span class="classifier">bool</span></dt><dd><p>Whether to show the html download button. Defaults to True.</p>
+</dd>
+<dt>freq_label<span class="classifier">str</span></dt><dd><p>The label of the frequency axis (vertical), hides the label when set
+to None which saves space.</p>
+</dd>
+<dt>native_player<span class="classifier">bool</span></dt><dd><p>Whether the underlying native audio player should be visible. Default
+is False</p>
+</dd>
+<dt>minimal: bool</dt><dd><p>Does nothing when False, when True it overrides some settings to make
+the player more compact and simple. Deafult is False.</p>
+</dd>
+<dt>extended: bool</dt><dd><p>Does nothing when False, when True it overrides some settings to make
+the player more descriptive and functional. Deafult is False.</p>
+</dd>
+</dl>
+</section>
+<section id="returns">
+<h4>Returns<a class="headerlink" href="#returns" title="Permalink to this heading">#</a></h4>
+<dl class="simple">
+<dt>panel<span class="classifier">pn.viewable.Viewable</span></dt><dd><p>An interactive waloviz panel, can be saved to html with <code class="docutils literal notranslate"><span class="pre">waloviz.save(panel)</span></code></p>
+</dd>
+</dl>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+</section>
+</section>
+</dd></dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="waloviz.__init__.extension">
+<span class="sig-prename descclassname"><span class="pre">waloviz.__init__.</span></span><span class="sig-name descname"><span class="pre">extension</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/holoviz/waloviz/blob/vdev/waloviz/_user_functions.py#L22-L42"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#waloviz.__init__.extension" title="Permalink to this definition">#</a></dt>
+<dd><section id="waloviz-extension">
+<h3><code class="docutils literal notranslate"><span class="pre">waloviz.extension</span></code><a class="headerlink" href="#waloviz-extension" title="Permalink to this heading">#</a></h3>
+<div class="line-block">
+<div class="line">Initializes the notebook extensions for the current IDE.</div>
+</div>
+<section id="id2">
+<h4>Examples<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">wavloviz</span> <span class="k">as</span> <span class="nn">wv</span>
+<span class="n">wv</span><span class="o">.</span><span class="n">extension</span><span class="p">()</span>
+<span class="n">wv</span><span class="o">.</span><span class="n">Audio</span><span class="p">(</span><span class="s1">'http://ccrma.stanford.edu/~jos/mp3/pno-cs.mp3'</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+</section>
+</section>
+</dd></dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="waloviz.__init__.save">
+<span class="sig-prename descclassname"><span class="pre">waloviz.__init__.</span></span><span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Viewable</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">PathLike</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">IOBase</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resources</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Resources</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Resources(mode='inline')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">embed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/holoviz/waloviz/blob/vdev/waloviz/_user_functions.py#L378-L444"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#waloviz.__init__.save" title="Permalink to this definition">#</a></dt>
+<dd><section id="waloviz-save">
+<h3><code class="docutils literal notranslate"><span class="pre">waloviz.save</span></code><a class="headerlink" href="#waloviz-save" title="Permalink to this heading">#</a></h3>
+<div class="line-block">
+<div class="line">Saves a waloviz player to an html file</div>
+</div>
+<section id="example">
+<h4>Example<a class="headerlink" href="#example" title="Permalink to this heading">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">wavloviz</span> <span class="k">as</span> <span class="nn">wv</span>
+<span class="n">wv</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">'http://ccrma.stanford.edu/~jos/mp3/pno-cs.mp3'</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="id3">
+<h4>Parameters<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h4>
+<dl class="simple">
+<dt>source<span class="classifier">pn.viewable.Viewable | str | os.PathLike | IOBase | (tensorlike, int) | tensorlike</span></dt><dd><p>The waloviz player created by <code class="docutils literal notranslate"><span class="pre">waloviz.Audio</span></code>, or a source for
+<code class="docutils literal notranslate"><span class="pre">waloviz.Audio</span></code> to create a player with.</p>
+</dd>
+<dt>out_file<span class="classifier">str | os.PathLike | IOBase</span></dt><dd><p>The output file path for the generated html, default is “{title}.html”</p>
+</dd>
+<dt>title<span class="classifier">str</span></dt><dd><p>The title to be used in the generated file name and the html title,
+if <code class="docutils literal notranslate"><span class="pre">waloviz.Audio(title="...")</span></code> was specified, then that value is
+used, otherwise, the default is “waloviz”.</p>
+</dd>
+<dt>resources<span class="classifier">bokeh.resources.Resources</span></dt><dd><p>The resources for the <code class="docutils literal notranslate"><span class="pre">panel</span></code> save method, default is INLINE</p>
+</dd>
+<dt>embed<span class="classifier">bool</span></dt><dd><p>The embed value for the <code class="docutils literal notranslate"><span class="pre">panel</span></code> save method, default is True</p>
+</dd>
+</dl>
+</section>
+<section id="id4">
+<h4>Returns<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h4>
+<dl class="simple">
+<dt>out_file<span class="classifier">str | os.PathLike | IOBase</span></dt><dd><p>The file that the waloviz html content was written into</p>
+</dd>
+</dl>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+</section>
+</section>
+</dd></dl>
+</section>
 </section>
 </article>
 <footer class="bd-footer-article">
@@ -334,7 +518,12 @@ document.write(`
   </div>
 <nav class="bd-toc-nav page-toc">
 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><code class="xref py py-mod docutils literal notranslate"><span class="pre">__init__</span></code> Module</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><code class="xref py py-mod docutils literal notranslate"><span class="pre">__init__</span></code> Module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#waloviz.__init__.Audio"><code class="docutils literal notranslate"><span class="pre">Audio()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#waloviz.__init__.extension"><code class="docutils literal notranslate"><span class="pre">extension()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#waloviz.__init__.save"><code class="docutils literal notranslate"><span class="pre">save()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </nav></div>
 <div class="sidebar-secondary-item">
@@ -365,7 +554,7 @@ document.write(`
 </p>
 </div>
 <div class="footer-item"><p class="last-updated">
-  Last updated on 2024-07-09.
+  Last updated on 2024-07-10.
   <br/>
 </p></div>
 </div>
