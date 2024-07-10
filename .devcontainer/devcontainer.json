@@ -30,7 +30,8 @@
         "charliermarsh.ruff",
         "esbenp.prettier-vscode",
         "streetsidesoftware.code-spell-checker",
-        "ms-azuretools.vscode-codker"
+        "ms-azuretools.vscode-docker",
+        "github.vscode-github-actions"
       ]
     }
   },
