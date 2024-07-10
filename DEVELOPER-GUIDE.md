@@ -16,16 +16,6 @@ Now follow these steps:
 2. Reopen folder in Dev Container (`ctrl+shift+P` -> type "Reopen", this may take a few minutes)
 3. `git checkout develop`
 
-## PR Checklist
-
-- [ ] Is there an Issue corresponding to my PR? If not, [Create an Issue](https://github.com/AlonKellner/waloviz/issues/new).
-- [ ] Does any maintainer know I'm working on this? If not, [LET THEM KNOW](https://github.com/AlonKellner/waloviz/issues)!
-- [ ] Did I add my changes to the next release in the [`doc/releases.md`](doc/releases.md)? If not, add them.
-- [ ] Should my changes be documented in the website? If so, document it in the `doc/`.
-- [ ] Does `pre-commit run` passes? If not, try to run it again and see if it passes now.
-- [ ] Does `pytest tests/ui --browser chromium` passes? If not, make those tests pass before submitting.
-- [ ]
-
 ## Where is Stuff?
 
 The Repository Structure is like so:
@@ -67,4 +57,4 @@ In this repo there are many technologies for different usages, here is a list wi
 ### YES
 
 You Are READY.  
-A truly certified Contributor, **thank you**, what a wonder you are :)
+What a wonder you are, a truly Certified Contributor, **thank you :)**
