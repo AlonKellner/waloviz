@@ -23,5 +23,6 @@ Introduction
     Getting Started <getting-started>
     User Guide <user-guide/index>
     API <reference-manual/index>
+    Releases <releases>
     FAQ <FAQ>
     About <about>

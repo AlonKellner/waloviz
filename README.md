@@ -3,7 +3,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](code_of_conduct.md)
 [![UI Tests](https://github.com/AlonKellner/waloviz/actions/workflows/ui-tests.yml/badge.svg)](https://github.com/AlonKellner/waloviz/actions/workflows/ui-tests.yml)
-[![Docs](https://github.com/AlonKellner/waloviz/actions/workflows/docsite.yml/badge.svg)](https://waloviz.com/en/latest)
+[![Docs](https://github.com/AlonKellner/waloviz/actions/workflows/docsite.yml/badge.svg)](https://waloviz.com/en/latest)  
 [![PyPi Version](https://img.shields.io/pypi/v/waloviz.svg)](https://pypi.python.org/pypi/waloviz/)
 [![All time downloads](https://static.pepy.tech/badge/waloviz)](https://pepy.tech/project/waloviz)
 [![Weekly Downloads](https://static.pepy.tech/badge/waloviz/week)](https://pepy.tech/project/waloviz)

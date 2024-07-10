@@ -4,25 +4,25 @@ We redpect our community, all contributions must adhere to our [Code Of Conduct]
 
 ## The Very First Contribution
 
-Thank you for wanting to contribute to WaloViz!
-There is one way in which you can contribute that takes only one second:
+Thank you for wanting to contribute to WaloViz!  
+There is one way in which you can contribute that takes only one second:  
 :star2: **Please consider giving WaloViz a GitHub star** :star2:
 
-Even if you do not give a star, you are the best!
-Using WaloViz, telling a friend about it or making contributions are all amazing ways in which WaloViz can become more useful for more people.
+Even if you do not give a star, you are the best!  
+Using WaloViz, telling a friend about it or making contributions are all amazing ways in which WaloViz can become more useful for more people.  
 For that we are greatful :heart:
 
 ## What is a Good First Contribution?
 
-The best place to start contributing to WaloViz is always the [Good First Issues](https://github.com/AlonKellner/waloviz/issues?q=is%3Aissue+is%3Aopen+%3Agood-first-issue)!
+The best place to start contributing to WaloViz is always the [Good First Issues](https://github.com/AlonKellner/waloviz/issues?q=is%3Aissue+is%3Aopen+%3Agood-first-issue)!  
 These are issues tagged with the `good-first-issue` tag, and you should be able to tackle them without any prior knowledge.
 
 But before you go ahead and start working on a PR you should read our [Developer Guide](DEVELOPER-GUIDE.md) first.
 
 ## Can I Contribute more?
 
-**YES!**
-WaloViz is early on its path, and there are lots of ways in which it can become better.
+**YES!**  
+WaloViz is early on its path, and there are lots of ways in which it can become better.  
 Here is a not comprehensive list of possible Contributions:
 
 - **Read the Vision & Roadmap** - find them in the [Readme](README.md), you might be able to help in ways that we didn't even realize!

@@ -28,6 +28,7 @@ authors = [
 ]
 maintainers = [
   {name = "Alon Kellner", email = "me@alonkellner.com"}
+  {email = "py@waloviz.com"}
 ]
 description = "An interactive audio player with a spectrogram built-in, as a Jupyter widget or as HTML."
 readme = "README.md"
