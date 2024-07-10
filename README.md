@@ -39,7 +39,7 @@ To learn more read our [Getting Started Guide](https://waloviz.com/en/latest/get
 
 ## [Contributing](CONTRIBUTING.md)
 
-WaloViz is a beginner friendly open-source project!
+WaloViz is a beginner friendly open-source project!  
 To make a contirbution, please read our [Contributing Guide](CONTRIBUTING.md).
 
 ## Our Vision
