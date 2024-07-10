@@ -7,7 +7,7 @@ About
 | Welcome!
 | WaloViz is an open source audio player with a spectrogram built-in, it was built by audio experts - for audio experts.
 | To start using WaloViz right now - read our `Getting Started Guide <./getting-started.html>`_.
-| WaloViz is proudly using the HoloViz stack for most of its features (as indicated by our name). To learn more - go to `the HoloViz website <https://holoviz.org/>`_, it's great :)
+| WaloViz is proudly using Bokeh and the HoloViz stack for most of its features (as indicated by our name). To learn more - go to `the Bokeh website <https://bokeh.org/>` and `the HoloViz website <https://holoviz.org/>`_, they're great :)
 
 Why WaloViz?
 ------------
