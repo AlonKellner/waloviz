@@ -8,24 +8,24 @@ Getting Started
 Explanation
 -----------
 
-``waloviz`` was built to be as accessible as possible, whether you're using jupyter, colab, VSCode, JupyterLab or just pure HTML - you'll only need three lines of code.  
+``waloviz`` was built to be as accessible as possible, whether you're using jupyter, colab, VSCode, JupyterLab or just pure HTML - you'll only need three lines of code.
 
 | First we need to install ``waloviz``:
 
-.. code-block:: shell 
-    
+.. code-block:: shell
+
     pip install waloviz
-    
+
 | We also need to install ``ffmpeg`` as a backend for ``torchaudio``:
 
-.. code-block:: shell 
-    
+.. code-block:: shell
+
     apt-get install ffmpeg
 
-| Then we need to import ``waloviz`` and activate the extension:  
+| Then we need to import ``waloviz`` and activate the extension:
 
 .. tabs::
-    
+
     .. group-tab:: jupyter
 
         .. code-block:: python
@@ -53,7 +53,7 @@ Explanation
 
             import waloviz as wv
             wv.extension()
-            
+
     .. group-tab:: Pure HTML
 
         .. code-block:: python
@@ -89,20 +89,20 @@ Explanation
         .. code-block:: python
 
             wv.Audio('https://www2.cs.uic.edu/~i101/SoundFiles/CantinaBand3.wav')
-            
+
     .. group-tab:: Pure HTML
 
         .. code-block:: python
 
             wv.save('https://www2.cs.uic.edu/~i101/SoundFiles/CantinaBand3.wav') # saves to `waloviz.html` by default
 
-| And... that's it, you're done.  
-| You can use the player to interact with your audio.  
+| And... that's it, you're done.
+| You can use the player to interact with your audio.
 
 Using the player
 ----------------
 
-| The controls are pretty intuitive, but here are the most important controls you should to know:  
+| The controls are pretty intuitive, but here are the most important controls you should to know:
 
 1. A single click on the spectrogram - toggles play\\pause
 2. Clicking on the bottom progress - moves the current time

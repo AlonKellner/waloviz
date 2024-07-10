@@ -1,7 +1,7 @@
 User Guide
 ==========
 
-| The User Guide goes through the available features in WaloViz. For newcomers, quick introduction to WaloViz can be found in our `Getting Started <../getting-started.html>`_ guide.  
+| The User Guide goes through the available features in WaloViz. For newcomers, quick introduction to WaloViz can be found in our `Getting Started Guide <../getting-started.html>`_.
 | If you are looking for a deep dive into the API, try our `Reference Manual <../reference-manual.html>`_.
 
 Feature guides
@@ -19,7 +19,7 @@ Feature guides
     Control the size ot your player and customize the responsiveness to your personal needs.
 
 `Advanced Options <04-advanced-options.html>`_
-    Modify the WaloViz player with nuanced options and features to your specific use case.  
+    Modify the WaloViz player with nuanced options and features to your specific use case.
 
 `The Player <05-the-player.html>`_
     Learn all about the hidden features of the WaloViz player, and get more out of it.

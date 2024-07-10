@@ -2,8 +2,8 @@
 API Reference Manual
 ********************
 
-The API reference manual is generated directly from documentation and declarations in the source code, and is thus often much more verbose than necessary.  
-Still, it often helps to navigate the code when necessary. Use only when you need a deep-dive into the code.  
+The API reference manual is generated directly from documentation and declarations in the source code, and is thus often much more verbose than necessary.
+Still, it often helps to navigate the code when necessary. Use only when you need a deep-dive into the code.
 
 --------
 

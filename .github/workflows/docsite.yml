@@ -1,4 +1,4 @@
-name: Deploy Doc Site
+name: Docs
 
 on:
   push:
@@ -15,7 +15,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.10'
+          python-version: "3.10"
 
       - name: Cache apt-pkgs
         uses: awalsh128/cache-apt-pkgs-action@latest
@@ -46,7 +46,7 @@ jobs:
 
       - name: Install dependencies
         run: python3 -m pip install -r requirements.txt
-      
+
       - name: Generate modules
         run: python ./doc/generate_modules.py src/waloviz -d ./doc/reference-manual -n waloviz -e tests
 
@@ -55,9 +55,9 @@ jobs:
 
       - name: Copy site root ➜
         run: cp -r doc/site_root/. builtdocs/
-          
+
       - name: Push to docsite
-        run:  |
+        run: |
           git config --global user.name '${{ github.repository_owner }}'
           git config --global user.email '${{ vars.OWNER_EMAIL }}'
           git_hash=$(git rev-parse --short "$GITHUB_SHA")

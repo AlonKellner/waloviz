@@ -179,7 +179,7 @@ def get_audio_xformatter(total_seconds: float) -> CustomJSTickFormatter:
 if ((tick < 0) || tick > {total_seconds}) {{
     return ""
 }}
-    
+
 var d = new Date(0);
 d.setMilliseconds(tick*1000);
 var days = Math.floor(d.getTime() / (1000*60*60*24));
@@ -215,14 +215,14 @@ return result;
 def get_record_ranges_callback(plots):
     record_ranges_callback = CustomJS(
         args=dict(plot_0=plots[0]),
-        code=f"""
-plot_0.prev_x_range = {{start: plot_0.x_range.start, end: plot_0.x_range.end}};
-plot_0.prev_y_range = {{start: plot_0.y_range.start, end: plot_0.y_range.end}};
+        code="""
+plot_0.prev_x_range = {start: plot_0.x_range.start, end: plot_0.x_range.end};
+plot_0.prev_y_range = {start: plot_0.y_range.start, end: plot_0.y_range.end};
 
-plot_0.prev_extra_y_ranges = Object.keys(plot_0.extra_y_ranges).reduce(function(result, key) {{
-    result[key] = {{start: plot_0.extra_y_ranges[key].start, end: plot_0.extra_y_ranges[key].end}};
+plot_0.prev_extra_y_ranges = Object.keys(plot_0.extra_y_ranges).reduce(function(result, key) {
+    result[key] = {start: plot_0.extra_y_ranges[key].start, end: plot_0.extra_y_ranges[key].end};
     return result;
-}}, {{}});
+}, {});
                 """,
     )
     return record_ranges_callback

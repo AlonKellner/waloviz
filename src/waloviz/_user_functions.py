@@ -237,7 +237,7 @@ def Audio(
         raise ValueError(
             """`over_curve` cannot be an integer! make sure you did not call `waloviz.Audio` like this:
     waloviz.Audio(wav, sr)
-    
+
 call `waloviz.Audio` in one of the following ways:
     waloviz.Audio((wav, sr))
     waloviz.Audio(wav, sr=sr)

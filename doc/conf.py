@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-# flake8: noqa (hacky way of sharing config, etc...)
+# (hacky way of sharing config, etc...)
 
-from nbsite.shared_conf import *
+from nbsite.shared_conf import *  # noqa: F403
 
 ###################################################
 # edit things below as appropriate for your project
@@ -20,9 +20,9 @@ description = "An interactive audio player with a spectrogram built-in, as a Jup
 site = "waloviz.com"
 version = release = wv.version
 
-html_static_path += ["_static"]
+html_static_path += ["_static"]  # noqa: F405
 html_theme = "pydata_sphinx_theme"
-html_css_files += ["css/custom.css"]
+html_css_files += ["css/custom.css"]  # noqa: F405
 html_logo = "_static/logo_horizontal.png"
 html_favicon = "_static/favicon.ico"
 html_title = f"{project} v{version}"
@@ -42,7 +42,7 @@ html_theme_options = {
 }
 html_last_updated_fmt = "%Y-%m-%d"
 
-extensions += [
+extensions += [  # noqa: F405
     "sphinx_favicon",
     "sphinxext.opengraph",
     "sphinx_tabs.tabs",
@@ -85,7 +85,7 @@ _NAV = (
     ("About", "about"),
 )
 
-html_context.update(
+html_context.update(  # noqa: F405
     {
         "PROJECT": project,
         "DESCRIPTION": description,

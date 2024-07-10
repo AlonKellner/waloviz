@@ -1,9 +1,9 @@
+jupyter-bokeh
 matplotlib
 nbsite
-sphinx-favicon
-sphinxext-opengraph
-jupyter-bokeh
-sphinx-tabs
 sphinx-copybutton
-sphinxemoji
+sphinx-favicon
+sphinx-tabs
 sphinx-toolbox
+sphinxemoji
+sphinxext-opengraph
