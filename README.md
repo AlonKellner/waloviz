@@ -9,7 +9,7 @@
 [![Weekly Downloads](https://static.pepy.tech/badge/waloviz/week)](https://pepy.tech/project/waloviz)
 [![PyPi Python Versions](https://img.shields.io/pypi/pyversions/waloviz.svg)](https://pypi.python.org/pypi/waloviz/)
 
-![example snapshot](doc/resources/example_snapshot.png)
+[![example snapshot](doc/resources/example_snapshot.png)](https://waloviz.com)
 An open source interactive audio player with a spectrogram built-in, primarily based on bokeh and the HoloViz stack (wav+HoloViz=WaloViz).
 
 ## Installation
