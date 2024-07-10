@@ -8,9 +8,9 @@ Thank you for wanting to contribute to WaloViz!
 There is one way in which you can contribute that takes only one second:  
 :star2: **Please consider giving WaloViz a GitHub star** :star2:
 
-Even if you do not give a star, you are the best!  
+Even if you do not give us a star, you are the best!  
 Using WaloViz, telling a friend about it or making contributions are all amazing ways in which WaloViz can become more useful for more people.  
-For that we are grateful :heart:
+For that - **we are grateful :heart:**
 
 ## What is a Good First Contribution?
 
@@ -31,7 +31,7 @@ Before starting to work on any PR go through this checklist, and once more befor
 - [ ] **Should my changes be documented in the website?** - If so, document it in the `doc/`.
 - [ ] **Should my changes have any tests?** - If so, write them in `tests/`.
 - [ ] **Does `pre-commit run` passes?** - If not, try to run it again and see if it passes now.
-- [ ] **Does `pytest tests/ui --browser chromium`** - passes? If not, make those tests pass before submitting.
+- [ ] **Does `pytest tests/ui --browser chromium` - passes?** If not, make those tests pass before submitting.
 - [ ] **Did anyone respond to my PR or Issue?** - If not, don't worry, we probably missed it by mistake, sorry... Just write another comment and mention a maintainer.
 
 ## Can I Contribute more?
