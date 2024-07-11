@@ -331,7 +331,69 @@ document.write(`
 <div class="graphviz"><img alt="Inheritance diagram of waloviz._holoviews_manipulations" class="inheritance graphviz" src="../_images/inheritance-b60c30bb7a4c17d6fa7678ccc4860bcf73905128.png"/></div>
 <section id="id1">
 <h2><code class="xref py py-mod docutils literal notranslate"><span class="pre">_holoviews_manipulations</span></code> Module<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
-<span class="target" id="module-waloviz._holoviews_manipulations"></span></section>
+<span class="target" id="module-waloviz._holoviews_manipulations"></span><dl class="py function">
+<dt class="sig sig-object py" id="waloviz._holoviews_manipulations.get_player_hv">
+<span class="sig-prename descclassname"><span class="pre">waloviz._holoviews_manipulations.</span></span><span class="sig-name descname"><span class="pre">get_player_hv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wav</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">total_seconds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">over_curve</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">Tensor</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Tensor</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tensor</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">over_curve_names</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_fft</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hop_length</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sync_legends</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pbar_height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theme_hook</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmap</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">over_curve_colors</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stay_color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">follow_color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colorbar</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">embed_title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">freq_label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/holoviz/waloviz/blob/vdev/waloviz/_holoviews_manipulations.py#L57-L169"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#waloviz._holoviews_manipulations.get_player_hv" title="Permalink to this definition">#</a></dt>
+<dd><div class="line-block">
+<div class="line">A HoloViews hook for applying a Bokeh theme</div>
+</div>
+<section id="parameters">
+<h3>Parameters<a class="headerlink" href="#parameters" title="Permalink to this heading">#</a></h3>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">wav</span></code><span class="classifier">torch.Tensor</span></dt><dd><p>Loaded audio tensor</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">sr</span></code><span class="classifier">int</span></dt><dd><p>Resolved sample-rate</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">total_seconds</span></code><span class="classifier">float</span></dt><dd><p>The total amount of seconds in the <code class="docutils literal notranslate"><span class="pre">wav</span></code> as calculated according to the <code class="docutils literal notranslate"><span class="pre">sr</span></code></p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">over_curve</span></code><span class="classifier">List[torch.Tensor]</span></dt><dd><p>A list of curves to be displayed over the spectrogram</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">over_curve_names</span></code><span class="classifier">List[str]</span></dt><dd><p>A list of display names corresponding to the list given in <code class="docutils literal notranslate"><span class="pre">over_curve</span></code></p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">n_fft</span></code><span class="classifier">int</span></dt><dd><p>Sets the <code class="docutils literal notranslate"><span class="pre">n_fft</span></code> of the torchaudio spectrogram</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">hop_length</span></code><span class="classifier">int</span></dt><dd><p>Sets the <code class="docutils literal notranslate"><span class="pre">hop_length</span></code> of the torchaudio spectrogram</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">sync_legends</span></code><span class="classifier">bool</span></dt><dd><p>Whether the legends of both audio channels <a href="#id2"><span class="problematic" id="id3">``</span></a>over_curve``s should be
+synchronized</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">pbar_height</span></code><span class="classifier">int</span></dt><dd><p>The total height of both the pbar itself and its axis</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">theme_hook</span></code><span class="classifier">ThemeHook</span></dt><dd><p>The HoloViews hook for applying a Bokeh theme, see <span class="xref std std-ref">ThemeHook</span>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">max_size</span></code><span class="classifier">int</span></dt><dd><p>The maximum amount of values allowed in the time axis, for both
+spectrograms and overlaid curves.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">cmap</span></code><span class="classifier">str</span></dt><dd><p>The colormap used to display the spectrogram</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">over_curve_colors</span></code><span class="classifier">List[str]</span></dt><dd><p>A list of display colors corresponding to the list given in <code class="docutils literal notranslate"><span class="pre">over_curve</span></code></p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">stay_color</span></code><span class="classifier">str</span></dt><dd><p>The color for the current time cursor <strong>when not following</strong> it</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">follow_color</span></code><span class="classifier">str</span></dt><dd><p>The color for the current time cursor <strong>only when following</strong> it</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">colorbar</span></code><span class="classifier">bool</span></dt><dd><p>Whether to display a colorbar for the spectrograms</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">title</span></code><span class="classifier">str</span></dt><dd><p>Sets the title of the chart, which is displayed when <code class="docutils literal notranslate"><span class="pre">embed_title=True</span></code></p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">freq_label</span></code><span class="classifier">str</span></dt><dd><p>The label of the frequency axis (vertical), hides the label when set
+to None which saves space.</p>
+</dd>
+</dl>
+</section>
+<section id="returns">
+<h3>Returns<a class="headerlink" href="#returns" title="Permalink to this heading">#</a></h3>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">player_hv</span></code><span class="classifier">hv.Layout</span></dt><dd><p>The basic player plot elements in HoloViews format, without any custom
+interactivity</p>
+</dd>
+</dl>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+</section>
+</dd></dl>
+</section>
 </section>
 </article>
 <footer class="bd-footer-article">
@@ -363,7 +425,10 @@ document.write(`
   </div>
 <nav class="bd-toc-nav page-toc">
 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><code class="xref py py-mod docutils literal notranslate"><span class="pre">_holoviews_manipulations</span></code> Module</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><code class="xref py py-mod docutils literal notranslate"><span class="pre">_holoviews_manipulations</span></code> Module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#waloviz._holoviews_manipulations.get_player_hv"><code class="docutils literal notranslate"><span class="pre">get_player_hv()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </nav></div>
 <div class="sidebar-secondary-item">
