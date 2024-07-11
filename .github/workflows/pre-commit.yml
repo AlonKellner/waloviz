@@ -1,4 +1,4 @@
-name: pre-commit
+name: Pre-Commit
 
 on:
   pull_request:
@@ -44,7 +44,7 @@ jobs:
             ${{ runner.os }}-pip-
 
       - name: Install dependencies
-        run: python3 -m pip install -r requirements.txt && playwright install chromium && playwright install-deps
+        run: python3 -m pip install -r requirements.txt
 
       - name: Pre-Commit
         uses: pre-commit/action@v3.0.1

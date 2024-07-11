@@ -15,7 +15,12 @@ version-file = "src/waloviz/_version.py"
 select = ["E4", "E7", "E9", "F", "B", "Q", "I"]
 
 [tool.pyright]
-extraPaths=["/usr/local/lib/python3.10/site-packages", "/workspaces/waloviz/src"]
+extraPaths=[
+    "/usr/local/lib/python3.10/site-packages",
+    "/workspaces/waloviz/src",
+    "/opt/hostedtoolcache/Python/3.10.14/x64/lib/python3.10/site-packages",
+    "/home/runner/work/waloviz/waloviz/src"
+]
 
 [project]
 dynamic = ["version"]
