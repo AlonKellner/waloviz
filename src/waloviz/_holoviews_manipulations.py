@@ -48,7 +48,7 @@ class ThemeHook:
             plot.handles["colorbar"].update(**self.theme_attrs["BaseColorBar"])
 
 
-def get_waloviz_hv(
+def get_player_hv(
     wav: torch.Tensor,
     sr: int,
     total_seconds: float,
@@ -82,81 +82,35 @@ def get_waloviz_hv(
 
     plots = []
     for channel, spec_channel in enumerate(spec):
-        spec_image = hv.Image(
-            spec_channel.numpy()[::-1, :] + 1e-5,
-            bounds=(0, hz_min, total_seconds, hv_max),
-            kdims=["x", "Hz"],
-        ).opts(
-            xaxis=None,
-            ylabel=freq_label,
-            cmap=cmap,
-            cnorm="log",
-            colorbar=colorbar,
-        )
-        vspan = hv.VSpan(0, 0).opts(fill_color="#ffffff33", yaxis=None)
-        vline = hv.VLine(0).opts(line_width=2, line_color=stay_color, yaxis=None)
-
-        has_over_curve = over_curve is not None
-        if has_over_curve:
-            curves = []
-            for curve_index, sub_curve in enumerate(over_curve):
-                color_kwargs = {}
-                if (
-                    over_curve_colors is not None
-                    and len(over_curve_colors) > curve_index
-                    and over_curve_colors[curve_index] is not None
-                ):
-                    color_kwargs["color"] = over_curve_colors[curve_index]
-
-                if isinstance(sub_curve, Tuple):
-                    sub_x, sub_y = sub_curve
-                    channel_sub_curve = sub_x[channel], sub_y[channel]
-                else:
-                    channel_sub_curve = (
-                        np.linspace(0, total_seconds, sub_curve[channel].shape[-1]),
-                        sub_curve[channel],
-                    )
-
-                curve = hv.Curve(
-                    channel_sub_curve,
-                    kdims=["x"],
-                    label=f"{over_curve_names[curve_index]}",
-                ).opts(ylabel="", xaxis=None, alpha=0.9, **color_kwargs)
-                curves.append(curve)
-            spec_image = spec_image * hv.Overlay(curves)
-
-        glyph = hv.Points([(0, 0.5)], kdims=["x", "dump"]).opts(
-            marker="^", color="white", size=10, yaxis=None, ylim=(0, 1)
-        )
-        if embed_title:
-            channel_title = f"{title} [{channel}]"
-        else:
-            channel_title = ""
-        plot = (spec_image * vline * vspan * glyph).opts(
-            multi_y=True,
-            legend_position="right",
-            hooks=[theme_hook],
-            title=channel_title,
+        plot = create_spectrogram_plot(
+            total_seconds,
+            over_curve,
+            over_curve_names,
+            theme_hook,
+            cmap,
+            over_curve_colors,
+            stay_color,
+            colorbar,
+            title,
+            embed_title,
+            freq_label,
+            hz_min,
+            hv_max,
+            channel,
+            spec_channel,
         )
         plots.append(plot)
 
-    image = hv.Image(
-        np.ones((1, 1)), bounds=(0, 0, total_seconds, 1), kdims=["x", "dump"]
-    ).opts(
-        xlabel="",
-        yaxis=None,
-        height=pbar_height,
-        cmap=["#444444", "#444444"],
-        alpha=0.5,
-    )
-    vline = hv.VLine(0).opts(line_color="white")
-    vspan = hv.VSpan(0, 0).opts(fill_color="white")
-    glyph = hv.Points([(0, 0.5)], kdims=["x", "dump"]).opts(
-        color="white", size=pbar_height - 30, yaxis=None, ylim=(0, 1)
-    )
-    pbar = image * vline * vspan * glyph
+    pbar = create_progress_bar_plot(total_seconds, pbar_height)
     plots.append(pbar)
 
+    player_hv = combine_player_plots(
+        sync_legends, theme_hook, stay_color, responsive, plots
+    )
+    return player_hv
+
+
+def combine_player_plots(sync_legends, theme_hook, stay_color, responsive, plots):
     base_tools = ["reset", "pan", "wheel_zoom", "save"]
     tools_kwargs = dict(
         tools=base_tools,
@@ -164,7 +118,7 @@ def get_waloviz_hv(
         active_tools=base_tools,
     )
 
-    waloviz_hv = (
+    player_hv = (
         hv.Layout(plots)
         .cols(1)
         .opts(toolbar="left", sync_legends=sync_legends)
@@ -185,4 +139,101 @@ def get_waloviz_hv(
         .opts(hv.opts.VSpan(line_color=stay_color, line_alpha=0.0, **tools_kwargs))
         .opts(hv.opts.VLine(**tools_kwargs))
     )
-    return waloviz_hv
+
+    return player_hv
+
+
+def create_progress_bar_plot(total_seconds, pbar_height):
+    image = hv.Image(
+        np.ones((1, 1)), bounds=(0, 0, total_seconds, 1), kdims=["x", "dump"]
+    ).opts(
+        xlabel="",
+        yaxis=None,
+        height=pbar_height,
+        cmap=["#444444", "#444444"],
+        alpha=0.5,
+    )
+    vline = hv.VLine(0).opts(line_color="white")
+    vspan = hv.VSpan(0, 0).opts(fill_color="white")
+    glyph = hv.Points([(0, 0.5)], kdims=["x", "dump"]).opts(
+        color="white", size=pbar_height - 30, yaxis=None, ylim=(0, 1)
+    )
+    pbar = image * vline * vspan * glyph
+    return pbar
+
+
+def create_spectrogram_plot(
+    total_seconds,
+    over_curve,
+    over_curve_names,
+    theme_hook,
+    cmap,
+    over_curve_colors,
+    stay_color,
+    colorbar,
+    title,
+    embed_title,
+    freq_label,
+    hz_min,
+    hv_max,
+    channel,
+    spec_channel,
+):
+    spec_image = hv.Image(
+        spec_channel.numpy()[::-1, :] + 1e-5,
+        bounds=(0, hz_min, total_seconds, hv_max),
+        kdims=["x", "Hz"],
+    ).opts(
+        xaxis=None,
+        ylabel=freq_label,
+        cmap=cmap,
+        cnorm="log",
+        colorbar=colorbar,
+    )
+    vspan = hv.VSpan(0, 0).opts(fill_color="#ffffff33", yaxis=None)
+    vline = hv.VLine(0).opts(line_width=2, line_color=stay_color, yaxis=None)
+
+    has_over_curve = over_curve is not None
+    if has_over_curve:
+        curves = []
+        for curve_index, sub_curve in enumerate(over_curve):
+            color_kwargs = {}
+            if (
+                over_curve_colors is not None
+                and len(over_curve_colors) > curve_index
+                and over_curve_colors[curve_index] is not None
+            ):
+                color_kwargs["color"] = over_curve_colors[curve_index]
+
+            if isinstance(sub_curve, Tuple):
+                sub_x, sub_y = sub_curve
+                channel_sub_curve = sub_x[channel], sub_y[channel]
+            else:
+                channel_sub_curve = (
+                    np.linspace(0, total_seconds, sub_curve[channel].shape[-1]),
+                    sub_curve[channel],
+                )
+
+            curve = hv.Curve(
+                channel_sub_curve,
+                kdims=["x"],
+                label=f"{over_curve_names[curve_index]}",
+            ).opts(ylabel="", xaxis=None, alpha=0.9, **color_kwargs)
+            curves.append(curve)
+        spec_image = spec_image * hv.Overlay(curves)
+
+    glyph = hv.Points([(0, 0.5)], kdims=["x", "dump"]).opts(
+        marker="^", color="white", size=10, yaxis=None, ylim=(0, 1)
+    )
+    if embed_title:
+        channel_title = f"{title} [{channel}]"
+    else:
+        channel_title = ""
+    plot = (spec_image * vline * vspan * glyph).opts(
+        multi_y=True,
+        legend_position="right",
+        hooks=[theme_hook],
+        title=channel_title,
+    )
+
+    return plot

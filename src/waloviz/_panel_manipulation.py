@@ -30,8 +30,8 @@ def _is_2dim_int_or_float_tensor(obj: Any) -> bool:
     )
 
 
-def wrap_with_waloviz_panel(
-    waloviz_bokeh,
+def wrap_player_with_panel(
+    player_bokeh,
     wav: torch.Tensor,
     sr: int,
     title: str,
@@ -74,19 +74,19 @@ def wrap_with_waloviz_panel(
             visible=native_player,
         )
 
-    plot_0, _, __ = waloviz_bokeh.children[0]
+    plot_0, _, __ = player_bokeh.children[0]
     pause_0 = plot_0.renderers[-1]
     vspan_0 = plot_0.renderers[-2]
     audio.jslink(pause_0, paused="visible", bidirectional=True)
     audio.jslink(vspan_0, time="right", bidirectional=True)
-    waloviz_panel_plot = pn.Column(
-        waloviz_bokeh, min_height=both_min_height + pbar_height
+    player_panel_plot = pn.Column(
+        player_bokeh, min_height=both_min_height + pbar_height
     )
-    rows = [waloviz_panel_plot, audio]
+    rows = [player_panel_plot, audio]
 
     if download_button:
         buffer = BytesIO()
-        buffer: BytesIO = save_waloviz_panel(
+        buffer: BytesIO = save_player_panel(
             pn.Column(
                 *rows,
                 **aspect_ratio_kwargs,
@@ -102,19 +102,19 @@ def wrap_with_waloviz_panel(
         )
         rows.append(file_download)
 
-    waloviz_panel = pn.Column(
+    player_panel = pn.Column(
         *rows,
         **aspect_ratio_kwargs,
         **width_kwargs,
         **height_kwargs,
     )
 
-    waloviz_panel.title = title
-    return waloviz_panel
+    player_panel.title = title
+    return player_panel
 
 
-def save_waloviz_panel(
-    waloviz_panel: pn.viewable.Viewable,
+def save_player_panel(
+    player_panel: pn.viewable.Viewable,
     file: Union[str, os.PathLike, IOBase] = None,
     title: Optional[str] = None,
     resources: Resources = INLINE,
@@ -122,7 +122,7 @@ def save_waloviz_panel(
 ):
     if title is None:
         try:
-            title = waloviz_panel.title
+            title = player_panel.title
         except Exception:
             title = "waloviz"
 
@@ -130,13 +130,13 @@ def save_waloviz_panel(
         file = f"{title}.html"
 
     if (
-        hasattr(waloviz_panel, "__len__")
-        and (len(waloviz_panel) > 2)
-        and isinstance(waloviz_panel[2], pn.widgets.misc.FileDownload)
+        hasattr(player_panel, "__len__")
+        and (len(player_panel) > 2)
+        and isinstance(player_panel[2], pn.widgets.misc.FileDownload)
     ):
-        waloviz_panel = pn.Column(waloviz_panel[0], waloviz_panel[1])
+        player_panel = pn.Column(player_panel[0], player_panel[1])
 
-    pn.panel(waloviz_panel).save(
+    pn.panel(player_panel).save(
         file,
         resources=resources,
         embed=embed,

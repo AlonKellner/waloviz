@@ -14,8 +14,8 @@ def apply_theme(plot, theme, theme_elements_mapping):
                 setattr(getattr(plot, attr), attr_name, attr_value)
 
 
-def finalize_waloviz_bokeh_gui(
-    waloviz_bokeh,
+def finalize_player_bokeh_gui(
+    player_bokeh,
     theme: Dict[str, Any],
     total_seconds: float,
     stay_color: str,
@@ -25,14 +25,14 @@ def finalize_waloviz_bokeh_gui(
     single_min_height: int,
     both_min_height: int,
 ):
-    waloviz_bokeh.toolbar.autohide = True
+    player_bokeh.toolbar.autohide = True
 
     plots = []
     vlines = []
     vspans = []
     glyphs = []
 
-    children = waloviz_bokeh.children
+    children = player_bokeh.children
     for channel, (plot, _, __) in enumerate(children):
         plots.append(plot)
 
@@ -170,7 +170,7 @@ def finalize_waloviz_bokeh_gui(
         ]:
             plot.js_on_event(e, get_record_ranges_callback(plots))
 
-    return waloviz_bokeh
+    return player_bokeh
 
 
 def get_audio_xformatter(total_seconds: float) -> CustomJSTickFormatter:

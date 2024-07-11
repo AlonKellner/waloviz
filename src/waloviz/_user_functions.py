@@ -10,9 +10,9 @@ import torchaudio
 import torchaudio.transforms as T
 from bokeh.resources import INLINE, Resources
 
-from ._bokeh_manipulation import finalize_waloviz_bokeh_gui, themes
-from ._holoviews_manipulations import ThemeHook, get_waloviz_hv
-from ._panel_manipulation import save_waloviz_panel, wrap_with_waloviz_panel
+from ._bokeh_manipulation import finalize_player_bokeh_gui, themes
+from ._holoviews_manipulations import ThemeHook, get_player_hv
+from ._panel_manipulation import save_player_panel, wrap_player_with_panel
 from ._tensor_utils import OverCurve, preprocess_over_curve, to_tensor
 
 FileLike = Union[str, os.PathLike, IOBase]
@@ -26,7 +26,7 @@ _mode = "default"
 
 def extension(mode="default"):
     """=====================
-    ``waloviz.extension``
+    ``wv.extension``
     =====================
 
     | Initializes the notebook extensions for the current IDE.
@@ -87,7 +87,7 @@ def Audio(
     extended: bool = False,
 ):
     """=================
-    ``waloviz.Audio``
+    ``wv.Audio``
     =================
 
     | Creates an interactive audio player with a spectrogram
@@ -197,7 +197,7 @@ def Audio(
     -------
 
     ``player`` : pn.viewable.Viewable
-        An interactive waloviz player, can be saved to html with ``waloviz.save(player)``
+        An interactive player, can be saved to html with ``wv.save(player)``
 
     Raises
     ------
@@ -268,7 +268,7 @@ def Audio(
         wav, sr, channels, over_curve, over_curve_names, over_curve_colors
     )
 
-    waloviz_hv = get_waloviz_hv(
+    player_hv = get_player_hv(
         wav=wav,
         sr=sr,
         total_seconds=total_seconds,
@@ -289,10 +289,10 @@ def Audio(
         colorbar=colorbar,
         freq_label=freq_label,
     )
-    waloviz_bokeh = hv.render(waloviz_hv)
+    player_bokeh = hv.render(player_hv)
 
-    waloviz_bokeh = finalize_waloviz_bokeh_gui(
-        waloviz_bokeh,
+    player_bokeh = finalize_player_bokeh_gui(
+        player_bokeh,
         theme=theme,
         total_seconds=total_seconds,
         stay_color=stay_color,
@@ -302,8 +302,8 @@ def Audio(
         single_min_height=single_min_height,
         both_min_height=both_min_height,
     )
-    waloviz_panel = wrap_with_waloviz_panel(
-        waloviz_bokeh,
+    player_panel = wrap_player_with_panel(
+        player_bokeh,
         wav=wav,
         sr=sr,
         title=title,
@@ -320,7 +320,7 @@ def Audio(
         sizing_mode=sizing_mode,
     )
 
-    return waloviz_panel
+    return player_panel
 
 
 def _resolve_presets(
@@ -543,8 +543,8 @@ def _load_audio(
         raise ValueError(
             """A sample rate must be specified but none was provided!
 Specify the sample rate in one of the following ways:
-    waloviz.Audio(wav, sr=sample_rate)
-    waloviz.Audio((wav, sample_rate))"""
+    wv.Audio(wav, sr=sample_rate)
+    wv.Audio((wav, sample_rate))"""
         )
 
     wav = to_tensor(wav).squeeze()
@@ -624,9 +624,9 @@ def _validate_max_args(args: List[Any]):
     |"""
     if len(args) > 0:
         raise ValueError(
-            """``waloviz.Audio`` should be called with at most 2 positional arguments like one of the following ways:
-    waloviz.Audio(source)
-    waloviz.Audio(source, over_curve)"""
+            """``wv.Audio`` should be called with at most 2 positional arguments like one of the following ways:
+    wv.Audio(source)
+    wv.Audio(source, over_curve)"""
         )
 
 
@@ -652,12 +652,12 @@ def _validate_over_curve(over_curve: Optional[OverCurve]):
     |"""
     if isinstance(over_curve, int):
         raise ValueError(
-            """``over_curve`` cannot be an integer! make sure you did not call ``waloviz.Audio`` like this:
-    waloviz.Audio(wav, sr)
-call ``waloviz.Audio`` in one of the following ways:
-    waloviz.Audio((wav, sr))
-    waloviz.Audio(wav, sr=sr)
-    waloviz.Audio(file_name_or_obj)"""
+            """``over_curve`` cannot be an integer! make sure you did not call ``wv.Audio`` like this:
+    wv.Audio(wav, sr)
+call ``wv.Audio`` in one of the following ways:
+    wv.Audio((wav, sr))
+    wv.Audio(wav, sr=sr)
+    wv.Audio(file_name_or_obj)"""
         )
 
 
@@ -769,10 +769,10 @@ def save(
     **kwargs,
 ):
     """================
-    ``waloviz.save``
+    ``wv.save``
     ================
 
-    | Saves a waloviz player to an html file
+    | Saves a player to an html file
 
     Example
     -------
@@ -786,13 +786,13 @@ def save(
     ----------
 
     ``source`` : pn.viewable.Viewable | str | os.PathLike | IOBase | (tensorlike, int) | tensorlike
-        The waloviz player created by ``waloviz.Audio``, or a source for
-        ``waloviz.Audio`` to create a player with.
+        The player created by ``wv.Audio``, or a source for ``wv.Audio`` to
+        create a player with.
     ``out_file`` : str | os.PathLike | IOBase
         The output file path for the generated html, default is "{title}.html"
     ``title`` : str
         The title to be used in the generated file name and the html title,
-        if ``waloviz.Audio(title="...")`` was specified, then that value is
+        if ``wv.Audio(title="...")`` was specified, then that value is
         used, otherwise, the default is "waloviz".
     ``resources`` : bokeh.resources.Resources
         The resources for the ``panel`` save method, default is INLINE
@@ -803,7 +803,7 @@ def save(
     -------
 
     ``out_file`` : str | os.PathLike | IOBase
-        The file that the waloviz html content was written into
+        The file that the HTML player content was written into
 
     Raises
     ------
@@ -817,7 +817,7 @@ def save(
         out_file = _resolve_out_file(out_file, args, kwargs)
     else:
         source = Audio(source, *args, **kwargs)
-    return save_waloviz_panel(source, out_file, title, resources, embed)
+    return save_player_panel(source, out_file, title, resources, embed)
 
 
 def _resolve_out_file(
@@ -866,10 +866,10 @@ def _resolve_out_file(
             args = []
     elif len(args) > 1:
         raise ValueError(
-            """``waloviz.save`` should be called with at most 2 positional arguments like one of the following ways:
-    waloviz.save(source)
-    waloviz.save(source, out_file)
-    waloviz.save(source, over_curve)"""
+            """``wv.save`` should be called with at most 2 positional arguments like one of the following ways:
+    wv.save(source)
+    wv.save(source, out_file)
+    wv.save(source, over_curve)"""
         )
 
     return out_file
