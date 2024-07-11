@@ -9,7 +9,9 @@ OverCurve = Union[
 ]
 
 
-def to_tensor(obj: Any) -> Union[torch.Tensor, Tuple[torch.Tensor, torch.Tensor]]:
+def to_tensor(
+    obj: Any,
+) -> Union[torch.Tensor, Tuple[torch.Tensor, torch.Tensor], Tuple]:
     """=============
     ``to_tensor``
     =============
@@ -130,8 +132,10 @@ def preprocess_over_curve(
     channels: int,
     over_curve: Optional[OverCurve],
     over_curve_names: Optional[Union[str, List[str]]] = None,
-    over_curve_colors: Optional[Union[str, List[str]]] = None,
-) -> Tuple[List[torch.Tensor], List[str], List[str]]:
+    over_curve_colors: Optional[Union[str, List[Optional[str]], Dict[str, str]]] = None,
+) -> Tuple[
+    Optional[List[torch.Tensor]], Optional[List[str]], Optional[List[Optional[str]]]
+]:
     """========================
     ``preprocess_over_curve``
     =========================
@@ -190,7 +194,7 @@ def preprocess_over_curve(
         over_curve_colors = [over_curve_colors]
 
     if not isinstance(over_curve, (List, Dict)):
-        if (hasattr(over_curve, "shape") and len(over_curve.shape) == 1) or (
+        if (hasattr(over_curve, "shape") and len(over_curve.shape) == 1) or (  # pyright: ignore[reportAttributeAccessIssue]
             isinstance(over_curve, Tuple) and len(over_curve) == 2
         ):
             over_curve = [over_curve]
@@ -199,7 +203,7 @@ def preprocess_over_curve(
 
     if isinstance(over_curve, List):
         if over_curve_names is None:
-            over_curve_names = list(range(len(over_curve)))
+            over_curve_names = [str(i) for i in range(len(over_curve))]
         elif len(over_curve_names) != len(over_curve):
             raise ValueError(
                 f"Size of ``over_curve_names`` was different than ``over_curve`` but should be equal, {len(over_curve_names)} != {len(over_curve)}"
@@ -220,6 +224,10 @@ def preprocess_over_curve(
         over_curve = [sub_curve for name, sub_curve in over_curve]
 
     if isinstance(over_curve_colors, Dict):
+        if over_curve_names is None:
+            raise ValueError(
+                "``over_curve_colors`` was a dict but no ``over_curve_names`` were provided"
+            )
         over_curve_colors = [
             (over_curve_colors[name] if name in over_curve_colors else None)
             for name in over_curve_names

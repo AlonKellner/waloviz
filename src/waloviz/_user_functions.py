@@ -1,6 +1,5 @@
 import os
-from io import IOBase
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, BinaryIO, Dict, List, Optional, Tuple, Union
 
 import holoviews as hv
 import numpy as np
@@ -12,11 +11,14 @@ from bokeh.resources import INLINE, Resources
 
 from ._bokeh_manipulation import finalize_player_bokeh_gui, themes
 from ._holoviews_manipulations import ThemeHook, get_player_hv
-from ._panel_manipulation import save_player_panel, wrap_player_with_panel
+from ._panel_manipulation import FileLike, save_player_panel, wrap_player_with_panel
 from ._tensor_utils import OverCurve, preprocess_over_curve, to_tensor
 
-FileLike = Union[str, os.PathLike, IOBase]
-
+AudioSource = Union[
+    FileLike,
+    Union[np.ndarray, torch.Tensor, Any],
+    Tuple[Union[np.ndarray, torch.Tensor, Any], int],
+]
 
 # The mode is set with the ``extension`` function, the mode can be either "default" or "colab".
 # If the mode is "colab" the ``extension`` will be loaded in every cell, see https://github.com/holoviz/holoviews/issues/3551
@@ -52,14 +54,14 @@ def extension(mode="default"):
     _mode = mode
 
     # WaloViz is built exclusively with bokeh, this will not likely to change in the foreseeable future.
-    hv.extension("bokeh")
+    hv.extension("bokeh")  # pyright: ignore[reportCallIssue]
 
     # When the ``comms`` are auto-detected (in colab for example) it doesn't work, ``comms="default"`` works on all platforms, not sure why
     pn.extension(comms="default")
 
 
 def Audio(
-    source: Union[FileLike, Tuple[Union[np.ndarray, torch.Tensor, Any], int]],
+    source: AudioSource,
     over_curve: Optional[OverCurve] = None,
     *args,
     over_curve_names: Optional[Union[str, List[str]]] = None,
@@ -77,15 +79,15 @@ def Audio(
     sync_legends: bool = False,
     colorbar: bool = False,
     cmap: str = "Inferno",
-    over_curve_colors: Optional[Union[str, List[str]]] = None,
+    over_curve_colors: Optional[Union[str, List[Optional[str]], Dict[str, str]]] = None,
     theme: Union[str, Dict[str, Any]] = "dark_minimal",
     max_size: int = 10000,
     download_button: bool = True,
-    freq_label: str = "Hz",
+    freq_label: Optional[str] = "Hz",
     native_player: bool = False,
     minimal: bool = False,
     extended: bool = False,
-):
+) -> pn.viewable.Viewable:
     """=================
     ``wv.Audio``
     =================
@@ -116,7 +118,7 @@ def Audio(
     Parameters
     ----------
 
-    ``source`` : str | os.PathLike | IOBase | (tensorlike, int) | tensorlike
+    ``source`` : str | os.PathLike | BinaryIO | (tensorlike, int) | tensorlike
         Either an audio file, or an audio tensor\\ndarray with a sample rate
     ``over_curve`` : tensorlike | List[tensorlike] | Dict[str, tensorlike] | callable
         A single or multiple curves to be displayed over the spectrogram
@@ -443,7 +445,7 @@ def _resolve_min_spectrogram_heights(
 
 
 def _resolve_spectrogram_resolution(
-    sr: Optional[int],
+    sr: int,
     frame_ms: Optional[float],
     n_fft: Optional[int],
     hop_ms: Optional[float],
@@ -482,6 +484,8 @@ def _resolve_spectrogram_resolution(
         frame_ms = 100.0
 
     if n_fft is None:
+        if frame_ms is None:
+            raise ValueError("``frame_ms`` was set to None without setting ``n_fft``")
         n_fft = int((sr * frame_ms) / 1000)
 
     if hop_ms is not None:
@@ -493,7 +497,7 @@ def _resolve_spectrogram_resolution(
 
 
 def _load_audio(
-    source: Union[FileLike, Tuple[Union[np.ndarray, torch.Tensor, Any], int]],
+    source: AudioSource,
     sr: Optional[int],
 ) -> Tuple[torch.Tensor, int]:
     """===============
@@ -506,7 +510,7 @@ def _load_audio(
     Parameters
     ----------
 
-    ``source`` : str | os.PathLike | IOBase | (tensorlike, int) | tensorlike
+    ``source`` : str | os.PathLike | BinaryIO | (tensorlike, int) | tensorlike
         User provided
     ``sr`` : int
         User provided
@@ -530,9 +534,13 @@ def _load_audio(
     |"""
     if torch.is_tensor(source) or isinstance(source, np.ndarray):
         source = source, sr
-    elif not isinstance(source, tuple):
+    if isinstance(source, FileLike):
         source = torchaudio.load(source)
 
+    if not isinstance(source, tuple):
+        raise ValueError("The given ``source`` type is not supported")
+
+    source_sr: int
     wav, source_sr = source
     if sr is None:
         target_sr = source_sr
@@ -547,7 +555,7 @@ Specify the sample rate in one of the following ways:
     wv.Audio((wav, sample_rate))"""
         )
 
-    wav = to_tensor(wav).squeeze()
+    wav = to_tensor(wav).squeeze()  # pyright: ignore[reportAttributeAccessIssue]
     if len(wav.shape) == 1:
         wav = wav[None, ...]
     elif len(wav.shape) > 2:
@@ -563,7 +571,7 @@ Specify the sample rate in one of the following ways:
 
 def _create_theme_hook(
     theme: Union[str, Dict[str, Any]],
-) -> Tuple[Union[str, Dict[str, Any]], ThemeHook]:
+) -> Tuple[Dict[str, Any], ThemeHook]:
     """======================
     ``_create_theme_hook``
     ======================
@@ -592,17 +600,16 @@ def _create_theme_hook(
 
     |"""
     if isinstance(theme, str):
-        if theme.lower() in themes:
-            theme = themes[theme.lower()]
-        else:
+        if theme.lower() not in themes:
             ValueError(
                 f"``theme`` was a string, but did not match any of the available options: {sorted(themes.keys())}"
             )
-    theme_hook = ThemeHook(theme).hook
+        theme = themes[theme.lower()]
+    theme_hook = ThemeHook(theme)
     return theme, theme_hook
 
 
-def _validate_max_args(args: List[Any]):
+def _validate_max_args(args: Tuple[Any]):
     """======================
     ``_validate_max_args``
     ======================
@@ -666,7 +673,7 @@ def _resolve_sizing_args(
     width: Union[int, str],
     height: Union[int, str],
     aspect_ratio: Optional[float],
-) -> Tuple[str, Union[int, str], Union[int, str], Optional[float]]:
+) -> Tuple[Optional[str], Union[int, str], Union[int, str], Optional[float]]:
     """========================
     ``_resolve_sizing_args``
     ========================
@@ -760,7 +767,7 @@ def _resolve_audio_height(native_player: bool) -> int:
 
 
 def save(
-    source: pn.viewable.Viewable,
+    source: Union[pn.viewable.Viewable, AudioSource],
     *args,
     out_file: Optional[FileLike] = None,
     title: Optional[str] = None,
@@ -785,10 +792,10 @@ def save(
     Parameters
     ----------
 
-    ``source`` : pn.viewable.Viewable | str | os.PathLike | IOBase | (tensorlike, int) | tensorlike
+    ``source`` : pn.viewable.Viewable | str | os.PathLike | BinaryIO | (tensorlike, int) | tensorlike
         The player created by ``wv.Audio``, or a source for ``wv.Audio`` to
         create a player with.
-    ``out_file`` : str | os.PathLike | IOBase
+    ``out_file`` : str | os.PathLike | BinaryIO
         The output file path for the generated html, default is "{title}.html"
     ``title`` : str
         The title to be used in the generated file name and the html title,
@@ -802,7 +809,7 @@ def save(
     Returns
     -------
 
-    ``out_file`` : str | os.PathLike | IOBase
+    ``out_file`` : str | os.PathLike | BinaryIO
         The file that the HTML player content was written into
 
     Raises
@@ -816,13 +823,18 @@ def save(
     if issubclass(type(source), pn.viewable.Viewable):
         out_file = _resolve_out_file(out_file, args, kwargs)
     else:
+        if not isinstance(
+            source, (FileLike, Union[np.ndarray, torch.Tensor, Any], tuple, int)
+        ):
+            raise ValueError("The provided ``source`` type is not supported")
         source = Audio(source, *args, **kwargs)
-    return save_player_panel(source, out_file, title, resources, embed)
+
+    return save_player_panel(source, out_file, title, resources, embed)  # pyright: ignore[reportArgumentType]
 
 
 def _resolve_out_file(
     out_file: Optional[FileLike],
-    args: List[Any],
+    args: Tuple[Any],
     kwargs: Dict[str, Any],
 ) -> Optional[FileLike]:
     """=====================
@@ -836,7 +848,7 @@ def _resolve_out_file(
     Parameters
     ----------
 
-    ``out_file`` : str | os.PathLike | IOBase
+    ``out_file`` : str | os.PathLike | BinaryIO
         User provided
     ``args`` : List[Any]
         User provided
@@ -846,7 +858,7 @@ def _resolve_out_file(
     Returns
     -------
 
-    ``out_file`` : str | os.PathLike | IOBase
+    ``out_file`` : str | os.PathLike | BinaryIO
         Resolved
 
     Raises
@@ -861,9 +873,9 @@ def _resolve_out_file(
             f"save() got an unexpected keyword argument '{list(kwargs.keys())[0]}'"
         )
     if len(args) == 1:
-        if isinstance(args[0], (str, os.PathLike, IOBase)):
+        if isinstance(args[0], (str, os.PathLike, BinaryIO)):
             out_file = args[0]
-            args = []
+            args = tuple()
     elif len(args) > 1:
         raise ValueError(
             """``wv.save`` should be called with at most 2 positional arguments like one of the following ways:

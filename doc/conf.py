@@ -5,7 +5,13 @@
 # edit things below as appropriate for your project
 import sys
 
-from nbsite.shared_conf import *  # noqa: F403
+from nbsite.shared_conf import *  # noqa: F403 # type: ignore
+from nbsite.shared_conf import (
+    extensions,
+    html_context,
+    html_css_files,
+    html_static_path,
+)
 
 sys.path.append("/workspaces/waloviz/src")
 sys.path.append("/home/runner/work/waloviz/waloviz/src")

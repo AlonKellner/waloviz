@@ -1,11 +1,13 @@
-from typing import Any, Dict, List, Optional, Tuple
+# pyright: reportAttributeAccessIssue=false, reportOptionalMemberAccess=false, reportOperatorIssue=false
+
+from typing import Any, Dict, List, Optional, Tuple, Union
 
 import holoviews as hv
 import numpy as np
 import torch
 import torchaudio.transforms as T
 
-from ._tensor_utils import OverCurve, skip_to_size
+from ._tensor_utils import skip_to_size
 
 
 class ThemeHook:
@@ -14,7 +16,11 @@ class ThemeHook:
         ``ThemeHook``
         =============
 
-        | A class with a HoloViews hook for applying a Bokeh theme
+        | A class with a HoloViews hook for applying a Bokeh theme.
+        | This is due to a problem when using the built-in theme support of
+        | HoloViews in integration with Panel, for some reason themes are only
+        | partially applied in those situations.
+        | TODO: Open an Issue in the `HoloViews <https://github.com/holoviz/holoviews>`_\\`Panel <https://github.com/holoviz/panel>`_ repository about this
 
         Parameters
         ----------
@@ -52,7 +58,7 @@ def get_player_hv(
     wav: torch.Tensor,
     sr: int,
     total_seconds: float,
-    over_curve: Optional[OverCurve],
+    over_curve: Optional[List[Union[torch.Tensor, Tuple[torch.Tensor, torch.Tensor]]]],
     over_curve_names: Optional[List[str]],
     n_fft: int,
     hop_length: int,
@@ -61,14 +67,68 @@ def get_player_hv(
     theme_hook: Any,
     max_size: int,
     cmap: str,
-    over_curve_colors: Optional[List[str]],
+    over_curve_colors: Optional[List[Optional[str]]],
     stay_color: str,
     follow_color: str,
     colorbar: bool,
-    title: str,
+    title: Optional[str],
     embed_title: bool,
-    freq_label: str,
+    freq_label: Optional[str],
 ):
+    """
+    | A HoloViews hook for applying a Bokeh theme
+
+    Parameters
+    ----------
+
+    ``wav`` : torch.Tensor
+        Loaded audio tensor
+    ``sr`` : int
+        Resolved sample-rate
+    ``total_seconds`` : float
+        The total amount of seconds in the ``wav`` as calculated according to the ``sr``
+    ``over_curve`` : List[torch.Tensor]
+        A list of curves to be displayed over the spectrogram
+    ``over_curve_names`` : List[str]
+        A list of display names corresponding to the list given in ``over_curve``
+    ``n_fft`` : int
+        Sets the ``n_fft`` of the torchaudio spectrogram
+    ``hop_length`` : int
+        Sets the ``hop_length`` of the torchaudio spectrogram
+    ``sync_legends`` : bool
+        Whether the legends of both audio channels ``over_curve``s should be
+        synchronized
+    ``pbar_height`` : int
+        The total height of both the pbar itself and its axis
+    ``theme_hook`` : ThemeHook
+        The HoloViews hook for applying a Bokeh theme, see :ref:`ThemeHook <waloviz._holoviews_manipulations.ThemeHook>`.
+    ``max_size`` : int
+        The maximum amount of values allowed in the time axis, for both
+        spectrograms and overlaid curves.
+    ``cmap`` : str
+        The colormap used to display the spectrogram
+    ``over_curve_colors`` : List[str]
+        A list of display colors corresponding to the list given in ``over_curve``
+    ``stay_color`` : str
+        The color for the current time cursor **when not following** it
+    ``follow_color`` : str
+        The color for the current time cursor **only when following** it
+    ``colorbar`` : bool
+        Whether to display a colorbar for the spectrograms
+    ``title`` : str
+        Sets the title of the chart, which is displayed when ``embed_title=True``
+    ``freq_label`` : str
+        The label of the frequency axis (vertical), hides the label when set
+        to None which saves space.
+
+    Returns
+    -------
+
+    ``player_hv`` : hv.Layout
+        The basic player plot elements in HoloViews format, without any custom
+        interactivity
+
+    |"""
     responsive = True
 
     spec = T.Spectrogram(n_fft=n_fft, hop_length=hop_length)(wav)
@@ -77,12 +137,13 @@ def get_player_hv(
     if over_curve is not None:
         over_curve = [skip_to_size(sub_curve, max_size) for sub_curve in over_curve]
 
-    hz_min = (-1 / n_fft) * sr / 2
-    hv_max = (1 + 1 / n_fft) * sr / 2
+    hz_min, hv_max = calculate_frequency_range_of_torhcaudio_spectrogram(sr, n_fft)
 
     plots = []
-    for channel, spec_channel in enumerate(spec):
-        plot = create_spectrogram_plot(
+    for channel_index, spec_channel in enumerate(spec):
+        plot = create_channel_spectrogram_plot(
+            channel_index,
+            spec_channel,
             total_seconds,
             over_curve,
             over_curve_names,
@@ -96,8 +157,6 @@ def get_player_hv(
             freq_label,
             hz_min,
             hv_max,
-            channel,
-            spec_channel,
         )
         plots.append(plot)
 
@@ -105,12 +164,18 @@ def get_player_hv(
     plots.append(pbar)
 
     player_hv = combine_player_plots(
-        sync_legends, theme_hook, stay_color, responsive, plots
+        plots, sync_legends, theme_hook, stay_color, responsive
     )
     return player_hv
 
 
-def combine_player_plots(sync_legends, theme_hook, stay_color, responsive, plots):
+def calculate_frequency_range_of_torhcaudio_spectrogram(sr, n_fft):
+    hz_min = (-1 / n_fft) * sr / 2
+    hv_max = (1 + 1 / n_fft) * sr / 2
+    return hz_min, hv_max
+
+
+def combine_player_plots(plots, sync_legends, theme_hook, stay_color, responsive):
     base_tools = ["reset", "pan", "wheel_zoom", "save"]
     tools_kwargs = dict(
         tools=base_tools,
@@ -125,14 +190,14 @@ def combine_player_plots(sync_legends, theme_hook, stay_color, responsive, plots
         .opts(
             hv.opts.Image(
                 responsive=responsive,
-                hooks=[theme_hook],
+                hooks=[theme_hook.hook],
                 **tools_kwargs,
             )
         )
         .opts(
             hv.opts.Curve(
                 responsive=responsive,
-                hooks=[theme_hook],
+                hooks=[theme_hook.hook],
                 **tools_kwargs,
             )
         )
@@ -162,7 +227,9 @@ def create_progress_bar_plot(total_seconds, pbar_height):
     return pbar
 
 
-def create_spectrogram_plot(
+def create_channel_spectrogram_plot(
+    channel_index,
+    spec_channel,
     total_seconds,
     over_curve,
     over_curve_names,
@@ -176,8 +243,6 @@ def create_spectrogram_plot(
     freq_label,
     hz_min,
     hv_max,
-    channel,
-    spec_channel,
 ):
     spec_image = hv.Image(
         spec_channel.numpy()[::-1, :] + 1e-5,
@@ -207,11 +272,11 @@ def create_spectrogram_plot(
 
             if isinstance(sub_curve, Tuple):
                 sub_x, sub_y = sub_curve
-                channel_sub_curve = sub_x[channel], sub_y[channel]
+                channel_sub_curve = sub_x[channel_index], sub_y[channel_index]
             else:
                 channel_sub_curve = (
-                    np.linspace(0, total_seconds, sub_curve[channel].shape[-1]),
-                    sub_curve[channel],
+                    np.linspace(0, total_seconds, sub_curve[channel_index].shape[-1]),
+                    sub_curve[channel_index],
                 )
 
             curve = hv.Curve(
@@ -226,13 +291,13 @@ def create_spectrogram_plot(
         marker="^", color="white", size=10, yaxis=None, ylim=(0, 1)
     )
     if embed_title:
-        channel_title = f"{title} [{channel}]"
+        channel_title = f"{title} [{channel_index}]"
     else:
         channel_title = ""
     plot = (spec_image * vline * vspan * glyph).opts(
         multi_y=True,
         legend_position="right",
-        hooks=[theme_hook],
+        hooks=[theme_hook.hook],
         title=channel_title,
     )
 

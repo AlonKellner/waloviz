@@ -2,3 +2,4 @@ hatch
 hatch-vcs
 hatchling
 pre-commit
+pyright

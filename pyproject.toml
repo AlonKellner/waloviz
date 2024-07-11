@@ -14,6 +14,9 @@ version-file = "src/waloviz/_version.py"
 # On top of the defaults (`E4`, E7`, `E9`, and `F`), enable isort (`I`) flake8-bugbear (`B`) and flake8-quotes (`Q`).
 select = ["E4", "E7", "E9", "F", "B", "Q", "I"]
 
+[tool.pyright]
+extraPaths=["/usr/local/lib/python3.10/site-packages", "/workspaces/waloviz/src"]
+
 [project]
 dynamic = ["version"]
 name = "waloviz"

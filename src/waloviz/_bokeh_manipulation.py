@@ -1,10 +1,10 @@
-from typing import Any, Dict
+from typing import Any, Dict, Optional
 
 from bokeh.models.callbacks import CustomJS
 from bokeh.models.formatters import CustomJSTickFormatter
 from bokeh.themes import built_in_themes
 
-themes = {k: v._json for k, v in built_in_themes.items()}
+themes: Dict[str, Dict[str, Any]] = {k: v._json for k, v in built_in_themes.items()}
 
 
 def apply_theme(plot, theme, theme_elements_mapping):
@@ -20,8 +20,8 @@ def finalize_player_bokeh_gui(
     total_seconds: float,
     stay_color: str,
     follow_color: str,
-    aspect_ratio: float,
-    sizing_mode: str,
+    aspect_ratio: Optional[float],
+    sizing_mode: Optional[str],
     single_min_height: int,
     both_min_height: int,
 ):

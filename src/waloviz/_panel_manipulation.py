@@ -1,6 +1,6 @@
 import os
-from io import BytesIO, IOBase
-from typing import Any, Optional, Union
+from io import BytesIO
+from typing import Any, BinaryIO, Optional, Union
 from unittest.mock import patch
 
 import numpy as np
@@ -12,6 +12,8 @@ from panel.pane.media import (
     _VALID_TORCH_DTYPES_FOR_AUDIO,
     TensorLike,
 )
+
+FileLike = Union[str, os.PathLike, BinaryIO]
 
 
 def _is_2dim_int_or_float_ndarray(obj: Any) -> bool:
@@ -25,8 +27,8 @@ def _is_2dim_int_or_float_ndarray(obj: Any) -> bool:
 def _is_2dim_int_or_float_tensor(obj: Any) -> bool:
     return (
         isinstance(obj, TensorLike)
-        and 0 < obj.dim() <= 2
-        and str(obj.dtype) in _VALID_TORCH_DTYPES_FOR_AUDIO
+        and 0 < obj.dim() <= 2  # pyright: ignore[reportAttributeAccessIssue]
+        and str(obj.dtype) in _VALID_TORCH_DTYPES_FOR_AUDIO  # pyright: ignore[reportAttributeAccessIssue]
     )
 
 
@@ -34,7 +36,7 @@ def wrap_player_with_panel(
     player_bokeh,
     wav: torch.Tensor,
     sr: int,
-    title: str,
+    title: Optional[str],
     width: Union[int, str],
     height: Union[int, str],
     audio_height: int,
@@ -44,8 +46,8 @@ def wrap_player_with_panel(
     both_min_height: int,
     download_button: bool,
     native_player: bool,
-    aspect_ratio: float,
-    sizing_mode: str,
+    aspect_ratio: Optional[float],
+    sizing_mode: Optional[str],
 ):
     aspect_ratio_kwargs = {}
     if (sizing_mode != "fixed") and (aspect_ratio is not None):
@@ -55,7 +57,7 @@ def wrap_player_with_panel(
     if width != "responsive":
         width_kwargs["width"] = width
     height_kwargs = {}
-    if height != "responsive":
+    if height != "responsive" and isinstance(height, int):
         plot_height = height - audio_height - button_height
         height_kwargs["height"] = plot_height
 
@@ -86,7 +88,7 @@ def wrap_player_with_panel(
 
     if download_button:
         buffer = BytesIO()
-        buffer: BytesIO = save_player_panel(
+        buffer = save_player_panel(
             pn.Column(
                 *rows,
                 **aspect_ratio_kwargs,
@@ -96,6 +98,8 @@ def wrap_player_with_panel(
             buffer,
             title,
         )
+        if not isinstance(buffer, BytesIO):
+            raise NotImplementedError()
         buffer.seek(0)
         file_download = pn.widgets.FileDownload(
             buffer, filename=f"{title}.html", embed=True
@@ -109,20 +113,20 @@ def wrap_player_with_panel(
         **height_kwargs,
     )
 
-    player_panel.title = title
+    player_panel.title = title  # pyright: ignore[reportAttributeAccessIssue]
     return player_panel
 
 
 def save_player_panel(
     player_panel: pn.viewable.Viewable,
-    file: Union[str, os.PathLike, IOBase] = None,
+    file: Optional[FileLike] = None,
     title: Optional[str] = None,
     resources: Resources = INLINE,
     embed: bool = True,
-):
+) -> FileLike:
     if title is None:
         try:
-            title = player_panel.title
+            title = player_panel.title  # pyright: ignore[reportAttributeAccessIssue]
         except Exception:
             title = "waloviz"
 
@@ -131,10 +135,10 @@ def save_player_panel(
 
     if (
         hasattr(player_panel, "__len__")
-        and (len(player_panel) > 2)
-        and isinstance(player_panel[2], pn.widgets.misc.FileDownload)
+        and (len(player_panel) > 2)  # pyright: ignore[reportArgumentType]
+        and isinstance(player_panel[2], pn.widgets.misc.FileDownload)  # pyright: ignore[reportIndexIssue]
     ):
-        player_panel = pn.Column(player_panel[0], player_panel[1])
+        player_panel = pn.Column(player_panel[0], player_panel[1])  # pyright: ignore[reportIndexIssue]
 
     pn.panel(player_panel).save(
         file,
