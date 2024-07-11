@@ -3,12 +3,32 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 import numpy as np
 import torch
 
+# A type for the overlaid curves, this comes up multiple times
 OverCurve = Union[
     List[Any], Dict[str, Any], np.ndarray, torch.Tensor, Tuple[Any, Any], Any
 ]
 
 
 def to_tensor(obj: Any) -> Union[torch.Tensor, Tuple[torch.Tensor, torch.Tensor]]:
+    """=============
+    ``to_tensor``
+    =============
+
+    | Given a hierarchical object recursively converts all leaf nodes into
+    | PyTorch tensors.
+
+    Parameters
+    ----------
+    ``obj`` : Any
+        A hierarchical tuple object
+
+    Returns
+    -------
+
+    ``obj`` : torch.Tensor
+        A hierarchical tuple tensor object
+
+    |"""
     if isinstance(obj, Tuple):
         return tuple([to_tensor(sub) for sub in obj])
 
@@ -20,6 +40,33 @@ def to_tensor(obj: Any) -> Union[torch.Tensor, Tuple[torch.Tensor, torch.Tensor]
 def broadcast_to_channels(
     tensor: Union[torch.Tensor, Tuple[torch.Tensor, torch.Tensor]], channels: int
 ) -> Union[torch.Tensor, Tuple]:
+    """=========================
+    ``broadcast_to_channels``
+    =========================
+
+    | Given a hierarchical tensor object recursively broadcast all leaf tensors
+    | to have exactly 2 dimensions and the same amount of channels as the ``wav``.
+
+    Parameters
+    ----------
+    ``tensor`` : torch.Tensor | (torch.Tensor, torch.Tensor)
+        A hierarchical tensor object with varying amounts of channels
+
+    Returns
+    -------
+
+    ``obj`` : torch.Tensor
+        A hierarchical tensor object with the same amount of channels
+
+    Raises
+    ------
+
+    ``ValueError`` :
+        | When a leaf tensor has 0 non squeezable dimensions
+        | **OR**
+        | When the initial amount of channels of a leaf tensor was larger than the target amount
+
+    |"""
     if isinstance(tensor, Tuple):
         return tuple([broadcast_to_channels(sub, channels) for sub in tensor])
 
@@ -42,6 +89,30 @@ def broadcast_to_channels(
 def skip_to_size(
     tensor: Union[torch.Tensor, Tuple], max_size: int
 ) -> Union[torch.Tensor, Tuple]:
+    """================
+    ``skip_to_size``
+    ================
+
+    | Given a hierarchical tensor object skip equally spaced tensor values along
+    | the time dimension (``dim=-1``) to become lower than the ``max_size`` value.
+    | This helps with the responsiveness of the player and avoids errors at the
+    | cost of losing information.
+    | This is used for both the overlaid curves and the spectrogram itself.
+
+    Parameters
+    ----------
+    ``tensor`` : torch.Tensor | (torch.Tensor, torch.Tensor)
+        A hierarchical tensor object with an unknown time size
+    ``max_size`` : int
+        The maximum allowed time dimension size
+
+    Returns
+    -------
+
+    ``obj`` : torch.Tensor
+        A hierarchical tensor object with a time size lower than ``max_size``
+
+    |"""
     if isinstance(tensor, Tuple):
         return tuple([skip_to_size(sub, max_size) for sub in tensor])
 
@@ -57,7 +128,54 @@ def preprocess_over_curve(
     over_curve: Optional[OverCurve],
     over_curve_names: Optional[Union[str, List[str]]] = None,
     over_curve_colors: Optional[Union[str, List[str]]] = None,
-) -> Tuple[List[torch.Tensor], List[str]]:
+) -> Tuple[List[torch.Tensor], List[str], List[str]]:
+    """========================
+    ``preprocess_over_curve``
+    =========================
+
+    | Converts user defined overlaid curves related options into a standard format,
+    | in terms of object structure and types.
+
+    Parameters
+    ----------
+    ``wav`` : torch.Tensor
+        Loaded audio tensor
+    ``sr`` : int
+        Resolved sample-rate
+    ``channels`` : int
+        The amount of channels in ``wav``
+    ``over_curve`` : tensorlike | List[tensorlike] | Dict[str, tensorlike] | callable
+        User provided
+    ``over_curve_names`` : List[str]
+        User provided
+    ``over_curve_colors`` : List[str]
+        User provided
+
+    Returns
+    -------
+
+    ``over_curve`` : List[torch.Tensor]
+        Standardized
+    ``over_curve_names`` : List[str]
+        Standardized
+    ``over_curve_colors`` : List[str]
+        Standardized
+
+    Raises
+    ------
+
+    ``ValueError`` :
+        When ``over_curve_names`` was provided but of a different size from ``over_curve``
+        **OR**
+        When ``over_curve_colors`` was provided but of a different size from ``over_curve``
+        **OR**
+        When ``over_curve_names`` was provided but ``over_curve`` was a dict
+        **OR**
+        When ``over_curve`` contained an ``(X,Y)`` tuple of size not equal to 2
+        **OR**
+        When ``over_curve`` contained an ``(X,Y)`` tuple where ``X.shape != Y.shape``
+
+    |"""
     if over_curve is None:
         return None, None, None
 
@@ -114,6 +232,7 @@ def preprocess_over_curve(
     ]
 
     for sub_curve in over_curve:
+        # The (X, Y) feature of the ``over_curve`` is not well documented, see https://github.com/AlonKellner/waloviz/issues/6
         if isinstance(sub_curve, Tuple):
             if len(sub_curve) != 2:
                 raise ValueError(

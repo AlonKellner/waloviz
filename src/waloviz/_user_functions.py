@@ -16,6 +16,9 @@ from ._panel_manipulation import wrap_with_waloviz_panel, save_waloviz_panel
 from ._tensor_utils import OverCurve, preprocess_over_curve, to_tensor
 
 
+FileLike = Union[str, os.PathLike, IOBase]
+
+
 # The mode is set with the ``extension`` function, the mode can be either "default" or "colab".
 # If the mode is "colab" the ``extension`` will be loaded in every cell, see https://github.com/holoviz/holoviews/issues/3551
 # Otherwise the mode does nothing.
@@ -57,9 +60,7 @@ def extension(mode="default"):
 
 
 def Audio(
-    source: Union[
-        str, os.PathLike, IOBase, Tuple[Union[np.ndarray, torch.Tensor, Any], int]
-    ],
+    source: Union[FileLike, Tuple[Union[np.ndarray, torch.Tensor, Any], int]],
     over_curve: Optional[OverCurve] = None,
     *args,
     over_curve_names: Optional[Union[str, List[str]]] = None,
@@ -203,17 +204,17 @@ def Audio(
     ------
 
     ``ValueError`` :
-        When both ``minimal=True`` and ``extended=True``
-        **OR**
-        When no sample-rate was provided
-        **OR**
-        When the ``wav`` tensor had more than 2 non squeezable dimensions
-        **OR**
-        When the ``theme`` string value was not found in Bokeh
-        **OR**
-        When there are more than 2 positional ``args``
-        **OR**
-        When the provided ``over_curve`` was an integer
+        | When both ``minimal=True`` and ``extended=True``
+        | **OR**
+        | When no sample-rate was provided
+        | **OR**
+        | When the ``wav`` tensor had more than 2 non squeezable dimensions
+        | **OR**
+        | When the ``theme`` string value was not found in Bokeh
+        | **OR**
+        | When there are more than 2 positional ``args``
+        | **OR**
+        | When the provided ``over_curve`` was an integer
 
     |"""
 
@@ -493,9 +494,7 @@ def _resolve_spectrogram_resolution(
 
 
 def _load_audio(
-    source: Union[
-        str, os.PathLike, IOBase, Tuple[Union[np.ndarray, torch.Tensor, Any], int]
-    ],
+    source: Union[FileLike, Tuple[Union[np.ndarray, torch.Tensor, Any], int]],
     sr: Optional[int],
 ) -> Tuple[torch.Tensor, int]:
     """===============
@@ -524,9 +523,9 @@ def _load_audio(
     ------
 
     ``ValueError`` :
-        When no sample-rate was provided
-        **OR**
-        When the ``wav`` tensor had more than 2 non squeezable dimensions
+        | When no sample-rate was provided
+        | **OR**
+        | When the ``wav`` tensor had more than 2 non squeezable dimensions
 
     |"""
     if torch.is_tensor(source) or isinstance(source, np.ndarray):
@@ -760,7 +759,7 @@ def _resolve_audio_height(native_player: bool) -> int:
 def save(
     source: pn.viewable.Viewable,
     *args,
-    out_file: Optional[Union[str, os.PathLike, IOBase]] = None,
+    out_file: Optional[FileLike] = None,
     title: Optional[str] = None,
     resources: Resources = INLINE,
     embed: bool = True,
@@ -819,10 +818,10 @@ def save(
 
 
 def _resolve_out_file(
-    out_file: Optional[Union[str, os.PathLike, IOBase]],
+    out_file: Optional[FileLike],
     args: List[Any],
     kwargs: Dict[str, Any],
-) -> Optional[Union[str, os.PathLike, IOBase]]:
+) -> Optional[FileLike]:
     """=====================
     ``_resolve_out_file``
     =====================
