@@ -80,18 +80,18 @@ def preprocess_over_curve(
             over_curve_names = list(range(len(over_curve)))
         elif len(over_curve_names) != len(over_curve):
             raise ValueError(
-                f"Size of `over_curve_names` was different than `over_curve` but should be equal, {len(over_curve_names)} != {len(over_curve)}"
+                f"Size of ``over_curve_names`` was different than ``over_curve`` but should be equal, {len(over_curve_names)} != {len(over_curve)}"
             )
 
         if over_curve_colors is not None and len(over_curve_colors) != len(over_curve):
             raise ValueError(
-                f"Size of `over_curve_colors` was different than `over_curve` but should be equal, {len(over_curve_colors)} != {len(over_curve)}"
+                f"Size of ``over_curve_colors`` was different than ``over_curve`` but should be equal, {len(over_curve_colors)} != {len(over_curve)}"
             )
 
     if isinstance(over_curve, Dict):
         if over_curve_names is not None:
             raise ValueError(
-                "`over_curve_names` can be set only when `over_curve` is not a dict."
+                "``over_curve_names`` can be set only when ``over_curve`` is not a dict."
             )
         over_curve = over_curve.items()
         over_curve_names = [name for name, sub_curve in over_curve]
@@ -117,12 +117,12 @@ def preprocess_over_curve(
         if isinstance(sub_curve, Tuple):
             if len(sub_curve) != 2:
                 raise ValueError(
-                    "When `over_curve` contains a tuple it must be of length 2 as such: `(x_coordinates, y_coordinates)`"
+                    "When ``over_curve`` contains a tuple it must be of length 2 as such: ``(x_coordinates, y_coordinates)``"
                 )
             sub_x, sub_y = sub_curve
             if sub_x.shape != sub_y.shape:
                 raise ValueError(
-                    f"Found a mismatch between `over_curve` x and y coordinates lengths:\t{sub_x.shape[-1]} != {sub_y.shape[-1]}"
+                    f"Found a mismatch between ``over_curve`` x and y coordinates lengths:\t{sub_x.shape[-1]} != {sub_y.shape[-1]}"
                 )
 
     return over_curve, over_curve_names, over_curve_colors

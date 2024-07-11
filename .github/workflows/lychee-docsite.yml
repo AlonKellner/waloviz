@@ -1,3 +1,4 @@
+# TODO: Fix this workflow to automatically check for broken links, see https://github.com/AlonKellner/waloviz/issues/2
 name: Check for broken links on site
 
 on: workflow_dispatch

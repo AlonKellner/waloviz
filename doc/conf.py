@@ -81,6 +81,7 @@ _NAV = (
     ("Getting Started", "getting-started/index"),
     ("User Guide", "user-guide/index"),
     ("API", "reference-manual/index"),
+    ("Releases", "releases"),
     ("FAQ", "FAQ"),
     ("About", "about"),
 )
