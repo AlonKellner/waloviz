@@ -12,9 +12,8 @@ from bokeh.resources import INLINE, Resources
 
 from ._bokeh_manipulation import finalize_waloviz_bokeh_gui, themes
 from ._holoviews_manipulations import ThemeHook, get_waloviz_hv
-from ._panel_manipulation import wrap_with_waloviz_panel, save_waloviz_panel
+from ._panel_manipulation import save_waloviz_panel, wrap_with_waloviz_panel
 from ._tensor_utils import OverCurve, preprocess_over_curve, to_tensor
-
 
 FileLike = Union[str, os.PathLike, IOBase]
 
@@ -506,6 +505,7 @@ def _load_audio(
 
     Parameters
     ----------
+
     ``source`` : str | os.PathLike | IOBase | (tensorlike, int) | tensorlike
         User provided
     ``sr`` : int
@@ -572,6 +572,7 @@ def _create_theme_hook(
 
     Parameters
     ----------
+
     ``theme`` : str | Dict[str, Any]
         User provided
 
@@ -610,6 +611,7 @@ def _validate_max_args(args: List[Any]):
 
     Parameters
     ----------
+
     ``args`` : List[Any]
         User provided
 
@@ -637,6 +639,7 @@ def _validate_over_curve(over_curve: Optional[OverCurve]):
 
     Parameters
     ----------
+
     ``over_curve`` : tensorlike | List[tensorlike] | Dict[str, tensorlike] | callable
         User provided
 

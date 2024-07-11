@@ -19,6 +19,7 @@ def to_tensor(obj: Any) -> Union[torch.Tensor, Tuple[torch.Tensor, torch.Tensor]
 
     Parameters
     ----------
+
     ``obj`` : Any
         A hierarchical tuple object
 
@@ -49,6 +50,7 @@ def broadcast_to_channels(
 
     Parameters
     ----------
+
     ``tensor`` : torch.Tensor | (torch.Tensor, torch.Tensor)
         A hierarchical tensor object with varying amounts of channels
 
@@ -101,6 +103,7 @@ def skip_to_size(
 
     Parameters
     ----------
+
     ``tensor`` : torch.Tensor | (torch.Tensor, torch.Tensor)
         A hierarchical tensor object with an unknown time size
     ``max_size`` : int
@@ -138,6 +141,7 @@ def preprocess_over_curve(
 
     Parameters
     ----------
+
     ``wav`` : torch.Tensor
         Loaded audio tensor
     ``sr`` : int
@@ -165,15 +169,15 @@ def preprocess_over_curve(
     ------
 
     ``ValueError`` :
-        When ``over_curve_names`` was provided but of a different size from ``over_curve``
-        **OR**
-        When ``over_curve_colors`` was provided but of a different size from ``over_curve``
-        **OR**
-        When ``over_curve_names`` was provided but ``over_curve`` was a dict
-        **OR**
-        When ``over_curve`` contained an ``(X,Y)`` tuple of size not equal to 2
-        **OR**
-        When ``over_curve`` contained an ``(X,Y)`` tuple where ``X.shape != Y.shape``
+        | When ``over_curve_names`` was provided but of a different size from ``over_curve``
+        | **OR**
+        | When ``over_curve_colors`` was provided but of a different size from ``over_curve``
+        | **OR**
+        | When ``over_curve_names`` was provided but ``over_curve`` was a dict
+        | **OR**
+        | When ``over_curve`` contained an ``(X,Y)`` tuple of size not equal to 2
+        | **OR**
+        | When ``over_curve`` contained an ``(X,Y)`` tuple where ``X.shape != Y.shape``
 
     |"""
     if over_curve is None:
@@ -232,7 +236,7 @@ def preprocess_over_curve(
     ]
 
     for sub_curve in over_curve:
-        # The (X, Y) feature of the ``over_curve`` is not well documented, see https://github.com/AlonKellner/waloviz/issues/6
+        # TODO: The (X, Y) feature of the ``over_curve`` is not well documented, see https://github.com/AlonKellner/waloviz/issues/6
         if isinstance(sub_curve, Tuple):
             if len(sub_curve) != 2:
                 raise ValueError(

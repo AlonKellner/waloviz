@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
 # (hacky way of sharing config, etc...)
 
-from nbsite.shared_conf import *  # noqa: F403
-
 ###################################################
 # edit things below as appropriate for your project
-
 import sys
+
+from nbsite.shared_conf import *  # noqa: F403
 
 sys.path.append("/workspaces/waloviz/src")
 sys.path.append("/home/runner/work/waloviz/waloviz/src")

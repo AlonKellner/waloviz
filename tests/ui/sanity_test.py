@@ -1,5 +1,4 @@
 import numpy as np
-
 from playwright.sync_api import expect
 
 

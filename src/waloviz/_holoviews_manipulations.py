@@ -1,4 +1,4 @@
-from typing import Any, List, Optional, Tuple
+from typing import Any, Dict, List, Optional, Tuple
 
 import holoviews as hv
 import numpy as np
@@ -9,10 +9,36 @@ from ._tensor_utils import OverCurve, skip_to_size
 
 
 class ThemeHook:
-    def __init__(self, theme_obj):
+    def __init__(self, theme_obj: Dict[str, Any]):
+        """=============
+        ``ThemeHook``
+        =============
+
+        | A class with a HoloViews hook for applying a Bokeh theme
+
+        Parameters
+        ----------
+
+        ``theme_obj`` : Dict[str, Any]
+            A Bokeh theme object
+
+        |"""
         self.theme_attrs = theme_obj["attrs"]
 
     def hook(self, plot, element):
+        """
+        | A HoloViews hook for applying a Bokeh theme
+
+        Parameters
+        ----------
+
+        ``plot`` : Dict[str, Any]
+            A Bokeh theme object
+
+        ``element`` : Any
+            Irrelevant
+
+        |"""
         if "Plot" in self.theme_attrs:
             plot.state.update(**self.theme_attrs["Plot"])
         if "xaxis" in plot.handles and "Axis" in self.theme_attrs:

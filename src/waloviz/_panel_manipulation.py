@@ -1,6 +1,6 @@
 import os
 from io import BytesIO, IOBase
-from typing import Any, Union, Optional
+from typing import Any, Optional, Union
 from unittest.mock import patch
 
 import numpy as np

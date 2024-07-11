@@ -10,6 +10,10 @@ tag-pattern = '''^[a-z]+\/(?:[\w-]+-)?(?P<version>[vV]?\d+(?:\.\d+){0,2}[^\+]*)(
 [tool.hatch.build.hooks.vcs]
 version-file = "src/waloviz/_version.py"
 
+[tool.ruff.lint]
+# On top of the defaults (`E4`, E7`, `E9`, and `F`), enable isort (`I`) flake8-bugbear (`B`) and flake8-quotes (`Q`).
+select = ["E4", "E7", "E9", "F", "B", "Q", "I"]
+
 [project]
 dynamic = ["version"]
 name = "waloviz"
