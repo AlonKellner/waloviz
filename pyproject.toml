@@ -10,17 +10,38 @@ tag-pattern = '''^[a-z]+\/(?:[\w-]+-)?(?P<version>[vV]?\d+(?:\.\d+){0,2}[^\+]*)(
 [tool.hatch.build.hooks.vcs]
 version-file = "src/waloviz/_version.py"
 
+[tool.ruff]
+line-length = 88
+
 [tool.ruff.lint]
-# On top of the defaults (`E4`, E7`, `E9`, and `F`), enable isort (`I`) flake8-bugbear (`B`) and flake8-quotes (`Q`).
-select = ["E4", "E7", "E9", "F", "B", "Q", "I"]
+select = [
+  "E4", "E7", "E9", "F", "B", "Q", "I",
+  "ARG", "ANN001", "ANN002", "ANN003",
+  "ANN201", "ANN202", "ANN204", "ANN205",
+  "ANN206", "D"
+]
+
+[tool.ruff.lint.per-file-ignores]
+"examples/*" = ["D", "ARG", "ANN"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "numpy"
 
 [tool.pyright]
+analyzeUnannotatedFunctions=true
+reportMissingParameterType="error"
+reportUnusedImport="error"
+reportUnusedClass="error"
+reportUnusedFunction="error"
+reportUnusedVariable="error"
 extraPaths=[
     "/usr/local/lib/python3.10/site-packages",
     "/workspaces/waloviz/src",
     "/opt/hostedtoolcache/Python/3.10.14/x64/lib/python3.10/site-packages",
     "/home/runner/work/waloviz/waloviz/src"
 ]
+exclude = ["examples/*"]
+ignore = ["examples/*"]
 
 [project]
 dynamic = ["version"]

@@ -1,5 +1,5 @@
 import os
-from typing import Any, BinaryIO, Dict, List, Optional, Tuple, Union
+from typing import IO, Any, BinaryIO, Dict, List, Optional, Tuple, Union
 
 import holoviews as hv
 import numpy as np
@@ -11,9 +11,10 @@ from bokeh.resources import INLINE, Resources
 
 from ._bokeh_manipulation import finalize_player_bokeh_gui, themes
 from ._holoviews_manipulations import ThemeHook, get_player_hv
-from ._panel_manipulation import FileLike, save_player_panel, wrap_player_with_panel
+from ._panel_manipulation import IOLike, save_player_panel, wrap_player_with_panel
 from ._tensor_utils import OverCurve, preprocess_over_curve, to_tensor
 
+FileLike = Union[str, os.PathLike, BinaryIO]
 AudioSource = Union[
     FileLike,
     Union[np.ndarray, torch.Tensor, Any],
@@ -26,11 +27,8 @@ AudioSource = Union[
 _mode = "default"
 
 
-def extension(mode="default"):
-    """=====================
-    ``wv.extension``
-    =====================
-
+def extension(mode: str = "default") -> None:
+    """
     | Initializes the notebook extensions for the current IDE.
 
     Examples
@@ -44,12 +42,13 @@ def extension(mode="default"):
 
     Parameters
     ----------
-
     ``mode`` : str
         Sets the mode of WaloViz, currently the only active mode is "colab".
         Default is "default"
 
-    |"""
+    |
+
+    """
     global _mode
     _mode = mode
 
@@ -63,7 +62,7 @@ def extension(mode="default"):
 def Audio(
     source: AudioSource,
     over_curve: Optional[OverCurve] = None,
-    *args,
+    *args: Tuple,
     over_curve_names: Optional[Union[str, List[str]]] = None,
     sr: Optional[int] = None,
     frame_ms: Optional[int] = None,
@@ -88,11 +87,8 @@ def Audio(
     minimal: bool = False,
     extended: bool = False,
 ) -> pn.viewable.Viewable:
-    """=================
-    ``wv.Audio``
-    =================
-
-    | Creates an interactive audio player with a spectrogram
+    r"""
+    | Create an interactive audio player with a spectrogram.
 
     Examples
     --------
@@ -117,8 +113,7 @@ def Audio(
 
     Parameters
     ----------
-
-    ``source`` : str | os.PathLike | BinaryIO | (tensorlike, int) | tensorlike
+    ``source`` : str | os.PathLike | IO | (tensorlike, int) | tensorlike
         Either an audio file, or an audio tensor\\ndarray with a sample rate
     ``over_curve`` : tensorlike | List[tensorlike] | Dict[str, tensorlike] | callable
         A single or multiple curves to be displayed over the spectrogram
@@ -197,13 +192,11 @@ def Audio(
 
     Returns
     -------
-
     ``player`` : pn.viewable.Viewable
         An interactive player, can be saved to html with ``wv.save(player)``
 
     Raises
     ------
-
     ``ValueError`` :
         | When both ``minimal=True`` and ``extended=True``
         | **OR**
@@ -217,8 +210,9 @@ def Audio(
         | **OR**
         | When the provided ``over_curve`` was an integer
 
-    |"""
+    |
 
+    """
     # These are configurable values which are not useful for users, but for developers
     single_min_height: int = 80  # The minimum height of a single spectrogram, value is 80 based on manual testing, below it the ticks text starts to overlap
     both_min_height: int = 150  # The minimum height of all spectrogram channels together, regardless of amount, value is 150, below it the Bokeh toolbar starts to hide tools
@@ -285,7 +279,6 @@ def Audio(
         cmap=cmap,
         over_curve_colors=over_curve_colors,
         stay_color=stay_color,
-        follow_color=follow_color,
         title=title,
         embed_title=embed_title,
         colorbar=colorbar,
@@ -302,7 +295,6 @@ def Audio(
         aspect_ratio=aspect_ratio,
         sizing_mode=sizing_mode,
         single_min_height=single_min_height,
-        both_min_height=both_min_height,
     )
     player_panel = wrap_player_with_panel(
         player_bokeh,
@@ -314,7 +306,6 @@ def Audio(
         audio_height=audio_height,
         button_height=button_height,
         pbar_height=pbar_height,
-        single_min_height=single_min_height,
         both_min_height=both_min_height,
         download_button=download_button,
         native_player=native_player,
@@ -335,15 +326,11 @@ def _resolve_presets(
     freq_label: Optional[str],
     native_player: bool,
 ) -> Tuple[Optional[str], bool, bool, bool, Optional[str], bool]:
-    """====================
-    ``_resolve_presets``
-    ====================
-
-    | Handles the ``minimal`` and ``extended`` presets
+    """
+    | Handles the ``minimal`` and ``extended`` presets.
 
     Parameters
     ----------
-
     ``minimal`` : bool
         Whether to use the minimal preset
     ``extended`` : bool
@@ -363,7 +350,6 @@ def _resolve_presets(
 
     Returns
     -------
-
     ``title`` : str
         Resolved by presets
     ``embed_title`` : bool
@@ -379,12 +365,12 @@ def _resolve_presets(
 
     Raises
     ------
-
     ``ValueError`` :
         When both ``minimal=True`` and ``extended=True``
 
-    |"""
+    |
 
+    """
     if minimal and extended:
         raise ValueError(
             "``Audio`` cannot be both ``minimal`` and ``extended``, choose one to keep"
@@ -411,15 +397,11 @@ def _resolve_presets(
 def _resolve_min_spectrogram_heights(
     single_min_height: int, both_min_height: int, channels: int
 ) -> Tuple[int, int]:
-    """====================================
-    ``_resolve_min_spectrogram_heights``
-    ====================================
-
-    | Makes sure that `single_min_height * channels == both_min_height`
+    """
+    | Makes sure that `single_min_height * channels == both_min_height`.
 
     Parameters
     ----------
-
     ``single_min_height`` : int
         As configured
     ``both_min_height`` : int
@@ -429,13 +411,14 @@ def _resolve_min_spectrogram_heights(
 
     Returns
     -------
-
     ``single_min_height`` : int
         Calculated
     ``both_min_height`` : int
         Calculated
 
-    |"""
+    |
+
+    """
     if both_min_height < single_min_height * channels:
         both_min_height = single_min_height * channels
 
@@ -451,15 +434,11 @@ def _resolve_spectrogram_resolution(
     hop_ms: Optional[float],
     hop_length: Optional[int],
 ) -> Tuple[int, int]:
-    """===================================
-    ``_resolve_spectrogram_resolution``
-    ===================================
-
-    | Calculates ``n_fft`` and ``hop_length`` while considering ``frame_ms`` and ``hop_ms``
+    """
+    | Calculates ``n_fft`` and ``hop_length`` while considering ``frame_ms`` and ``hop_ms``.
 
     Parameters
     ----------
-
     ``sr`` : int
         Resolved from ``_load_audio``
     ``frame_ms`` : float
@@ -473,13 +452,14 @@ def _resolve_spectrogram_resolution(
 
     Returns
     -------
-
     ``n_fft`` : int
         Calculated
     ``hop_length`` : int
         Calculated
 
-    |"""
+    |
+
+    """
     if (n_fft is None) and (frame_ms is None):
         frame_ms = 100.0
 
@@ -500,24 +480,18 @@ def _load_audio(
     source: AudioSource,
     sr: Optional[int],
 ) -> Tuple[torch.Tensor, int]:
-    """===============
-    ``_load_audio``
-    ===============
-
-    | Resolves the ``source`` into a ``wav`` tensor and ``sr``, loads and resamples
-    | using ``torchaudio`` if needed
+    """
+    | Resolves the ``source`` into a ``wav`` tensor and ``sr``, loads and resamples using ``torchaudio`` if needed.
 
     Parameters
     ----------
-
-    ``source`` : str | os.PathLike | BinaryIO | (tensorlike, int) | tensorlike
+    ``source`` : str | os.PathLike | IO | (tensorlike, int) | tensorlike
         User provided
     ``sr`` : int
         User provided
 
     Returns
     -------
-
     ``wav`` : torch.Tensor
         Loaded and resampled
     ``sr`` : int
@@ -525,16 +499,17 @@ def _load_audio(
 
     Raises
     ------
-
     ``ValueError`` :
         | When no sample-rate was provided
         | **OR**
         | When the ``wav`` tensor had more than 2 non squeezable dimensions
 
-    |"""
+    |
+
+    """
     if torch.is_tensor(source) or isinstance(source, np.ndarray):
         source = source, sr
-    if isinstance(source, FileLike):
+    if isinstance(source, IOLike):
         source = torchaudio.load(source)
 
     if not isinstance(source, tuple):
@@ -572,21 +547,16 @@ Specify the sample rate in one of the following ways:
 def _create_theme_hook(
     theme: Union[str, Dict[str, Any]],
 ) -> Tuple[Dict[str, Any], ThemeHook]:
-    """======================
-    ``_create_theme_hook``
-    ======================
-
-    | Resolves and validates the ``theme`` and creates a ``ThemeHook`` from it
+    """
+    | Resolves and validates the ``theme`` and creates a ``ThemeHook`` from it.
 
     Parameters
     ----------
-
     ``theme`` : str | Dict[str, Any]
         User provided
 
     Returns
     -------
-
     ``theme`` : str | Dict[str, Any]
         Resolved and validated
     ``theme_hook`` : ThemeHook
@@ -594,11 +564,12 @@ def _create_theme_hook(
 
     Raises
     ------
-
     ``ValueError`` :
         When the ``theme`` string value was not found in Bokeh
 
-    |"""
+    |
+
+    """
     if isinstance(theme, str):
         if theme.lower() not in themes:
             ValueError(
@@ -609,26 +580,23 @@ def _create_theme_hook(
     return theme, theme_hook
 
 
-def _validate_max_args(args: Tuple[Any]):
-    """======================
-    ``_validate_max_args``
-    ======================
-
-    | Validates the positional ``args``, max of 2
+def _validate_max_args(args: Tuple) -> None:
+    """
+    | Validates the positional ``args``, max of 2.
 
     Parameters
     ----------
-
     ``args`` : List[Any]
         User provided
 
     Raises
     ------
-
     ``ValueError`` :
         When there are more than 2 positional ``args``
 
-    |"""
+    |
+
+    """
     if len(args) > 0:
         raise ValueError(
             """``wv.Audio`` should be called with at most 2 positional arguments like one of the following ways:
@@ -637,26 +605,23 @@ def _validate_max_args(args: Tuple[Any]):
         )
 
 
-def _validate_over_curve(over_curve: Optional[OverCurve]):
-    """========================
-    ``_validate_over_curve``
-    ========================
-
-    | Validates that the ``over_curve`` was not mixed up with the ``sr` value
+def _validate_over_curve(over_curve: Optional[OverCurve]) -> None:
+    """
+    | Validates that the ``over_curve`` was not mixed up with the ``sr` value.
 
     Parameters
     ----------
-
     ``over_curve`` : tensorlike | List[tensorlike] | Dict[str, tensorlike] | callable
         User provided
 
     Raises
     ------
-
     ``ValueError`` :
         When the provided ``over_curve`` was an integer
 
-    |"""
+    |
+
+    """
     if isinstance(over_curve, int):
         raise ValueError(
             """``over_curve`` cannot be an integer! make sure you did not call ``wv.Audio`` like this:
@@ -674,15 +639,11 @@ def _resolve_sizing_args(
     height: Union[int, str],
     aspect_ratio: Optional[float],
 ) -> Tuple[Optional[str], Union[int, str], Union[int, str], Optional[float]]:
-    """========================
-    ``_resolve_sizing_args``
-    ========================
-
-    | Resolves the sizing options to behave as expected, mainly with respect to responsiveness
+    """
+    | Resolves the sizing options to behave as expected, mainly with respect to responsiveness.
 
     Parameters
     ----------
-
     ``sizing_mode`` : str
         User provided
     ``height`` : int | str
@@ -694,7 +655,6 @@ def _resolve_sizing_args(
 
     Returns
     -------
-
     ``sizing_mode`` : str
         Resolved
     ``height`` : int | str
@@ -704,7 +664,9 @@ def _resolve_sizing_args(
     ``aspect_ratio`` : float
         Resolved
 
-    |"""
+    |
+
+    """
     if sizing_mode is None:
         if (width != "responsive") and (height != "responsive"):
             sizing_mode = "fixed"
@@ -720,66 +682,57 @@ def _resolve_sizing_args(
 
 
 def _resolve_button_height(download_button: bool) -> int:
-    """==========================
-    ``_resolve_button_height``
-    ==========================
-
-    | Infers the height that the button will take, whether it will be visible or not,
-    | 30 is the default ``panel`` button height
+    """
+    | Infers the height that the button will take, whether it will be visible or not, 30 is the default ``panel`` button height.
 
     Parameters
     ----------
-
     ``download_button`` : bool
         User provided
 
     Returns
     -------
-
     ``button_height`` : int
         Inferred
 
-    |"""
+    |
+
+    """
     return 30 if download_button else 0
 
 
 def _resolve_audio_height(native_player: bool) -> int:
-    """=========================
-    ``_resolve_audio_height``
-    =========================
-
-    | Infers the height that the audio will take, whether it will be visible or not
+    """
+    | Infers the height that the audio will take, whether it will be visible or not.
 
     Parameters
     ----------
-
     ``native_player`` : bool
         User provided
 
     Returns
     -------
-
     ``audio_height`` : int
         Inferred
 
-    |"""
+    |
+
+    """
     return 30 if native_player else 0
 
 
 def save(
     source: Union[pn.viewable.Viewable, AudioSource],
-    *args,
-    out_file: Optional[FileLike] = None,
+    second_arg: Optional[Union[OverCurve, IOLike]] = None,
+    *args: Tuple,
+    out_file: Optional[IOLike] = None,
     title: Optional[str] = None,
     resources: Resources = INLINE,
     embed: bool = True,
-    **kwargs,
-):
-    """================
-    ``wv.save``
-    ================
-
-    | Saves a player to an html file
+    **kwargs: Dict[str, Any],
+) -> IOLike:
+    """
+    | Saves a player to an html file.
 
     Example
     -------
@@ -791,11 +744,10 @@ def save(
 
     Parameters
     ----------
-
-    ``source`` : pn.viewable.Viewable | str | os.PathLike | BinaryIO | (tensorlike, int) | tensorlike
+    ``source`` : pn.viewable.Viewable | str | os.PathLike | IO | (tensorlike, int) | tensorlike
         The player created by ``wv.Audio``, or a source for ``wv.Audio`` to
         create a player with.
-    ``out_file`` : str | os.PathLike | BinaryIO
+    ``out_file`` : str | os.PathLike | IO
         The output file path for the generated html, default is "{title}.html"
     ``title`` : str
         The title to be used in the generated file name and the html title,
@@ -808,47 +760,47 @@ def save(
 
     Returns
     -------
-
-    ``out_file`` : str | os.PathLike | BinaryIO
+    ``out_file`` : str | os.PathLike | IO
         The file that the HTML player content was written into
 
     Raises
     ------
-
     ``ValueError`` :
         When called with more than 2 positional ``args``
 
-    |"""
+    |
 
+    """
     if issubclass(type(source), pn.viewable.Viewable):
-        out_file = _resolve_out_file(out_file, args, kwargs)
+        out_file = _resolve_out_file(out_file, second_arg, args, kwargs)
     else:
         if not isinstance(
-            source, (FileLike, Union[np.ndarray, torch.Tensor, Any], tuple, int)
+            source, (IOLike, Union[np.ndarray, torch.Tensor, Any], tuple, int)
         ):
             raise ValueError("The provided ``source`` type is not supported")
-        source = Audio(source, *args, **kwargs)
+        source = Audio(source, *args, **kwargs)  # pyright: ignore[reportArgumentType]
+        # TODO: this being a "reportArgumentType" actually looks like a pyright bug, it
+        #       assumes that the Dict[str, Any] is assigned when the Any is assigned.
+        #       Should open an Issue in their repo, see https://github.com/microsoft/pyright
 
     return save_player_panel(source, out_file, title, resources, embed)  # pyright: ignore[reportArgumentType]
 
 
 def _resolve_out_file(
-    out_file: Optional[FileLike],
-    args: Tuple[Any],
+    out_file: Optional[IOLike],
+    second_arg: Optional[Union[OverCurve, IOLike]],
+    args: Tuple,
     kwargs: Dict[str, Any],
-) -> Optional[FileLike]:
-    """=====================
-    ``_resolve_out_file``
-    =====================
-
+) -> Optional[IOLike]:
+    """
     | Resolves the ``out_file``  whether it was given positionally or as a keyword.
+
     | This is needed to support both ``out_file`` and ``over_curve`` as values for
     | the second positional argument.
 
     Parameters
     ----------
-
-    ``out_file`` : str | os.PathLike | BinaryIO
+    ``out_file`` : str | os.PathLike | IO
         User provided
     ``args`` : List[Any]
         User provided
@@ -857,26 +809,25 @@ def _resolve_out_file(
 
     Returns
     -------
-
-    ``out_file`` : str | os.PathLike | BinaryIO
+    ``out_file`` : str | os.PathLike | IO
         Resolved
 
     Raises
     ------
-
     ``ValueError`` :
         When called with more than 2 positional ``args``
 
-    |"""
+    |
+
+    """
     if len(kwargs) > 0:
         raise TypeError(
             f"save() got an unexpected keyword argument '{list(kwargs.keys())[0]}'"
         )
-    if len(args) == 1:
-        if isinstance(args[0], (str, os.PathLike, BinaryIO)):
-            out_file = args[0]
-            args = tuple()
-    elif len(args) > 1:
+    if (len(args) == 0) and (second_arg is not None):
+        if isinstance(second_arg, (str, os.PathLike, IO)):
+            out_file = second_arg
+    elif len(args) > 0:
         raise ValueError(
             """``wv.save`` should be called with at most 2 positional arguments like one of the following ways:
     wv.save(source)

@@ -1,5 +1,7 @@
-from typing import Any, Dict, Optional
+from typing import Any, Dict, List, Optional
 
+import bokeh
+import bokeh.model
 from bokeh.models.callbacks import CustomJS
 from bokeh.models.formatters import CustomJSTickFormatter
 from bokeh.themes import built_in_themes
@@ -7,7 +9,11 @@ from bokeh.themes import built_in_themes
 themes: Dict[str, Dict[str, Any]] = {k: v._json for k, v in built_in_themes.items()}
 
 
-def apply_theme(plot, theme, theme_elements_mapping):
+def apply_theme(
+    plot: bokeh.model.Model,
+    theme: Dict[str, Any],
+    theme_elements_mapping: Dict[str, str],
+) -> None:
     for element, attr in theme_elements_mapping.items():
         if hasattr(plot, attr) and element in theme["attrs"]:
             for attr_name, attr_value in theme["attrs"][element].items():
@@ -15,7 +21,7 @@ def apply_theme(plot, theme, theme_elements_mapping):
 
 
 def finalize_player_bokeh_gui(
-    player_bokeh,
+    player_bokeh: bokeh.model.Model,
     theme: Dict[str, Any],
     total_seconds: float,
     stay_color: str,
@@ -23,8 +29,7 @@ def finalize_player_bokeh_gui(
     aspect_ratio: Optional[float],
     sizing_mode: Optional[str],
     single_min_height: int,
-    both_min_height: int,
-):
+) -> bokeh.model.Model:
     player_bokeh.toolbar.autohide = True
 
     plots = []
@@ -212,7 +217,7 @@ return result;
     return xformatter
 
 
-def get_record_ranges_callback(plots):
+def get_record_ranges_callback(plots: List[bokeh.model.Model]) -> CustomJS:
     record_ranges_callback = CustomJS(
         args=dict(plot_0=plots[0]),
         code="""
@@ -228,7 +233,9 @@ plot_0.prev_extra_y_ranges = Object.keys(plot_0.extra_y_ranges).reduce(function(
     return record_ranges_callback
 
 
-def get_start_follow_callback(follow_color, vspans, plots):
+def get_start_follow_callback(
+    follow_color: str, vspans: List[bokeh.model.Model], plots: List[bokeh.model.Model]
+) -> CustomJS:
     start_follow_callback = CustomJS(
         args=dict(vspan_0=vspans[0], plot_0=plots[0]),
         code=f"""
@@ -241,7 +248,9 @@ vspan_0.ratio = (x-plot_0.x_range.start)/(plot_0.x_range.end-plot_0.x_range.star
     return start_follow_callback
 
 
-def get_stop_follow_callback(stay_color, vspans):
+def get_stop_follow_callback(
+    stay_color: str, vspans: List[bokeh.model.Model]
+) -> CustomJS:
     stop_follow_callback = CustomJS(
         args=dict(vspan_0=vspans[0]),
         code=f"""
@@ -252,7 +261,9 @@ vspan_0.line_color = "{stay_color}";
     return stop_follow_callback
 
 
-def get_set_y_range_callback(plot, plots):
+def get_set_y_range_callback(
+    plot: bokeh.model.Model, plots: List[bokeh.model.Model]
+) -> CustomJS:
     set_y_range_callback = CustomJS(
         args=dict(plot=plot, plot_0=plots[0]),
         code="""
@@ -295,7 +306,9 @@ if (('is_y_fixed' in plot_0) && (plot_0.is_y_fixed)) {
     return set_y_range_callback
 
 
-def get_keep_y_range_callback(plot, plots):
+def get_keep_y_range_callback(
+    plot: bokeh.model.Model, plots: List[bokeh.model.Model]
+) -> CustomJS:
     keep_y_range_callback = CustomJS(
         args=dict(plot=plot, plot_0=plots[0]),
         code="""
@@ -314,7 +327,9 @@ if (('is_y_fixed' in plot_0) && (plot_0.is_y_fixed)) {
     return keep_y_range_callback
 
 
-def get_set_pbar_x_range_callback(plot, plots):
+def get_set_pbar_x_range_callback(
+    plot: bokeh.model.Model, plots: List[bokeh.model.Model]
+) -> CustomJS:
     set_pbar_x_range_callback = CustomJS(
         args=dict(plot=plot, pbar=plots[-1], plot_0=plots[0]),
         code="""
@@ -343,7 +358,9 @@ if (('is_x_fixed' in plot_0) && (plot_0.is_x_fixed)) {
     return set_pbar_x_range_callback
 
 
-def get_keep_x_range_callback(plot, plots):
+def get_keep_x_range_callback(
+    plot: bokeh.model.Model, plots: List[bokeh.model.Model]
+) -> CustomJS:
     keep_x_range_callback = CustomJS(
         args=dict(plot=plot, plot_0=plots[0]),
         code="""
@@ -356,7 +373,7 @@ if (('is_x_fixed' in plot_0) && (plot_0.is_x_fixed)) {
     return keep_x_range_callback
 
 
-def get_keep_dump_range_callback(plot):
+def get_keep_dump_range_callback(plot: bokeh.model.Model) -> CustomJS:
     keep_dump_range_callback = CustomJS(
         args=dict(plot=plot),
         code="""
@@ -372,7 +389,9 @@ if ('dump' in plot.extra_y_ranges) {
     return keep_dump_range_callback
 
 
-def get_play_pause_callback(plots, glyphs):
+def get_play_pause_callback(
+    plots: List[bokeh.model.Model], glyphs: List[bokeh.model.Model]
+) -> CustomJS:
     play_pause_callback = CustomJS(
         args=dict(plot_0=plots[0], pause_0=glyphs[0]),
         code="""
@@ -389,7 +408,9 @@ if (mouse_on_xrange) {
     return play_pause_callback
 
 
-def get_reset_callback(plot, plots):
+def get_reset_callback(
+    plot: bokeh.model.Model, plots: List[bokeh.model.Model]
+) -> CustomJS:
     reset_callback = CustomJS(
         args=dict(plot=plot, plot_0=plots[0]),
         code="""
@@ -412,7 +433,7 @@ if (('is_x_fixed' in plot_0) && (plot_0.is_x_fixed)) {
     return reset_callback
 
 
-def get_follow_callback(plot, vspan):
+def get_follow_callback(plot: bokeh.model.Model, vspan: bokeh.model.Model) -> CustomJS:
     follow_callback = CustomJS(
         args=dict(plot=plot, vspan=vspan),
         code="""
@@ -426,7 +447,9 @@ if (('is_following' in cb_obj) && (cb_obj.is_following)) {
     return follow_callback
 
 
-def get_move_time_callback(vspans, plots):
+def get_move_time_callback(
+    vspans: List[bokeh.model.Model], plots: List[bokeh.model.Model]
+) -> CustomJS:
     move_time_callback = CustomJS(
         args=dict(vspan_0=vspans[0], plot_0=plots[0]),
         code="""
@@ -436,7 +459,9 @@ vspan_0.right = Math.max(Math.min(cb_obj.x, plot_0.x_range.reset_end), plot_0.x_
     return move_time_callback
 
 
-def get_move_pbar_callback(vspans, plots):
+def get_move_pbar_callback(
+    vspans: List[bokeh.model.Model], plots: List[bokeh.model.Model]
+) -> CustomJS:
     move_pbar_callback = CustomJS(
         args=dict(vspan_0=vspans[0], plot_0=plots[0]),
         code="""

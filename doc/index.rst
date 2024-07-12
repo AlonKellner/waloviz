@@ -2,6 +2,11 @@
 Introduction
 ===============
 
+.. code-block:: shell
+
+    pip install waloviz
+    apt-get install ffmpeg
+
 .. notebook:: holoviews ../examples/introduction.ipynb
     :offset: 1
 

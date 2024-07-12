@@ -1,3 +1,4 @@
+"""The Sphinx configuration file, for the Documentation Website, see https://waloviz.com."""
 # -*- coding: utf-8 -*-
 # (hacky way of sharing config, etc...)
 

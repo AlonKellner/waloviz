@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-sphinx-autopackage-script
+sphinx-autopackage-script.
+
 This script parses a directory tree looking for python modules and packages and
 creates ReST files appropriately to create code documentation with Sphinx.
 It also creates a modules index (named modules.<suffix>).
@@ -32,6 +33,7 @@ It also creates a modules index (named modules.<suffix>).
 
 import optparse
 import os
+from typing import List, Optional
 
 # automodule options
 OPTIONS = [
@@ -44,7 +46,7 @@ OPTIONS = [
 INIT = "__init__.py"
 
 
-def makename(package, module):
+def makename(package: Optional[str], module: str) -> str:
     """Join package and module with a dot."""
     # Both package and module can be None/empty.
     if package:
@@ -56,7 +58,7 @@ def makename(package, module):
     return name
 
 
-def write_file(name, text, opts):
+def write_file(name: str, text: str, opts: optparse.Values) -> None:
     """Write the output file for module/package <name>."""
     if opts.dryrun:
         return
@@ -70,7 +72,7 @@ def write_file(name, text, opts):
         f.close()
 
 
-def format_heading(level, text):
+def format_heading(level: int, text: str) -> str:
     """Create a heading of <level> [1, 2 or 3 supported]."""
     underlining = [
         "=",
@@ -80,7 +82,7 @@ def format_heading(level, text):
     return "%s\n%s\n\n" % (text, underlining)
 
 
-def format_directive(module, package=None):
+def format_directive(module: str, package: Optional[str] = None) -> str:
     """Create the automodule directive and add the options."""
     directive = ".. automodule:: %s\n" % makename(package, module)
     for option in OPTIONS:
@@ -88,15 +90,16 @@ def format_directive(module, package=None):
     return directive
 
 
-def format_inheritance_diagram(module, package=None):
+def format_inheritance_diagram(module: str, package: Optional[str] = None) -> str:
     """Create the inheritance_diagram directive and add the options."""
     directive = ".. inheritance-diagram:: %s\n" % makename(package, module)
     return directive
 
 
-def create_module_file(package, module, opts):
+def create_module_file(
+    package: Optional[str], module: str, opts: optparse.Values
+) -> None:
     """Build the text of the file and write the file."""
-
     text = format_heading(1, "%s Module" % module)
     text += format_inheritance_diagram(module, package)
     text += "\n"
@@ -105,7 +108,14 @@ def create_module_file(package, module, opts):
     write_file(makename(package, module), text, opts)
 
 
-def create_package_file(root, master_package, subroot, py_files, opts, subs):
+def create_package_file(
+    root: str,
+    master_package: Optional[str],
+    subroot: str,
+    py_files: List[str],
+    opts: optparse.Values,
+    subs: List[str],
+) -> None:
     """Build the text of the file and write the file."""
     package = os.path.split(root)[-1]
     text = format_heading(1, "%s.%s Package" % (master_package, package))
@@ -142,10 +152,10 @@ def create_package_file(root, master_package, subroot, py_files, opts, subs):
     write_file(makename(master_package, subroot), text, opts)
 
 
-def create_modules_toc_file(master_package, modules, opts, name="modules"):
-    """
-    Create the module's index.
-    """
+def create_modules_toc_file(
+    modules: List[str], opts: optparse.Values, name: str = "modules"
+) -> None:
+    """Create the module's index."""
     text = format_heading(1, "%s Modules" % opts.header)
     text += ".. toctree::\n"
     text += "   :maxdepth: %s\n\n" % opts.maxdepth
@@ -162,19 +172,14 @@ def create_modules_toc_file(master_package, modules, opts, name="modules"):
     write_file(name, text, opts)
 
 
-def shall_skip(module):
-    """
-    Check if we want to skip this module.
-    """
+def shall_skip(module: str) -> bool:
+    """Check if we want to skip this module."""
     # skip it, if there is nothing (or just \n or \r\n) in the file
     return os.path.getsize(module) < 3
 
 
-def recurse_tree(path, excludes, opts):
-    """
-    Look for every file in the directory tree and create the corresponding
-    ReST files.
-    """
+def recurse_tree(path: str, excludes: List[str], opts: optparse.Values) -> None:
+    """Look for every file in the directory tree and create the corresponding ReST files."""
     # use absolute path for root, as relative paths like '../../foo' cause
     # 'if "/." in root ...' to filter out *all* modules otherwise
     path = os.path.abspath(path)
@@ -224,12 +229,13 @@ def recurse_tree(path, excludes, opts):
 
     # create the module's index
     if not opts.notoc:
-        create_modules_toc_file(package_name, toc, opts)
+        create_modules_toc_file(toc, opts)
 
 
-def normalize_excludes(rootpath, excludes):
-    """
-    Normalize the excluded directory list:
+def normalize_excludes(rootpath: str, excludes: List[str]) -> List[str]:
+    """Normalize the excluded directory list.
+
+    Conditions:
     * must be either an absolute path or start with rootpath,
     * otherwise it is joined with rootpath
     * with trailing slash
@@ -245,9 +251,9 @@ def normalize_excludes(rootpath, excludes):
     return f_excludes
 
 
-def is_excluded(root, excludes):
-    """
-    Check if the directory is in the exclude list.
+def is_excluded(root: str, excludes: List[str]) -> bool:
+    """Check if the directory is in the exclude list.
+
     Note: by having trailing slashes, we avoid common prefix issues, like
           e.g. an exlude "foo" also accidentally excluding "foobar".
     """
@@ -260,10 +266,8 @@ def is_excluded(root, excludes):
     return False
 
 
-def main():
-    """
-    Parse and check the command line arguments.
-    """
+def main() -> None:
+    """Parse and check the command line arguments."""
     parser = optparse.OptionParser(
         usage="""usage: %prog [options] [module,]
 Note: By default this script will not overwrite already created files."""
@@ -336,7 +340,7 @@ Note: By default this script will not overwrite already created files."""
         parser.error("At least one module is required.")
     else:
         modules = args
-        excludes = opts.excludes
+        excludes: List[str] = opts.excludes
         for module in modules:
             rootpath = os.path.abspath(os.path.join(__file__, "..", "..", module))
             if os.path.isdir(rootpath):

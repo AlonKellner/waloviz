@@ -1,8 +1,10 @@
 import os
 from io import BytesIO
-from typing import Any, BinaryIO, Optional, Union
+from typing import IO, Any, Optional, Union
 from unittest.mock import patch
 
+import bokeh
+import bokeh.model
 import numpy as np
 import panel as pn
 import torch
@@ -13,7 +15,7 @@ from panel.pane.media import (
     TensorLike,
 )
 
-FileLike = Union[str, os.PathLike, BinaryIO]
+IOLike = Union[str, os.PathLike, IO]
 
 
 def _is_2dim_int_or_float_ndarray(obj: Any) -> bool:
@@ -33,7 +35,7 @@ def _is_2dim_int_or_float_tensor(obj: Any) -> bool:
 
 
 def wrap_player_with_panel(
-    player_bokeh,
+    player_bokeh: bokeh.model.Model,
     wav: torch.Tensor,
     sr: int,
     title: Optional[str],
@@ -42,13 +44,13 @@ def wrap_player_with_panel(
     audio_height: int,
     button_height: int,
     pbar_height: int,
-    single_min_height: int,
     both_min_height: int,
     download_button: bool,
     native_player: bool,
     aspect_ratio: Optional[float],
     sizing_mode: Optional[str],
-):
+) -> pn.viewable.Viewable:
+    print(type(player_bokeh))
     aspect_ratio_kwargs = {}
     if (sizing_mode != "fixed") and (aspect_ratio is not None):
         aspect_ratio_kwargs["aspect_ratio"] = aspect_ratio
@@ -119,11 +121,11 @@ def wrap_player_with_panel(
 
 def save_player_panel(
     player_panel: pn.viewable.Viewable,
-    file: Optional[FileLike] = None,
+    file: Optional[IOLike] = None,
     title: Optional[str] = None,
     resources: Resources = INLINE,
     embed: bool = True,
-) -> FileLike:
+) -> IOLike:
     if title is None:
         try:
             title = player_panel.title  # pyright: ignore[reportAttributeAccessIssue]
