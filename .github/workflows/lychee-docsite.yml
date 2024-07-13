@@ -1,5 +1,5 @@
 # TODO: Fix this workflow to automatically check for broken links, see https://github.com/AlonKellner/waloviz/issues/2
-name: Check for broken links on site
+name: Lychee check Docs
 
 on: workflow_dispatch
 # on:
