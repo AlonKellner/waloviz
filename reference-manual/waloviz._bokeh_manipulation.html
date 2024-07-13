@@ -330,7 +330,445 @@ document.write(`
 <h1>_bokeh_manipulation Module<a class="headerlink" href="#bokeh-manipulation-module" title="Permalink to this heading">#</a></h1>
 <section id="id1">
 <h2><code class="xref py py-mod docutils literal notranslate"><span class="pre">_bokeh_manipulation</span></code> Module<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
-<span class="target" id="module-waloviz._bokeh_manipulation"></span></section>
+<span class="target" id="module-waloviz._bokeh_manipulation"></span><dl class="py function">
+<dt class="sig sig-object py" id="waloviz._bokeh_manipulation.apply_theme">
+<span class="sig-prename descclassname"><span class="pre">waloviz._bokeh_manipulation.</span></span><span class="sig-name descname"><span class="pre">apply_theme</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">plot</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theme</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theme_elements_mapping</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference external" href="https://github.com/holoviz/waloviz/blob/vdev/waloviz/_bokeh_manipulation.py#L12-L34"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#waloviz._bokeh_manipulation.apply_theme" title="Permalink to this definition">#</a></dt>
+<dd><div class="line-block">
+<div class="line">Manually sets theme values of a plot.</div>
+</div>
+<section id="parameters">
+<h3>Parameters<a class="headerlink" href="#parameters" title="Permalink to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">plot</span></code> : bokeh.model.Model</p>
+<p><code class="docutils literal notranslate"><span class="pre">theme</span></code> : Dict[str, Any]</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">theme_elements_mapping</span></code><span class="classifier">Dict[str, str]</span></dt><dd><p>A mapping between theme keys and plot attributes</p>
+</dd>
+</dl>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+</section>
+</dd></dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="waloviz._bokeh_manipulation.finalize_player_bokeh_gui">
+<span class="sig-prename descclassname"><span class="pre">waloviz._bokeh_manipulation.</span></span><span class="sig-name descname"><span class="pre">finalize_player_bokeh_gui</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">player_bokeh</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theme</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">total_seconds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stay_color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">follow_color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aspect_ratio</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sizing_mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">single_min_height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Model</span></span></span><a class="reference external" href="https://github.com/holoviz/waloviz/blob/vdev/waloviz/_bokeh_manipulation.py#L37-L96"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#waloviz._bokeh_manipulation.finalize_player_bokeh_gui" title="Permalink to this definition">#</a></dt>
+<dd><div class="line-block">
+<div class="line">Modify bokeh settings and adds custom jslink interactivity.</div>
+</div>
+<section id="id2">
+<h3>Parameters<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">player_bokeh</span></code><span class="classifier">bokeh.model.Model</span></dt><dd><p>As rendered by HoloViews</p>
+</dd>
+</dl>
+<p><code class="docutils literal notranslate"><span class="pre">theme</span></code> : Dict[str, Any]</p>
+<p><code class="docutils literal notranslate"><span class="pre">total_seconds</span></code> : float</p>
+<p><code class="docutils literal notranslate"><span class="pre">stay_color</span></code> : str</p>
+<p><code class="docutils literal notranslate"><span class="pre">follow_color</span></code> : str</p>
+<p><code class="docutils literal notranslate"><span class="pre">aspect_ratio</span></code> : float | None</p>
+<p><code class="docutils literal notranslate"><span class="pre">single_min_height</span></code> : int</p>
+</section>
+<section id="returns">
+<h3>Returns<a class="headerlink" href="#returns" title="Permalink to this heading">#</a></h3>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">player_bokeh</span></code><span class="classifier">bokeh.model.Model</span></dt><dd><p>With modifications and custom jslink interactivity</p>
+</dd>
+</dl>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+</section>
+</dd></dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="waloviz._bokeh_manipulation.get_audio_xformatter">
+<span class="sig-prename descclassname"><span class="pre">waloviz._bokeh_manipulation.</span></span><span class="sig-name descname"><span class="pre">get_audio_xformatter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">total_seconds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">CustomJSTickFormatter</span></span></span><a class="reference external" href="https://github.com/holoviz/waloviz/blob/vdev/waloviz/_bokeh_manipulation.py#L325-L376"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#waloviz._bokeh_manipulation.get_audio_xformatter" title="Permalink to this definition">#</a></dt>
+<dd><div class="line-block">
+<div class="line">Create a relative time tick formatter, with dynamic resolution from days up to milliseconds.</div>
+</div>
+<section id="id3">
+<h3>Parameters<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">total_seconds</span></code> : float</p>
+</section>
+<section id="id4">
+<h3>Returns<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">xformatter</span></code><span class="classifier">CustomJSTickFormatter</span></dt><dd><p>Relative time tick formatter.</p>
+</dd>
+</dl>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+</section>
+</dd></dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="waloviz._bokeh_manipulation.get_follow_callback">
+<span class="sig-prename descclassname"><span class="pre">waloviz._bokeh_manipulation.</span></span><span class="sig-name descname"><span class="pre">get_follow_callback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">plot</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vspan</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Model</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">CustomJS</span></span></span><a class="reference external" href="https://github.com/holoviz/waloviz/blob/vdev/waloviz/_bokeh_manipulation.py#L783-L811"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#waloviz._bokeh_manipulation.get_follow_callback" title="Permalink to this definition">#</a></dt>
+<dd><div class="line-block">
+<div class="line">Create a jslink callback which updates the x range when in “follow” mode.</div>
+</div>
+<section id="id5">
+<h3>Parameters<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h3>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">plot</span></code><span class="classifier">bokeh.model.Model</span></dt><dd><p>The current <code class="docutils literal notranslate"><span class="pre">plot</span></code></p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">vspans</span></code><span class="classifier">List[bokeh.model.Model]</span></dt><dd><p>Bokeh elements that brighten the section played so far</p>
+</dd>
+</dl>
+</section>
+<section id="id6">
+<h3>Returns<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h3>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">follow_callback</span></code><span class="classifier">CustomJS</span></dt><dd><p>A jslink callback.</p>
+</dd>
+</dl>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+</section>
+</dd></dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="waloviz._bokeh_manipulation.get_keep_dump_range_callback">
+<span class="sig-prename descclassname"><span class="pre">waloviz._bokeh_manipulation.</span></span><span class="sig-name descname"><span class="pre">get_keep_dump_range_callback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">plot</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Model</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">CustomJS</span></span></span><a class="reference external" href="https://github.com/holoviz/waloviz/blob/vdev/waloviz/_bokeh_manipulation.py#L670-L700"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#waloviz._bokeh_manipulation.get_keep_dump_range_callback" title="Permalink to this definition">#</a></dt>
+<dd><div class="line-block">
+<div class="line">Create a jslink callback which keeps the “dump” y axis between 0 and 1.</div>
+</div>
+<div class="line-block">
+<div class="line">The “dump” axis is used for the play and stop icons as well as the progress bar handle.</div>
+</div>
+<section id="id7">
+<h3>Parameters<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h3>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">plot</span></code><span class="classifier">bokeh.model.Model</span></dt><dd><p>The current <code class="docutils literal notranslate"><span class="pre">plot</span></code></p>
+</dd>
+</dl>
+</section>
+<section id="id8">
+<h3>Returns<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h3>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">keep_dump_range_callback</span></code><span class="classifier">CustomJS</span></dt><dd><p>A jslink callback.</p>
+</dd>
+</dl>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+</section>
+</dd></dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="waloviz._bokeh_manipulation.get_keep_x_range_callback">
+<span class="sig-prename descclassname"><span class="pre">waloviz._bokeh_manipulation.</span></span><span class="sig-name descname"><span class="pre">get_keep_x_range_callback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">plot</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plots</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Model</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">CustomJS</span></span></span><a class="reference external" href="https://github.com/holoviz/waloviz/blob/vdev/waloviz/_bokeh_manipulation.py#L636-L667"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#waloviz._bokeh_manipulation.get_keep_x_range_callback" title="Permalink to this definition">#</a></dt>
+<dd><div class="line-block">
+<div class="line">Create a jslink callback which keeps the constant x range when the mouse is over the progress bar.</div>
+</div>
+<div class="line-block">
+<div class="line">Uses <code class="docutils literal notranslate"><span class="pre">is_x_fixed</span></code>, <code class="docutils literal notranslate"><span class="pre">x_fixed_start</span></code> and <code class="docutils literal notranslate"><span class="pre">x_fixed_end</span></code> of the zeroth plot (first spectrogram).</div>
+</div>
+<section id="id9">
+<h3>Parameters<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h3>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">plot</span></code><span class="classifier">bokeh.model.Model</span></dt><dd><p>The current <code class="docutils literal notranslate"><span class="pre">plot</span></code></p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">plots</span></code><span class="classifier">List[bokeh.model.Model]</span></dt><dd><p>Bokeh plots for the spectrograms and progress bar</p>
+</dd>
+</dl>
+</section>
+<section id="id10">
+<h3>Returns<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h3>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">keep_x_range_callback</span></code><span class="classifier">CustomJS</span></dt><dd><p>A jslink callback.</p>
+</dd>
+</dl>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+</section>
+</dd></dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="waloviz._bokeh_manipulation.get_keep_y_range_callback">
+<span class="sig-prename descclassname"><span class="pre">waloviz._bokeh_manipulation.</span></span><span class="sig-name descname"><span class="pre">get_keep_y_range_callback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">plot</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plots</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Model</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">CustomJS</span></span></span><a class="reference external" href="https://github.com/holoviz/waloviz/blob/vdev/waloviz/_bokeh_manipulation.py#L546-L583"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#waloviz._bokeh_manipulation.get_keep_y_range_callback" title="Permalink to this definition">#</a></dt>
+<dd><div class="line-block">
+<div class="line">Create a jslink callback which keeps the constant y range when the mouse is over the spectrograms.</div>
+</div>
+<div class="line-block">
+<div class="line">Uses <code class="docutils literal notranslate"><span class="pre">is_y_fixed</span></code>, <code class="docutils literal notranslate"><span class="pre">hz_fixed_start</span></code> and <code class="docutils literal notranslate"><span class="pre">hz_fixed_end</span></code> of the zeroth plot (first spectrogram).</div>
+</div>
+<section id="id11">
+<h3>Parameters<a class="headerlink" href="#id11" title="Permalink to this heading">#</a></h3>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">plot</span></code><span class="classifier">bokeh.model.Model</span></dt><dd><p>The current <code class="docutils literal notranslate"><span class="pre">plot</span></code></p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">plots</span></code><span class="classifier">List[bokeh.model.Model]</span></dt><dd><p>Bokeh plots for the spectrograms and progress bar</p>
+</dd>
+</dl>
+</section>
+<section id="id12">
+<h3>Returns<a class="headerlink" href="#id12" title="Permalink to this heading">#</a></h3>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">keep_y_range_callback</span></code><span class="classifier">CustomJS</span></dt><dd><p>A jslink callback.</p>
+</dd>
+</dl>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+</section>
+</dd></dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="waloviz._bokeh_manipulation.get_move_pbar_callback">
+<span class="sig-prename descclassname"><span class="pre">waloviz._bokeh_manipulation.</span></span><span class="sig-name descname"><span class="pre">get_move_pbar_callback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vspans</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Model</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plots</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Model</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">CustomJS</span></span></span><a class="reference external" href="https://github.com/holoviz/waloviz/blob/vdev/waloviz/_bokeh_manipulation.py#L845-L873"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#waloviz._bokeh_manipulation.get_move_pbar_callback" title="Permalink to this definition">#</a></dt>
+<dd><div class="line-block">
+<div class="line">Create a jslink callback which moves the current time to the mouse position when the mouse is over the progress bar.</div>
+</div>
+<section id="id13">
+<h3>Parameters<a class="headerlink" href="#id13" title="Permalink to this heading">#</a></h3>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">vspans</span></code><span class="classifier">List[bokeh.model.Model]</span></dt><dd><p>Bokeh elements that brighten the section played so far</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">plots</span></code><span class="classifier">List[bokeh.model.Model]</span></dt><dd><p>Bokeh plots for the spectrograms and progress bar</p>
+</dd>
+</dl>
+</section>
+<section id="id14">
+<h3>Returns<a class="headerlink" href="#id14" title="Permalink to this heading">#</a></h3>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">move_pbar_callback</span></code><span class="classifier">CustomJS</span></dt><dd><p>A jslink callback.</p>
+</dd>
+</dl>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+</section>
+</dd></dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="waloviz._bokeh_manipulation.get_move_time_callback">
+<span class="sig-prename descclassname"><span class="pre">waloviz._bokeh_manipulation.</span></span><span class="sig-name descname"><span class="pre">get_move_time_callback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vspans</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Model</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plots</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Model</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">CustomJS</span></span></span><a class="reference external" href="https://github.com/holoviz/waloviz/blob/vdev/waloviz/_bokeh_manipulation.py#L814-L842"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#waloviz._bokeh_manipulation.get_move_time_callback" title="Permalink to this definition">#</a></dt>
+<dd><div class="line-block">
+<div class="line">Create a jslink callback which moves the current time to the mouse position.</div>
+</div>
+<div class="line-block">
+<div class="line">Used when double clicking.</div>
+</div>
+<section id="id15">
+<h3>Parameters<a class="headerlink" href="#id15" title="Permalink to this heading">#</a></h3>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">vspans</span></code><span class="classifier">List[bokeh.model.Model]</span></dt><dd><p>Bokeh elements that brighten the section played so far</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">plots</span></code><span class="classifier">List[bokeh.model.Model]</span></dt><dd><p>Bokeh plots for the spectrograms and progress bar</p>
+</dd>
+</dl>
+</section>
+<section id="id16">
+<h3>Returns<a class="headerlink" href="#id16" title="Permalink to this heading">#</a></h3>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">move_time_callback</span></code><span class="classifier">CustomJS</span></dt><dd><p>A jslink callback.</p>
+</dd>
+</dl>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+</section>
+</dd></dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="waloviz._bokeh_manipulation.get_play_pause_callback">
+<span class="sig-prename descclassname"><span class="pre">waloviz._bokeh_manipulation.</span></span><span class="sig-name descname"><span class="pre">get_play_pause_callback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">plots</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Model</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">glyphs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Model</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">CustomJS</span></span></span><a class="reference external" href="https://github.com/holoviz/waloviz/blob/vdev/waloviz/_bokeh_manipulation.py#L703-L738"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#waloviz._bokeh_manipulation.get_play_pause_callback" title="Permalink to this definition">#</a></dt>
+<dd><div class="line-block">
+<div class="line">Create a jslink callback which toggles play\pause when the mouse is over the spectrograms.</div>
+</div>
+<div class="line-block">
+<div class="line">Makes the zeroth glyph (first spectrogram play icon) visible.</div>
+</div>
+<section id="id17">
+<h3>Parameters<a class="headerlink" href="#id17" title="Permalink to this heading">#</a></h3>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">plots</span></code><span class="classifier">List[bokeh.model.Model]</span></dt><dd><p>Bokeh plots for the spectrograms and progress bar</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">glyphs</span></code><span class="classifier">List[bokeh.model.Model]</span></dt><dd><p>Bokeh elements for play icons and the progress bar circular handle</p>
+</dd>
+</dl>
+</section>
+<section id="id18">
+<h3>Returns<a class="headerlink" href="#id18" title="Permalink to this heading">#</a></h3>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">play_pause_callback</span></code><span class="classifier">CustomJS</span></dt><dd><p>A jslink callback.</p>
+</dd>
+</dl>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+</section>
+</dd></dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="waloviz._bokeh_manipulation.get_record_ranges_callback">
+<span class="sig-prename descclassname"><span class="pre">waloviz._bokeh_manipulation.</span></span><span class="sig-name descname"><span class="pre">get_record_ranges_callback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">plots</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Model</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">CustomJS</span></span></span><a class="reference external" href="https://github.com/holoviz/waloviz/blob/vdev/waloviz/_bokeh_manipulation.py#L379-L409"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#waloviz._bokeh_manipulation.get_record_ranges_callback" title="Permalink to this definition">#</a></dt>
+<dd><div class="line-block">
+<div class="line">Create a jslink callback which records the previous ranges, important for following and zooming on x axis only.</div>
+</div>
+<div class="line-block">
+<div class="line">Saves <code class="docutils literal notranslate"><span class="pre">prev_x_range</span></code> and <code class="docutils literal notranslate"><span class="pre">prev_y_range</span></code> in the zeroth plot (first spectrogram).</div>
+</div>
+<section id="id19">
+<h3>Parameters<a class="headerlink" href="#id19" title="Permalink to this heading">#</a></h3>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">plots</span></code><span class="classifier">List[bokeh.model.Model]</span></dt><dd><p>Bokeh plots for the spectrograms and progress bar</p>
+</dd>
+</dl>
+</section>
+<section id="id20">
+<h3>Returns<a class="headerlink" href="#id20" title="Permalink to this heading">#</a></h3>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">record_ranges_callback</span></code><span class="classifier">CustomJS</span></dt><dd><p>A jslink callback.</p>
+</dd>
+</dl>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+</section>
+</dd></dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="waloviz._bokeh_manipulation.get_reset_callback">
+<span class="sig-prename descclassname"><span class="pre">waloviz._bokeh_manipulation.</span></span><span class="sig-name descname"><span class="pre">get_reset_callback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">plot</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plots</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Model</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">CustomJS</span></span></span><a class="reference external" href="https://github.com/holoviz/waloviz/blob/vdev/waloviz/_bokeh_manipulation.py#L741-L780"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#waloviz._bokeh_manipulation.get_reset_callback" title="Permalink to this definition">#</a></dt>
+<dd><div class="line-block">
+<div class="line">Create a jslink callback which updates saved values to their presets.</div>
+</div>
+<section id="id21">
+<h3>Parameters<a class="headerlink" href="#id21" title="Permalink to this heading">#</a></h3>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">plot</span></code><span class="classifier">bokeh.model.Model</span></dt><dd><p>The current <code class="docutils literal notranslate"><span class="pre">plot</span></code></p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">plots</span></code><span class="classifier">List[bokeh.model.Model]</span></dt><dd><p>Bokeh plots for the spectrograms and progress bar</p>
+</dd>
+</dl>
+</section>
+<section id="id22">
+<h3>Returns<a class="headerlink" href="#id22" title="Permalink to this heading">#</a></h3>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">reset_callback</span></code><span class="classifier">CustomJS</span></dt><dd><p>A jslink callback.</p>
+</dd>
+</dl>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+</section>
+</dd></dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="waloviz._bokeh_manipulation.get_set_pbar_x_range_callback">
+<span class="sig-prename descclassname"><span class="pre">waloviz._bokeh_manipulation.</span></span><span class="sig-name descname"><span class="pre">get_set_pbar_x_range_callback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">plot</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plots</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Model</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">CustomJS</span></span></span><a class="reference external" href="https://github.com/holoviz/waloviz/blob/vdev/waloviz/_bokeh_manipulation.py#L586-L633"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#waloviz._bokeh_manipulation.get_set_pbar_x_range_callback" title="Permalink to this definition">#</a></dt>
+<dd><div class="line-block">
+<div class="line">Create a jslink callback which stops the x zoom by setting a constant x range when the mouse is over the progress bar.</div>
+</div>
+<div class="line-block">
+<div class="line">Sets <code class="docutils literal notranslate"><span class="pre">is_x_fixed</span></code>, <code class="docutils literal notranslate"><span class="pre">x_fixed_start</span></code> and <code class="docutils literal notranslate"><span class="pre">x_fixed_end</span></code> of the zeroth plot (first spectrogram).</div>
+</div>
+<section id="id23">
+<h3>Parameters<a class="headerlink" href="#id23" title="Permalink to this heading">#</a></h3>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">plot</span></code><span class="classifier">bokeh.model.Model</span></dt><dd><p>The current <code class="docutils literal notranslate"><span class="pre">plot</span></code></p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">plots</span></code><span class="classifier">List[bokeh.model.Model]</span></dt><dd><p>Bokeh plots for the spectrograms and progress bar</p>
+</dd>
+</dl>
+</section>
+<section id="id24">
+<h3>Returns<a class="headerlink" href="#id24" title="Permalink to this heading">#</a></h3>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">set_pbar_x_range_callback</span></code><span class="classifier">CustomJS</span></dt><dd><p>A jslink callback.</p>
+</dd>
+</dl>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+</section>
+</dd></dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="waloviz._bokeh_manipulation.get_set_y_range_callback">
+<span class="sig-prename descclassname"><span class="pre">waloviz._bokeh_manipulation.</span></span><span class="sig-name descname"><span class="pre">get_set_y_range_callback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">plot</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plots</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Model</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">CustomJS</span></span></span><a class="reference external" href="https://github.com/holoviz/waloviz/blob/vdev/waloviz/_bokeh_manipulation.py#L482-L543"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#waloviz._bokeh_manipulation.get_set_y_range_callback" title="Permalink to this definition">#</a></dt>
+<dd><div class="line-block">
+<div class="line">Create a jslink callback which stops the y zoom by setting a constant y range when the mouse is over the spectrograms.</div>
+</div>
+<div class="line-block">
+<div class="line">Sets <code class="docutils literal notranslate"><span class="pre">is_y_fixed</span></code>, <code class="docutils literal notranslate"><span class="pre">hz_fixed_start</span></code> and <code class="docutils literal notranslate"><span class="pre">hz_fixed_end</span></code> of the zeroth plot (first spectrogram).</div>
+</div>
+<section id="id25">
+<h3>Parameters<a class="headerlink" href="#id25" title="Permalink to this heading">#</a></h3>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">plot</span></code><span class="classifier">bokeh.model.Model</span></dt><dd><p>The current <code class="docutils literal notranslate"><span class="pre">plot</span></code></p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">plots</span></code><span class="classifier">List[bokeh.model.Model]</span></dt><dd><p>Bokeh plots for the spectrograms and progress bar</p>
+</dd>
+</dl>
+</section>
+<section id="id26">
+<h3>Returns<a class="headerlink" href="#id26" title="Permalink to this heading">#</a></h3>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">set_y_range_callback</span></code><span class="classifier">CustomJS</span></dt><dd><p>A jslink callback.</p>
+</dd>
+</dl>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+</section>
+</dd></dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="waloviz._bokeh_manipulation.get_start_follow_callback">
+<span class="sig-prename descclassname"><span class="pre">waloviz._bokeh_manipulation.</span></span><span class="sig-name descname"><span class="pre">get_start_follow_callback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">follow_color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vspans</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Model</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plots</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Model</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">CustomJS</span></span></span><a class="reference external" href="https://github.com/holoviz/waloviz/blob/vdev/waloviz/_bokeh_manipulation.py#L412-L446"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#waloviz._bokeh_manipulation.get_start_follow_callback" title="Permalink to this definition">#</a></dt>
+<dd><div class="line-block">
+<div class="line">Create a jslink callback which activates “follow” mode.</div>
+</div>
+<div class="line-block">
+<div class="line">Saves <code class="docutils literal notranslate"><span class="pre">is_following</span></code> to the zeroth vspan (first spectrogram bright section).</div>
+<div class="line">Also used to synchronize the vline follow color with the vspan <code class="docutils literal notranslate"><span class="pre">line_color</span></code>.</div>
+</div>
+<section id="id27">
+<h3>Parameters<a class="headerlink" href="#id27" title="Permalink to this heading">#</a></h3>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">follow_color</span></code><span class="classifier">List[bokeh.model.Model]</span></dt><dd><p>The color of the vlines when in “follow” mode</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">vspans</span></code><span class="classifier">List[bokeh.model.Model]</span></dt><dd><p>Bokeh elements that brighten the section played so far</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">plots</span></code><span class="classifier">List[bokeh.model.Model]</span></dt><dd><p>Bokeh plots for the spectrograms and progress bar</p>
+</dd>
+</dl>
+</section>
+<section id="id28">
+<h3>Returns<a class="headerlink" href="#id28" title="Permalink to this heading">#</a></h3>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">start_follow_callback</span></code><span class="classifier">CustomJS</span></dt><dd><p>A jslink callback.</p>
+</dd>
+</dl>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+</section>
+</dd></dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="waloviz._bokeh_manipulation.get_stop_follow_callback">
+<span class="sig-prename descclassname"><span class="pre">waloviz._bokeh_manipulation.</span></span><span class="sig-name descname"><span class="pre">get_stop_follow_callback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stay_color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vspans</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Model</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">CustomJS</span></span></span><a class="reference external" href="https://github.com/holoviz/waloviz/blob/vdev/waloviz/_bokeh_manipulation.py#L449-L479"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#waloviz._bokeh_manipulation.get_stop_follow_callback" title="Permalink to this definition">#</a></dt>
+<dd><div class="line-block">
+<div class="line">Create a jslink callback which activates “stay” mode, stops “follow” mode.</div>
+</div>
+<div class="line-block">
+<div class="line">Sets <code class="docutils literal notranslate"><span class="pre">is_following</span></code> of the zeroth vspan (first spectrogram bright section).</div>
+<div class="line">Also used to synchronize the vline stay color with the vspan <code class="docutils literal notranslate"><span class="pre">line_color</span></code>.</div>
+</div>
+<section id="id29">
+<h3>Parameters<a class="headerlink" href="#id29" title="Permalink to this heading">#</a></h3>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">stay_color</span></code><span class="classifier">List[bokeh.model.Model]</span></dt><dd><p>The color of the vlines when in “stay” mode</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">vspans</span></code><span class="classifier">List[bokeh.model.Model]</span></dt><dd><p>Bokeh elements that brighten the section played so far</p>
+</dd>
+</dl>
+</section>
+<section id="id30">
+<h3>Returns<a class="headerlink" href="#id30" title="Permalink to this heading">#</a></h3>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">stop_follow_callback</span></code><span class="classifier">CustomJS</span></dt><dd><p>A jslink callback.</p>
+</dd>
+</dl>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+</section>
+</dd></dl>
+</section>
 </section>
 </article>
 <footer class="bd-footer-article">
@@ -362,7 +800,25 @@ document.write(`
   </div>
 <nav class="bd-toc-nav page-toc">
 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><code class="xref py py-mod docutils literal notranslate"><span class="pre">_bokeh_manipulation</span></code> Module</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><code class="xref py py-mod docutils literal notranslate"><span class="pre">_bokeh_manipulation</span></code> Module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#waloviz._bokeh_manipulation.apply_theme"><code class="docutils literal notranslate"><span class="pre">apply_theme()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#waloviz._bokeh_manipulation.finalize_player_bokeh_gui"><code class="docutils literal notranslate"><span class="pre">finalize_player_bokeh_gui()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#waloviz._bokeh_manipulation.get_audio_xformatter"><code class="docutils literal notranslate"><span class="pre">get_audio_xformatter()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#waloviz._bokeh_manipulation.get_follow_callback"><code class="docutils literal notranslate"><span class="pre">get_follow_callback()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#waloviz._bokeh_manipulation.get_keep_dump_range_callback"><code class="docutils literal notranslate"><span class="pre">get_keep_dump_range_callback()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#waloviz._bokeh_manipulation.get_keep_x_range_callback"><code class="docutils literal notranslate"><span class="pre">get_keep_x_range_callback()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#waloviz._bokeh_manipulation.get_keep_y_range_callback"><code class="docutils literal notranslate"><span class="pre">get_keep_y_range_callback()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#waloviz._bokeh_manipulation.get_move_pbar_callback"><code class="docutils literal notranslate"><span class="pre">get_move_pbar_callback()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#waloviz._bokeh_manipulation.get_move_time_callback"><code class="docutils literal notranslate"><span class="pre">get_move_time_callback()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#waloviz._bokeh_manipulation.get_play_pause_callback"><code class="docutils literal notranslate"><span class="pre">get_play_pause_callback()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#waloviz._bokeh_manipulation.get_record_ranges_callback"><code class="docutils literal notranslate"><span class="pre">get_record_ranges_callback()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#waloviz._bokeh_manipulation.get_reset_callback"><code class="docutils literal notranslate"><span class="pre">get_reset_callback()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#waloviz._bokeh_manipulation.get_set_pbar_x_range_callback"><code class="docutils literal notranslate"><span class="pre">get_set_pbar_x_range_callback()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#waloviz._bokeh_manipulation.get_set_y_range_callback"><code class="docutils literal notranslate"><span class="pre">get_set_y_range_callback()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#waloviz._bokeh_manipulation.get_start_follow_callback"><code class="docutils literal notranslate"><span class="pre">get_start_follow_callback()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#waloviz._bokeh_manipulation.get_stop_follow_callback"><code class="docutils literal notranslate"><span class="pre">get_stop_follow_callback()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </nav></div>
 <div class="sidebar-secondary-item">
@@ -393,7 +849,7 @@ document.write(`
 </p>
 </div>
 <div class="footer-item"><p class="last-updated">
-  Last updated on 2024-07-12.
+  Last updated on 2024-07-13.
   <br/>
 </p></div>
 </div>

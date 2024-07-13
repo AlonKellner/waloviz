@@ -330,7 +330,93 @@ document.write(`
 <h1>_panel_manipulation Module<a class="headerlink" href="#panel-manipulation-module" title="Permalink to this heading">#</a></h1>
 <section id="id1">
 <h2><code class="xref py py-mod docutils literal notranslate"><span class="pre">_panel_manipulation</span></code> Module<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
-<span class="target" id="module-waloviz._panel_manipulation"></span></section>
+<span class="target" id="module-waloviz._panel_manipulation"></span><dl class="py function">
+<dt class="sig sig-object py" id="waloviz._panel_manipulation.save_player_panel">
+<span class="sig-prename descclassname"><span class="pre">waloviz._panel_manipulation.</span></span><span class="sig-name descname"><span class="pre">save_player_panel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">player_panel</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Viewable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">PathLike</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">IO</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resources</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Resources</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Resources(mode='inline')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">embed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">PathLike</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">IO</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference external" href="https://github.com/holoviz/waloviz/blob/vdev/waloviz/_panel_manipulation.py#L195-L252"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#waloviz._panel_manipulation.save_player_panel" title="Permalink to this definition">#</a></dt>
+<dd><div class="line-block">
+<div class="line">Saves a panel player to an HTML file.</div>
+</div>
+<div class="line-block">
+<div class="line">Does not save the download button.</div>
+</div>
+<section id="parameters">
+<h3>Parameters<a class="headerlink" href="#parameters" title="Permalink to this heading">#</a></h3>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">source</span></code><span class="classifier">pn.viewable.Viewable</span></dt><dd><p>The player created by <code class="docutils literal notranslate"><span class="pre">wv.Audio</span></code></p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">out_file</span></code><span class="classifier">str | os.PathLike | IO</span></dt><dd><p>The output file path for the generated html, default is “{title}.html”</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">title</span></code><span class="classifier">str</span></dt><dd><p>The title to be used in the generated file name and the html title,
+if <code class="docutils literal notranslate"><span class="pre">wv.Audio(title="...")</span></code> was specified, then that value is
+used, otherwise, the default is “waloviz”.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">resources</span></code><span class="classifier">bokeh.resources.Resources</span></dt><dd><p>The resources for the <code class="docutils literal notranslate"><span class="pre">panel</span></code> save method, default is INLINE</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">embed</span></code><span class="classifier">bool</span></dt><dd><p>The embed value for the <code class="docutils literal notranslate"><span class="pre">panel</span></code> save method, default is True</p>
+</dd>
+</dl>
+</section>
+<section id="returns">
+<h3>Returns<a class="headerlink" href="#returns" title="Permalink to this heading">#</a></h3>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">out_file</span></code><span class="classifier">str | os.PathLike | IO</span></dt><dd><p>The file that the HTML player content was written into</p>
+</dd>
+</dl>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+</section>
+</dd></dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="waloviz._panel_manipulation.wrap_player_with_panel">
+<span class="sig-prename descclassname"><span class="pre">waloviz._panel_manipulation.</span></span><span class="sig-name descname"><span class="pre">wrap_player_with_panel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">player_bokeh</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wav</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">audio_height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">button_height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pbar_height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">both_min_height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">download_button</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">native_player</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aspect_ratio</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sizing_mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Viewable</span></span></span><a class="reference external" href="https://github.com/holoviz/waloviz/blob/vdev/waloviz/_panel_manipulation.py#L71-L192"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#waloviz._panel_manipulation.wrap_player_with_panel" title="Permalink to this definition">#</a></dt>
+<dd><div class="line-block">
+<div class="line">Wraps the bokeh player with panel, adds the audio and optionally a download button.</div>
+</div>
+<section id="id2">
+<h3>Parameters<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">player_bokeh</span></code><span class="classifier">bokeh.model.Model</span></dt><dd><p>The generated bokeh player with the custom jslink interactivity, without the audio</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">wav</span></code><span class="classifier">torch.Tensor</span></dt><dd><p>The audio tensor</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">sr</span></code><span class="classifier">int</span></dt><dd><p>The sample rate</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">title</span></code><span class="classifier">str</span></dt><dd><p>A title to be used when saving the plot</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">height</span></code><span class="classifier">int | str</span></dt><dd><p>The total height of the plot</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">width</span></code><span class="classifier">int | str</span></dt><dd><p>The total width of the plot</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">audio_height</span></code><span class="classifier">bool</span></dt><dd><p>The expected height of the audio widget</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">button_height</span></code><span class="classifier">bool</span></dt><dd><p>The expected height of the download button</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">download_button</span></code><span class="classifier">bool</span></dt><dd><p>Whether to show the html download button</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">native_player</span></code><span class="classifier">bool</span></dt><dd><p>Whether the underlying native audio player should be visible</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">aspect_ratio</span></code><span class="classifier">float</span></dt><dd><p>The ratio between the width and height, relevant only when either
+width, height or both are “responsive”</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">sizing_mode</span></code><span class="classifier">str</span></dt><dd><p>The panel <code class="docutils literal notranslate"><span class="pre">sizing_mode</span></code>, can be one of seven values:
+“stretch_width”, “stretch_height”, “stretch_both”,
+“scale_width”, “scale_height”, “scale_both”, or “fixed”.</p>
+</dd>
+</dl>
+</section>
+<section id="id3">
+<h3>Returns<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">player_panel</span></code><span class="classifier">pn.viewable.Viewable</span></dt><dd><p>A panel pane with a fully featured interactive player</p>
+</dd>
+</dl>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+</section>
+</dd></dl>
+</section>
 </section>
 </article>
 <footer class="bd-footer-article">
@@ -362,7 +448,11 @@ document.write(`
   </div>
 <nav class="bd-toc-nav page-toc">
 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><code class="xref py py-mod docutils literal notranslate"><span class="pre">_panel_manipulation</span></code> Module</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><code class="xref py py-mod docutils literal notranslate"><span class="pre">_panel_manipulation</span></code> Module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#waloviz._panel_manipulation.save_player_panel"><code class="docutils literal notranslate"><span class="pre">save_player_panel()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#waloviz._panel_manipulation.wrap_player_with_panel"><code class="docutils literal notranslate"><span class="pre">wrap_player_with_panel()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </nav></div>
 <div class="sidebar-secondary-item">
@@ -393,7 +483,7 @@ document.write(`
 </p>
 </div>
 <div class="footer-item"><p class="last-updated">
-  Last updated on 2024-07-12.
+  Last updated on 2024-07-13.
   <br/>
 </p></div>
 </div>
