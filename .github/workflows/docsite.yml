@@ -48,7 +48,7 @@ jobs:
             ${{ runner.os }}-pip-
 
       - name: Install dependencies
-        run: python3 -m pip install -r requirements.txt
+        run: python3 -m pip install -r requirements.txt && playwright install chromium && playwright install-deps
 
       - name: Generate modules
         run: python ./doc/generate_modules.py src/waloviz -d ./doc/reference-manual -n waloviz -e tests

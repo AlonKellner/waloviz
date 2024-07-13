@@ -47,7 +47,7 @@ jobs:
             ${{ runner.os }}-pip-
 
       - name: Install dependencies
-        run: python3 -m pip install -r requirements.txt
+        run: python3 -m pip install -r requirements.txt && playwright install chromium && playwright install-deps
 
       - name: Pre-Commit
         uses: pre-commit/action@v3.0.1
