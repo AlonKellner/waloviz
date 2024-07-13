@@ -1,4 +1,5 @@
 import os
+from io import IOBase
 from typing import IO, Any, BinaryIO, Dict, List, Optional, Tuple, Union
 
 import holoviews as hv
@@ -757,9 +758,9 @@ def save(
 
     |
     """
-    if issubclass(type(source), pn.viewable.Viewable):
-        out_file = _resolve_out_file(out_file, second_arg, args, kwargs)
-    else:
+    out_file = _resolve_out_file(out_file, second_arg, args, kwargs)
+
+    if not issubclass(type(source), pn.viewable.Viewable):
         if not isinstance(
             source, (IOLike, Union[np.ndarray, torch.Tensor, Any], tuple, int)
         ):
@@ -810,8 +811,10 @@ def _resolve_out_file(
             f"save() got an unexpected keyword argument '{list(kwargs.keys())[0]}'"
         )
     if (len(args) == 0) and (second_arg is not None):
-        if isinstance(second_arg, (str, os.PathLike, IO)):
-            out_file = second_arg
+        if isinstance(second_arg, (str, os.PathLike, IO)) or issubclass(
+            type(second_arg), IOBase
+        ):
+            out_file = second_arg  # pyright: ignore[reportAssignmentType]
     elif len(args) > 0:
         raise ValueError(
             """``wv.save`` should be called with at most 2 positional arguments like one of the following ways:

@@ -194,7 +194,7 @@ def wrap_player_with_panel(
 
 def save_player_panel(
     player_panel: pn.viewable.Viewable,
-    file: Optional[IOLike] = None,
+    out_file: Optional[IOLike] = None,
     title: Optional[str] = None,
     resources: Resources = INLINE,
     embed: bool = True,
@@ -232,8 +232,8 @@ def save_player_panel(
         except Exception:
             title = "waloviz"
 
-    if file is None:
-        file = f"{title}.html"
+    if out_file is None:
+        out_file = f"{title}.html"
 
     if (
         hasattr(player_panel, "__len__")
@@ -243,10 +243,10 @@ def save_player_panel(
         player_panel = pn.Column(player_panel[0], player_panel[1])  # pyright: ignore[reportIndexIssue]
 
     pn.panel(player_panel).save(
-        file,
+        out_file,
         resources=resources,
         embed=embed,
         title=title,
     )
 
-    return file
+    return out_file
