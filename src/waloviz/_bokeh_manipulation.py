@@ -1,3 +1,13 @@
+"""
+Here there are all sorts of Bokeh related manipulations, but most dominantly custom jslink.
+
+| There are multiple functions in here that set some JS properties of Bokeh JS elements
+| in order to "communicate" between those jslinks, for example the color of the current
+| time cursor is communicated through the bright "played" region.
+| At times these are confusing, this is a work in progress and will get better as we
+| learn :)
+"""
+
 from typing import Any, Dict, List, Optional
 
 import bokeh
