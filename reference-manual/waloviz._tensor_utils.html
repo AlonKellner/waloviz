@@ -284,6 +284,7 @@ document.write(`
 </ul>
 </li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">API</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="waloviz.__init__.html">waloviz</a></li>
 <li class="toctree-l2"><a class="reference internal" href="waloviz._user_functions.html">_user_functions</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">_tensor_utils</a></li>
 <li class="toctree-l2"><a class="reference internal" href="waloviz._holoviews_manipulations.html">_holoviews_manipulations</a></li>
@@ -334,7 +335,7 @@ document.write(`
 <dt class="sig sig-object py" id="waloviz._tensor_utils.broadcast_to_channels">
 <span class="sig-prename descclassname"><span class="pre">waloviz._tensor_utils.</span></span><span class="sig-name descname"><span class="pre">broadcast_to_channels</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tensor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">Tensor</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Tensor</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tensor</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">Tensor</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference external" href="https://github.com/holoviz/waloviz/blob/vdev/waloviz/_tensor_utils.py#L38-L79"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#waloviz._tensor_utils.broadcast_to_channels" title="Permalink to this definition">#</a></dt>
 <dd><div class="line-block">
-<div class="line">Given a hierarchical tensor object recursively broadcast all leaf tensors to have exactly 2 dimensions and the same amount of channels as the <code class="docutils literal notranslate"><span class="pre">wav</span></code>.</div>
+<div class="line">Given a hierarchical tensor object recursively broadcast all leaf tensors to have exactly 2 dimensions and the same amount of channels as the <code class="docutils literal notranslate"><span class="pre">wav</span></code> .</div>
 </div>
 <section id="parameters">
 <h3>Parameters<a class="headerlink" href="#parameters" title="Permalink to this heading">#</a></h3>
@@ -366,13 +367,101 @@ document.write(`
 </section>
 </dd></dl>
 <dl class="py function">
+<dt class="sig sig-object py" id="waloviz._tensor_utils.handle_dict_colors">
+<span class="sig-prename descclassname"><span class="pre">waloviz._tensor_utils.</span></span><span class="sig-name descname"><span class="pre">handle_dict_colors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">over_curve_names</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">over_curve_colors</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference external" href="https://github.com/holoviz/waloviz/blob/vdev/waloviz/_tensor_utils.py#L235-L269"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#waloviz._tensor_utils.handle_dict_colors" title="Permalink to this definition">#</a></dt>
+<dd><div class="line-block">
+<div class="line">Handles the case where <code class="docutils literal notranslate"><span class="pre">over_curve_colors</span></code> is a dict and converts it to a list.</div>
+</div>
+<section id="id2">
+<h3>Parameters<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">over_curve_names</span></code> : List[str] | None</p>
+<p><code class="docutils literal notranslate"><span class="pre">over_curve_colors</span></code> : Dict[str, str]</p>
+</section>
+<section id="id3">
+<h3>Returns<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">over_curve_colors</span></code> : List[str | None]</p>
+</section>
+<section id="id4">
+<h3>Raises<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
+<dl>
+<dt><code class="docutils literal notranslate"><span class="pre">ValueError</span></code></dt><dd><div class="line-block">
+<div class="line">When <code class="docutils literal notranslate"><span class="pre">over_curve_colors</span></code> was a dict but <code class="docutils literal notranslate"><span class="pre">over_curve_names</span></code> was not provided</div>
+</div>
+</dd>
+</dl>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+</section>
+</dd></dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="waloviz._tensor_utils.handle_dict_over_curve">
+<span class="sig-prename descclassname"><span class="pre">waloviz._tensor_utils.</span></span><span class="sig-name descname"><span class="pre">handle_dict_over_curve</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">over_curve</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">over_curve_names</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference external" href="https://github.com/holoviz/waloviz/blob/vdev/waloviz/_tensor_utils.py#L272-L303"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#waloviz._tensor_utils.handle_dict_over_curve" title="Permalink to this definition">#</a></dt>
+<dd><div class="line-block">
+<div class="line">Handles the case where <code class="docutils literal notranslate"><span class="pre">over_curve</span></code> is a dict and converts it to a list.</div>
+</div>
+<section id="id5">
+<h3>Parameters<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">over_curve</span></code> : Dict[str, Any]
+<code class="docutils literal notranslate"><span class="pre">over_curve_names</span></code> : List[str] | None</p>
+</section>
+<section id="id6">
+<h3>Returns<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">over_curve</span></code> : List[Any]</p>
+<p><code class="docutils literal notranslate"><span class="pre">over_curve_names</span></code> : List[str]</p>
+</section>
+<section id="id7">
+<h3>Raises<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h3>
+<dl>
+<dt><code class="docutils literal notranslate"><span class="pre">ValueError</span></code></dt><dd><div class="line-block">
+<div class="line">When <code class="docutils literal notranslate"><span class="pre">over_curve_names</span></code> was provided but <code class="docutils literal notranslate"><span class="pre">over_curve</span></code> was a dict</div>
+</div>
+</dd>
+</dl>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+</section>
+</dd></dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="waloviz._tensor_utils.handle_list_over_curve">
+<span class="sig-prename descclassname"><span class="pre">waloviz._tensor_utils.</span></span><span class="sig-name descname"><span class="pre">handle_list_over_curve</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">over_curve</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">over_curve_names</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">over_curve_colors</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference external" href="https://github.com/holoviz/waloviz/blob/vdev/waloviz/_tensor_utils.py#L306-L348"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#waloviz._tensor_utils.handle_list_over_curve" title="Permalink to this definition">#</a></dt>
+<dd><div class="line-block">
+<div class="line">Handles the case where <code class="docutils literal notranslate"><span class="pre">over_curve</span></code> is a list, makes a bunch of validations and generates <code class="docutils literal notranslate"><span class="pre">over_curve_names</span></code> if None were provided.</div>
+</div>
+<section id="id8">
+<h3>Parameters<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">over_curve</span></code> : Dict[str, Any]
+<code class="docutils literal notranslate"><span class="pre">over_curve_names</span></code> : List[str] | None</p>
+</section>
+<section id="id9">
+<h3>Returns<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">over_curve</span></code> : List[Any]</p>
+<p><code class="docutils literal notranslate"><span class="pre">over_curve_names</span></code> : List[str]</p>
+</section>
+<section id="id10">
+<h3>Raises<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h3>
+<dl>
+<dt><code class="docutils literal notranslate"><span class="pre">ValueError</span></code></dt><dd><div class="line-block">
+<div class="line">When <code class="docutils literal notranslate"><span class="pre">over_curve_names</span></code> was provided but of a different size from <code class="docutils literal notranslate"><span class="pre">over_curve</span></code></div>
+<div class="line"><strong>OR</strong></div>
+<div class="line">When <code class="docutils literal notranslate"><span class="pre">over_curve_colors</span></code> was provided but of a different size from <code class="docutils literal notranslate"><span class="pre">over_curve</span></code></div>
+</div>
+</dd>
+</dl>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+</section>
+</dd></dl>
+<dl class="py function">
 <dt class="sig sig-object py" id="waloviz._tensor_utils.preprocess_over_curve">
 <span class="sig-prename descclassname"><span class="pre">waloviz._tensor_utils.</span></span><span class="sig-name descname"><span class="pre">preprocess_over_curve</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wav</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">over_curve</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tensor</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">over_curve_names</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">over_curve_colors</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tensor</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference external" href="https://github.com/holoviz/waloviz/blob/vdev/waloviz/_tensor_utils.py#L114-L200"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#waloviz._tensor_utils.preprocess_over_curve" title="Permalink to this definition">#</a></dt>
 <dd><div class="line-block">
 <div class="line">Converts user defined overlaid curves related options into a standard format, in terms of object structure and types.</div>
 </div>
-<section id="id2">
-<h3>Parameters<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
+<section id="id11">
+<h3>Parameters<a class="headerlink" href="#id11" title="Permalink to this heading">#</a></h3>
 <dl class="simple">
 <dt><code class="docutils literal notranslate"><span class="pre">wav</span></code><span class="classifier">torch.Tensor</span></dt><dd><p>Loaded audio tensor</p>
 </dd>
@@ -388,8 +477,8 @@ document.write(`
 </dd>
 </dl>
 </section>
-<section id="id3">
-<h3>Returns<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
+<section id="id12">
+<h3>Returns<a class="headerlink" href="#id12" title="Permalink to this heading">#</a></h3>
 <dl class="simple">
 <dt><code class="docutils literal notranslate"><span class="pre">over_curve</span></code><span class="classifier">List[torch.Tensor]</span></dt><dd><p>Standardized</p>
 </dd>
@@ -399,8 +488,8 @@ document.write(`
 </dd>
 </dl>
 </section>
-<section id="id4">
-<h3>Raises<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
+<section id="id13">
+<h3>Raises<a class="headerlink" href="#id13" title="Permalink to this heading">#</a></h3>
 <dl>
 <dt><code class="docutils literal notranslate"><span class="pre">ValueError</span></code></dt><dd><div class="line-block">
 <div class="line">When <code class="docutils literal notranslate"><span class="pre">over_curve_names</span></code> was provided but of a different size from <code class="docutils literal notranslate"><span class="pre">over_curve</span></code></div>
@@ -423,18 +512,45 @@ document.write(`
 </section>
 </dd></dl>
 <dl class="py function">
+<dt class="sig sig-object py" id="waloviz._tensor_utils.single_value_to_list">
+<span class="sig-prename descclassname"><span class="pre">waloviz._tensor_utils.</span></span><span class="sig-name descname"><span class="pre">single_value_to_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">over_curve</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tensor</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">over_curve_names</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">over_curve_colors</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tensor</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference external" href="https://github.com/holoviz/waloviz/blob/vdev/waloviz/_tensor_utils.py#L351-L399"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#waloviz._tensor_utils.single_value_to_list" title="Permalink to this definition">#</a></dt>
+<dd><div class="line-block">
+<div class="line">Makes sure that if single values were provided they are wrapped in single element lists.</div>
+</div>
+<section id="id14">
+<h3>Parameters<a class="headerlink" href="#id14" title="Permalink to this heading">#</a></h3>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">over_curve</span></code><span class="classifier">tensorlike | List[tensorlike] | Dict[str, tensorlike] | callable</span></dt><dd><p>User provided</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">over_curve_names</span></code><span class="classifier">List[str]</span></dt><dd><p>User provided</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">over_curve_colors</span></code><span class="classifier">List[str]</span></dt><dd><p>User provided</p>
+</dd>
+</dl>
+</section>
+<section id="id15">
+<h3>Returns<a class="headerlink" href="#id15" title="Permalink to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">over_curve</span></code> : tensorlike | List[tensorlike] | Dict[str, tensorlike] | callable</p>
+<p><code class="docutils literal notranslate"><span class="pre">over_curve_names</span></code> : List[str]</p>
+<p><code class="docutils literal notranslate"><span class="pre">over_curve_colors</span></code> : List[str]</p>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+</section>
+</dd></dl>
+<dl class="py function">
 <dt class="sig sig-object py" id="waloviz._tensor_utils.skip_to_size">
 <span class="sig-prename descclassname"><span class="pre">waloviz._tensor_utils.</span></span><span class="sig-name descname"><span class="pre">skip_to_size</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tensor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">Tensor</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">Tensor</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference external" href="https://github.com/holoviz/waloviz/blob/vdev/waloviz/_tensor_utils.py#L82-L111"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#waloviz._tensor_utils.skip_to_size" title="Permalink to this definition">#</a></dt>
 <dd><div class="line-block">
-<div class="line">Given a hierarchical tensor object skip equally spaced tensor values along the time dimension (<code class="docutils literal notranslate"><span class="pre">dim=-1</span></code>) to become lower than the <code class="docutils literal notranslate"><span class="pre">max_size</span></code> value.</div>
+<div class="line">Given a hierarchical tensor object skip equally spaced tensor values along the time dimension ( <code class="docutils literal notranslate"><span class="pre">dim=-1</span></code> ) to become lower than the <code class="docutils literal notranslate"><span class="pre">max_size</span></code> value.</div>
 </div>
 <div class="line-block">
 <div class="line">This helps with the responsiveness of the player and avoids errors at the</div>
 <div class="line">cost of losing information.</div>
 <div class="line">This is used for both the overlaid curves and the spectrogram itself.</div>
 </div>
-<section id="id5">
-<h3>Parameters<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h3>
+<section id="id16">
+<h3>Parameters<a class="headerlink" href="#id16" title="Permalink to this heading">#</a></h3>
 <dl class="simple">
 <dt><code class="docutils literal notranslate"><span class="pre">tensor</span></code><span class="classifier">torch.Tensor | (torch.Tensor, torch.Tensor)</span></dt><dd><p>A hierarchical tensor object with an unknown time size</p>
 </dd>
@@ -442,8 +558,8 @@ document.write(`
 </dd>
 </dl>
 </section>
-<section id="id6">
-<h3>Returns<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h3>
+<section id="id17">
+<h3>Returns<a class="headerlink" href="#id17" title="Permalink to this heading">#</a></h3>
 <dl class="simple">
 <dt><code class="docutils literal notranslate"><span class="pre">obj</span></code><span class="classifier">torch.Tensor</span></dt><dd><p>A hierarchical tensor object with a time size lower than <code class="docutils literal notranslate"><span class="pre">max_size</span></code></p>
 </dd>
@@ -459,17 +575,45 @@ document.write(`
 <dd><div class="line-block">
 <div class="line">Given a hierarchical object recursively converts all leaf nodes into PyTorch tensors.</div>
 </div>
-<section id="id7">
-<h3>Parameters<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h3>
+<section id="id18">
+<h3>Parameters<a class="headerlink" href="#id18" title="Permalink to this heading">#</a></h3>
 <dl class="simple">
 <dt><code class="docutils literal notranslate"><span class="pre">obj</span></code><span class="classifier">Any</span></dt><dd><p>A hierarchical tuple object</p>
 </dd>
 </dl>
 </section>
-<section id="id8">
-<h3>Returns<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h3>
+<section id="id19">
+<h3>Returns<a class="headerlink" href="#id19" title="Permalink to this heading">#</a></h3>
 <dl class="simple">
 <dt><code class="docutils literal notranslate"><span class="pre">obj</span></code><span class="classifier">torch.Tensor</span></dt><dd><p>A hierarchical tuple tensor object</p>
+</dd>
+</dl>
+<div class="line-block">
+<div class="line"><br/></div>
+</div>
+</section>
+</dd></dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="waloviz._tensor_utils.validate_XY_over_curve">
+<span class="sig-prename descclassname"><span class="pre">waloviz._tensor_utils.</span></span><span class="sig-name descname"><span class="pre">validate_XY_over_curve</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">over_curve</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tensor</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference external" href="https://github.com/holoviz/waloviz/blob/vdev/waloviz/_tensor_utils.py#L203-L232"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#waloviz._tensor_utils.validate_XY_over_curve" title="Permalink to this definition">#</a></dt>
+<dd><div class="line-block">
+<div class="line">If the <code class="docutils literal notranslate"><span class="pre">over_curve</span></code> has X and Y tensors, make sure their of the same shape.</div>
+</div>
+<section id="id20">
+<h3>Parameters<a class="headerlink" href="#id20" title="Permalink to this heading">#</a></h3>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">over_curve</span></code><span class="classifier">List[torch.Tensor | (torch.Tensor, torch.Tensor)]</span></dt><dd><p>Either a list of tensors or <code class="docutils literal notranslate"><span class="pre">(X,Y)</span></code> tuples of tensors</p>
+</dd>
+</dl>
+</section>
+<section id="id21">
+<h3>Raises<a class="headerlink" href="#id21" title="Permalink to this heading">#</a></h3>
+<dl>
+<dt><code class="docutils literal notranslate"><span class="pre">ValueError</span></code></dt><dd><div class="line-block">
+<div class="line">When <code class="docutils literal notranslate"><span class="pre">over_curve</span></code> contained an <code class="docutils literal notranslate"><span class="pre">(X,Y)</span></code> tuple of size not equal to 2</div>
+<div class="line"><strong>OR</strong></div>
+<div class="line">When <code class="docutils literal notranslate"><span class="pre">over_curve</span></code> contained an <code class="docutils literal notranslate"><span class="pre">(X,Y)</span></code> tuple where <code class="docutils literal notranslate"><span class="pre">X.shape</span> <span class="pre">!=</span> <span class="pre">Y.shape</span></code></div>
+</div>
 </dd>
 </dl>
 <div class="line-block">
@@ -511,9 +655,14 @@ document.write(`
 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><code class="xref py py-mod docutils literal notranslate"><span class="pre">_tensor_utils</span></code> Module</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#waloviz._tensor_utils.broadcast_to_channels"><code class="docutils literal notranslate"><span class="pre">broadcast_to_channels()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#waloviz._tensor_utils.handle_dict_colors"><code class="docutils literal notranslate"><span class="pre">handle_dict_colors()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#waloviz._tensor_utils.handle_dict_over_curve"><code class="docutils literal notranslate"><span class="pre">handle_dict_over_curve()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#waloviz._tensor_utils.handle_list_over_curve"><code class="docutils literal notranslate"><span class="pre">handle_list_over_curve()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#waloviz._tensor_utils.preprocess_over_curve"><code class="docutils literal notranslate"><span class="pre">preprocess_over_curve()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#waloviz._tensor_utils.single_value_to_list"><code class="docutils literal notranslate"><span class="pre">single_value_to_list()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#waloviz._tensor_utils.skip_to_size"><code class="docutils literal notranslate"><span class="pre">skip_to_size()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#waloviz._tensor_utils.to_tensor"><code class="docutils literal notranslate"><span class="pre">to_tensor()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#waloviz._tensor_utils.validate_XY_over_curve"><code class="docutils literal notranslate"><span class="pre">validate_XY_over_curve()</span></code></a></li>
 </ul>
 </li>
 </ul>

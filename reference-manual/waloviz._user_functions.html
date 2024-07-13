@@ -63,7 +63,7 @@
 <link href="../genindex.html" rel="index" title="Index"/>
 <link href="../search.html" rel="search" title="Search"/>
 <link href="waloviz._tensor_utils.html" rel="next" title="_tensor_utils Module"/>
-<link href="index.html" rel="prev" title="API Reference Manual"/>
+<link href="waloviz.__init__.html" rel="prev" title="__init__ Module"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
 <meta content="en" name="docsearch:language"/>
 </link></link></link></link></link></link></link></head>
@@ -284,6 +284,7 @@ document.write(`
 </ul>
 </li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">API</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="waloviz.__init__.html">waloviz</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">_user_functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="waloviz._tensor_utils.html">_tensor_utils</a></li>
 <li class="toctree-l2"><a class="reference internal" href="waloviz._holoviews_manipulations.html">_holoviews_manipulations</a></li>
@@ -371,9 +372,9 @@ audio is resampled to the specified <code class="docutils literal notranslate"><
 default is 100.0.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">n_fft</span></code><span class="classifier">int</span></dt><dd><p>Sets the <code class="docutils literal notranslate"><span class="pre">n_fft</span></code> of the spectrogram, overrides the <code class="docutils literal notranslate"><span class="pre">frame_ms</span></code> value,
-default is <code class="docutils literal notranslate"><span class="pre">(sr/1000</span> <span class="pre">*</span> <span class="pre">frame_ms)</span></code>.</p>
+default is <code class="docutils literal notranslate"><span class="pre">(sr/1000</span> <span class="pre">*</span> <span class="pre">frame_ms)</span></code> .</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">hop_ms</span></code>: float</dt><dd><p>Sets the <code class="docutils literal notranslate"><span class="pre">hop_length</span></code> of the spectrogram, in milliseconds.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">hop_ms</span></code><span class="classifier">float</span></dt><dd><p>Sets the <code class="docutils literal notranslate"><span class="pre">hop_length</span></code> of the spectrogram, in milliseconds.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">hop_length</span></code><span class="classifier">int</span></dt><dd><p>Sets the <code class="docutils literal notranslate"><span class="pre">hop_length</span></code> of the spectrogram, default is <code class="docutils literal notranslate"><span class="pre">n_fft/8</span></code></p>
 </dd>
@@ -393,7 +394,7 @@ the plot will stretch in width to fit.</p>
 <dt><code class="docutils literal notranslate"><span class="pre">aspect_ratio</span></code><span class="classifier">float</span></dt><dd><p>The ratio between the width and height, relevant only when either
 width, height or both are “responsive”, default is 3.5.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">sizing_mode</span></code><span class="classifier">str</span></dt><dd><p>The panel <code class="docutils literal notranslate"><span class="pre">sizing_mode</span></code>, can be one of seven values:
+<dt><code class="docutils literal notranslate"><span class="pre">sizing_mode</span></code><span class="classifier">str</span></dt><dd><p>The panel <code class="docutils literal notranslate"><span class="pre">sizing_mode</span></code> , can be one of seven values:
 “stretch_width”, “stretch_height”, “stretch_both”,
 “scale_width”, “scale_height”, “scale_both”, or “fixed”.
 Default is “scale_both”.</p>
@@ -405,7 +406,7 @@ synchronized, default is False</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">cmap</span></code><span class="classifier">str</span></dt><dd><p>The colormap used to display the spectrogram, default is “Inferno”</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">over_curve_colors</span></code><span class="classifier">str | List[str] | Dict[str, str]</span></dt><dd><p>Sets the colors to display for each given <code class="docutils literal notranslate"><span class="pre">over_curve</span></code>, should match
+<dt><code class="docutils literal notranslate"><span class="pre">over_curve_colors</span></code><span class="classifier">str | List[str] | Dict[str, str]</span></dt><dd><p>Sets the colors to display for each given <code class="docutils literal notranslate"><span class="pre">over_curve</span></code> , should match
 the size and structure of the given <code class="docutils literal notranslate"><span class="pre">over_curve</span></code> value.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">theme</span></code><span class="classifier">str | Dict[str, Any]</span></dt><dd><p>Sets the visual look and feel of the plot, the value provided must
@@ -414,8 +415,8 @@ be a <code class="docutils literal notranslate"><span class="pre">bokeh</span></
 <dt><code class="docutils literal notranslate"><span class="pre">max_size</span></code><span class="classifier">int</span></dt><dd><p>When the spectrogram or one of the over curves contain many values,
 the plot’s performance suffers. For that reason <code class="docutils literal notranslate"><span class="pre">max_size</span></code> limits the
 amount of displayed values, when the spectrogram or an over curve has
-more values than the <code class="docutils literal notranslate"><span class="pre">max_size</span></code>, it is reduced in size by skipping
-intermediate values, until the size is less than the <code class="docutils literal notranslate"><span class="pre">max_size</span></code>.
+more values than the <code class="docutils literal notranslate"><span class="pre">max_size</span></code> , it is reduced in size by skipping
+intermediate values, until the size is less than the <code class="docutils literal notranslate"><span class="pre">max_size</span></code> .
 Default is 10000.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">download_button</span></code><span class="classifier">bool</span></dt><dd><p>Whether to show the html download button. Defaults to True.</p>
@@ -426,10 +427,10 @@ to None which saves space.</p>
 <dt><code class="docutils literal notranslate"><span class="pre">native_player</span></code><span class="classifier">bool</span></dt><dd><p>Whether the underlying native audio player should be visible. Default
 is False</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">minimal</span></code>: bool</dt><dd><p>Does nothing when False, when True it overrides some settings to make
+<dt><code class="docutils literal notranslate"><span class="pre">minimal</span></code><span class="classifier">bool</span></dt><dd><p>Does nothing when False, when True it overrides some settings to make
 the player more compact and simple. Default is False.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">extended</span></code>: bool</dt><dd><p>Does nothing when False, when True it overrides some settings to make
+<dt><code class="docutils literal notranslate"><span class="pre">extended</span></code><span class="classifier">bool</span></dt><dd><p>Does nothing when False, when True it overrides some settings to make
 the player more descriptive and functional. Default is False.</p>
 </dd>
 </dl>
@@ -506,7 +507,7 @@ Default is “default”</p>
 <section id="id4">
 <h3>Parameters<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
 <dl class="simple">
-<dt><code class="docutils literal notranslate"><span class="pre">source</span></code><span class="classifier">pn.viewable.Viewable | str | os.PathLike | IO | (tensorlike, int) | tensorlike</span></dt><dd><p>The player created by <code class="docutils literal notranslate"><span class="pre">wv.Audio</span></code>, or a source for <code class="docutils literal notranslate"><span class="pre">wv.Audio</span></code> to
+<dt><code class="docutils literal notranslate"><span class="pre">source</span></code><span class="classifier">pn.viewable.Viewable | str | os.PathLike | IO | (tensorlike, int) | tensorlike</span></dt><dd><p>The player created by <code class="docutils literal notranslate"><span class="pre">wv.Audio</span></code> , or a source for <code class="docutils literal notranslate"><span class="pre">wv.Audio</span></code> to
 create a player with.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">out_file</span></code><span class="classifier">str | os.PathLike | IO</span></dt><dd><p>The output file path for the generated html, default is “{title}.html”</p>
@@ -546,11 +547,11 @@ used, otherwise, the default is “waloviz”.</p>
 <div class="footer-article-items footer-article__inner">
 <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
-<a class="left-prev" href="index.html" title="previous page">
+<a class="left-prev" href="waloviz.__init__.html" title="previous page">
 <i class="fa-solid fa-angle-left"></i>
 <div class="prev-next-info">
 <p class="prev-next-subtitle">previous</p>
-<p class="prev-next-title">API Reference Manual</p>
+<p class="prev-next-title">__init__ Module</p>
 </div>
 </a>
 <a class="right-next" href="waloviz._tensor_utils.html" title="next page">

@@ -15,10 +15,10 @@
 <meta content="website" property="og:type"/>
 <meta content="http://waloviz.com/reference-manual/modules.html" property="og:url"/>
 <meta content="WaloViz" property="og:site_name"/>
-<meta content="__init__ Module-__init__ Module- Audio(), extension(), save()..,_bokeh_manipulation Module-_bokeh_manipulation Module- apply_theme(), finalize_player_bokeh_gui(), get_audio_xformatter(), get_follow..." property="og:description"/>
+<meta content="__init__ Module-__init__ Module- Audio(), extension(), save()..,_bokeh_manipulation Module-_bokeh_manipulation Module- add_interactivity_with_jslinks(), apply_theme(), finalize_player_bokeh_gui(), ..." property="og:description"/>
 <meta content="https://waloviz.com/en/latest/_static/logo_vertical.png" property="og:image"/>
 <meta content="WaloViz" property="og:image:alt"/>
-<meta content="__init__ Module-__init__ Module- Audio(), extension(), save()..,_bokeh_manipulation Module-_bokeh_manipulation Module- apply_theme(), finalize_player_bokeh_gui(), get_audio_xformatter(), get_follow..." name="description"/>
+<meta content="__init__ Module-__init__ Module- Audio(), extension(), save()..,_bokeh_manipulation Module-_bokeh_manipulation Module- add_interactivity_with_jslinks(), apply_theme(), finalize_player_bokeh_gui(), ..." name="description"/>
 <title>waloviz Modules — WaloViz vdev</title>
 <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
@@ -282,6 +282,7 @@ document.write(`
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="index.html">API</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="waloviz.__init__.html">waloviz</a></li>
 <li class="toctree-l2"><a class="reference internal" href="waloviz._user_functions.html">_user_functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="waloviz._tensor_utils.html">_tensor_utils</a></li>
 <li class="toctree-l2"><a class="reference internal" href="waloviz._holoviews_manipulations.html">_holoviews_manipulations</a></li>
@@ -338,6 +339,7 @@ document.write(`
 </li>
 <li class="toctree-l1"><a class="reference internal" href="waloviz._bokeh_manipulation.html">_bokeh_manipulation Module</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="waloviz._bokeh_manipulation.html#id1"><code class="xref py py-mod docutils literal notranslate"><span class="pre">_bokeh_manipulation</span></code> Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="waloviz._bokeh_manipulation.html#waloviz._bokeh_manipulation.add_interactivity_with_jslinks"><code class="docutils literal notranslate"><span class="pre">add_interactivity_with_jslinks()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="waloviz._bokeh_manipulation.html#waloviz._bokeh_manipulation.apply_theme"><code class="docutils literal notranslate"><span class="pre">apply_theme()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="waloviz._bokeh_manipulation.html#waloviz._bokeh_manipulation.finalize_player_bokeh_gui"><code class="docutils literal notranslate"><span class="pre">finalize_player_bokeh_gui()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="waloviz._bokeh_manipulation.html#waloviz._bokeh_manipulation.get_audio_xformatter"><code class="docutils literal notranslate"><span class="pre">get_audio_xformatter()</span></code></a></li>
@@ -354,12 +356,17 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="waloviz._bokeh_manipulation.html#waloviz._bokeh_manipulation.get_set_y_range_callback"><code class="docutils literal notranslate"><span class="pre">get_set_y_range_callback()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="waloviz._bokeh_manipulation.html#waloviz._bokeh_manipulation.get_start_follow_callback"><code class="docutils literal notranslate"><span class="pre">get_start_follow_callback()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="waloviz._bokeh_manipulation.html#waloviz._bokeh_manipulation.get_stop_follow_callback"><code class="docutils literal notranslate"><span class="pre">get_stop_follow_callback()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="waloviz._bokeh_manipulation.html#waloviz._bokeh_manipulation.modify_bokeh_elements"><code class="docutils literal notranslate"><span class="pre">modify_bokeh_elements()</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="waloviz._holoviews_manipulations.html">_holoviews_manipulations Module</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="waloviz._holoviews_manipulations.html#id1"><code class="xref py py-mod docutils literal notranslate"><span class="pre">_holoviews_manipulations</span></code> Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="waloviz._holoviews_manipulations.html#waloviz._holoviews_manipulations.ThemeHook"><code class="docutils literal notranslate"><span class="pre">ThemeHook</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="waloviz._holoviews_manipulations.html#waloviz._holoviews_manipulations.ThemeHook.hook"><code class="docutils literal notranslate"><span class="pre">ThemeHook.hook()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="waloviz._holoviews_manipulations.html#waloviz._holoviews_manipulations.calculate_frequency_range_of_torchaudio_spectrogram"><code class="docutils literal notranslate"><span class="pre">calculate_frequency_range_of_torchaudio_spectrogram()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="waloviz._holoviews_manipulations.html#waloviz._holoviews_manipulations.combine_player_plots"><code class="docutils literal notranslate"><span class="pre">combine_player_plots()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="waloviz._holoviews_manipulations.html#waloviz._holoviews_manipulations.create_channel_spectrogram_plot"><code class="docutils literal notranslate"><span class="pre">create_channel_spectrogram_plot()</span></code></a></li>
@@ -380,9 +387,14 @@ document.write(`
 <li class="toctree-l1"><a class="reference internal" href="waloviz._tensor_utils.html">_tensor_utils Module</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="waloviz._tensor_utils.html#id1"><code class="xref py py-mod docutils literal notranslate"><span class="pre">_tensor_utils</span></code> Module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="waloviz._tensor_utils.html#waloviz._tensor_utils.broadcast_to_channels"><code class="docutils literal notranslate"><span class="pre">broadcast_to_channels()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="waloviz._tensor_utils.html#waloviz._tensor_utils.handle_dict_colors"><code class="docutils literal notranslate"><span class="pre">handle_dict_colors()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="waloviz._tensor_utils.html#waloviz._tensor_utils.handle_dict_over_curve"><code class="docutils literal notranslate"><span class="pre">handle_dict_over_curve()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="waloviz._tensor_utils.html#waloviz._tensor_utils.handle_list_over_curve"><code class="docutils literal notranslate"><span class="pre">handle_list_over_curve()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="waloviz._tensor_utils.html#waloviz._tensor_utils.preprocess_over_curve"><code class="docutils literal notranslate"><span class="pre">preprocess_over_curve()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="waloviz._tensor_utils.html#waloviz._tensor_utils.single_value_to_list"><code class="docutils literal notranslate"><span class="pre">single_value_to_list()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="waloviz._tensor_utils.html#waloviz._tensor_utils.skip_to_size"><code class="docutils literal notranslate"><span class="pre">skip_to_size()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="waloviz._tensor_utils.html#waloviz._tensor_utils.to_tensor"><code class="docutils literal notranslate"><span class="pre">to_tensor()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="waloviz._tensor_utils.html#waloviz._tensor_utils.validate_XY_over_curve"><code class="docutils literal notranslate"><span class="pre">validate_XY_over_curve()</span></code></a></li>
 </ul>
 </li>
 </ul>
