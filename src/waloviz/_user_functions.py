@@ -128,8 +128,8 @@ def Audio(
         default is 100.0.
     ``n_fft`` : int
         Sets the ``n_fft`` of the spectrogram, overrides the ``frame_ms`` value,
-        default is ``(sr/1000 * frame_ms)``.
-    ``hop_ms``: float
+        default is ``(sr/1000 * frame_ms)`` .
+    ``hop_ms`` : float
         Sets the ``hop_length`` of the spectrogram, in milliseconds.
     ``hop_length`` : int
         Sets the ``hop_length`` of the spectrogram, default is ``n_fft/8``
@@ -150,7 +150,7 @@ def Audio(
         The ratio between the width and height, relevant only when either
         width, height or both are "responsive", default is 3.5.
     ``sizing_mode`` : str
-        The panel ``sizing_mode``, can be one of seven values:
+        The panel ``sizing_mode`` , can be one of seven values:
         "stretch_width", "stretch_height", "stretch_both",
         "scale_width", "scale_height", "scale_both", or "fixed".
         Default is "scale_both".
@@ -162,7 +162,7 @@ def Audio(
     ``cmap`` : str
         The colormap used to display the spectrogram, default is "Inferno"
     ``over_curve_colors`` : str | List[str] | Dict[str, str]
-        Sets the colors to display for each given ``over_curve``, should match
+        Sets the colors to display for each given ``over_curve`` , should match
         the size and structure of the given ``over_curve`` value.
     ``theme`` : str | Dict[str, Any]
         Sets the visual look and feel of the plot, the value provided must
@@ -171,8 +171,8 @@ def Audio(
         When the spectrogram or one of the over curves contain many values,
         the plot's performance suffers. For that reason ``max_size`` limits the
         amount of displayed values, when the spectrogram or an over curve has
-        more values than the ``max_size``, it is reduced in size by skipping
-        intermediate values, until the size is less than the ``max_size``.
+        more values than the ``max_size`` , it is reduced in size by skipping
+        intermediate values, until the size is less than the ``max_size`` .
         Default is 10000.
     ``download_button`` : bool
         Whether to show the html download button. Defaults to True.
@@ -182,10 +182,10 @@ def Audio(
     ``native_player`` : bool
         Whether the underlying native audio player should be visible. Default
         is False
-    ``minimal``: bool
+    ``minimal`` : bool
         Does nothing when False, when True it overrides some settings to make
         the player more compact and simple. Default is False.
-    ``extended``: bool
+    ``extended`` : bool
         Does nothing when False, when True it overrides some settings to make
         the player more descriptive and functional. Default is False.
 
@@ -340,7 +340,7 @@ def _resolve_presets(
         User provided
     ``download_button`` : bool
         User provided
-    ``freq_label``: str
+    ``freq_label`` : str
         User provided
     ``native_player`` : bool
         User provided
@@ -355,7 +355,7 @@ def _resolve_presets(
         Resolved by presets
     ``download_button`` : bool
         Resolved by presets
-    ``freq_label``: str
+    ``freq_label`` : str
         Resolved by presets
     ``native_player`` : bool
         Resolved by presets
@@ -369,7 +369,7 @@ def _resolve_presets(
     """
     if minimal and extended:
         raise ValueError(
-            "``Audio`` cannot be both ``minimal`` and ``extended``, choose one to keep"
+            "``Audio`` cannot be both ``minimal`` and ``extended`` , choose one to keep"
         )
 
     # TODO: The current logic does not allow the user to override the preset values,
@@ -430,7 +430,7 @@ def _resolve_spectrogram_resolution(
     hop_length: Optional[int],
 ) -> Tuple[int, int]:
     """
-    | Calculates ``n_fft`` and ``hop_length`` while considering ``frame_ms`` and ``hop_ms``.
+    | Calculates ``n_fft`` and ``hop_length`` while considering ``frame_ms`` and ``hop_ms`` .
 
     Parameters
     ----------
@@ -475,7 +475,7 @@ def _load_audio(
     sr: Optional[int],
 ) -> Tuple[torch.Tensor, int]:
     """
-    | Resolves the ``source`` into a ``wav`` tensor and ``sr``, loads and resamples using ``torchaudio`` if needed.
+    | Resolves the ``source`` into a ``wav`` tensor and ``sr`` , loads and resamples using ``torchaudio`` if needed.
 
     Parameters
     ----------
@@ -574,7 +574,7 @@ def _create_theme_hook(
 
 def _validate_max_args(args: Tuple) -> None:
     """
-    | Validates the positional ``args``, max of 2.
+    | Validates the positional ``args`` , max of 2.
 
     Parameters
     ----------
@@ -732,7 +732,7 @@ def save(
     Parameters
     ----------
     ``source`` : pn.viewable.Viewable | str | os.PathLike | IO | (tensorlike, int) | tensorlike
-        The player created by ``wv.Audio``, or a source for ``wv.Audio`` to
+        The player created by ``wv.Audio`` , or a source for ``wv.Audio`` to
         create a player with.
     ``out_file`` : str | os.PathLike | IO
         The output file path for the generated html, default is "{title}.html"

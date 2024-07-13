@@ -39,7 +39,7 @@ def broadcast_to_channels(
     tensor: Union[torch.Tensor, Tuple[torch.Tensor, torch.Tensor]], channels: int
 ) -> Union[torch.Tensor, Tuple]:
     """
-    | Given a hierarchical tensor object recursively broadcast all leaf tensors to have exactly 2 dimensions and the same amount of channels as the ``wav``.
+    | Given a hierarchical tensor object recursively broadcast all leaf tensors to have exactly 2 dimensions and the same amount of channels as the ``wav`` .
 
     Parameters
     ----------
@@ -83,7 +83,7 @@ def skip_to_size(
     tensor: Union[torch.Tensor, Tuple], max_size: int
 ) -> Union[torch.Tensor, Tuple]:
     """
-    | Given a hierarchical tensor object skip equally spaced tensor values along the time dimension (``dim=-1``) to become lower than the ``max_size`` value.
+    | Given a hierarchical tensor object skip equally spaced tensor values along the time dimension ( ``dim=-1`` ) to become lower than the ``max_size`` value.
 
     | This helps with the responsiveness of the player and avoids errors at the
     | cost of losing information.
@@ -165,7 +165,7 @@ def preprocess_over_curve(
 
     |
     """
-    over_curve, over_curve_names, over_curve_colors = _single_value_to_list(
+    over_curve, over_curve_names, over_curve_colors = single_value_to_list(
         over_curve, over_curve_names, over_curve_colors
     )
 
@@ -173,17 +173,17 @@ def preprocess_over_curve(
         return None, None, None
 
     if isinstance(over_curve, List):
-        over_curve_names = _handle_list_over_curve(
+        over_curve_names = handle_list_over_curve(
             over_curve, over_curve_names, over_curve_colors
         )
 
     if isinstance(over_curve, Dict):
-        over_curve, over_curve_names = _handle_dict_over_curve(
+        over_curve, over_curve_names = handle_dict_over_curve(
             over_curve, over_curve_names
         )
 
     if isinstance(over_curve_colors, Dict):
-        over_curve_colors = _handle_dict_colors(over_curve_names, over_curve_colors)
+        over_curve_colors = handle_dict_colors(over_curve_names, over_curve_colors)
 
     over_curve = [
         (sub_curve(wav, sr) if callable(sub_curve) else sub_curve)
@@ -195,12 +195,12 @@ def preprocess_over_curve(
         for sub_curve in over_curve
     ]
 
-    _validate_XY_over_curve(over_curve)
+    validate_XY_over_curve(over_curve)
 
     return over_curve, over_curve_names, over_curve_colors
 
 
-def _validate_XY_over_curve(over_curve: OverCurve) -> None:
+def validate_XY_over_curve(over_curve: OverCurve) -> None:
     """
     | If the ``over_curve`` has X and Y tensors, make sure their of the same shape.
 
@@ -232,7 +232,7 @@ def _validate_XY_over_curve(over_curve: OverCurve) -> None:
                 )
 
 
-def _handle_dict_colors(
+def handle_dict_colors(
     over_curve_names: Optional[List[str]], over_curve_colors: Dict[str, str]
 ) -> List[Optional[str]]:
     """
@@ -269,7 +269,7 @@ def _handle_dict_colors(
     return list_over_curve_colors
 
 
-def _handle_dict_over_curve(
+def handle_dict_over_curve(
     over_curve: Dict[str, Any], over_curve_names: Optional[List[str]]
 ) -> Tuple[List[Any], List[str]]:
     """
@@ -303,7 +303,7 @@ def _handle_dict_over_curve(
     return list_over_curve, over_curve_names
 
 
-def _handle_list_over_curve(
+def handle_list_over_curve(
     over_curve: List[Any],
     over_curve_names: Optional[List[str]],
     over_curve_colors: Optional[Union[List[Optional[str]], Dict[str, str]]],
@@ -348,7 +348,7 @@ def _handle_list_over_curve(
     return over_curve_names
 
 
-def _single_value_to_list(
+def single_value_to_list(
     over_curve: Optional[OverCurve],
     over_curve_names: Optional[Union[str, List[str]]] = None,
     over_curve_colors: Optional[Union[str, List[Optional[str]], Dict[str, str]]] = None,

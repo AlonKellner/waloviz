@@ -10,13 +10,13 @@ Explanation
 
 ``waloviz`` was built to be as accessible as possible, whether you're using jupyter, colab, VSCode, JupyterLab or just pure HTML - you'll only need three lines of code.
 
-| First we need to install ``waloviz``:
+| First we need to install ``waloviz`` :
 
 .. code-block:: shell
 
     pip install waloviz
 
-| We also need to install ``ffmpeg`` as a backend for ``torchaudio``:
+| We also need to install ``ffmpeg`` as a backend for ``torchaudio`` :
 
 .. code-block:: shell
 

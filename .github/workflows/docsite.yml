@@ -7,7 +7,7 @@ on:
       - main
       - develop
 
-# TODO: Maybe we should try to fix the duplication between here and the ``.devcontainer/Dockerfile``, as well as other workflows
+# TODO: Maybe we should try to fix the duplication between here and the ``.devcontainer/Dockerfile`` , as well as other workflows
 jobs:
   deploy:
     runs-on: ubuntu-latest

@@ -20,7 +20,7 @@ IOLike = Union[str, os.PathLike, IO]
 
 def _is_2dim_int_or_float_ndarray(obj: Any) -> bool:
     """
-    | A 2d variant of ``_is_1dim_int_or_float_ndarray``, since scipy actually supports 2d ndarrays.
+    | A 2d variant of ``_is_1dim_int_or_float_ndarray`` , since scipy actually supports 2d ndarrays.
 
     | TODO: Create an issue at the `Panel Repository <https://github.com/holoviz/panel>`_ about this.
 
@@ -45,7 +45,7 @@ def _is_2dim_int_or_float_ndarray(obj: Any) -> bool:
 
 def _is_2dim_int_or_float_tensor(obj: Any) -> bool:
     """
-    | A 2d variant of ``_is_1dim_int_or_float_tensor``, since scipy actually supports 2d tensors.
+    | A 2d variant of ``_is_1dim_int_or_float_tensor`` , since scipy actually supports 2d tensors.
 
     | TODO: Create an issue at the `Panel Repository <https://github.com/holoviz/panel>`_ about this.
 
@@ -113,7 +113,7 @@ def wrap_player_with_panel(
         The ratio between the width and height, relevant only when either
         width, height or both are "responsive"
     ``sizing_mode`` : str
-        The panel ``sizing_mode``, can be one of seven values:
+        The panel ``sizing_mode`` , can be one of seven values:
         "stretch_width", "stretch_height", "stretch_both",
         "scale_width", "scale_height", "scale_both", or "fixed".
 

@@ -13,23 +13,24 @@ from ._tensor_utils import skip_to_size
 
 
 class ThemeHook:
+    r"""
+    | A class with a HoloViews hook for applying a Bokeh theme.
+
+    | This is due to a problem when using the built-in theme support of
+    | HoloViews in integration with Panel, for some reason themes are only
+    | partially applied in those situations.
+    | TODO: Open an Issue in the `HoloViews <https://github.com/holoviz/holoviews>`_\\`Panel <https://github.com/holoviz/panel>`_ repository about this
+
+    Parameters
+    ----------
+    ``theme_obj`` : Dict[str, Any]
+        A Bokeh theme object
+
+    |
+
+    """
+
     def __init__(self, theme_obj: Dict[str, Any]) -> None:
-        r"""
-        | A class with a HoloViews hook for applying a Bokeh theme.
-
-        | This is due to a problem when using the built-in theme support of
-        | HoloViews in integration with Panel, for some reason themes are only
-        | partially applied in those situations.
-        | TODO: Open an Issue in the `HoloViews <https://github.com/holoviz/holoviews>`_\\`Panel <https://github.com/holoviz/panel>`_ repository about this
-
-        Parameters
-        ----------
-        ``theme_obj`` : Dict[str, Any]
-            A Bokeh theme object
-
-        |
-
-        """
         self.theme_attrs = theme_obj["attrs"]
 
     def hook(self, plot: bokeh.model.Model, element: Any) -> None:  # noqa: ARG002
@@ -96,7 +97,7 @@ def get_player_hv(
     ``hop_length`` : int
         Sets the ``hop_length`` of the torchaudio spectrogram
     ``sync_legends`` : bool
-        Whether the legends of both audio channels ``over_curve``s should be
+        Whether the legends of both audio channels ``over_curve`` s should be
         synchronized
     ``pbar_height`` : int
         The total height of both the pbar itself and its axis
@@ -118,7 +119,7 @@ def get_player_hv(
     ``title`` : str
         Sets the title of the chart, which is displayed when ``embed_title=True``
     ``embed_title`` : bool
-        Displayed the ``title as part of the plot when ``True``
+        Displayed the ``title`` as part of the plot when ``True``
     ``freq_label`` : str
         The label of the frequency axis (vertical), hides the label when set
         to None which saves space.
@@ -214,7 +215,7 @@ def combine_player_plots(
     ``plots`` : List[hv.Layout]
         A list of the plots of the spectrograms and the progress bar
     ``sync_legends`` : bool
-        Whether the legends of both audio channels ``over_curve``s should be
+        Whether the legends of both audio channels ``over_curve`` s should be
         synchronized
     ``theme_hook`` : ThemeHook
         The HoloViews hook for applying a Bokeh theme, see :ref:`ThemeHook <waloviz._holoviews_manipulations.ThemeHook>`.

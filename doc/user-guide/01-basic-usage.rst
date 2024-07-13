@@ -25,4 +25,4 @@ The ``extension`` function
             wv.extension("colab")
 
 | Calling ``extension`` lets WaloViz know that you are about to use it in a notebook, you to do it just once.
-| Don't think about it too much, that's how many libraries operate (such as ``holoviews`` or ``panel``), and it works!
+| Don't think about it too much, that's how many libraries operate (such as ``holoviews`` or ``panel`` ), and it works!

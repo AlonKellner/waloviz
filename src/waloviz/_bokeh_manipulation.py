@@ -63,10 +63,12 @@ def finalize_player_bokeh_gui(
 
     ``single_min_height`` : int
 
+
     Returns
     -------
     ``player_bokeh`` : bokeh.model.Model
         With modifications and custom jslink interactivity
+
     |
     """
     player_bokeh.toolbar.autohide = True
@@ -76,7 +78,7 @@ def finalize_player_bokeh_gui(
     vspans = []
     glyphs = []
 
-    player_bokeh = _modify_bokeh_elements(
+    player_bokeh = modify_bokeh_elements(
         player_bokeh,
         theme,
         total_seconds,
@@ -89,14 +91,14 @@ def finalize_player_bokeh_gui(
         glyphs,
     )
 
-    player_bokeh = _add_interactivity_with_jslinks(
+    player_bokeh = add_interactivity_with_jslinks(
         player_bokeh, stay_color, follow_color, plots, vlines, vspans, glyphs
     )
 
     return player_bokeh
 
 
-def _add_interactivity_with_jslinks(
+def add_interactivity_with_jslinks(
     player_bokeh: bokeh.model.Model,
     stay_color: str,
     follow_color: str,
@@ -231,7 +233,7 @@ def _add_interactivity_with_jslinks(
     return player_bokeh
 
 
-def _modify_bokeh_elements(
+def modify_bokeh_elements(
     player_bokeh: bokeh.model.Model,
     theme: Dict[str, Any],
     total_seconds: float,
@@ -416,7 +418,7 @@ def get_start_follow_callback(
     | Create a jslink callback which activates "follow" mode.
 
     | Saves ``is_following`` to the zeroth vspan (first spectrogram bright section).
-    | Also used to synchronize the vline follow color with the vspan ``line_color``.
+    | Also used to synchronize the vline follow color with the vspan ``line_color`` .
 
     Parameters
     ----------
@@ -453,7 +455,7 @@ def get_stop_follow_callback(
     | Create a jslink callback which activates "stay" mode, stops "follow" mode.
 
     | Sets ``is_following`` of the zeroth vspan (first spectrogram bright section).
-    | Also used to synchronize the vline stay color with the vspan ``line_color``.
+    | Also used to synchronize the vline stay color with the vspan ``line_color`` .
 
     Parameters
     ----------
@@ -485,7 +487,7 @@ def get_set_y_range_callback(
     """
     | Create a jslink callback which stops the y zoom by setting a constant y range when the mouse is over the spectrograms.
 
-    | Sets ``is_y_fixed``, ``hz_fixed_start`` and ``hz_fixed_end`` of the zeroth plot (first spectrogram).
+    | Sets ``is_y_fixed`` , ``hz_fixed_start`` and ``hz_fixed_end`` of the zeroth plot (first spectrogram).
 
     Parameters
     ----------
@@ -549,7 +551,7 @@ def get_keep_y_range_callback(
     """
     | Create a jslink callback which keeps the constant y range when the mouse is over the spectrograms.
 
-    | Uses ``is_y_fixed``, ``hz_fixed_start`` and ``hz_fixed_end`` of the zeroth plot (first spectrogram).
+    | Uses ``is_y_fixed`` , ``hz_fixed_start`` and ``hz_fixed_end`` of the zeroth plot (first spectrogram).
 
     Parameters
     ----------
@@ -589,7 +591,7 @@ def get_set_pbar_x_range_callback(
     """
     | Create a jslink callback which stops the x zoom by setting a constant x range when the mouse is over the progress bar.
 
-    | Sets ``is_x_fixed``, ``x_fixed_start`` and ``x_fixed_end`` of the zeroth plot (first spectrogram).
+    | Sets ``is_x_fixed`` , ``x_fixed_start`` and ``x_fixed_end`` of the zeroth plot (first spectrogram).
 
     Parameters
     ----------
@@ -639,7 +641,7 @@ def get_keep_x_range_callback(
     """
     | Create a jslink callback which keeps the constant x range when the mouse is over the progress bar.
 
-    | Uses ``is_x_fixed``, ``x_fixed_start`` and ``x_fixed_end`` of the zeroth plot (first spectrogram).
+    | Uses ``is_x_fixed`` , ``x_fixed_start`` and ``x_fixed_end`` of the zeroth plot (first spectrogram).
 
     Parameters
     ----------
