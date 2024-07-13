@@ -9,6 +9,7 @@
     wv.Audio("local_data/waloviz.wav")
 
 Read our `Documentation <https://waloviz.com/en/latest/>`_ for more information.
+You can also try `waloviz` right now with our [Google Colab Demo](https://colab.research.google.com/drive/1euQCxaNlTg0pGvXz6d7RSoDhM3B1k7dy?usp=sharing) :)
 """
 
 from ._user_functions import Audio, extension, save
