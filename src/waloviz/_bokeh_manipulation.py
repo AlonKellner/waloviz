@@ -113,11 +113,11 @@ def add_interactivity_with_jslinks(
     Parameters
     ----------
     ``player_bokeh`` : bokeh.model.Model
-
+        .
     ``stay_color`` : str
-
+        .
     ``follow_color`` : str
-
+        .
     ``plots`` : List[bokeh.model.Model]
         Bokeh plots for the spectrograms and progress bar
     ``vlines`` : List[bokeh.model.Model]
@@ -251,17 +251,17 @@ def modify_bokeh_elements(
     Parameters
     ----------
     ``player_bokeh`` : bokeh.model.Model
-
+        .
     ``theme`` : Dict[str, Any]
-
+        .
     ``total_seconds`` : float
-
+        .
     ``aspect_ratio`` : float | None
-
+        .
     ``sizing_mode`` : str | None
-
+        .
     ``single_min_height`` : int
-
+        .
     ``plots`` : List[bokeh.model.Model]
         Bokeh plots for the spectrograms and progress bar
     ``vlines`` : List[bokeh.model.Model]

@@ -241,14 +241,14 @@ def handle_dict_colors(
     Parameters
     ----------
     ``over_curve_names`` : List[str] | None
-
+        .
     ``over_curve_colors`` : Dict[str, str]
-
+        .
 
     Returns
     -------
     ``over_curve_colors`` : List[str | None]
-
+        .
 
     Raises
     ------
@@ -278,14 +278,16 @@ def handle_dict_over_curve(
     Parameters
     ----------
     ``over_curve`` : Dict[str, Any]
+        .
     ``over_curve_names`` : List[str] | None
+        .
 
     Returns
     -------
     ``over_curve`` : List[Any]
-
+        .
     ``over_curve_names`` : List[str]
-
+        .
 
     Raises
     ------
@@ -314,14 +316,16 @@ def handle_list_over_curve(
     Parameters
     ----------
     ``over_curve`` : Dict[str, Any]
+        .
     ``over_curve_names`` : List[str] | None
+        .
 
     Returns
     -------
     ``over_curve`` : List[Any]
-
+        .
     ``over_curve_names`` : List[str]
-
+        .
 
     Raises
     ------
@@ -372,11 +376,11 @@ def single_value_to_list(
     Returns
     -------
     ``over_curve`` : tensorlike | List[tensorlike] | Dict[str, tensorlike] | callable
-
+        .
     ``over_curve_names`` : List[str]
-
+        .
     ``over_curve_colors`` : List[str]
-
+        .
 
     |
     """

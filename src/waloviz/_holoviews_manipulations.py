@@ -19,7 +19,7 @@ class ThemeHook:
     | This is due to a problem when using the built-in theme support of
     | HoloViews in integration with Panel, for some reason themes are only
     | partially applied in those situations.
-    | TODO: Open an Issue in the `HoloViews <https://github.com/holoviz/holoviews>`_\\`Panel <https://github.com/holoviz/panel>`_ repository about this
+    | TODO: Open an Issue in the `HoloViews <https://github.com/holoviz/holoviews>`_ \\ `Panel <https://github.com/holoviz/panel>`_ repository about this
 
     Parameters
     ----------
@@ -41,7 +41,6 @@ class ThemeHook:
         ----------
         ``plot`` : Dict[str, Any]
             A Bokeh theme object
-
         ``element`` : Any
             Irrelevant
 
