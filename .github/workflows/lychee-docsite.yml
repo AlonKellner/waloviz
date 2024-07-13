@@ -25,8 +25,11 @@ jobs:
       - name: Cache apt-pkgs
         uses: awalsh128/cache-apt-pkgs-action@latest
         with:
-          packages: ffmpeg sox libavdevice-dev
+          packages: ffmpeg sox libavdevice-dev graphviz
           version: 1.0
+
+      - name: Dot register
+        run: sudo dot -c
 
       - name: Upgrade pip
         run: |

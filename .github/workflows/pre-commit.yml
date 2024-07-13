@@ -25,6 +25,9 @@ jobs:
           packages: ffmpeg sox libavdevice-dev graphviz
           version: 1.0
 
+      - name: Dot register
+        run: sudo dot -c
+
       - name: Upgrade pip
         run: |
           # install pip=>20.1 to use "pip cache dir"
