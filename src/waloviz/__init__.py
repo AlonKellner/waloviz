@@ -1,5 +1,5 @@
 """
-``waloviz``, an interactive spectrogram player.
+``waloviz``, an interactive spectrogram player, for audio experts - by audio experts.
 
 .. code-block:: python
 

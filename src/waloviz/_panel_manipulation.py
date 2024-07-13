@@ -19,6 +19,23 @@ IOLike = Union[str, os.PathLike, IO]
 
 
 def _is_2dim_int_or_float_ndarray(obj: Any) -> bool:
+    """
+    | A 2d variant of ``_is_1dim_int_or_float_ndarray``, since scipy actually supports 2d ndarrays.
+
+    | TODO: Create an issue at the `Panel Repository <https://github.com/holoviz/panel>`_ about this.
+
+    Parameters
+    ----------
+    ``obj`` : Any
+        The audio ndarray
+
+    Returns
+    -------
+    ``is_valid`` : bool
+
+
+    |
+    """
     return (
         isinstance(obj, np.ndarray)
         and 0 < obj.ndim <= 2
@@ -27,6 +44,23 @@ def _is_2dim_int_or_float_ndarray(obj: Any) -> bool:
 
 
 def _is_2dim_int_or_float_tensor(obj: Any) -> bool:
+    """
+    | A 2d variant of ``_is_1dim_int_or_float_tensor``, since scipy actually supports 2d tensors.
+
+    | TODO: Create an issue at the `Panel Repository <https://github.com/holoviz/panel>`_ about this.
+
+    Parameters
+    ----------
+    ``obj`` : Any
+        The audio tensor
+
+    Returns
+    -------
+    ``is_valid`` : bool
+
+
+    |
+    """
     return (
         isinstance(obj, TensorLike)
         and 0 < obj.dim() <= 2  # pyright: ignore[reportAttributeAccessIssue]
@@ -50,7 +84,46 @@ def wrap_player_with_panel(
     aspect_ratio: Optional[float],
     sizing_mode: Optional[str],
 ) -> pn.viewable.Viewable:
-    print(type(player_bokeh))
+    """
+    | Wraps the bokeh player with panel, adds the audio and optionally a download button.
+
+    Parameters
+    ----------
+    ``player_bokeh`` : bokeh.model.Model
+        The generated bokeh player with the custom jslink interactivity, without the audio
+    ``wav`` : torch.Tensor
+        The audio tensor
+    ``sr`` : int
+        The sample rate
+    ``title`` : str
+        A title to be used when saving the plot
+    ``height`` : int | str
+        The total height of the plot
+    ``width`` : int | str
+        The total width of the plot
+    ``audio_height`` : bool
+        The expected height of the audio widget
+    ``button_height`` : bool
+        The expected height of the download button
+    ``download_button`` : bool
+        Whether to show the html download button
+    ``native_player`` : bool
+        Whether the underlying native audio player should be visible
+    ``aspect_ratio`` : float
+        The ratio between the width and height, relevant only when either
+        width, height or both are "responsive"
+    ``sizing_mode`` : str
+        The panel ``sizing_mode``, can be one of seven values:
+        "stretch_width", "stretch_height", "stretch_both",
+        "scale_width", "scale_height", "scale_both", or "fixed".
+
+    Returns
+    -------
+    ``player_panel`` : pn.viewable.Viewable
+        A panel pane with a fully featured interactive player
+
+    |
+    """
     aspect_ratio_kwargs = {}
     if (sizing_mode != "fixed") and (aspect_ratio is not None):
         aspect_ratio_kwargs["aspect_ratio"] = aspect_ratio
@@ -126,6 +199,33 @@ def save_player_panel(
     resources: Resources = INLINE,
     embed: bool = True,
 ) -> IOLike:
+    """
+    | Saves a panel player to an HTML file.
+
+    | Does not save the download button.
+
+    Parameters
+    ----------
+    ``source`` : pn.viewable.Viewable
+        The player created by ``wv.Audio``
+    ``out_file`` : str | os.PathLike | IO
+        The output file path for the generated html, default is "{title}.html"
+    ``title`` : str
+        The title to be used in the generated file name and the html title,
+        if ``wv.Audio(title="...")`` was specified, then that value is
+        used, otherwise, the default is "waloviz".
+    ``resources`` : bokeh.resources.Resources
+        The resources for the ``panel`` save method, default is INLINE
+    ``embed`` : bool
+        The embed value for the ``panel`` save method, default is True
+
+    Returns
+    -------
+    ``out_file`` : str | os.PathLike | IO
+        The file that the HTML player content was written into
+
+    |
+    """
     if title is None:
         try:
             title = player_panel.title  # pyright: ignore[reportAttributeAccessIssue]

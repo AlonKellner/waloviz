@@ -47,9 +47,8 @@ def extension(mode: str = "default") -> None:
         Default is "default"
 
     |
-
     """
-    global _mode
+    global _mode  # noqa: PLW0603  # ``_mode`` specifically needs to be global because it is the only stateful feature for the whole package
     _mode = mode
 
     # WaloViz is built exclusively with bokeh, this will not likely to change in the foreseeable future.
@@ -197,7 +196,7 @@ def Audio(
 
     Raises
     ------
-    ``ValueError`` :
+    ``ValueError``
         | When both ``minimal=True`` and ``extended=True``
         | **OR**
         | When no sample-rate was provided
@@ -211,7 +210,6 @@ def Audio(
         | When the provided ``over_curve`` was an integer
 
     |
-
     """
     # These are configurable values which are not useful for users, but for developers
     single_min_height: int = 80  # The minimum height of a single spectrogram, value is 80 based on manual testing, below it the ticks text starts to overlap
@@ -248,7 +246,6 @@ def Audio(
     channels = len(wav)
     total_seconds = wav.shape[-1] / sr
 
-    global _mode
     if _mode == "colab":
         extension(_mode)
 
@@ -365,11 +362,10 @@ def _resolve_presets(
 
     Raises
     ------
-    ``ValueError`` :
+    ``ValueError``
         When both ``minimal=True`` and ``extended=True``
 
     |
-
     """
     if minimal and extended:
         raise ValueError(
@@ -417,7 +413,6 @@ def _resolve_min_spectrogram_heights(
         Calculated
 
     |
-
     """
     if both_min_height < single_min_height * channels:
         both_min_height = single_min_height * channels
@@ -458,7 +453,6 @@ def _resolve_spectrogram_resolution(
         Calculated
 
     |
-
     """
     if (n_fft is None) and (frame_ms is None):
         frame_ms = 100.0
@@ -499,13 +493,12 @@ def _load_audio(
 
     Raises
     ------
-    ``ValueError`` :
+    ``ValueError``
         | When no sample-rate was provided
         | **OR**
         | When the ``wav`` tensor had more than 2 non squeezable dimensions
 
     |
-
     """
     if torch.is_tensor(source) or isinstance(source, np.ndarray):
         source = source, sr
@@ -564,15 +557,14 @@ def _create_theme_hook(
 
     Raises
     ------
-    ``ValueError`` :
+    ``ValueError``
         When the ``theme`` string value was not found in Bokeh
 
     |
-
     """
     if isinstance(theme, str):
         if theme.lower() not in themes:
-            ValueError(
+            raise ValueError(
                 f"``theme`` was a string, but did not match any of the available options: {sorted(themes.keys())}"
             )
         theme = themes[theme.lower()]
@@ -591,11 +583,10 @@ def _validate_max_args(args: Tuple) -> None:
 
     Raises
     ------
-    ``ValueError`` :
+    ``ValueError``
         When there are more than 2 positional ``args``
 
     |
-
     """
     if len(args) > 0:
         raise ValueError(
@@ -616,11 +607,10 @@ def _validate_over_curve(over_curve: Optional[OverCurve]) -> None:
 
     Raises
     ------
-    ``ValueError`` :
+    ``ValueError``
         When the provided ``over_curve`` was an integer
 
     |
-
     """
     if isinstance(over_curve, int):
         raise ValueError(
@@ -665,7 +655,6 @@ def _resolve_sizing_args(
         Resolved
 
     |
-
     """
     if sizing_mode is None:
         if (width != "responsive") and (height != "responsive"):
@@ -696,7 +685,6 @@ def _resolve_button_height(download_button: bool) -> int:
         Inferred
 
     |
-
     """
     return 30 if download_button else 0
 
@@ -716,7 +704,6 @@ def _resolve_audio_height(native_player: bool) -> int:
         Inferred
 
     |
-
     """
     return 30 if native_player else 0
 
@@ -765,11 +752,10 @@ def save(
 
     Raises
     ------
-    ``ValueError`` :
+    ``ValueError``
         When called with more than 2 positional ``args``
 
     |
-
     """
     if issubclass(type(source), pn.viewable.Viewable):
         out_file = _resolve_out_file(out_file, second_arg, args, kwargs)
@@ -814,11 +800,10 @@ def _resolve_out_file(
 
     Raises
     ------
-    ``ValueError`` :
+    ``ValueError``
         When called with more than 2 positional ``args``
 
     |
-
     """
     if len(kwargs) > 0:
         raise TypeError(

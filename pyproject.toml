@@ -16,10 +16,12 @@ line-length = 88
 [tool.ruff.lint]
 select = [
   "E4", "E7", "E9", "F", "B", "Q", "I",
-  "ARG", "ANN001", "ANN002", "ANN003",
-  "ANN201", "ANN202", "ANN204", "ANN205",
-  "ANN206", "D"
+  "ARG", "ANN", "D", "PL"
 ]
+ignore = ["PLR2004", "PLR0913", "ANN401", "ANN101"]
+
+[tool.ruff.lint.pylint]
+max-args = 10
 
 [tool.ruff.lint.per-file-ignores]
 "examples/*" = ["D", "ARG", "ANN"]
@@ -66,7 +68,19 @@ maintainers = [
 description = "An interactive audio player with a spectrogram built-in, as a Jupyter widget or as HTML."
 readme = "README.md"
 
-keywords = ["spectrogram", "player", "wav", "holoviz", "speech", "audio", "bokeh", "visualization", "mp3", "ffmpeg", "flac"]
+keywords = [
+  "spectrogram",
+  "player",
+  "wav",
+  "holoviz",
+  "speech",
+  "audio",
+  "bokeh",
+  "visualization",
+  "mp3",
+  "ffmpeg",
+  "flac"
+]
 
 classifiers = [
   "Development Status :: 3 - Alpha",

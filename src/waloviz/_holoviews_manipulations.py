@@ -117,6 +117,8 @@ def get_player_hv(
         Whether to display a colorbar for the spectrograms
     ``title`` : str
         Sets the title of the chart, which is displayed when ``embed_title=True``
+    ``embed_title`` : bool
+        Displayed the ``title as part of the plot when ``True``
     ``freq_label`` : str
         The label of the frequency axis (vertical), hides the label when set
         to None which saves space.
@@ -138,7 +140,7 @@ def get_player_hv(
     if over_curve is not None:
         over_curve = [skip_to_size(sub_curve, max_size) for sub_curve in over_curve]
 
-    hz_min, hv_max = calculate_frequency_range_of_torhcaudio_spectrogram(sr, n_fft)
+    hz_min, hv_max = calculate_frequency_range_of_torchaudio_spectrogram(sr, n_fft)
 
     plots = []
     for channel_index, spec_channel in enumerate(spec):
@@ -170,21 +172,64 @@ def get_player_hv(
     return player_hv
 
 
-def calculate_frequency_range_of_torhcaudio_spectrogram(
+def calculate_frequency_range_of_torchaudio_spectrogram(
     sr: int, n_fft: int
 ) -> Tuple[float, float]:
+    """
+    | Calculates the maximum and minimum frequency as in the torchaudio spectrogram.
+
+    Parameters
+    ----------
+    ``sr`` : int
+        Resolved sample-rate
+    ``n_fft`` : int
+        Sets the ``n_fft`` of the torchaudio spectrogram
+
+    Returns
+    -------
+    ``hz_min`` : int
+        Minimum frequency in the torchaudio spectrogram
+    ``hz_max`` : int
+        Maximum frequency in the torchaudio spectrogram
+
+    |
+    """
     hz_min = (-1 / n_fft) * sr / 2
     hv_max = (1 + 1 / n_fft) * sr / 2
     return hz_min, hv_max
 
 
 def combine_player_plots(
-    plots: List[hv.core.Layoutable],
+    plots: List[hv.Layout],
     sync_legends: bool,
     theme_hook: ThemeHook,
     stay_color: str,
     responsive: bool,
 ) -> hv.Layout:
+    """
+    | Combines the spectrograms and progress bar plots into one layout.
+
+    Parameters
+    ----------
+    ``plots`` : List[hv.Layout]
+        A list of the plots of the spectrograms and the progress bar
+    ``sync_legends`` : bool
+        Whether the legends of both audio channels ``over_curve``s should be
+        synchronized
+    ``theme_hook`` : ThemeHook
+        The HoloViews hook for applying a Bokeh theme, see :ref:`ThemeHook <waloviz._holoviews_manipulations.ThemeHook>`.
+    ``stay_color`` : str
+        The color for the current time cursor **when not following** it
+    ``responsive`` : bool
+        Whether the plot width and height should be responsive
+
+    Returns
+    -------
+    ``player_hv`` : hv.Layout
+        A HoloViews Layout with the spectrograms and progress bar stacked together.
+
+    |
+    """
     base_tools = ["reset", "pan", "wheel_zoom", "save"]
     tools_kwargs = dict(
         tools=base_tools,
@@ -217,9 +262,24 @@ def combine_player_plots(
     return player_hv
 
 
-def create_progress_bar_plot(
-    total_seconds: float, pbar_height: int
-) -> hv.core.Layoutable:
+def create_progress_bar_plot(total_seconds: float, pbar_height: int) -> hv.Layout:
+    """
+    | Creates a HoloViews plot of the progress bar.
+
+    Parameters
+    ----------
+    ``total_seconds`` : float
+        The total amount of seconds in the ``wav`` as calculated according to the ``sr``
+    ``pbar_height`` : int
+        The total height of both the pbar itself and its axis
+
+    Returns
+    -------
+    ``pbar`` : hv.Layout
+        A HoloViews plot of the progress bar
+
+    |
+    """
     image = hv.Image(
         np.ones((1, 1)), bounds=(0, 0, total_seconds, 1), kdims=["x", "dump"]
     ).opts(
@@ -254,7 +314,52 @@ def create_channel_spectrogram_plot(
     freq_label: Optional[str],
     hz_min: float,
     hv_max: float,
-) -> hv.core.Layoutable:
+) -> hv.Layout:
+    """
+    | Creates a HoloViews plot of the progress bar.
+
+    Parameters
+    ----------
+    ``channel_index`` : int
+        The current channel to generate spectrogram for
+    ``spec_channel`` : torch.Tensor
+        The spectrogram of the current channel
+    ``total_seconds`` : float
+        The total amount of seconds in the ``wav`` as calculated according to the ``sr``
+    ``over_curve`` : List[torch.Tensor]
+        A list of curves to be displayed over the spectrogram
+    ``over_curve_names`` : List[str]
+        A list of display names corresponding to the list given in ``over_curve``
+    ``theme_hook`` : ThemeHook
+        The HoloViews hook for applying a Bokeh theme, see :ref:`ThemeHook <waloviz._holoviews_manipulations.ThemeHook>`.
+    ``cmap`` : str
+        The colormap used to display the spectrogram
+    ``over_curve_colors`` : List[str]
+        A list of display colors corresponding to the list given in ``over_curve``
+    ``stay_color`` : str
+        The color for the current time cursor **when not following** it
+    ``colorbar`` : bool
+        Whether to display a colorbar for the spectrograms
+    ``title`` : str
+        Sets the title of the chart, which is displayed when ``embed_title=True``
+    ``embed_title`` : bool
+        Displayed the ``title as part of the plot when ``True``
+    ``freq_label`` : str
+        The label of the frequency axis (vertical), hides the label when set
+        to None which saves space.
+    ``hz_min`` : int
+        Minimum frequency in the torchaudio spectrogram
+    ``hz_max`` : int
+        Maximum frequency in the torchaudio spectrogram
+
+
+    Returns
+    -------
+    ``channel_spectrogram_plot`` : hv.Layout
+        A HoloViews plot of the current channel spectrogram
+
+    |
+    """
     spec_image = hv.Image(
         spec_channel.numpy()[::-1, :] + 1e-5,
         bounds=(0, hz_min, total_seconds, hv_max),

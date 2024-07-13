@@ -125,12 +125,12 @@ def create_package_file(
         if shall_skip(os.path.join(root, py_file)):
             continue
         is_package = py_file == INIT
-        py_file = os.path.splitext(py_file)[0]
-        py_path = makename(subroot, py_file)
+        py_file_name = os.path.splitext(py_file)[0]
+        py_path = makename(subroot, py_file_name)
         if is_package:
             heading = ":mod:`%s` Package" % package
         else:
-            heading = ":mod:`%s` Module" % py_file
+            heading = ":mod:`%s` Module" % py_file_name
         text += format_heading(2, heading)
         text += format_inheritance_diagram(
             is_package and subroot or py_path, master_package
@@ -198,7 +198,7 @@ def recurse_tree(path: str, excludes: List[str], opts: optparse.Values) -> None:
             py_files.remove(INIT)
             py_files.insert(0, INIT)
         # remove hidden ('.') and private ('_') directories
-        subs = sorted([sub for sub in subs if sub[0] not in [".", "_"]])
+        sorted_subs = sorted([sub for sub in subs if sub[0] not in [".", "_"]])
         # check if there are valid files to process
         # TODO: could add check for windows hidden files
         if "/." in root or "/_" in root or not py_files or is_excluded(root, excludes):
@@ -206,7 +206,7 @@ def recurse_tree(path: str, excludes: List[str], opts: optparse.Values) -> None:
         if INIT in py_files and not root == path:
             # we are in package ...
             if (  # ... with subpackage(s)
-                subs
+                sorted_subs
                 or
                 # ... with some module(s)
                 len(py_files) > 1
@@ -217,7 +217,9 @@ def recurse_tree(path: str, excludes: List[str], opts: optparse.Values) -> None:
                 subroot = (
                     root[len(path) :].lstrip(os.path.sep).replace(os.path.sep, ".")
                 )
-                create_package_file(root, package_name, subroot, py_files, opts, subs)
+                create_package_file(
+                    root, package_name, subroot, py_files, opts, sorted_subs
+                )
                 toc.append(makename(package_name, subroot))
         elif root == path:
             # if we are at the root level, we don't require it to be a package
@@ -243,11 +245,12 @@ def normalize_excludes(rootpath: str, excludes: List[str]) -> List[str]:
     sep = os.path.sep
     f_excludes = []
     for exclude in excludes:
+        f_exclude = exclude
         if not os.path.isabs(exclude) and not exclude.startswith(rootpath):
-            exclude = os.path.join(rootpath, exclude)
+            f_exclude = os.path.join(rootpath, exclude)
         if not exclude.endswith(sep):
-            exclude += sep
-        f_excludes.append(exclude)
+            f_exclude += sep
+        f_excludes.append(f_exclude)
     return f_excludes
 
 

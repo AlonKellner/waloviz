@@ -26,7 +26,6 @@ def to_tensor(
         A hierarchical tuple tensor object
 
     |
-
     """
     if isinstance(obj, Tuple):
         return tuple([to_tensor(sub) for sub in obj])
@@ -54,13 +53,12 @@ def broadcast_to_channels(
 
     Raises
     ------
-    ``ValueError`` :
+    ``ValueError``
         | When a leaf tensor has 0 non squeezable dimensions
         | **OR**
         | When the initial amount of channels of a leaf tensor was larger than the target amount
 
     |
-
     """
     if isinstance(tensor, Tuple):
         return tuple([broadcast_to_channels(sub, channels) for sub in tensor])
@@ -104,7 +102,6 @@ def skip_to_size(
         A hierarchical tensor object with a time size lower than ``max_size``
 
     |
-
     """
     if isinstance(tensor, Tuple):
         return tuple([skip_to_size(sub, max_size) for sub in tensor])
@@ -153,10 +150,12 @@ def preprocess_over_curve(
 
     Raises
     ------
-    ``ValueError`` :
+    ``ValueError``
         | When ``over_curve_names`` was provided but of a different size from ``over_curve``
         | **OR**
         | When ``over_curve_colors`` was provided but of a different size from ``over_curve``
+        | **OR**
+        | When ``over_curve_colors`` was a dict but ``over_curve_names`` was not provided
         | **OR**
         | When ``over_curve_names`` was provided but ``over_curve`` was a dict
         | **OR**
@@ -165,7 +164,221 @@ def preprocess_over_curve(
         | When ``over_curve`` contained an ``(X,Y)`` tuple where ``X.shape != Y.shape``
 
     |
+    """
+    over_curve, over_curve_names, over_curve_colors = _single_value_to_list(
+        over_curve, over_curve_names, over_curve_colors
+    )
 
+    if over_curve is None:
+        return None, None, None
+
+    if isinstance(over_curve, List):
+        over_curve_names = _handle_list_over_curve(
+            over_curve, over_curve_names, over_curve_colors
+        )
+
+    if isinstance(over_curve, Dict):
+        over_curve, over_curve_names = _handle_dict_over_curve(
+            over_curve, over_curve_names
+        )
+
+    if isinstance(over_curve_colors, Dict):
+        over_curve_colors = _handle_dict_colors(over_curve_names, over_curve_colors)
+
+    over_curve = [
+        (sub_curve(wav, sr) if callable(sub_curve) else sub_curve)
+        for sub_curve in over_curve
+    ]
+
+    over_curve = [
+        broadcast_to_channels(to_tensor(sub_curve), channels)
+        for sub_curve in over_curve
+    ]
+
+    _validate_XY_over_curve(over_curve)
+
+    return over_curve, over_curve_names, over_curve_colors
+
+
+def _validate_XY_over_curve(over_curve: OverCurve) -> None:
+    """
+    | If the ``over_curve`` has X and Y tensors, make sure their of the same shape.
+
+    Parameters
+    ----------
+    ``over_curve`` : List[torch.Tensor | (torch.Tensor, torch.Tensor)]
+        Either a list of tensors or ``(X,Y)`` tuples of tensors
+
+    Raises
+    ------
+    ``ValueError``
+        | When ``over_curve`` contained an ``(X,Y)`` tuple of size not equal to 2
+        | **OR**
+        | When ``over_curve`` contained an ``(X,Y)`` tuple where ``X.shape != Y.shape``
+
+    |
+    """
+    for sub_curve in over_curve:
+        # TODO: The (X, Y) feature of the ``over_curve`` is not well documented, see https://github.com/AlonKellner/waloviz/issues/6
+        if isinstance(sub_curve, Tuple):
+            if len(sub_curve) != 2:
+                raise ValueError(
+                    "When ``over_curve`` contains a tuple it must be of length 2 as such: ``(x_coordinates, y_coordinates)``"
+                )
+            sub_x, sub_y = sub_curve
+            if sub_x.shape != sub_y.shape:
+                raise ValueError(
+                    f"Found a mismatch between ``over_curve`` x and y coordinates lengths:\t{sub_x.shape[-1]} != {sub_y.shape[-1]}"
+                )
+
+
+def _handle_dict_colors(
+    over_curve_names: Optional[List[str]], over_curve_colors: Dict[str, str]
+) -> List[Optional[str]]:
+    """
+    | Handles the case where ``over_curve_colors`` is a dict and converts it to a list.
+
+    Parameters
+    ----------
+    ``over_curve_names`` : List[str] | None
+
+    ``over_curve_colors`` : Dict[str, str]
+
+
+    Returns
+    -------
+    ``over_curve_colors`` : List[str | None]
+
+
+    Raises
+    ------
+    ``ValueError``
+        | When ``over_curve_colors`` was a dict but ``over_curve_names`` was not provided
+
+    |
+    """
+    if over_curve_names is None:
+        raise ValueError(
+            "``over_curve_colors`` was a dict but ``over_curve_names`` was not provided"
+        )
+    list_over_curve_colors: List[Optional[str]] = [
+        (over_curve_colors[name] if name in over_curve_colors else None)
+        for name in over_curve_names
+    ]
+
+    return list_over_curve_colors
+
+
+def _handle_dict_over_curve(
+    over_curve: Dict[str, Any], over_curve_names: Optional[List[str]]
+) -> Tuple[List[Any], List[str]]:
+    """
+    | Handles the case where ``over_curve`` is a dict and converts it to a list.
+
+    Parameters
+    ----------
+    ``over_curve`` : Dict[str, Any]
+    ``over_curve_names`` : List[str] | None
+
+    Returns
+    -------
+    ``over_curve`` : List[Any]
+
+    ``over_curve_names`` : List[str]
+
+
+    Raises
+    ------
+    ``ValueError``
+        | When ``over_curve_names`` was provided but ``over_curve`` was a dict
+
+    |
+    """
+    if over_curve_names is not None:
+        raise ValueError(
+            "``over_curve_names`` can be set only when ``over_curve`` is not a dict"
+        )
+    over_curve_names = [name for name, _ in over_curve.items()]
+    list_over_curve: List[Any] = [sub_curve for _, sub_curve in over_curve.items()]
+    return list_over_curve, over_curve_names
+
+
+def _handle_list_over_curve(
+    over_curve: List[Any],
+    over_curve_names: Optional[List[str]],
+    over_curve_colors: Optional[Union[List[Optional[str]], Dict[str, str]]],
+) -> Optional[List[str]]:
+    """
+    | Handles the case where ``over_curve`` is a list, makes a bunch of validations and generates ``over_curve_names`` if None were provided.
+
+    Parameters
+    ----------
+    ``over_curve`` : Dict[str, Any]
+    ``over_curve_names`` : List[str] | None
+
+    Returns
+    -------
+    ``over_curve`` : List[Any]
+
+    ``over_curve_names`` : List[str]
+
+
+    Raises
+    ------
+    ``ValueError``
+        | When ``over_curve_names`` was provided but of a different size from ``over_curve``
+        | **OR**
+        | When ``over_curve_colors`` was provided but of a different size from ``over_curve``
+
+    |
+    """
+    if over_curve_names is None:
+        over_curve_names = [str(i) for i in range(len(over_curve))]
+    elif len(over_curve_names) != len(over_curve):
+        raise ValueError(
+            f"Size of ``over_curve_names`` was different than ``over_curve`` but should be equal, {len(over_curve_names)} != {len(over_curve)}"
+        )
+
+    if over_curve_colors is not None:
+        if len(over_curve_colors) != len(over_curve):
+            raise ValueError(
+                f"Size of ``over_curve_colors`` was different than ``over_curve`` but should be equal, {len(over_curve_colors)} != {len(over_curve)}"
+            )
+
+    return over_curve_names
+
+
+def _single_value_to_list(
+    over_curve: Optional[OverCurve],
+    over_curve_names: Optional[Union[str, List[str]]] = None,
+    over_curve_colors: Optional[Union[str, List[Optional[str]], Dict[str, str]]] = None,
+) -> Tuple[
+    Optional[OverCurve],
+    Optional[List[str]],
+    Optional[Union[List[Optional[str]], Dict[str, str]]],
+]:
+    """
+    | Makes sure that if single values were provided they are wrapped in single element lists.
+
+    Parameters
+    ----------
+    ``over_curve`` : tensorlike | List[tensorlike] | Dict[str, tensorlike] | callable
+        User provided
+    ``over_curve_names`` : List[str]
+        User provided
+    ``over_curve_colors`` : List[str]
+        User provided
+
+    Returns
+    -------
+    ``over_curve`` : tensorlike | List[tensorlike] | Dict[str, tensorlike] | callable
+
+    ``over_curve_names`` : List[str]
+
+    ``over_curve_colors`` : List[str]
+
+
+    |
     """
     if over_curve is None:
         return None, None, None
@@ -183,60 +396,4 @@ def preprocess_over_curve(
             over_curve = [over_curve]
         else:
             over_curve = [sub_curve for sub_curve in over_curve]
-
-    if isinstance(over_curve, List):
-        if over_curve_names is None:
-            over_curve_names = [str(i) for i in range(len(over_curve))]
-        elif len(over_curve_names) != len(over_curve):
-            raise ValueError(
-                f"Size of ``over_curve_names`` was different than ``over_curve`` but should be equal, {len(over_curve_names)} != {len(over_curve)}"
-            )
-
-        if over_curve_colors is not None and len(over_curve_colors) != len(over_curve):
-            raise ValueError(
-                f"Size of ``over_curve_colors`` was different than ``over_curve`` but should be equal, {len(over_curve_colors)} != {len(over_curve)}"
-            )
-
-    if isinstance(over_curve, Dict):
-        if over_curve_names is not None:
-            raise ValueError(
-                "``over_curve_names`` can be set only when ``over_curve`` is not a dict."
-            )
-        over_curve = over_curve.items()
-        over_curve_names = [name for name, _ in over_curve]
-        over_curve = [sub_curve for _, sub_curve in over_curve]
-
-    if isinstance(over_curve_colors, Dict):
-        if over_curve_names is None:
-            raise ValueError(
-                "``over_curve_colors`` was a dict but no ``over_curve_names`` were provided"
-            )
-        over_curve_colors = [
-            (over_curve_colors[name] if name in over_curve_colors else None)
-            for name in over_curve_names
-        ]
-
-    over_curve = [
-        (sub_curve(wav, sr) if callable(sub_curve) else sub_curve)
-        for sub_curve in over_curve
-    ]
-
-    over_curve = [
-        broadcast_to_channels(to_tensor(sub_curve), channels)
-        for sub_curve in over_curve
-    ]
-
-    for sub_curve in over_curve:
-        # TODO: The (X, Y) feature of the ``over_curve`` is not well documented, see https://github.com/AlonKellner/waloviz/issues/6
-        if isinstance(sub_curve, Tuple):
-            if len(sub_curve) != 2:
-                raise ValueError(
-                    "When ``over_curve`` contains a tuple it must be of length 2 as such: ``(x_coordinates, y_coordinates)``"
-                )
-            sub_x, sub_y = sub_curve
-            if sub_x.shape != sub_y.shape:
-                raise ValueError(
-                    f"Found a mismatch between ``over_curve`` x and y coordinates lengths:\t{sub_x.shape[-1]} != {sub_y.shape[-1]}"
-                )
-
     return over_curve, over_curve_names, over_curve_colors
