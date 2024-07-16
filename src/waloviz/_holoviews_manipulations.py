@@ -17,8 +17,8 @@ class ThemeHook:
     | A class with a HoloViews hook for applying a Bokeh theme.
 
     | This is due to a problem when using the built-in theme support of
-    | HoloViews in integration with Panel, for some reason themes are only
-    | partially applied in those situations.
+      HoloViews in integration with Panel, for some reason themes are only
+      partially applied in those situations.
     | TODO: Open an Issue in the `HoloViews <https://github.com/holoviz/holoviews>`_ \\ `Panel <https://github.com/holoviz/panel>`_ repository about this
 
     Parameters
