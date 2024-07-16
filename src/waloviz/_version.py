@@ -1,5 +1,5 @@
 __version__ = version = "dev"
-__version_tuple__ = version_tuple = "dev"
+__version_tuple__ = version_tuple = ("dev",)
 
 # this will be generate automatically when published by hatchling and hatch-vcs according to the git tag.
 # For example if the tag was "release/v0.0.0a0", The generated file will look like this:

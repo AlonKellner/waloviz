@@ -30,6 +30,7 @@ Before starting to work on any PR go through this checklist, and once more befor
 - [ ] **Did I add my changes to the next release in the [`doc/releases.md`](doc/releases.md)?** - If not, add them.
 - [ ] **Should my changes be documented in the website?** - If so, document it in the `doc/`.
 - [ ] **Should my changes have any tests?** - If so, write them in `tests/`.
+- [ ] **Do all modified functions have an up to date inline documentation?** - If not, create or update the inline documentation.
 - [ ] **Does `pre-commit run` passes?** - If not, try to run it again and see if it passes now.
 - [ ] **Does `pytest tests/ui --browser chromium` - passes?** If not, make those tests pass before submitting.
 - [ ] **Did anyone respond to my PR or Issue?** - If not, don't worry, we probably missed it by mistake, sorry... Just write another comment and mention a maintainer.

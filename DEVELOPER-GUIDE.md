@@ -30,7 +30,11 @@ The Repository Structure is like so:
 
 ## Technologies
 
-In this repo there are many technologies for different usages, here is a list with helpful links:
+In this repo there are many technologies for many reasons.  
+**YOU DON'T NEED TO KNOW ALL OF THEM TO MAKE A PR!**  
+Most issues have a "Recommended Knowledge" section, all you need to know is listed there. If you need more background on how a specific technology fits in to WaloViz, then this is the section for you.
+
+Here is a non-comprehensive list which explains each technology with helpful links:
 
 - [**Github Actions**](https://docs.github.com/en/actions) - A versatile CI\CD solution with a huge community, for automated CI\CD pipelines
 - [**Github Pages**](https://pages.github.com/) - A simple static hosting solution, for hosting [the Test Documentation Website](https://alonkellner.com/waloviz/)
