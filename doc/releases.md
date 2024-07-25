@@ -1,6 +1,6 @@
 # Releases
 
-## Planned Version
+## Version 0.0.1
 
 **July 28, 2024**
 
