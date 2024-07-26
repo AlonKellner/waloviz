@@ -533,7 +533,7 @@ Specify the sample rate in one of the following ways:
         )
 
     if source_sr != target_sr:
-        wav = T.Resample(source_sr, target_sr)(wav)
+        wav = T.Resample(source_sr, target_sr)(wav.to(torch.float32))
     sr = target_sr
     return wav, sr
 
