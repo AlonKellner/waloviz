@@ -118,12 +118,14 @@ def preprocess_over_curve(
     over_curve: Optional[OverCurve],
     over_curve_names: Optional[Union[str, List[str]]] = None,
     over_curve_colors: Optional[Union[str, List[Optional[str]], Dict[str, str]]] = None,
-    over_curve_axes: Optional[Union[str, List[Optional[str]], Dict[str, str]]] = None,
+    over_curve_axes: Optional[
+        Union[str, List[Optional[str]], List[str], Dict[str, str]]
+    ] = None,
 ) -> Tuple[
     Optional[List[torch.Tensor]],
     Optional[List[str]],
     Optional[List[Optional[str]]],
-    Optional[List[Optional[str]]],
+    Optional[List[str]],
 ]:
     """
     | Converts user defined overlaid curves related options into a standard format, in terms of object structure and types.
@@ -202,6 +204,12 @@ def preprocess_over_curve(
     if isinstance(over_curve_axes, Dict):
         over_curve_axes = handle_dict_axes(over_curve_names, over_curve_axes)
 
+    over_curve_axes_list: Optional[List[str]] = None
+    if over_curve_axes is not None:
+        over_curve_axes_list = [
+            ("y" if axis is None else axis) for axis in over_curve_axes
+        ]
+
     over_curve = [
         (sub_curve(wav, sr) if callable(sub_curve) else sub_curve)
         for sub_curve in over_curve
@@ -214,7 +222,7 @@ def preprocess_over_curve(
 
     validate_XY_over_curve(over_curve)
 
-    return over_curve, over_curve_names, over_curve_colors, over_curve_axes
+    return over_curve, over_curve_names, over_curve_colors, over_curve_axes_list
 
 
 def validate_XY_over_curve(over_curve: OverCurve) -> None:
@@ -363,7 +371,7 @@ def handle_list_over_curve(
     over_curve: List[Any],
     over_curve_names: Optional[List[str]],
     over_curve_colors: Optional[Union[List[Optional[str]], Dict[str, str]]],
-    over_curve_axes: Optional[Union[List[Optional[str]], Dict[str, str]]],
+    over_curve_axes: Optional[Union[List[Optional[str]], List[str], Dict[str, str]]],
 ) -> Optional[List[str]]:
     """
     | Handles the case where ``over_curve`` is a list, makes a bunch of validations and generates ``over_curve_names`` if None were provided.
@@ -421,12 +429,14 @@ def single_value_to_list(
     over_curve: Optional[OverCurve],
     over_curve_names: Optional[Union[str, List[str]]] = None,
     over_curve_colors: Optional[Union[str, List[Optional[str]], Dict[str, str]]] = None,
-    over_curve_axes: Optional[Union[str, List[Optional[str]], Dict[str, str]]] = None,
+    over_curve_axes: Optional[
+        Union[str, List[Optional[str]], List[str], Dict[str, str]]
+    ] = None,
 ) -> Tuple[
     Optional[OverCurve],
     Optional[List[str]],
     Optional[Union[List[Optional[str]], Dict[str, str]]],
-    Optional[Union[List[Optional[str]], Dict[str, str]]],
+    Optional[Union[List[Optional[str]], List[str], Dict[str, str]]],
 ]:
     """
     | Makes sure that if single values were provided they are wrapped in single element lists.

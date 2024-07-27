@@ -83,7 +83,12 @@ def Audio(
     max_size: int = 10000,
     download_button: bool = True,
     freq_label: Optional[str] = "Hz",
-    over_curve_axes: Optional[Union[str, List[Optional[str]], Dict[str, str]]] = None,
+    over_curve_axes: Optional[
+        Union[str, List[Optional[str]], List[str], Dict[str, str]]
+    ] = None,
+    axes_limits: Optional[
+        Dict[str, Tuple[Optional[Union[float, int]], Optional[Union[float, int]]]]
+    ] = None,
     native_player: bool = False,
     minimal: bool = False,
     extended: bool = False,
@@ -185,6 +190,11 @@ def Audio(
         Sets the axis for each given ``over_curve`` , should match the size
         and structure of the given ``over_curve`` value. Setting the axis to
         "Hz" will sync the curve to the frequency axis of the spectrogram.
+    ``axes_limits`` : Dict[str, Tuple[float, float]]
+        Sets default limits for the different axes, the available axes are
+        "x" for the time dimension, "Hz" for the frequency dimension, "y"
+        for the default over curves dimension, and any other axis
+        provided in the ``over_curve_axes`` parameter.
     ``native_player`` : bool
         Whether the underlying native audio player should be visible. Default
         is False
@@ -218,7 +228,8 @@ def Audio(
     |
     """
     # These are configurable values which are not useful for users, but for developers
-    single_min_height: int = 80  # The minimum height of a single spectrogram, value is 80 based on manual testing, below it the ticks text starts to overlap
+    # The minimum height of a single spectrogram, value is 80 based on manual testing, below it the ticks text starts to overlap
+    single_min_height: int = 80
     both_min_height: int = 150  # The minimum height of all spectrogram channels together, regardless of amount, value is 150, below it the Bokeh toolbar starts to hide tools
     pbar_height: int = 40  # The total height of the progress bar including the axis itself, value is 40 = 10 for the bar itself + 30 for the axis
     stay_color: str = "#ffffff88"  # A half transparent white when playing normally
@@ -295,6 +306,7 @@ def Audio(
         colorbar=colorbar,
         freq_label=freq_label,
         over_curve_axes=over_curve_axes,
+        axes_limits=axes_limits,
     )
     player_bokeh = hv.render(player_hv)
 
@@ -779,6 +791,7 @@ def save(
             source, (IOLike, Union[np.ndarray, torch.Tensor, Any], tuple, int)
         ):
             raise ValueError("The provided ``source`` type is not supported")
+
         source = Audio(source, *args, **kwargs)  # pyright: ignore[reportArgumentType]
         # TODO: this being a "reportArgumentType" actually looks like a pyright bug, it
         #       assumes that the Dict[str, Any] is assigned when the Any is assigned.

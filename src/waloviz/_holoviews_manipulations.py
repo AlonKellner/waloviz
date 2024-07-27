@@ -75,7 +75,10 @@ def get_player_hv(
     title: Optional[str],
     embed_title: bool,
     freq_label: Optional[str],
-    over_curve_axes: Optional[List[Optional[str]]],
+    over_curve_axes: Optional[List[str]],
+    axes_limits: Optional[
+        Dict[str, Tuple[Optional[Union[float, int]], Optional[Union[float, int]]]]
+    ],
 ) -> hv.Layout:
     """
     | Uses HoloViews to create the plots elements of the player, without any custom interactivity.
@@ -125,6 +128,8 @@ def get_player_hv(
         to None which saves space.
     ``over_curve_axes`` : List[str]
         A list of axes names corresponding to the list given in ``over_curve``
+    ``axes_limits`` : Dict[str, Tuple[float, float]]
+        Default limits for any of the axes
 
     Returns
     -------
@@ -139,7 +144,10 @@ def get_player_hv(
 
     spec = T.Spectrogram(n_fft=n_fft, hop_length=hop_length)(wav)
 
-    spec: List[torch.Tensor] = [skip_to_size(sub_spec, max_size) for sub_spec in spec]  # pyright: ignore[reportAssignmentType] # type not inferred to recursive function
+    # type not inferred to recursive function
+    spec: List[torch.Tensor] = [  # pyright: ignore[reportAssignmentType]
+        skip_to_size(sub_spec, max_size) for sub_spec in spec
+    ]
     if over_curve is not None:
         over_curve = [skip_to_size(sub_curve, max_size) for sub_curve in over_curve]
 
@@ -164,6 +172,7 @@ def get_player_hv(
             hz_min,
             hv_max,
             over_curve_axes,
+            axes_limits,
         )
         plots.append(plot)
 
@@ -285,7 +294,7 @@ def create_progress_bar_plot(total_seconds: float, pbar_height: int) -> hv.Layou
     |
     """
     image = hv.Image(
-        np.ones((1, 1)), bounds=(0, 0, total_seconds, 1), kdims=["x", "dump"]
+        np.ones((1, 1)), bounds=(0, 0, total_seconds, 1), kdims=["x", "_dump"]
     ).opts(
         xlabel="",
         yaxis=None,
@@ -295,7 +304,7 @@ def create_progress_bar_plot(total_seconds: float, pbar_height: int) -> hv.Layou
     )
     vline = hv.VLine(0).opts(line_color="white")
     vspan = hv.VSpan(0, 0).opts(fill_color="white")
-    glyph = hv.Points([(0, 0.5)], kdims=["x", "dump"]).opts(
+    glyph = hv.Points([(0, 0.5)], kdims=["x", "_dump"]).opts(
         color="white", size=pbar_height - 30, yaxis=None, ylim=(0, 1)
     )
     pbar: hv.Layout = image * vline * vspan * glyph
@@ -318,7 +327,10 @@ def create_channel_spectrogram_plot(
     freq_label: Optional[str],
     hz_min: float,
     hv_max: float,
-    over_curve_axes: Optional[List[Optional[str]]],
+    over_curve_axes: Optional[List[str]],
+    axes_limits: Optional[
+        Dict[str, Tuple[Optional[Union[float, int]], Optional[Union[float, int]]]]
+    ],
 ) -> hv.Layout:
     """
     | Creates a HoloViews plot of the progress bar.
@@ -358,6 +370,8 @@ def create_channel_spectrogram_plot(
         Maximum frequency in the torchaudio spectrogram
     ``over_curve_axes`` : List[str]
         A list of axes names corresponding to the list given in ``over_curve``
+    ``axes_limits`` : Dict[str, Tuple[float, float]]
+        Default limits for any of the axes
 
     Returns
     -------
@@ -366,6 +380,8 @@ def create_channel_spectrogram_plot(
 
     |
     """
+    lim_kwargs = create_lim_kwargs(over_curve_axes, axes_limits)
+
     spec_image = hv.Image(
         spec_channel.numpy()[::-1, :] + 1e-5,
         bounds=(0, hz_min, total_seconds, hv_max),
@@ -376,6 +392,8 @@ def create_channel_spectrogram_plot(
         cmap=cmap,
         cnorm="log",
         colorbar=colorbar,
+        **lim_kwargs["x"],
+        **lim_kwargs["Hz"],
     )
     vspan = hv.VSpan(0, 0).opts(fill_color="#ffffff33", yaxis=None)
     vline = hv.VLine(0).opts(line_width=2, line_color=stay_color, yaxis=None)
@@ -392,12 +410,15 @@ def create_channel_spectrogram_plot(
                 color_kwargs["color"] = over_curve_colors[curve_index]
 
             axes_kwargs = {}
+            axes_opts_kwargs = {}
             if (
                 over_curve_axes is not None
                 and len(over_curve_axes) > curve_index
                 and over_curve_axes[curve_index] is not None
             ):
-                axes_kwargs["vdims"] = [over_curve_axes[curve_index]]
+                axis = over_curve_axes[curve_index]
+                axes_kwargs["vdims"] = [axis]
+                axes_opts_kwargs = lim_kwargs[axis]
 
             if isinstance(sub_curve, Tuple):
                 sub_x, sub_y = sub_curve
@@ -413,11 +434,18 @@ def create_channel_spectrogram_plot(
                 kdims=["x"],
                 label=f"{over_curve_names[curve_index]}",
                 **axes_kwargs,
-            ).opts(ylabel="", xaxis=None, alpha=0.9, **color_kwargs)
+            ).opts(
+                ylabel="",
+                xaxis=None,
+                alpha=0.9,
+                **color_kwargs,
+                **axes_opts_kwargs,
+                **lim_kwargs["x"],
+            )
             curves.append(curve)
         spec_image = spec_image * hv.Overlay(curves)
 
-    glyph = hv.Points([(0, 0.5)], kdims=["x", "dump"]).opts(
+    glyph = hv.Points([(0, 0.5)], kdims=["x", "_dump"]).opts(
         marker="^", color="white", size=10, yaxis=None, ylim=(0, 1)
     )
     if embed_title:
@@ -432,3 +460,42 @@ def create_channel_spectrogram_plot(
     )
 
     return plot
+
+
+def create_lim_kwargs(
+    over_curve_axes: Optional[List[str]],
+    axes_limits: Optional[
+        Dict[str, Tuple[Optional[Union[float, int]], Optional[Union[float, int]]]]
+    ],
+) -> Dict[
+    str, Dict[str, Tuple[Optional[Union[float, int]], Optional[Union[float, int]]]]
+]:
+    """
+    | Creates a dict with kwargs for axis limiting, in the required HoloViews axis limits format.
+
+    Parameters
+    ----------
+    ``over_curve_axes`` : List[str]
+        .
+    ``axes_limits`` : Dict[str, Tuple[float, float]]
+        .
+
+    Returns
+    -------
+    ``lim_kwargs`` : Dict[str, Dict[str, Tuple[float, float]]]
+        The limit kwargs for each axis as required by HoloViews
+
+    |
+    """
+    lim_kwargs = {"x": {}, "Hz": {}}
+    if over_curve_axes is not None:
+        for axis in set(over_curve_axes):
+            lim_kwargs[axis] = {}
+
+    if axes_limits is not None:
+        for axis, limits in axes_limits.items():
+            if axis == "x":
+                lim_kwargs["x"] = dict(xlim=limits)
+            else:
+                lim_kwargs[axis] = dict(ylim=limits)
+    return lim_kwargs

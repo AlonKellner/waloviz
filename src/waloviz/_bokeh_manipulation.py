@@ -413,7 +413,9 @@ plot_0.prev_x_range = {start: plot_0.x_range.start, end: plot_0.x_range.end};
 plot_0.prev_y_range = {start: plot_0.y_range.start, end: plot_0.y_range.end};
 
 plot_0.prev_extra_y_ranges = Object.keys(plot_0.extra_y_ranges).reduce(function(result, key) {
-    result[key] = {start: plot_0.extra_y_ranges[key].start, end: plot_0.extra_y_ranges[key].end};
+    if (key != '_dump') {
+        result[key] = {start: plot_0.extra_y_ranges[key].start, end: plot_0.extra_y_ranges[key].end};
+    }
     return result;
 }, {});
                 """,
@@ -497,7 +499,7 @@ def get_set_y_range_callback(
     """
     | Create a jslink callback which stops the y zoom by setting a constant y range when the mouse is over the spectrograms.
 
-    | Sets ``is_y_fixed`` , ``hz_fixed_start`` and ``hz_fixed_end`` of the zeroth plot (first spectrogram).
+    | Sets ``is_y_fixed`` , ``hz_fixed_range.start`` and ``hz_fixed_range.end`` of the zeroth plot (first spectrogram).
 
     Parameters
     ----------
@@ -519,12 +521,16 @@ def get_set_y_range_callback(
 let mouse_in = ('x' in cb_obj) && (cb_obj.x > plot.x_range.start) && (cb_obj.x < plot.x_range.end);
 if (('is_y_fixed' in plot_0) && (plot_0.is_y_fixed)) {
     if (mouse_in) {
-        if ('dump' in plot.extra_y_ranges) {
-            plot.y_range.start = plot_0.hz_fixed_start;
-            plot.y_range.end = plot_0.hz_fixed_end;
-            if (('y' in plot_0.extra_y_ranges) && ('y_fixed_start' in plot_0)) {
-                plot.extra_y_ranges['y'].start = plot_0.y_fixed_start;
-                plot.extra_y_ranges['y'].end = plot_0.y_fixed_end;
+        if ('_dump' in plot.extra_y_ranges) {
+            plot.y_range.start = plot_0.hz_fixed_range.start;
+            plot.y_range.end = plot_0.hz_fixed_range.end;
+            if ((Object.keys(plot.extra_y_ranges).length > 0) && ('extra_fixed_ranges' in plot_0)) {
+                for (const key in plot_0.extra_y_ranges) {
+                    if ((key != '_dump') && (key in plot_0.extra_fixed_ranges) && ('start' in plot_0.extra_fixed_ranges[key])) {
+                        plot.extra_y_ranges[key].start = plot_0.extra_fixed_ranges[key].start;
+                        plot.extra_y_ranges[key].end = plot_0.extra_fixed_ranges[key].end;
+                    }
+                }
             }
         }
     } else {
@@ -534,18 +540,24 @@ if (('is_y_fixed' in plot_0) && (plot_0.is_y_fixed)) {
     if (mouse_in) {
         plot_0.is_y_fixed = true;
         if ('prev_y_range' in plot_0) {
-            plot_0.hz_fixed_start = plot_0.prev_y_range.start;
-            plot_0.hz_fixed_end = plot_0.prev_y_range.end;
-            if ('y' in plot_0.prev_extra_y_ranges) {
-                plot_0.y_fixed_start = plot_0.prev_extra_y_ranges['y'].start;
-                plot_0.y_fixed_end = plot_0.prev_extra_y_ranges['y'].end;
-            }
+            plot_0.hz_fixed_range = plot_0.prev_y_range;
+            plot_0.extra_fixed_ranges = plot_0.prev_extra_y_ranges;
         } else {
-            plot_0.hz_fixed_start = plot_0.y_range.reset_start;
-            plot_0.hz_fixed_end = plot_0.y_range.reset_end;
-            if (('y' in plot.extra_y_ranges) && (plot.extra_y_ranges['y'].reset_start != null)) {
-                plot_0.y_fixed_start = plot_0.extra_y_ranges['y'].reset_start;
-                plot_0.y_fixed_end = plot_0.extra_y_ranges['y'].reset_end;
+
+            plot_0.hz_fixed_range = {
+                start: plot_0.y_range.reset_start,
+                end: plot_0.y_range.reset_end
+            };
+            if (Object.keys(plot.extra_y_ranges).length > 0) {
+                plot_0.extra_fixed_ranges = {};
+                for (const key in plot_0.extra_y_ranges) {
+                    if ((key != '_dump') && (plot_0.extra_y_ranges[key].reset_start != null)) {
+                        plot_0.extra_fixed_ranges[key] = {
+                            start: plot_0.extra_y_ranges[key].reset_start,
+                            end: plot_0.extra_y_ranges[key].reset_end
+                        };
+                    }
+                }
             }
         }
     }
@@ -561,7 +573,7 @@ def get_keep_y_range_callback(
     """
     | Create a jslink callback which keeps the constant y range when the mouse is over the spectrograms.
 
-    | Uses ``is_y_fixed`` , ``hz_fixed_start`` and ``hz_fixed_end`` of the zeroth plot (first spectrogram).
+    | Uses ``is_y_fixed`` , ``hz_fixed_range.start`` and ``hz_fixed_range.end`` of the zeroth plot (first spectrogram).
 
     Parameters
     ----------
@@ -581,12 +593,16 @@ def get_keep_y_range_callback(
         args=dict(plot=plot, plot_0=plots[0]),
         code="""
 if (('is_y_fixed' in plot_0) && (plot_0.is_y_fixed)) {
-    if ('dump' in plot.extra_y_ranges) {
-        plot.y_range.start = plot_0.hz_fixed_start;
-        plot.y_range.end = plot_0.hz_fixed_end;
-        if (('y' in plot.extra_y_ranges) && ('y_fixed_start' in plot_0)) {
-            plot.extra_y_ranges['y'].start = plot_0.y_fixed_start;
-            plot.extra_y_ranges['y'].end = plot_0.y_fixed_end;
+    if ('_dump' in plot.extra_y_ranges) {
+        plot.y_range.start = plot_0.hz_fixed_range.start;
+        plot.y_range.end = plot_0.hz_fixed_range.end;
+        if ((Object.keys(plot.extra_y_ranges).length > 0) && ('extra_fixed_ranges' in plot_0)) {
+            for (const key in plot_0.extra_y_ranges) {
+                if ((key != '_dump') && (key in plot_0.extra_fixed_ranges) && ('start' in plot_0.extra_fixed_ranges[key])) {
+                    plot.extra_y_ranges[key].start = plot_0.extra_fixed_ranges[key].start;
+                    plot.extra_y_ranges[key].end = plot_0.extra_fixed_ranges[key].end;
+                }
+            }
         }
     }
 }
@@ -601,7 +617,7 @@ def get_set_pbar_x_range_callback(
     """
     | Create a jslink callback which stops the x zoom by setting a constant x range when the mouse is over the progress bar.
 
-    | Sets ``is_x_fixed`` , ``x_fixed_start`` and ``x_fixed_end`` of the zeroth plot (first spectrogram).
+    | Sets ``is_x_fixed`` , ``x_fixed_range.start`` and ``x_fixed_range.end`` of the zeroth plot (first spectrogram).
 
     Parameters
     ----------
@@ -623,8 +639,8 @@ def get_set_pbar_x_range_callback(
 let mouse_in = ('y' in cb_obj) && (cb_obj.y > pbar.y_range.start) && (cb_obj.y < pbar.y_range.end);
 if (('is_x_fixed' in plot_0) && (plot_0.is_x_fixed)) {
     if (mouse_in) {
-        plot.x_range.start = plot_0.x_fixed_start;
-        plot.x_range.end = plot_0.x_fixed_end;
+        plot.x_range.start = plot_0.x_fixed_range.start;
+        plot.x_range.end = plot_0.x_fixed_range.end;
     } else {
         plot_0.is_x_fixed = false;
     }
@@ -632,11 +648,11 @@ if (('is_x_fixed' in plot_0) && (plot_0.is_x_fixed)) {
     if (mouse_in) {
         plot_0.is_x_fixed = true;
         if ('prev_x_range' in plot_0) {
-            plot_0.x_fixed_start = plot_0.prev_x_range.start;
-            plot_0.x_fixed_end = plot_0.prev_x_range.end;
+            plot_0.x_fixed_range = plot_0.prev_x_range;
         } else {
-            plot_0.x_fixed_start = plot_0.x_range.reset_start;
-            plot_0.x_fixed_end = plot_0.x_range.reset_end;
+            plot_0.x_fixed_range = {};
+            plot_0.x_fixed_range.start = plot_0.x_range.reset_start;
+            plot_0.x_fixed_range.end = plot_0.x_range.reset_end;
         }
     }
 }
@@ -651,7 +667,7 @@ def get_keep_x_range_callback(
     """
     | Create a jslink callback which keeps the constant x range when the mouse is over the progress bar.
 
-    | Uses ``is_x_fixed`` , ``x_fixed_start`` and ``x_fixed_end`` of the zeroth plot (first spectrogram).
+    | Uses ``is_x_fixed`` , ``x_fixed_range.start`` and ``x_fixed_range.end`` of the zeroth plot (first spectrogram).
 
     Parameters
     ----------
@@ -671,8 +687,8 @@ def get_keep_x_range_callback(
         args=dict(plot=plot, plot_0=plots[0]),
         code="""
 if (('is_x_fixed' in plot_0) && (plot_0.is_x_fixed)) {
-    plot.x_range.start = plot_0.x_fixed_start;
-    plot.x_range.end = plot_0.x_fixed_end;
+    plot.x_range.start = plot_0.x_fixed_range.start;
+    plot.x_range.end = plot_0.x_fixed_range.end;
 }
             """,
     )
@@ -681,9 +697,9 @@ if (('is_x_fixed' in plot_0) && (plot_0.is_x_fixed)) {
 
 def get_keep_dump_range_callback(plot: bokeh.model.Model) -> CustomJS:
     """
-    | Create a jslink callback which keeps the "dump" y axis between 0 and 1.
+    | Create a jslink callback which keeps the '_dump' y axis between 0 and 1.
 
-    | The "dump" axis is used for the play and stop icons as well as the progress bar handle.
+    | The '_dump' axis is used for the play and stop icons as well as the progress bar handle.
 
     Parameters
     ----------
@@ -700,9 +716,9 @@ def get_keep_dump_range_callback(plot: bokeh.model.Model) -> CustomJS:
     keep_dump_range_callback = CustomJS(
         args=dict(plot=plot),
         code="""
-if ('dump' in plot.extra_y_ranges) {
-    plot.extra_y_ranges['dump'].start = 0;
-    plot.extra_y_ranges['dump'].end = 1;
+if ('_dump' in plot.extra_y_ranges) {
+    plot.extra_y_ranges['_dump'].start = 0;
+    plot.extra_y_ranges['_dump'].end = 1;
 } else {
     plot.y_range.start = 0;
     plot.y_range.end = 1;
@@ -777,9 +793,13 @@ if (('is_y_fixed' in plot_0) && (plot_0.is_y_fixed)) {
     plot_0.is_y_fixed = false;
     plot.y_range.start = plot.y_range.reset_start;
     plot.y_range.end = plot.y_range.reset_end;
-    if (('y' in plot.extra_y_ranges) && (plot.extra_y_ranges['y'].reset_start != null)) {
-        plot.extra_y_ranges['y'].start = plot.extra_y_ranges['y'].reset_start;
-        plot.extra_y_ranges['y'].end = plot.extra_y_ranges['y'].reset_end;
+    if (Object.keys(plot.extra_y_ranges).length > 0) {
+        for (const key in plot.extra_y_ranges) {
+            if ((key != '_dump') && (plot.extra_y_ranges[key].reset_start != null)) {
+                plot.extra_y_ranges[key].start = plot.extra_y_ranges[key].reset_start;
+                plot.extra_y_ranges[key].end = plot.extra_y_ranges[key].reset_end;
+            }
+        }
     }
 }
 if (('is_x_fixed' in plot_0) && (plot_0.is_x_fixed)) {
