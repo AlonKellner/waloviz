@@ -419,6 +419,9 @@ def create_channel_spectrogram_plot(
                 axis = over_curve_axes[curve_index]
                 axes_kwargs["vdims"] = [axis]
                 axes_opts_kwargs = lim_kwargs[axis]
+            elif "y" in lim_kwargs:
+                axis = "y"
+                axes_opts_kwargs = lim_kwargs[axis]
 
             if isinstance(sub_curve, Tuple):
                 sub_x, sub_y = sub_curve

@@ -479,7 +479,9 @@ def single_value_to_list(
 
     if not isinstance(over_curve, (List, Dict)):
         if (hasattr(over_curve, "shape") and len(over_curve.shape) == 1) or (  # pyright: ignore[reportAttributeAccessIssue]
-            isinstance(over_curve, Tuple) and len(over_curve) == 2
+            isinstance(over_curve, Tuple)
+            and len(over_curve) == 2
+            or callable(over_curve)
         ):
             over_curve = [over_curve]
         else:
