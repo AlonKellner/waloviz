@@ -118,8 +118,12 @@ def preprocess_over_curve(
     over_curve: Optional[OverCurve],
     over_curve_names: Optional[Union[str, List[str]]] = None,
     over_curve_colors: Optional[Union[str, List[Optional[str]], Dict[str, str]]] = None,
+    over_curve_axes: Optional[Union[str, List[Optional[str]], Dict[str, str]]] = None,
 ) -> Tuple[
-    Optional[List[torch.Tensor]], Optional[List[str]], Optional[List[Optional[str]]]
+    Optional[List[torch.Tensor]],
+    Optional[List[str]],
+    Optional[List[Optional[str]]],
+    Optional[List[Optional[str]]],
 ]:
     """
     | Converts user defined overlaid curves related options into a standard format, in terms of object structure and types.
@@ -138,6 +142,8 @@ def preprocess_over_curve(
         User provided
     ``over_curve_colors`` : List[str]
         User provided
+    ``over_curve_axes`` : List[str]
+        User provided
 
     Returns
     -------
@@ -147,6 +153,8 @@ def preprocess_over_curve(
         Standardized
     ``over_curve_colors`` : List[str]
         Standardized
+    ``over_curve_axes`` : List[str]
+        User provided
 
     Raises
     ------
@@ -155,7 +163,11 @@ def preprocess_over_curve(
         | **OR**
         | When ``over_curve_colors`` was provided but of a different size from ``over_curve``
         | **OR**
+        | When ``over_curve_axes`` was provided but of a different size from ``over_curve``
+        | **OR**
         | When ``over_curve_colors`` was a dict but ``over_curve_names`` was not provided
+        | **OR**
+        | When ``over_curve_axes`` was a dict but ``over_curve_names`` was not provided
         | **OR**
         | When ``over_curve_names`` was provided but ``over_curve`` was a dict
         | **OR**
@@ -165,16 +177,18 @@ def preprocess_over_curve(
 
     |
     """
-    over_curve, over_curve_names, over_curve_colors = single_value_to_list(
-        over_curve, over_curve_names, over_curve_colors
+    over_curve, over_curve_names, over_curve_colors, over_curve_axes = (
+        single_value_to_list(
+            over_curve, over_curve_names, over_curve_colors, over_curve_axes
+        )
     )
 
     if over_curve is None:
-        return None, None, None
+        return None, None, None, None
 
     if isinstance(over_curve, List):
         over_curve_names = handle_list_over_curve(
-            over_curve, over_curve_names, over_curve_colors
+            over_curve, over_curve_names, over_curve_colors, over_curve_axes
         )
 
     if isinstance(over_curve, Dict):
@@ -184,6 +198,9 @@ def preprocess_over_curve(
 
     if isinstance(over_curve_colors, Dict):
         over_curve_colors = handle_dict_colors(over_curve_names, over_curve_colors)
+
+    if isinstance(over_curve_axes, Dict):
+        over_curve_axes = handle_dict_axes(over_curve_names, over_curve_axes)
 
     over_curve = [
         (sub_curve(wav, sr) if callable(sub_curve) else sub_curve)
@@ -197,7 +214,7 @@ def preprocess_over_curve(
 
     validate_XY_over_curve(over_curve)
 
-    return over_curve, over_curve_names, over_curve_colors
+    return over_curve, over_curve_names, over_curve_colors, over_curve_axes
 
 
 def validate_XY_over_curve(over_curve: OverCurve) -> None:
@@ -269,6 +286,43 @@ def handle_dict_colors(
     return list_over_curve_colors
 
 
+def handle_dict_axes(
+    over_curve_names: Optional[List[str]], over_curve_axes: Dict[str, str]
+) -> List[Optional[str]]:
+    """
+    | Handles the case where ``over_curve_axes`` is a dict and converts it to a list.
+
+    Parameters
+    ----------
+    ``over_curve_names`` : List[str] | None
+        .
+    ``over_curve_axes`` : Dict[str, str]
+        .
+
+    Returns
+    -------
+    ``over_curve_axes`` : List[str | None]
+        .
+
+    Raises
+    ------
+    ``ValueError``
+        | When ``over_curve_axes`` was a dict but ``over_curve_names`` was not provided
+
+    |
+    """
+    if over_curve_names is None:
+        raise ValueError(
+            "``over_curve_axes`` was a dict but ``over_curve_names`` was not provided"
+        )
+    list_over_curve_axes: List[Optional[str]] = [
+        (over_curve_axes[name] if name in over_curve_axes else None)
+        for name in over_curve_names
+    ]
+
+    return list_over_curve_axes
+
+
 def handle_dict_over_curve(
     over_curve: Dict[str, Any], over_curve_names: Optional[List[str]]
 ) -> Tuple[List[Any], List[str]]:
@@ -309,6 +363,7 @@ def handle_list_over_curve(
     over_curve: List[Any],
     over_curve_names: Optional[List[str]],
     over_curve_colors: Optional[Union[List[Optional[str]], Dict[str, str]]],
+    over_curve_axes: Optional[Union[List[Optional[str]], Dict[str, str]]],
 ) -> Optional[List[str]]:
     """
     | Handles the case where ``over_curve`` is a list, makes a bunch of validations and generates ``over_curve_names`` if None were provided.
@@ -319,11 +374,13 @@ def handle_list_over_curve(
         .
     ``over_curve_names`` : List[str] | None
         .
+    ``over_curve_colors`` : List[str] | None
+        .
+    ``over_curve_axes`` : List[str] | None
+        .
 
     Returns
     -------
-    ``over_curve`` : List[Any]
-        .
     ``over_curve_names`` : List[str]
         .
 
@@ -333,6 +390,8 @@ def handle_list_over_curve(
         | When ``over_curve_names`` was provided but of a different size from ``over_curve``
         | **OR**
         | When ``over_curve_colors`` was provided but of a different size from ``over_curve``
+        | **OR**
+        | When ``over_curve_axes`` was provided but of a different size from ``over_curve``
 
     |
     """
@@ -349,6 +408,12 @@ def handle_list_over_curve(
                 f"Size of ``over_curve_colors`` was different than ``over_curve`` but should be equal, {len(over_curve_colors)} != {len(over_curve)}"
             )
 
+    if over_curve_axes is not None:
+        if len(over_curve_axes) != len(over_curve):
+            raise ValueError(
+                f"Size of ``over_curve_axes`` was different than ``over_curve`` but should be equal, {len(over_curve_axes)} != {len(over_curve)}"
+            )
+
     return over_curve_names
 
 
@@ -356,9 +421,11 @@ def single_value_to_list(
     over_curve: Optional[OverCurve],
     over_curve_names: Optional[Union[str, List[str]]] = None,
     over_curve_colors: Optional[Union[str, List[Optional[str]], Dict[str, str]]] = None,
+    over_curve_axes: Optional[Union[str, List[Optional[str]], Dict[str, str]]] = None,
 ) -> Tuple[
     Optional[OverCurve],
     Optional[List[str]],
+    Optional[Union[List[Optional[str]], Dict[str, str]]],
     Optional[Union[List[Optional[str]], Dict[str, str]]],
 ]:
     """
@@ -372,6 +439,8 @@ def single_value_to_list(
         User provided
     ``over_curve_colors`` : List[str]
         User provided
+    ``over_curve_axes`` : List[str]
+        User provided
 
     Returns
     -------
@@ -381,17 +450,22 @@ def single_value_to_list(
         .
     ``over_curve_colors`` : List[str]
         .
+    ``over_curve_axes`` : List[str]
+        .
 
     |
     """
     if over_curve is None:
-        return None, None, None
+        return None, None, None, None
 
     if isinstance(over_curve_names, str):
         over_curve_names = [over_curve_names]
 
     if isinstance(over_curve_colors, str):
         over_curve_colors = [over_curve_colors]
+
+    if isinstance(over_curve_axes, str):
+        over_curve_axes = [over_curve_axes]
 
     if not isinstance(over_curve, (List, Dict)):
         if (hasattr(over_curve, "shape") and len(over_curve.shape) == 1) or (  # pyright: ignore[reportAttributeAccessIssue]
@@ -400,4 +474,4 @@ def single_value_to_list(
             over_curve = [over_curve]
         else:
             over_curve = [sub_curve for sub_curve in over_curve]
-    return over_curve, over_curve_names, over_curve_colors
+    return over_curve, over_curve_names, over_curve_colors, over_curve_axes

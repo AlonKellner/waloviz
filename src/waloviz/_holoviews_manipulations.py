@@ -75,6 +75,7 @@ def get_player_hv(
     title: Optional[str],
     embed_title: bool,
     freq_label: Optional[str],
+    over_curve_axes: Optional[List[Optional[str]]],
 ) -> hv.Layout:
     """
     | Uses HoloViews to create the plots elements of the player, without any custom interactivity.
@@ -122,6 +123,8 @@ def get_player_hv(
     ``freq_label`` : str
         The label of the frequency axis (vertical), hides the label when set
         to None which saves space.
+    ``over_curve_axes`` : List[str]
+        A list of axes names corresponding to the list given in ``over_curve``
 
     Returns
     -------
@@ -160,6 +163,7 @@ def get_player_hv(
             freq_label,
             hz_min,
             hv_max,
+            over_curve_axes,
         )
         plots.append(plot)
 
@@ -314,6 +318,7 @@ def create_channel_spectrogram_plot(
     freq_label: Optional[str],
     hz_min: float,
     hv_max: float,
+    over_curve_axes: Optional[List[Optional[str]]],
 ) -> hv.Layout:
     """
     | Creates a HoloViews plot of the progress bar.
@@ -351,7 +356,8 @@ def create_channel_spectrogram_plot(
         Minimum frequency in the torchaudio spectrogram
     ``hz_max`` : int
         Maximum frequency in the torchaudio spectrogram
-
+    ``over_curve_axes`` : List[str]
+        A list of axes names corresponding to the list given in ``over_curve``
 
     Returns
     -------
@@ -385,6 +391,14 @@ def create_channel_spectrogram_plot(
             ):
                 color_kwargs["color"] = over_curve_colors[curve_index]
 
+            axes_kwargs = {}
+            if (
+                over_curve_axes is not None
+                and len(over_curve_axes) > curve_index
+                and over_curve_axes[curve_index] is not None
+            ):
+                axes_kwargs["vdims"] = [over_curve_axes[curve_index]]
+
             if isinstance(sub_curve, Tuple):
                 sub_x, sub_y = sub_curve
                 channel_sub_curve = sub_x[channel_index], sub_y[channel_index]
@@ -398,6 +412,7 @@ def create_channel_spectrogram_plot(
                 channel_sub_curve,
                 kdims=["x"],
                 label=f"{over_curve_names[curve_index]}",
+                **axes_kwargs,
             ).opts(ylabel="", xaxis=None, alpha=0.9, **color_kwargs)
             curves.append(curve)
         spec_image = spec_image * hv.Overlay(curves)

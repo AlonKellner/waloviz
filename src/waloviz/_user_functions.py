@@ -83,6 +83,7 @@ def Audio(
     max_size: int = 10000,
     download_button: bool = True,
     freq_label: Optional[str] = "Hz",
+    over_curve_axes: Optional[Union[str, List[Optional[str]], Dict[str, str]]] = None,
     native_player: bool = False,
     minimal: bool = False,
     extended: bool = False,
@@ -180,6 +181,10 @@ def Audio(
     ``freq_label`` : str
         The label of the frequency axis (vertical), hides the label when set
         to None which saves space.
+    ``over_curve_axes`` : str | List[str] | Dict[str, str]
+        Sets the axis for each given ``over_curve`` , should match the size
+        and structure of the given ``over_curve`` value. Setting the axis to
+        "Hz" will sync the curve to the frequency axis of the spectrogram.
     ``native_player`` : bool
         Whether the underlying native audio player should be visible. Default
         is False
@@ -258,8 +263,16 @@ def Audio(
         single_min_height, both_min_height, channels
     )
 
-    over_curve, over_curve_names, over_curve_colors = preprocess_over_curve(
-        wav, sr, channels, over_curve, over_curve_names, over_curve_colors
+    over_curve, over_curve_names, over_curve_colors, over_curve_axes = (
+        preprocess_over_curve(
+            wav,
+            sr,
+            channels,
+            over_curve,
+            over_curve_names,
+            over_curve_colors,
+            over_curve_axes,
+        )
     )
 
     player_hv = get_player_hv(
@@ -281,6 +294,7 @@ def Audio(
         embed_title=embed_title,
         colorbar=colorbar,
         freq_label=freq_label,
+        over_curve_axes=over_curve_axes,
     )
     player_bokeh = hv.render(player_hv)
 
