@@ -59,7 +59,7 @@ By being Responsive to Users, and Welcoming to Beginner Conftributors.
 
 ## Roadmap
 
-- [ ] Early Alpha release
+- [x] Early Alpha release
 - [ ] Create and follow dependencies Issues
 - [ ] Create a PR for the [Panel Community Gallery](https://panel.holoviz.org/gallery/index.html#community-gallery)
 - [ ] Plan Beta release features
