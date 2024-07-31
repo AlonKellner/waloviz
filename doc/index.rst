@@ -12,7 +12,7 @@ Introduction
 
 **An interactive audio player with a spectrogram built-in, as a Jupyter widget or as HTML.**
 
-`|:star:| GitHub Repo |:star:| <https://github.com/AlonKellner/waloviz/>`_, `|:arrow_forward:| Google Colab Demo |:arrow_forward:| <https://colab.research.google.com/drive/1euQCxaNlTg0pGvXz6d7RSoDhM3B1k7dy>`_, `|:bust_in_silhouette:| Portfolio Project Page |:bust_in_silhouette:| <https://alonkellner.com/projects/open-source_2024-07-25_waloviz/>`_
+|:star:| `GitHub Repo <https://github.com/AlonKellner/waloviz/>`_ |:star:|, |:arrow_forward:| `Google Colab Demo <https://colab.research.google.com/drive/1euQCxaNlTg0pGvXz6d7RSoDhM3B1k7dy>`_ |:arrow_forward:|, |:bust_in_silhouette:| `Portfolio Project Page <https://alonkellner.com/projects/open-source_2024-07-25_waloviz/>`_ |:bust_in_silhouette:|
 
 | Welcome!
 | WaloViz is an open source audio player with a spectrogram built-in, it was built by audio experts - for audio experts.
