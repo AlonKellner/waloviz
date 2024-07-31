@@ -12,6 +12,8 @@
 [![example snapshot](doc/resources/example_snapshot.png)](https://waloviz.com)
 **An open source interactive audio player with a spectrogram built-in, primarily based on [Bokeh](https://bokeh.org/) and the [HoloViz](https://holoviz.org/) stack (wav+HoloViz=WaloViz).**
 
+[:globe_with_meridians: WaloViz Website :globe_with_meridians:](https://waloviz.com), [:arrow_forward: Google Colab Demo :arrow_forward:](https://colab.research.google.com/drive/1euQCxaNlTg0pGvXz6d7RSoDhM3B1k7dy), [:bust_in_silhouette: Portfolio Project Page :bust_in_silhouette:](https://alonkellner.com/projects/open-source_2024-07-25_waloviz/)
+
 ## Installation
 
 ```shell
