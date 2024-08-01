@@ -11,7 +11,7 @@ TL;DR
     pip install waloviz
     ffmpeg --version
 
-|
+.. separator comment
 
     If the ``ffmpeg --version`` command fails, try following the installation instructions in the `Explanation section <#explanation>`_
 
@@ -59,9 +59,9 @@ Explanation
 
             apt-get install 'ffmpeg<7'
 
-|
+.. separator comment
 
-    If none of the ``ffmpeg`` installation options worked for you, follow `this Hostinger Tutorial <https://www.hostinger.com/tutorials/how-to-install-ffmpeg`_, make sure to install a version lower than 7.
+    If none of the ``ffmpeg`` installation options worked for you, follow `this Hostinger Tutorial <https://www.hostinger.com/tutorials/how-to-install-ffmpeg>`_, make sure to install a version lower than 7.
 
 | After ``ffmpeg`` is verified to be installed properly, we move on to python!
 | All we need to do is import ``waloviz`` and activate the extension:

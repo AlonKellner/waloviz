@@ -7,9 +7,9 @@ Introduction
     pip install waloviz
     ffmpeg --version
 
-|
+.. separator comment
 
-    If the `ffmpeg --version` command fails, try following the [Installation Instructions in our Getting Started guide](https://waloviz.com/en/stable/getting-started.
+    If the ``ffmpeg --version`` command fails, try following the `Installation Instructions in our Getting Started guide <https://waloviz.com/en/stable/getting-started>`_.
 
 .. notebook:: holoviews ../examples/introduction.ipynb
     :offset: 1
