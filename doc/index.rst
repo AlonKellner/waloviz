@@ -10,7 +10,7 @@ Introduction
 
 ..
 
-    If the ``ffmpeg --version`` command fails, try following the `Installation Instructions in our Getting Started guide <https://waloviz.com/en/stable/getting-started>`_.
+    If the ``ffmpeg --version`` command fails, try following the `Installation Instructions in our Getting Started guide <../getting-started.html#explanation>`_.
 
 .. notebook:: holoviews ../examples/introduction.ipynb
     :offset: 1

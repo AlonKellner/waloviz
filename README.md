@@ -57,7 +57,7 @@ To make a contirbution, please read our [Contributing Guide](CONTRIBUTING.md).
  </picture>
 </a>
 
-What an incredible community response to our launch! Thank you all!
+What an incredible community response to our launch! Thank you all so much!
 
 ## Our Vision
 

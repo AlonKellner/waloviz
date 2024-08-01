@@ -6,7 +6,7 @@ FAQ
 
   .. collapse:: A:
 
-      | WaloViz uses ``torchaudio`` to load audio files, and ``torchaudio`` itself uses a backend to load them, the recommended backend is ``ffmpeg`` , so just make sure you've installed it by following the `Installation Instructions in our Getting Started guide <https://waloviz.com/en/stable/getting-started.html#explanation>`_.
+      | WaloViz uses ``torchaudio`` to load audio files, and ``torchaudio`` itself uses a backend to load them, the recommended backend is ``ffmpeg`` , so just make sure you've installed it by following the `Installation Instructions in our Getting Started guide <../getting-started.html#explanation>`_.
 
 * **Q:** How can I help WaloViz?
 
