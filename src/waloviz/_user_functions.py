@@ -32,6 +32,15 @@ def extension(mode: str = "default") -> None:
     """
     | Initializes the notebook extensions for the current IDE.
 
+    | It is the equivalent of:
+
+    .. code-block:: python
+
+            hv.extension("bokeh")
+            pn.extension(comms="default")
+
+    | When the ``mode`` parameter is "colab" those two lines of code will rerun on every ``wv.Audio`` call.
+
     Examples
     --------
 

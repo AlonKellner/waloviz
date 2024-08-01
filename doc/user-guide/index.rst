@@ -1,7 +1,8 @@
 User Guide
 ==========
 
-| The User Guide goes through the available features in WaloViz. For newcomers, quick introduction to WaloViz can be found in our `Getting Started Guide <../getting-started.html>`_.
+| The User Guide goes through the available features in WaloViz.
+| For newcomers, a quick introduction to WaloViz can be found in our `Getting Started Guide <../getting-started.html>`_.
 | If you are looking for a deep dive into the API, try our `Reference Manual <../reference-manual.html>`_.
 
 Feature guides

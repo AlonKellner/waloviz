@@ -6,8 +6,12 @@ About
 
 | Welcome!
 | WaloViz is an open source audio player with a spectrogram built-in, it was built by audio experts - for audio experts.
-| To start using WaloViz right now - read our `Getting Started Guide <./getting-started.html>`_.
-| WaloViz is proudly using Bokeh and the HoloViz stack for most of its features (as indicated by our name). To learn more - go to `the Bokeh website <https://bokeh.org/>`_ and `the HoloViz website <https://holoviz.org/>`_, they're great :)
+|
+| The name comes from ``WaloViz = wav + HoloViz``, since it supports common audio file formats such as ``wav`` and many others thanks to ``torhcaudio`` and ``ffmpeg`` , and it is interactive thanks to the high customizability of the ``HoloViz`` stack, integrated with ``Bokeh``.
+| To learn more about ``HoloViz`` - go to `the HoloViz website <https://holoviz.org/>`_, to learn more about ``Bokeh`` - go to `the Bokeh website <https://bokeh.org/>`_, they're great :)
+|
+| To start using WaloViz right now - read our `Getting Started <./getting-started.html>`_ guide.
+| You can also try ``waloviz`` right now with our `Google Colab Demo <https://colab.research.google.com/drive/1euQCxaNlTg0pGvXz6d7RSoDhM3B1k7dy?usp=sharing>`_ :)
 
 Why WaloViz?
 ------------

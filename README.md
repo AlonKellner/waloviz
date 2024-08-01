@@ -10,7 +10,7 @@
 [![PyPi Python Versions](https://img.shields.io/pypi/pyversions/waloviz.svg)](https://pypi.python.org/pypi/waloviz/)
 
 [![example snapshot](doc/resources/example_snapshot.png)](https://waloviz.com)
-**An open source interactive audio player with a spectrogram built-in, primarily based on [Bokeh](https://bokeh.org/) and the [HoloViz](https://holoviz.org/) stack (wav+HoloViz=WaloViz).**
+**An open source interactive audio player with a spectrogram built-in, primarily based on [Bokeh](https://bokeh.org/) and the [HoloViz](https://holoviz.org/) stack (`wav+HoloViz=WaloViz`).**
 
 [:globe_with_meridians: WaloViz Website :globe_with_meridians:](https://waloviz.com), [:arrow_forward: Google Colab Demo :arrow_forward:](https://colab.research.google.com/drive/1euQCxaNlTg0pGvXz6d7RSoDhM3B1k7dy), [:bust_in_silhouette: Portfolio Project Page :bust_in_silhouette:](https://alonkellner.com/projects/open-source_2024-07-25_waloviz/)
 
@@ -18,8 +18,10 @@
 
 ```shell
 pip install waloviz
-apt-get install ffmpeg
+ffmpeg --version
 ```
+
+> If the `ffmpeg --version` command fails, try following the [Installation Instructions in our Getting Started guide](https://waloviz.com/en/stable/getting-started.html#explanation).
 
 ## Quickstart
 
@@ -44,6 +46,18 @@ You can also try `waloviz` right now with our [Google Colab Demo](https://colab.
 
 WaloViz is a beginner friendly open-source project!  
 To make a contirbution, please read our [Contributing Guide](CONTRIBUTING.md).
+
+## Star History
+
+<a href="https://star-history.com/#AlonKellner/waloviz&Date">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=AlonKellner/waloviz&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=AlonKellner/waloviz&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=AlonKellner/waloviz&type=Date" />
+ </picture>
+</a>
+
+What an incredible community response to our launch! Thank you all so much!
 
 ## Our Vision
 
