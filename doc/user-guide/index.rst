@@ -13,7 +13,7 @@ Feature guides
     The most simple and useful ways to use WaloViz.
 
 `Overlaying Data <02-overlaying-data.html>`_
-    Add curves overlayed on the player, good for time-aligned visualizations such as a waveform.
+    Add curves overlaid on the player, good for time-aligned visualizations such as a waveform.
 
 `Responsiveness and Size <03-responsiveness-and-size.html>`_
     Control the size ot your player and customize the responsiveness to your personal needs.

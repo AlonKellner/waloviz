@@ -43,7 +43,7 @@ You can also try `waloviz` right now with our [Google Colab Demo](https://colab.
 ## [Contributing](CONTRIBUTING.md)
 
 WaloViz is a beginner friendly open-source project!  
-To make a contirbution, please read our [Contributing Guide](CONTRIBUTING.md).
+To make a contribution, please read our [Contributing Guide](CONTRIBUTING.md).
 
 ## Our Vision
 
@@ -55,7 +55,7 @@ First by being Simple to Use, and secondly by having Powerful Features.
 
 ### **Grow a Healthy Open-Source Community**
 
-By being Responsive to Users, and Welcoming to Beginner Conftributors.
+By being Responsive to Users, and Welcoming to Beginner Contributors.
 
 ## Roadmap
 

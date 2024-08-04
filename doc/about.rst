@@ -13,7 +13,7 @@ Why WaloViz?
 ------------
 
 | WaloViz is designed to be accessible but powerful.
-| With just three lines of code it integrates seemlessly with the most popular notebook IDEs such as JupyterLab, VSCode and Google Colab.
+| With just three lines of code it integrates seamlessly with the most popular notebook IDEs such as JupyterLab, VSCode and Google Colab.
 | You can use it to view audio URLs and files but also your own processed audio tensor.
 | An impressive suite of features is at your fingertips, high-level features such as overlaying your data and a built-in download button, and also low-level features for granular control like changing the colormap or sample-rate.
 |
