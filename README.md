@@ -45,7 +45,19 @@ You can also try `waloviz` right now with our [Google Colab Demo](https://colab.
 ## [Contributing](CONTRIBUTING.md)
 
 WaloViz is a beginner friendly open-source project!  
-To make a contirbution, please read our [Contributing Guide](CONTRIBUTING.md).
+To make a contribution, please read our [Contributing Guide](CONTRIBUTING.md).
+
+## Star History
+
+<a href="https://star-history.com/#AlonKellner/waloviz&Date">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=AlonKellner/waloviz&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=AlonKellner/waloviz&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=AlonKellner/waloviz&type=Date" />
+ </picture>
+</a>
+
+What an incredible community response to our launch! Thank you all so much!
 
 ## Star History
 
@@ -69,7 +81,7 @@ First by being Simple to Use, and secondly by having Powerful Features.
 
 ### **Grow a Healthy Open-Source Community**
 
-By being Responsive to Users, and Welcoming to Beginner Conftributors.
+By being Responsive to Users, and Welcoming to Beginner Contributors.
 
 ## Roadmap
 
