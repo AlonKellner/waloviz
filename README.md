@@ -59,18 +59,6 @@ To make a contribution, please read our [Contributing Guide](CONTRIBUTING.md).
 
 What an incredible community response to our launch! Thank you all so much!
 
-## Star History
-
-<a href="https://star-history.com/#AlonKellner/waloviz&Date">
- <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=AlonKellner/waloviz&type=Date&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=AlonKellner/waloviz&type=Date" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=AlonKellner/waloviz&type=Date" />
- </picture>
-</a>
-
-What an incredible community response to our launch! Thank you all so much!
-
 ## Our Vision
 
 WaloViz has only two long term goals:
