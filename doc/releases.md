@@ -1,6 +1,16 @@
 # Releases
 
-## Version 0.0.1
+## Version 0.1.0 (Beta Launch)
+
+**September 01, 2024**
+
+Our Beta, with bugs fixed and a few new features!
+
+### Features
+
+### Bug Fixes
+
+## Version 0.0.1 (Alpha Launch)
 
 **August 01, 2024**
 

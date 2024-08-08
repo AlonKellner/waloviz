@@ -22,7 +22,7 @@ def _is_2dim_int_or_float_ndarray(obj: Any) -> bool:
     """
     | A 2d variant of ``_is_1dim_int_or_float_ndarray`` , since scipy actually supports 2d ndarrays.
 
-    | TODO: Create an issue at the `Panel Repository <https://github.com/holoviz/panel>`_ about this.
+    | TODO: Follow `the issue on the Panel Repository <https://github.com/holoviz/panel/issues/7090>`_.
 
     Parameters
     ----------
@@ -47,7 +47,7 @@ def _is_2dim_int_or_float_tensor(obj: Any) -> bool:
     """
     | A 2d variant of ``_is_1dim_int_or_float_tensor`` , since scipy actually supports 2d tensors.
 
-    | TODO: Create an issue at the `Panel Repository <https://github.com/holoviz/panel>`_ about this.
+    | TODO: Follow `the issue on the Panel Repository <https://github.com/holoviz/panel/issues/7090>`_.
 
     Parameters
     ----------

@@ -71,7 +71,7 @@ def extension(mode: str = "default") -> None:
 def Audio(
     source: AudioSource,
     over_curve: Optional[OverCurve] = None,
-    *args: Tuple,
+    *args: Any,
     over_curve_names: Optional[Union[str, List[str]]] = None,
     sr: Optional[int] = None,
     frame_ms: Optional[int] = None,
@@ -747,12 +747,12 @@ def _resolve_audio_height(native_player: bool) -> int:
 def save(
     source: Union[pn.viewable.Viewable, AudioSource],
     second_arg: Optional[Union[OverCurve, IOLike]] = None,
-    *args: Tuple,
+    *args: Any,
     out_file: Optional[IOLike] = None,
     title: Optional[str] = None,
     resources: Resources = INLINE,
     embed: bool = True,
-    **kwargs: Dict[str, Any],
+    **kwargs: Any,
 ) -> IOLike:
     """
     | Saves a player to an html file.
@@ -801,10 +801,7 @@ def save(
         ):
             raise ValueError("The provided ``source`` type is not supported")
 
-        source = Audio(source, *args, **kwargs)  # pyright: ignore[reportArgumentType]
-        # TODO: this being a "reportArgumentType" actually looks like a pyright bug, it
-        #       assumes that the Dict[str, Any] is assigned when the Any is assigned.
-        #       Should open an Issue in their repo, see https://github.com/microsoft/pyright
+        source = Audio(source, *args, **kwargs)
 
     return save_player_panel(source, out_file, title, resources, embed)  # pyright: ignore[reportArgumentType]
 
