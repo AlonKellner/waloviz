@@ -11,6 +11,7 @@ on:
       - develop
 
 # TODO: Maybe we should try to fix the duplication between here and the ``.devcontainer/Dockerfile`` , as well as other workflows
+# see https://github.com/AlonKellner/waloviz/issues/7
 jobs:
   deploy:
     runs-on: ubuntu-latest
