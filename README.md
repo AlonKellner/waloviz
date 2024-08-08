@@ -74,7 +74,7 @@ By being Responsive to Users, and Welcoming to Beginner Contributors.
 ## Roadmap
 
 - [x] Early Alpha release
-- [ ] Create and follow dependencies Issues
+- [x] Create and follow dependencies Issues
 - [ ] Create a PR for the [Panel Community Gallery](https://panel.holoviz.org/gallery/index.html#community-gallery)
 - [ ] Plan Beta release features
 - [ ] Extensive UI Tests (with playwright, see [tests/ui/sanity_test.py](tests/ui/sanity_test.py))
