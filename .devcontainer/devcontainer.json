@@ -12,7 +12,7 @@
     "ghcr.io/devcontainers-contrib/features/coverage-py:2": {},
     "ghcr.io/devcontainers-contrib/features/ruff:1": {},
     "ghcr.io/raucha/devcontainer-features/pytorch:1": {},
-    "ghcr.io/hspaans/devcontainer-features/pytest:1": {},
+    "ghcr.io/hspaans/devcontainer-features/pytest:2": {},
     "ghcr.io/devcontainers-contrib/features/pre-commit:2": {},
     "ghcr.io/devcontainers-community/npm-features/prettier:1": {}
   },
